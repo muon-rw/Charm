@@ -6,7 +6,7 @@ import net.minecraft.world.item.DyeColor;
 import svenhjol.charm.network.Id;
 import svenhjol.charm.network.ServerSender;
 
-@Id("strange:closest_waypoint")
+@Id("charm:closest_waypoint")
 public class ServerSendClosestWaypoint extends ServerSender {
     public void send(ServerPlayer player, Component title, DyeColor color, boolean playSound) {
         super.send(player, buf -> {

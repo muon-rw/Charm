@@ -10,7 +10,7 @@ import svenhjol.charm.network.Id;
 import svenhjol.charm.module.waypoints.Waypoints;
 import svenhjol.charm.module.waypoints.WaypointsClient;
 
-@Id("strange:closest_waypoint")
+@Id("charm:closest_waypoint")
 public class ClientReceiveClosestWaypoint extends ClientReceiver {
     @Override
     public void handle(Minecraft client, FriendlyByteBuf buffer) {

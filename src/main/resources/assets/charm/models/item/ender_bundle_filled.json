@@ -1,6 +1,6 @@
 {
   "parent": "item/bundle",
   "textures": {
-    "layer0": "strange:item/ender_bundle_filled"
+    "layer0": "charm:item/ender_bundle_filled"
   }
 }

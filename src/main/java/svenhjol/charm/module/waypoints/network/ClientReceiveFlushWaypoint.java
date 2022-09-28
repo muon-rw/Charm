@@ -6,7 +6,7 @@ import svenhjol.charm.network.ClientReceiver;
 import svenhjol.charm.network.Id;
 import svenhjol.charm.module.waypoints.WaypointsClient;
 
-@Id("strange:flush_waypoint")
+@Id("charm:flush_waypoint")
 public class ClientReceiveFlushWaypoint extends ClientReceiver {
     @Override
     public void handle(Minecraft client, FriendlyByteBuf buffer) {
