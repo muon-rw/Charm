@@ -79,6 +79,10 @@
   "client": [
     "allow_too_expensive.StopShowingTooExpensiveMixin",
     "atlases.DrawAtlasOnCartographyTableMixin",
+    "colored_glints.GetArmorStackMixin",
+    "colored_glints.GetCustomRenderLayersMixin",
+    "colored_glints.GetElytraMixin",
+    "colored_glints.GetItemMixin",
     "colored_nether_portals.ChangeOverlayColorMixin",
     "core.OverrideBundleTooltipGridsizeMixin",
     "disable_experimental_screen.DisableExperimentalDialogMixin",
