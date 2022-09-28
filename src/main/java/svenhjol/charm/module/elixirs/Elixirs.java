@@ -51,7 +51,13 @@ public class Elixirs extends CharmModule {
     public static List<String> configBlacklist = new ArrayList<>();
 
     @Config(name = "Dungeon chest chance", description = "Chance (out of 1.0) of an elixir being found in a vanilla dungeon chest.")
-    public static float dungeonChestChance = 0.02F;
+    public static float dungeonChance = 0.05F;
+
+    @Config(name = "Woodland mansion chest chance", description = "Chance (out of 1.0) of an elixir being found in a woodland mansion chest.")
+    public static float mansionChance = 0.5F;
+
+    @Config(name = "Stronghold chest chance", description = "Chance (out of 1.0) of an elixir being found in stronghold corridor and crossing chests.")
+    public static float strongholdChance = 0.5F;
 
     @Override
     public void register() {
@@ -62,7 +68,11 @@ public class Elixirs extends CharmModule {
     public void runWhenEnabled() {
         LootTableEvents.MODIFY.register(this::handleLootTables);
         PlayerTickCallback.EVENT.register(this::handlePlayerTick);
-        registerLootTable(BuiltInLootTables.SIMPLE_DUNGEON, dungeonChestChance);
+
+        registerLootTable(BuiltInLootTables.SIMPLE_DUNGEON, dungeonChance);
+        registerLootTable(BuiltInLootTables.WOODLAND_MANSION, mansionChance);
+        registerLootTable(BuiltInLootTables.STRONGHOLD_CORRIDOR, strongholdChance);
+        registerLootTable(BuiltInLootTables.STRONGHOLD_CROSSING, strongholdChance);
 
         try {
             List<String> classes = ClassHelper.getClassesInPackage(ITEM_NAMESPACE);
