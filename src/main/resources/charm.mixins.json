@@ -80,6 +80,7 @@
     "atlases.DrawAtlasOnCartographyTableMixin",
     "colored_nether_portals.ChangeOverlayColorMixin",
     "core.OverrideBundleTooltipGridsizeMixin",
+    "disable_experimental_screen.DisableExperimentalDialogMixin",
     "enchantable_horse_armor.HorseArmorGlintMixin",
     "event.AddEntityClientMixin",
     "event.BlockColorRegisterMixin",
