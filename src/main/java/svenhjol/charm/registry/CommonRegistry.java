@@ -1,5 +1,6 @@
 package svenhjol.charm.registry;
 
+import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
@@ -155,7 +156,7 @@ public class CommonRegistry {
         return Registry.register(Registry.STRUCTURE_PROCESSOR, id, type);
     }
 
-    public static VillagerProfession villagerProfession(ResourceLocation id, PoiType jobSite, List<Block> secondaryJobSites, List<Item> harvestableItems, SoundEvent workSound) {
+    public static VillagerProfession villagerProfession(ResourceLocation id, PoiType jobSite, ImmutableSet<Block> secondaryJobSites, ImmutableSet<Item> harvestableItems, SoundEvent workSound) {
         // Build profession using fabric API.
         var profession = VillagerProfessionBuilder.create()
             .id(id)
