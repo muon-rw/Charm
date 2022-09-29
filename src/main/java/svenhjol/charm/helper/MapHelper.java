@@ -10,6 +10,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
+import svenhjol.charm.Charm;
 
 public class MapHelper {
     public static ItemStack create(ServerLevel level, BlockPos pos, Component name, MapDecoration.Type targetType, int color) {
@@ -30,7 +31,7 @@ public class MapHelper {
             id = new ResourceLocation(id.toString().substring(1));
         }
 
-        LogHelper.debug(MapHelper.class, "Merchant wants to sell: " + id);
+        Charm.LOG.debug(MapHelper.class, "Merchant wants to sell: " + id);
         var nearest = WorldHelper.findNearestStructure(id, level, pos, distance, true);
         if (nearest == null) return new ItemStack(Items.MAP);
 

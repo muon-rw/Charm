@@ -3,6 +3,7 @@ package svenhjol.charm.helper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import svenhjol.charm.Charm;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.loader.CommonLoader;
 import svenhjol.charm.loader.ModuleLoader;
@@ -21,19 +22,19 @@ public class RecipeHelper {
     private static final List<ResourceLocation> RECIPES_TO_REMOVE = new ArrayList<>();
 
     public static void removeRecipe(ResourceLocation id) {
-        LogHelper.debug(RecipeHelper.class, "Adding `" + id + "` to list of recipes to remove");
+        Charm.LOG.debug(RecipeHelper.class, "Adding `" + id + "` to list of recipes to remove");
         RECIPES_TO_REMOVE.add(id);
     }
 
     public static Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> sortAndFilterRecipes(Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipesByType, boolean doFilter) {
-        LogHelper.debug(RecipeHelper.class, "Preparing to sort and filter recipes");
+        Charm.LOG.debug(RecipeHelper.class, "Preparing to sort and filter recipes");
         List<String> modIds = ModuleLoader.getModIds();
         Map<ResourceLocation, CharmModule> charmModules = CommonLoader.getAllModules();
         Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> out = new LinkedHashMap<>();
 
         recipesByType.keySet().forEach(type -> {
             Map<ResourceLocation, Recipe<?>> recipes = recipesByType.get(type);
-            LogHelper.debug(RecipeHelper.class, "Recipe type `" + type.toString() + "` contains " + recipes.size() + " recipes");
+            Charm.LOG.debug(RecipeHelper.class, "Recipe type `" + type.toString() + "` contains " + recipes.size() + " recipes");
 
             Stream<Map.Entry<ResourceLocation, Recipe<?>>> moddedStream = recipes.entrySet().stream().filter(r -> !r.getKey().getNamespace().equals("minecraft"));
             Stream<Map.Entry<ResourceLocation, Recipe<?>>> minecraftStream = recipes.entrySet().stream().filter(r -> r.getKey().getNamespace().equals("minecraft"));
@@ -57,7 +58,7 @@ public class RecipeHelper {
                         && !RECIPES_TO_REMOVE.contains(res);
 
                     if (!enabled)
-                        LogHelper.debug(RecipeHelper.class, "> Filtering out recipe `" + res + "`");
+                        Charm.LOG.debug(RecipeHelper.class, "> Filtering out recipe `" + res + "`");
 
                     return enabled;
                 });
@@ -72,7 +73,7 @@ public class RecipeHelper {
             merged.putAll(minecraftRecipes);
 
             out.put(type, merged);
-            LogHelper.debug(RecipeHelper.class, "Recipe type `" + type + "` reassembled with " + merged.size() + " recipes");
+            Charm.LOG.debug(RecipeHelper.class, "Recipe type `" + type + "` reassembled with " + merged.size() + " recipes");
         });
 
         return out;

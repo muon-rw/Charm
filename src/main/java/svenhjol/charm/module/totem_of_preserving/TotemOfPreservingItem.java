@@ -11,8 +11,8 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import svenhjol.charm.Charm;
 import svenhjol.charm.helper.ItemNbtHelper;
-import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.helper.TextHelper;
 import svenhjol.charm.helper.TotemHelper;
 import svenhjol.charm.item.CharmItem;
@@ -131,7 +131,7 @@ public class TotemOfPreservingItem extends CharmItem {
         for (var key : keys) {
             var tag = itemsTag.get(key);
             if (tag == null) {
-                LogHelper.warn(TotemOfPreservingItem.class, "Missing item with key " + key);
+                Charm.LOG.warn(TotemOfPreservingItem.class, "Missing item with key " + key);
                 continue;
             }
             var stack = ItemStack.of((CompoundTag)tag);

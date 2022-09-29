@@ -6,7 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import svenhjol.charm.helper.LogHelper;
+import svenhjol.charm.Charm;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -36,7 +36,7 @@ public abstract class ServerSender {
 
     protected void debug(String message) {
         if (showDebugMessages()) {
-            LogHelper.debug(getClass(), message);
+            Charm.LOG.debug(getClass(), message);
         }
     }
 

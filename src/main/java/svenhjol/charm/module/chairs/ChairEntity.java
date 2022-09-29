@@ -10,7 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.StairBlock;
-import svenhjol.charm.helper.LogHelper;
+import svenhjol.charm.Charm;
 
 public class ChairEntity extends Entity {
     public ChairEntity(EntityType<? extends ChairEntity> type, Level level) {
@@ -64,18 +64,18 @@ public class ChairEntity extends Entity {
 
                 unRide();
                 remove(RemovalReason.DISCARDED);
-                LogHelper.debug(getClass(), "Removing because no longer a stairs block");
+                Charm.LOG.debug(getClass(), "Removing because no longer a stairs block");
 
             } else if (stateAbove.isCollisionShapeFullBlock(level, pos.above())) {
 
                 unRide();
                 remove(RemovalReason.DISCARDED);
-                LogHelper.debug(getClass(), "Removing because block above is invalid");
+                Charm.LOG.debug(getClass(), "Removing because block above is invalid");
 
             } else if (!hasExactlyOnePlayerPassenger()) {
 
                 remove(RemovalReason.DISCARDED);
-                LogHelper.debug(getClass(), "Removing because no passengers");
+                Charm.LOG.debug(getClass(), "Removing because no passengers");
 
             }
         }

@@ -10,7 +10,6 @@ import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunct
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import svenhjol.charm.Charm;
-import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.module.improved_mansion_loot.ImprovedMansionLoot;
 
 public class ImprovedFortressLootFunction extends LootItemConditionalFunction {
@@ -50,7 +49,7 @@ public class ImprovedFortressLootFunction extends LootItemConditionalFunction {
         out = EnchantmentHelper.enchantItem(random, out, level, true);
 
         if (EnchantmentHelper.getEnchantments(out).isEmpty()) {
-            LogHelper.debug(getClass(), "Item did not get enchanted properly");
+            Charm.LOG.debug(getClass(), "Item did not get enchanted properly");
             return ItemStack.EMPTY;
         }
 

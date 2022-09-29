@@ -4,6 +4,7 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.network.FriendlyByteBuf;
+import svenhjol.charm.Charm;
 
 import javax.annotation.Nullable;
 import java.io.ByteArrayInputStream;
@@ -27,7 +28,7 @@ public class NetworkHelper {
             buffer.writeUtf(serialized);
             return buffer;
         } catch (IOException e) {
-            LogHelper.warn(NetworkHelper.class, "Failed to compress nbt");
+            Charm.LOG.warn(NetworkHelper.class, "Failed to compress nbt");
         }
 
         return null;
@@ -39,7 +40,7 @@ public class NetworkHelper {
             byte[] byteData = Base64.getDecoder().decode(data.readUtf());
             return NbtIo.readCompressed(new ByteArrayInputStream(byteData));
         } catch (IOException e) {
-            LogHelper.warn(NetworkHelper.class, "Failed to decompress nbt");
+            Charm.LOG.warn(NetworkHelper.class, "Failed to decompress nbt");
         }
 
         return null;

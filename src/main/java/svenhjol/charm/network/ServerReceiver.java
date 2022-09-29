@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
-import svenhjol.charm.helper.LogHelper;
+import svenhjol.charm.Charm;
 
 import java.util.Optional;
 
@@ -44,7 +44,7 @@ public abstract class ServerReceiver {
 
     protected void debug(String message) {
         if (showDebugMessages()) {
-            LogHelper.debug(getClass(), message);
+            Charm.LOG.debug(getClass(), message);
         }
     }
 

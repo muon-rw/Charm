@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.ClientModule;
 import svenhjol.charm.api.event.PlaySoundCallback;
-import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.helper.SoundHelper;
 import svenhjol.charm.loader.CharmModule;
 
@@ -68,7 +68,7 @@ public class DiscsStopBackgroundMusicClient extends CharmModule {
             SoundHelper.getPlayingSounds().forEach((category, s) -> {
                 if (category == SoundSource.RECORDS) {
                     musicToStop = sound;
-                    LogHelper.debug(getClass(), "Triggered background music while music disc playing");
+                    Charm.LOG.debug(getClass(), "Triggered background music while music disc playing");
                 }
             });
         }

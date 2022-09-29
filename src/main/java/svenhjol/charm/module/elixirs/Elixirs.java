@@ -22,7 +22,6 @@ import svenhjol.charm.annotation.Config;
 import svenhjol.charm.api.event.PlayerTickCallback;
 import svenhjol.charm.helper.ClassHelper;
 import svenhjol.charm.helper.ItemNbtHelper;
-import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.lib.CharmAdvancements;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.registry.CommonRegistry;
@@ -85,13 +84,13 @@ public class Elixirs extends CharmModule {
                     IElixir potion = (IElixir)clazz.getDeclaredConstructor().newInstance();
                     POTIONS.add(potion);
 
-                    LogHelper.debug(Charm.MOD_ID, getClass(), "Loaded potion: " + simpleClassName);
+                    Charm.LOG.debug(getClass(), "Loaded potion: " + simpleClassName);
                 } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
-                    LogHelper.warn(getClass(), "Elixir `" + simpleClassName + "` failed to load: " + e.getMessage());
+                    Charm.LOG.warn(getClass(), "Elixir `" + simpleClassName + "` failed to load: " + e.getMessage());
                 }
             }
         } catch (IOException | URISyntaxException e) {
-            LogHelper.info(Charm.MOD_ID, getClass(), "Failed to load classes from namespace: " + e.getMessage());
+            Charm.LOG.info(getClass(), "Failed to load classes from namespace: " + e.getMessage());
         }
     }
 

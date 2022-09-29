@@ -28,7 +28,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.annotation.Config;
-import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.loader.CharmModule;
 
 import javax.annotation.Nullable;
@@ -275,7 +274,7 @@ public class WeatheringIron extends CharmModule {
                         nextState = nextState.setValue(property, state.getValue(property));
                     }
 
-                    LogHelper.debug(WeatheringIron.class, "Weathering block to " + nextBlock + ", d = " + d + ", chance = " + chance, ", pos = " + pos);
+                    Charm.LOG.debug(WeatheringIron.class, "Weathering block to " + nextBlock + ", d = " + d + ", chance = " + chance, ", pos = " + pos);
                     level.setBlockAndUpdate(pos, nextState);
                 }
             }
@@ -299,7 +298,7 @@ public class WeatheringIron extends CharmModule {
 
         if (facesIncreaseWeathering && faces > 1) {
             double newChance = chance + (faceMultiplier * faces);
-            LogHelper.debug(WeatheringIron.class, "Face weathering, faces = " + faces + ", chance now = " + newChance + ", pos = " + pos);
+            Charm.LOG.debug(WeatheringIron.class, "Face weathering, faces = " + faces + ", chance now = " + newChance + ", pos = " + pos);
             return newChance;
         } else if (faces > 0) {
             return chance;
@@ -311,7 +310,7 @@ public class WeatheringIron extends CharmModule {
     public static boolean hasBubbleColumn(ServerLevel level, BlockPos pos) {
         boolean has = level.getBlockState(pos.below()).getBlock() == Blocks.BUBBLE_COLUMN;
         if (has) {
-            LogHelper.debug(WeatheringIron.class, "Bubble column weathering, pos = " + pos);
+            Charm.LOG.debug(WeatheringIron.class, "Bubble column weathering, pos = " + pos);
         }
         return has;
     }

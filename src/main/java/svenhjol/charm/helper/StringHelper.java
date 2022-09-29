@@ -9,6 +9,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import org.apache.commons.lang3.StringUtils;
+import svenhjol.charm.Charm;
 import svenhjol.charm.loader.ModuleLoader;
 
 import java.io.IOException;
@@ -72,9 +73,9 @@ public class StringHelper {
                 try (JsonReader reader = new JsonReader(new InputStreamReader(Files.newInputStream(path), StandardCharsets.UTF_8))) {
                     JsonElement parsed = JsonParser.parseReader(reader);
                     languageStrings.put(modId, parsed.getAsJsonObject());
-                    LogHelper.debug(StringHelper.class, "Successfully opened language file for `" + modId + "`");
+                    Charm.LOG.debug(StringHelper.class, "Successfully opened language file for `" + modId + "`");
                 } catch (IOException e) {
-                    LogHelper.error(StringHelper.class, "Failed to open language file: " + e.getMessage());
+                    Charm.LOG.error(StringHelper.class, "Failed to open language file: " + e.getMessage());
                 }
             });
         }
@@ -83,7 +84,7 @@ public class StringHelper {
             // try and fetch the resolved language key from the mod's language strings
             JsonElement el = languageStrings.get(modId).get(key);
             if (el != null) {
-                LogHelper.debug(StringHelper.class, "Resolved `" + key + "` for mod `" + modId + "`");
+                Charm.LOG.debug(StringHelper.class, "Resolved `" + key + "` for mod `" + modId + "`");
                 return Optional.of(el.getAsString());
             }
         }
@@ -122,12 +123,12 @@ public class StringHelper {
             if (!key.isEmpty() && key.contains(useModId)) {
                 Optional<String> opt = tryResolveLanguageKey(useModId, key);
                 if (opt.isPresent()) {
-                    LogHelper.debug(StringHelper.class, "Resolved key `" + key + "` to `" + opt.get() + "`");
+                    Charm.LOG.debug(StringHelper.class, "Resolved key `" + key + "` to `" + opt.get() + "`");
                     return Optional.of(reduced.replace(key, opt.get()));
                 }
             }
         } catch (StringIndexOutOfBoundsException e) {
-            LogHelper.debug(StringHelper.class, "Index out of bounds when trying to process `" + reduced + "`: " + e.getMessage());
+            Charm.LOG.debug(StringHelper.class, "Index out of bounds when trying to process `" + reduced + "`: " + e.getMessage());
         }
 
         return Optional.empty();

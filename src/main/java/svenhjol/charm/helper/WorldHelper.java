@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.material.Material;
+import svenhjol.charm.Charm;
 import svenhjol.charm.registry.CommonRegistry;
 
 import javax.annotation.Nullable;
@@ -42,7 +43,7 @@ public class WorldHelper {
         }
 
         if (result) {
-            LogHelper.debug(WorldHelper.class, "Force loaded chunk " + chunkPos);
+            Charm.LOG.debug(WorldHelper.class, "Force loaded chunk " + chunkPos);
         }
 
         return result;
@@ -52,9 +53,9 @@ public class WorldHelper {
         ChunkPos chunkPos = new ChunkPos(pos);
         boolean result = level.setChunkForced(chunkPos.getMinBlockX(), chunkPos.getMinBlockZ(), false);
         if (!result) {
-            LogHelper.error(WorldHelper.class, "Could not unload forced chunk - this is probably really bad.");
+            Charm.LOG.error(WorldHelper.class, "Could not unload forced chunk - this is probably really bad.");
         } else {
-            LogHelper.debug(WorldHelper.class, "Unloaded forced chunk " + chunkPos);
+            Charm.LOG.debug(WorldHelper.class, "Unloaded forced chunk " + chunkPos);
         }
         return result;
     }
@@ -161,7 +162,7 @@ public class WorldHelper {
         }
 
         if (surface <= 0) {
-            LogHelper.warn(WorldHelper.class, "Failed to find a surface value to spawn the player");
+            Charm.LOG.warn(WorldHelper.class, "Failed to find a surface value to spawn the player");
             return null;
         }
 

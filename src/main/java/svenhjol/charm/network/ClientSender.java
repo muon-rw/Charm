@@ -4,7 +4,7 @@ import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import svenhjol.charm.helper.LogHelper;
+import svenhjol.charm.Charm;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -57,7 +57,7 @@ public abstract class ClientSender {
 
     protected void debug(String message) {
         if (showDebugMessages()) {
-            LogHelper.debug(getClass(), message);
+            Charm.LOG.debug(getClass(), message);
         }
     }
 

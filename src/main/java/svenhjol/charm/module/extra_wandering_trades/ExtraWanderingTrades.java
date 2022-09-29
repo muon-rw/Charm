@@ -7,7 +7,6 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
-import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.helper.VillagerHelper;
 import svenhjol.charm.loader.CharmModule;
 
@@ -32,7 +31,7 @@ public class ExtraWanderingTrades extends CharmModule {
             var item = entry.getKey();
             var maxCount = entry.getValue().getFirst();
             var minCost = entry.getValue().getSecond();
-            LogHelper.debug(getClass(), "rare: " + item.asItem().getDescriptionId() + ", count: " + maxCount + ", cost: " + minCost);
+            Charm.LOG.debug(getClass(), "rare: " + item.asItem().getDescriptionId() + ", count: " + maxCount + ", cost: " + minCost);
             addTrade(item, maxCount, minCost, true);
         }
     }
@@ -47,7 +46,7 @@ public class ExtraWanderingTrades extends CharmModule {
 
     private void addTrade(ItemLike item, int maxCount, int minCost, boolean isRare) {
         var itemKey = item.asItem().getDescriptionId().split("\\.");
-        LogHelper.debug(getClass(), (isRare ? "rare" : "normal") + ": " + itemKey[itemKey.length - 1] + ", count: " + maxCount + ", cost: " + minCost);
+        Charm.LOG.debug(getClass(), (isRare ? "rare" : "normal") + ": " + itemKey[itemKey.length - 1] + ", count: " + maxCount + ", cost: " + minCost);
         VillagerHelper.addWanderingTrade((entity, random) -> {
             var in = new ItemStack(Items.EMERALD, minCost);
             var out = new ItemStack(item, maxCount);

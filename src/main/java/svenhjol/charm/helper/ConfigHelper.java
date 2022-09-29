@@ -5,6 +5,7 @@ import com.electronwill.nightconfig.toml.TomlFormat;
 import com.electronwill.nightconfig.toml.TomlWriter;
 import com.moandjiezana.toml.Toml;
 import net.fabricmc.loader.api.FabricLoader;
+import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.Config;
 import svenhjol.charm.init.CharmDebug;
 import svenhjol.charm.loader.CharmModule;
@@ -113,14 +114,14 @@ public class ConfigHelper {
 
                             // set the class property
                             if (CharmDebug.isEnabled()) {
-                                LogHelper.info(ConfigHelper.class, "In module " + moduleName + ": setting `" + propName + "` to `" + configValue + "`");
+                                Charm.LOG.info(ConfigHelper.class, "In module " + moduleName + ": setting `" + propName + "` to `" + configValue + "`");
                             }
                             prop.set(null, configValue);
                         }
                     }
 
                 } catch (Exception e) {
-                    LogHelper.error(ConfigHelper.class, "Failed to read config for `" + moduleName + "`: " + e.getMessage());
+                    Charm.LOG.error(ConfigHelper.class, "Failed to read config for `" + moduleName + "`: " + e.getMessage());
                 }
             }
         });
@@ -161,7 +162,7 @@ public class ConfigHelper {
                     config.add(moduleConfigName, propValue);
 
                 } catch (Exception e) {
-                    LogHelper.error(ConfigHelper.class, "Failed to write config property `" + prop.getName() + "` in `" + module.getName() + "`");
+                    Charm.LOG.error(ConfigHelper.class, "Failed to write config property `" + prop.getName() + "` in `" + module.getName() + "`");
                 }
             });
         });
@@ -172,9 +173,9 @@ public class ConfigHelper {
             Writer buffer = Files.newBufferedWriter(path);
             tomlWriter.write(config, buffer);
             buffer.close();
-            LogHelper.debug(ConfigHelper.class, "Written config to disk");
+            Charm.LOG.debug(ConfigHelper.class, "Written config to disk");
         } catch (Exception e) {
-            LogHelper.error(ConfigHelper.class, "Failed to write config: " + e.getMessage());
+            Charm.LOG.error(ConfigHelper.class, "Failed to write config: " + e.getMessage());
         }
     }
 
