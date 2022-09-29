@@ -172,8 +172,6 @@ public class CommonRegistry {
         // Create a new empty trade set for the profession.
         TRADES.put(profession, new Int2ObjectOpenHashMap<>());
 
-
-
         return profession;
     }
 
