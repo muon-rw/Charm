@@ -29,7 +29,6 @@ import java.util.function.Predicate;
  */
 @SuppressWarnings({"unused"})
 public class BiomeHelper {
-    public static Map<BiomeCategory, List<ResourceKey<Biome>>> BIOME_CATEGORY_MAP = new HashMap<>();
 
     public static Biome getBiome(ServerLevel level, BlockPos pos) {
         return getBiomeHolder(level, pos).value();
