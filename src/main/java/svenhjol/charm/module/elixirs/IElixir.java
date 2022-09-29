@@ -27,8 +27,8 @@ public interface IElixir {
 
     default Component getName() {
         int i = new Random().nextInt(16) + 1;
-        Component word = TextHelper.translatable("item.strange.elixirs.adjective" + i);
-        return TextHelper.translatable("item.strange.elixirs.itemname", word);
+        Component word = TextHelper.translatable("item.charm.elixirs.adjective" + i);
+        return TextHelper.translatable("item.charm.elixirs.itemname", word);
     }
 
     default List<MobEffectInstance> getEffects() {

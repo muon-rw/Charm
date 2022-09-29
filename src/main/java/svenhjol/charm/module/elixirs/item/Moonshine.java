@@ -29,7 +29,7 @@ public class Moonshine implements IElixir {
 
     @Override
     public Component getName() {
-        return TextHelper.translatable("item.strange.elixirs.moonshine");
+        return TextHelper.translatable("item.charm.elixirs.moonshine");
     }
 
     @Override

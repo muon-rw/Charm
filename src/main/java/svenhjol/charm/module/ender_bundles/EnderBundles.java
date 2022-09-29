@@ -27,7 +27,7 @@ import java.util.function.Predicate;
 @CommonModule(mod = Charm.MOD_ID)
 public class EnderBundles extends CharmModule {
     private static final List<Predicate<Player>> INVENTORY_CHECKS = new ArrayList<>();
-    private static final Component CONTAINER_TITLE = TextHelper.translatable("container.strange.ender_bundle");
+    private static final Component CONTAINER_TITLE = TextHelper.translatable("container.charm.ender_bundle");
     private static final ServerReceiveOpenEnderBundle RECEIVE_OPEN_ENDER_CHEST = new ServerReceiveOpenEnderBundle();
     private static final ServerReceiveRequestEnderInventory RECEIVE_REQUEST_ENDER_INVENTORY = new ServerReceiveRequestEnderInventory();
     private static final ServerSendUpdateEnderInventory SEND_UPDATE_ENDER_INVENTORY = new ServerSendUpdateEnderInventory();

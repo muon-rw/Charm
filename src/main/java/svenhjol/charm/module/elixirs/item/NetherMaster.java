@@ -21,7 +21,7 @@ public class NetherMaster implements IElixir {
 
     @Override
     public Component getName() {
-        return TextHelper.translatable("item.strange.elixirs.nether_master");
+        return TextHelper.translatable("item.charm.elixirs.nether_master");
     }
 
     @Override

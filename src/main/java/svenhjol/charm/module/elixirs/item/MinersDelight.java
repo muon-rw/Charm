@@ -20,7 +20,7 @@ public class MinersDelight implements IElixir {
 
     @Override
     public Component getName() {
-        return TextHelper.translatable("item.strange.elixirs.miners_delight");
+        return TextHelper.translatable("item.charm.elixirs.miners_delight");
     }
 
     @Override

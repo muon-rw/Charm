@@ -39,7 +39,7 @@ import java.util.Map;
 @CommonModule(mod = Charm.MOD_ID, description = "Discoverable potions with much greater strength and duration.")
 public class Elixirs extends CharmModule {
     public static final String ITEM_NAMESPACE = "svenhjol.charm.module.elixirs.item";
-    public static final String ELIXIR_TAG = "strange_elixir";
+    public static final String ELIXIR_TAG = "charm_elixir";
     public static final List<IElixir> POTIONS = new ArrayList<>();
     public static final Map<ResourceLocation, Float> LOOT_TABLES = new HashMap<>();
     public static final ResourceLocation LOOT_ID = new ResourceLocation(Charm.MOD_ID, "elixirs_loot");
