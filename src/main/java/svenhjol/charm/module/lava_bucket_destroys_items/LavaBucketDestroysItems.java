@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.api.event.StackItemOnItemCallback;
-import svenhjol.charm.lib.Advancements;
+import svenhjol.charm.lib.CharmAdvancements;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.module.lava_bucket_destroys_items.network.ClientSendDestroyWithLavaBucket;
 import svenhjol.charm.module.lava_bucket_destroys_items.network.ServerReceiveDestroyWithLavaBucket;
@@ -52,6 +52,6 @@ public class LavaBucketDestroysItems extends CharmModule {
     }
 
     public static void triggerDestroyedItem(ServerPlayer player) {
-        Advancements.triggerActionPerformed(player, LavaBucketDestroysItems.TRIGGER_DESTROYED_ITEM);
+        CharmAdvancements.triggerActionPerformed(player, LavaBucketDestroysItems.TRIGGER_DESTROYED_ITEM);
     }
 }
