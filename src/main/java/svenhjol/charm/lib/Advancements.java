@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CharmAdvancements {
+public class Advancements {
     private static final List<ResourceLocation> ADVANCEMENTS_TO_REMOVE = new ArrayList<>();
     private static ActionPerformedCriterion ACTION_PERFORMED;
 
@@ -26,7 +26,7 @@ public class CharmAdvancements {
     }
 
     public static void removeAdvancement(ResourceLocation id) {
-        LogHelper.debug(CharmAdvancements.class, "Adding `" + id + "` to list of advancements to remove");
+        LogHelper.debug(Advancements.class, "Adding `" + id + "` to list of advancements to remove");
         ADVANCEMENTS_TO_REMOVE.add(id);
     }
 
@@ -39,7 +39,7 @@ public class CharmAdvancements {
             // remove exact matches
             AtomicInteger exactMatches = new AtomicInteger();
             keys.stream().filter(a -> a.equals(toRemove)).forEach(a -> {
-                LogHelper.debug(CharmAdvancements.class, "> Filtering out exact match `" + a + "`");
+                LogHelper.debug(Advancements.class, "> Filtering out exact match `" + a + "`");
                 exactMatches.getAndIncrement();
                 map.remove(a);
             });
@@ -51,7 +51,7 @@ public class CharmAdvancements {
                 .filter(a -> a.getNamespace().equals(toRemove.getNamespace()))
                 .filter(a -> a.getPath().startsWith(toRemove.getPath()))
                 .forEach(a -> {
-                    LogHelper.debug(CharmAdvancements.class, "> Filtering out fuzzy match `" + a + "`");
+                    LogHelper.debug(Advancements.class, "> Filtering out fuzzy match `" + a + "`");
                     map.remove(a);
                 });
         });

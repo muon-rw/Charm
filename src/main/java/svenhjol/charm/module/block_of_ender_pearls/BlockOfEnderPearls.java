@@ -20,7 +20,7 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.annotation.Config;
 import svenhjol.charm.api.event.AddEntityCallback;
-import svenhjol.charm.lib.CharmAdvancements;
+import svenhjol.charm.lib.Advancements;
 import svenhjol.charm.helper.PlayerHelper;
 import svenhjol.charm.helper.WorldHelper;
 import svenhjol.charm.loader.CharmModule;
@@ -53,7 +53,7 @@ public class BlockOfEnderPearls extends CharmModule {
         List<String> disable = new ArrayList<>();
         if (!chorusTeleport) disable.add("teleport_to_ender_pearl_block");
         if (!convertSilverfish) disable.add("convert_silverfish");
-        disable.forEach(a -> CharmAdvancements.removeAdvancement(new ResourceLocation(Charm.MOD_ID, "block_of_ender_pearls/" + a)));
+        disable.forEach(a -> Advancements.removeAdvancement(new ResourceLocation(Charm.MOD_ID, "block_of_ender_pearls/" + a)));
     }
 
     @Override
@@ -139,10 +139,10 @@ public class BlockOfEnderPearls extends CharmModule {
 
     public static void triggerConvertedSilverfishForNearbyPlayers(ServerLevel level, BlockPos pos) {
         PlayerHelper.getPlayersInRange(level, pos).forEach(player
-            -> CharmAdvancements.triggerActionPerformed((ServerPlayer)player, TRIGGER_CONVERTED_SILVERFISH));
+            -> Advancements.triggerActionPerformed((ServerPlayer)player, TRIGGER_CONVERTED_SILVERFISH));
     }
 
     public static void triggerTeleported(ServerPlayer playerEntity) {
-        CharmAdvancements.triggerActionPerformed(playerEntity, TRIGGER_TELEPORTED_TO_ENDER_PEARL_BLOCK);
+        Advancements.triggerActionPerformed(playerEntity, TRIGGER_TELEPORTED_TO_ENDER_PEARL_BLOCK);
     }
 }
