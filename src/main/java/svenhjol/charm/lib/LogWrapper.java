@@ -11,19 +11,19 @@ public class LogWrapper {
         LOG = LogManager.getFormatterLogger(StringHelper.capitalize(modId));
     }
 
-    public void info(Class<?> source, String message, Object... args) {
+    public void info(String modId, Class<?> source, String message, Object... args) {
         LOG.info(assembleMessage(source, message), args);
     }
 
-    public void warn(Class<?> source, String message, Object... args) {
+    public void warn(String modId, Class<?> source, String message, Object... args) {
         LOG.warn(assembleMessage(source, message), args);
     }
 
-    public void error(Class<?> source, String message, Object... args) {
+    public void error(String modId, Class<?> source, String message, Object... args) {
         LOG.error(assembleMessage(source, message), args);
     }
 
-    public void debug(Class<?> source, String message, Object... args) {
+    public void debug(String modId, Class<?> source, String message, Object... args) {
         if (DebugHelper.isDebugMode()) {
             LOG.info(assembleMessage(source, message), args);
         }
