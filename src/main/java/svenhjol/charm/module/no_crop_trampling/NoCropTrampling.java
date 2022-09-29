@@ -5,7 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.annotation.Config;
-import svenhjol.charm.helper.EnchantmentsHelper;
+import svenhjol.charm.lib.CharmEnchantments;
 import svenhjol.charm.loader.CharmModule;
 
 @CommonModule(mod = Charm.MOD_ID, description = "Removes trampling of farmland and crops.")
@@ -19,7 +19,7 @@ public class NoCropTrampling extends CharmModule {
             return false;
         }
 
-        if (requireFeatherFalling && !EnchantmentsHelper.hasFeatherFalling(livingEntity)) {
+        if (requireFeatherFalling && !CharmEnchantments.hasFeatherFalling(livingEntity)) {
             return false;
         }
 

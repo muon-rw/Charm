@@ -22,7 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.annotation.Config;
-import svenhjol.charm.helper.EnchantmentsHelper;
+import svenhjol.charm.lib.CharmEnchantments;
 import svenhjol.charm.lib.CharmAdvancements;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.module.collection_enchantment.CollectionEnchantment;
@@ -83,7 +83,7 @@ public class QuickReplant extends CharmModule {
             if (!level.isClientSide) {
                 ServerPlayer serverPlayer = (ServerPlayer)player;
                 ServerLevel serverLevel = (ServerLevel)serverPlayer.level;
-                var hasCollection = Charm.LOADER.isEnabled(CollectionEnchantment.class) && EnchantmentsHelper.has(held, CollectionEnchantment.ENCHANTMENT);
+                var hasCollection = Charm.LOADER.isEnabled(CollectionEnchantment.class) && CharmEnchantments.has(held, CollectionEnchantment.ENCHANTMENT);
 
                 List<ItemStack> drops = Block.getDrops(state, serverLevel, pos, null, player, ItemStack.EMPTY);
                 for (ItemStack drop : drops) {
