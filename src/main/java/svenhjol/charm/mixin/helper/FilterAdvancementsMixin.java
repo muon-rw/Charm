@@ -17,7 +17,6 @@ public class FilterAdvancementsMixin {
     /**
      * Conditionally remove advancements from the map if their
      * corresponding Charm module is disabled.
-     *
      * Disabling this mixin will cause all advancements to be
      * loaded and if any Charm modules are disabled then
      * some advancements may not be completable.
@@ -32,7 +31,7 @@ public class FilterAdvancementsMixin {
     )
     private HashMap<ResourceLocation, Advancement.Builder> hookAdd(Map<ResourceLocation, Advancement.Builder> map) {
         var newMap = new HashMap<>(map);
-        CharmAdvancements.filterAdvancements(newMap);
+        CharmAdvancements.filter(newMap);
         return Maps.newHashMap(newMap);
     }
 }

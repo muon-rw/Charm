@@ -33,7 +33,7 @@ public class Core extends CharmModule {
 
     private void handleServerJoin(Entity entity, ServerLevel level) {
         if (entity instanceof ServerPlayer player) {
-            CharmAdvancements.triggerActionPerformed(player, ADVANCEMENT_PLAYER_JOINED);
+            CharmAdvancements.trigger(player, ADVANCEMENT_PLAYER_JOINED);
         }
     }
 

@@ -55,6 +55,6 @@ public class VillagersFollowEmeraldBlocks extends CharmModule {
     }
 
     public static void triggerLuredVillager(ServerPlayer player) {
-        CharmAdvancements.triggerActionPerformed(player, TRIGGER_LURED_VILLAGER);
+        CharmAdvancements.trigger(player, TRIGGER_LURED_VILLAGER);
     }
 }

@@ -192,7 +192,7 @@ public class Atlases extends CharmModule {
     }
 
     public static void triggerMadeMaps(ServerPlayer player) {
-        CharmAdvancements.triggerActionPerformed(player, TRIGGER_MADE_ATLAS_MAPS);
+        CharmAdvancements.trigger(player, TRIGGER_MADE_ATLAS_MAPS);
     }
 
     private void handlePlayerTick(Player player) {

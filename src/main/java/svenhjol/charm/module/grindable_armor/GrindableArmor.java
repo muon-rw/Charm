@@ -99,6 +99,6 @@ public class GrindableArmor extends CharmModule {
     }
 
     public static void triggerRecycledArmor(ServerPlayer player) {
-        CharmAdvancements.triggerActionPerformed(player, TRIGGER_RECYCLED_ARMOR);
+        CharmAdvancements.trigger(player, TRIGGER_RECYCLED_ARMOR);
     }
 }

@@ -44,6 +44,6 @@ public class Kilns extends CharmModule {
     }
 
     public static void triggerFiredItem(ServerPlayer player) {
-        CharmAdvancements.triggerActionPerformed(player, TRIGGER_FIRED_ITEM);
+        CharmAdvancements.trigger(player, TRIGGER_FIRED_ITEM);
     }
 }

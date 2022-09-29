@@ -64,6 +64,6 @@ public class PortableCrafting extends CharmModule {
     }
 
     public static void triggerUsedCraftingTable(ServerPlayer player) {
-        CharmAdvancements.triggerActionPerformed(player, TRIGGER_USED_CRAFTING_TABLE);
+        CharmAdvancements.trigger(player, TRIGGER_USED_CRAFTING_TABLE);
     }
 }

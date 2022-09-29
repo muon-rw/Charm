@@ -28,6 +28,6 @@ public class BlockOfGunpowder extends CharmModule {
 
     public static void triggerAdvancementForNearbyPlayers(ServerLevel level, BlockPos pos) {
         PlayerHelper.getPlayersInRange(level, pos).forEach(player
-            -> CharmAdvancements.triggerActionPerformed((ServerPlayer)player, TRIGGER_DISSOLVED_GUNPOWDER));
+            -> CharmAdvancements.trigger((ServerPlayer)player, TRIGGER_DISSOLVED_GUNPOWDER));
     }
 }

@@ -28,6 +28,6 @@ public class BlockOfSugar extends CharmModule {
 
     public static void triggerAdvancementForNearbyPlayers(ServerLevel level, BlockPos pos) {
         PlayerHelper.getPlayersInRange(level, pos).forEach(player
-            -> CharmAdvancements.triggerActionPerformed((ServerPlayer)player, TRIGGER_DISSOLVED_SUGAR));
+            -> CharmAdvancements.trigger((ServerPlayer)player, TRIGGER_DISSOLVED_SUGAR));
     }
 }

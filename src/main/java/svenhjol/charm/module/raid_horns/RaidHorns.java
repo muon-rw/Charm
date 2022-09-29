@@ -70,10 +70,10 @@ public class RaidHorns extends CharmModule {
     }
 
     public static void triggerSummoned(ServerPlayer playerEntity) {
-        CharmAdvancements.triggerActionPerformed(playerEntity, TRIGGER_SUMMONED_PILLAGERS);
+        CharmAdvancements.trigger(playerEntity, TRIGGER_SUMMONED_PILLAGERS);
     }
 
     public static void triggerCalledOff(ServerPlayer playerEntity) {
-        CharmAdvancements.triggerActionPerformed(playerEntity, TRIGGER_CALLED_OFF_RAID);
+        CharmAdvancements.trigger(playerEntity, TRIGGER_CALLED_OFF_RAID);
     }
 }
