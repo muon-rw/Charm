@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.DyeColor;
@@ -17,7 +18,7 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.helper.PlayerHelper;
 import svenhjol.charm.helper.WorldHelper;
-import svenhjol.charm.lib.Advancements;
+import svenhjol.charm.init.CharmAdvancements;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.registry.CommonRegistry;
 
@@ -107,6 +108,6 @@ public class ColoredNetherPortals extends CharmModule {
     }
 
     public static void triggerColoredPortal(ServerPlayer player) {
-        Advancements.triggerActionPerformed(player, TRIGGER_COLORED_PORTAL);
+        CharmAdvancements.ACTION_PERFORMED.trigger(player, TRIGGER_COLORED_PORTAL);
     }
 }
