@@ -130,10 +130,10 @@ public class BatBuckets extends CharmModule {
     }
 
     public static void triggerCapturedBat(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_CAPTURED_BAT);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_CAPTURED_BAT);
     }
 
     public static void triggerUsedBatBucket(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_USED_BAT_BUCKET);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_USED_BAT_BUCKET);
     }
 }

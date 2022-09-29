@@ -190,6 +190,6 @@ public class ExtractEnchantments extends CharmModule {
     }
 
     public static void triggerExtractedEnchantment(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_EXTRACTED_ENCHANTMENT);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_EXTRACTED_ENCHANTMENT);
     }
 }

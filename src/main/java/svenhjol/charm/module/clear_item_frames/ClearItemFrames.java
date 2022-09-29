@@ -58,7 +58,7 @@ public class ClearItemFrames extends CharmModule {
 
             if (!level.isClientSide) {
                 SERVER_SEND_ADD_AMETHYST.send((ServerPlayer) player, frame.blockPosition());
-                CharmAdvancements.trigger((ServerPlayer) player, TRIGGER_USED_AMETHYST_ON_FRAME);
+                CharmAdvancements.triggerActionPerformed((ServerPlayer) player, TRIGGER_USED_AMETHYST_ON_FRAME);
             }
 
             return InteractionResult.sidedSuccess(level.isClientSide);

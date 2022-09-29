@@ -96,7 +96,7 @@ public class Elixirs extends CharmModule {
     }
 
     public static void triggerFindElixir(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_FIND_ELIXIR);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_FIND_ELIXIR);
     }
 
     private void handlePlayerTick(Player player) {

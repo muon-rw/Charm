@@ -68,6 +68,6 @@ public class EndermitePowder extends CharmModule {
     }
 
     public static void triggerAdvancement(ServerPlayer playerEntity) {
-        CharmAdvancements.trigger(playerEntity, new ResourceLocation(Charm.MOD_ID, "used_endermite_powder"));
+        CharmAdvancements.triggerActionPerformed(playerEntity, new ResourceLocation(Charm.MOD_ID, "used_endermite_powder"));
     }
 }

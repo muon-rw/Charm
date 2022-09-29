@@ -3,6 +3,7 @@ package svenhjol.charm.loader;
 import com.moandjiezana.toml.Toml;
 import net.minecraft.resources.ResourceLocation;
 import svenhjol.charm.annotation.CommonModule;
+import svenhjol.charm.lib.CharmAdvancements;
 import svenhjol.charm.helper.ConfigHelper;
 import svenhjol.charm.mixin.BaseMixinConfigPlugin;
 import svenhjol.charm.module.core.Core;
@@ -11,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @SuppressWarnings({"unused", "unchecked"})
 public class CommonLoader<T extends CharmModule> extends ModuleLoader<T> {
@@ -46,9 +48,8 @@ public class CommonLoader<T extends CharmModule> extends ModuleLoader<T> {
         super.run();
 
         // filter out all disabled module advancements
-        getAllModules().values().stream()
-            .filter(m -> !Core.doAdvancements || !m.isEnabled())
-            .forEach(CharmModule::getId);
+        CharmAdvancements.removeAdvancements(getAllModules().values().stream()
+            .filter(m -> !Core.doAdvancements || !m.isEnabled()).collect(Collectors.toList()));
     }
 
     @Override

@@ -39,6 +39,6 @@ public class EditableSigns extends CharmModule {
     }
 
     public static void triggerEditedSign(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_EDITED_SIGN);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_EDITED_SIGN);
     }
 }

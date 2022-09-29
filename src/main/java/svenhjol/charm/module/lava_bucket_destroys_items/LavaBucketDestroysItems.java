@@ -52,6 +52,6 @@ public class LavaBucketDestroysItems extends CharmModule {
     }
 
     public static void triggerDestroyedItem(ServerPlayer player) {
-        CharmAdvancements.trigger(player, LavaBucketDestroysItems.TRIGGER_DESTROYED_ITEM);
+        CharmAdvancements.triggerActionPerformed(player, LavaBucketDestroysItems.TRIGGER_DESTROYED_ITEM);
     }
 }

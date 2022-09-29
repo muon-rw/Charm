@@ -279,6 +279,6 @@ public class TotemOfPreserving extends CharmModule {
     }
 
     public static void triggerUsedTotemOfPreserving(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_USED_TOTEM_OF_PRESERVING);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_USED_TOTEM_OF_PRESERVING);
     }
 }

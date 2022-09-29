@@ -70,6 +70,6 @@ public class Mooblooms extends CharmModule {
     }
 
     public static void triggerMilkedMoobloom(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_MILKED_MOOBLOOM);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_MILKED_MOOBLOOM);
     }
 }

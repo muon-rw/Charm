@@ -107,6 +107,6 @@ public class ColoredNetherPortals extends CharmModule {
     }
 
     public static void triggerColoredPortal(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_COLORED_PORTAL);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_COLORED_PORTAL);
     }
 }

@@ -134,6 +134,6 @@ public class QuickReplant extends CharmModule {
     }
 
     public static void triggerReplantedCrops(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_REPLANTED_CROPS);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_REPLANTED_CROPS);
     }
 }

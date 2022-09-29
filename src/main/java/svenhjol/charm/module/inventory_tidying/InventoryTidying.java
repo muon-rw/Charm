@@ -69,6 +69,6 @@ public class InventoryTidying extends CharmModule {
     }
 
     public static void triggerTidiedInventory(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_TIDIED_INVENTORY);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_TIDIED_INVENTORY);
     }
 }

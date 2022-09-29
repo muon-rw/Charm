@@ -79,6 +79,6 @@ public class Bookcases extends CharmModule {
     }
 
     public static void triggerAddedBookToBookcase(ServerPlayer player) {
-        CharmAdvancements.trigger(player, TRIGGER_ADDED_BOOK_TO_BOOKCASE);
+        CharmAdvancements.triggerActionPerformed(player, TRIGGER_ADDED_BOOK_TO_BOOKCASE);
     }
 }

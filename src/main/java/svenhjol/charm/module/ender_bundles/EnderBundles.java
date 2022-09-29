@@ -78,7 +78,7 @@ public class EnderBundles extends CharmModule {
     }
     
     public static void triggerUsedEnderBundle(ServerPlayer player) {
-        CharmAdvancements.trigger(player, EnderBundles.TRIGGER_USED_ENDER_BUNDLE);
+        CharmAdvancements.triggerActionPerformed(player, EnderBundles.TRIGGER_USED_ENDER_BUNDLE);
     }
     
     public static NonNullList<ItemStack> getEnderInventory(Player player) {
