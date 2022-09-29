@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import svenhjol.charm.helper.PlayerHelper;
 
 @Mixin({BowlFoodItem.class, SuspiciousStewItem.class})
 public class FinishEatingStewMixin {
@@ -22,12 +23,12 @@ public class FinishEatingStewMixin {
         at = @At("RETURN"),
         cancellable = true
     )
-    private void hookFinishUsing(ItemStack stack, Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
-        if (cir.getReturnValue().getItem() == Items.BOWL && stack.getCount() > 0) {
+    private void hookFinishUsing(ItemStack itemStack, Level level, LivingEntity livingEntity, CallbackInfoReturnable<ItemStack> cir) {
+        if (cir.getReturnValue().getItem() == Items.BOWL && itemStack.getCount() > 0) {
             if (livingEntity instanceof Player player) {
-                player.getInventory().placeItemBackInInventory(new ItemStack(Items.BOWL));
+                PlayerHelper.addOrDropStack(player, new ItemStack(Items.BOWL));
             }
-            cir.setReturnValue(stack);
+            cir.setReturnValue(itemStack);
         }
     }
 }

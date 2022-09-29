@@ -1,4 +1,4 @@
-package svenhjol.charm.lib;
+package svenhjol.charm.init;
 
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ConfiguredStructureTags;

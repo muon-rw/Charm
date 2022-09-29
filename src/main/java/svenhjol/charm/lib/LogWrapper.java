@@ -2,8 +2,8 @@ package svenhjol.charm.lib;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import svenhjol.charm.helper.DebugHelper;
 import svenhjol.charm.helper.StringHelper;
-import svenhjol.charm.init.CharmDebug;
 
 public class LogWrapper {
     private final Logger LOG;
@@ -24,7 +24,7 @@ public class LogWrapper {
     }
 
     public void debug(Class<?> source, String message, Object... args) {
-        if (CharmDebug.isEnabled()) {
+        if (DebugHelper.isDebugMode()) {
             LOG.info(assembleMessage(source, message), args);
         }
     }

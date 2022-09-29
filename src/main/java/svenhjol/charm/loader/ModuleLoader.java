@@ -1,9 +1,9 @@
 package svenhjol.charm.loader;
 
 import svenhjol.charm.helper.ClassHelper;
+import svenhjol.charm.helper.DebugHelper;
 import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.helper.StringHelper;
-import svenhjol.charm.init.CharmDebug;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -49,7 +49,7 @@ public abstract class ModuleLoader<T extends CharmModule> {
 
     protected void dependencies() {
         getModules().forEach(module -> {
-            boolean debug = CharmDebug.isEnabled();
+            boolean debug = DebugHelper.isDebugMode();
             boolean enabledInConfig = module.isEnabledInConfig();
             boolean passedDependencyCheck = module.getDependencies().isEmpty() || module.getDependencies().stream().allMatch(dep -> dep.test(module));
             module.setEnabled(enabledInConfig && passedDependencyCheck);
@@ -94,7 +94,7 @@ public abstract class ModuleLoader<T extends CharmModule> {
      */
     public boolean isEnabled(String moduleName) {
         if (!ENABLED_STRING_CACHE.containsKey(moduleName)) {
-            if (CharmDebug.isEnabled() && moduleName.contains(":")) {
+            if (DebugHelper.isDebugMode() && moduleName.contains(":")) {
                 // deprecated, warn about it
                 LogHelper.warn(ModuleLoader.class, "Deprecated: Module `" + moduleName + "` no longer requires namespace");
                 moduleName = moduleName.split(":")[1];

@@ -22,6 +22,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import svenhjol.charm.block.CharmBlockWithEntity;
 import svenhjol.charm.helper.LogHelper;
+import svenhjol.charm.helper.PlayerHelper;
 import svenhjol.charm.loader.CharmModule;
 
 public class TotemBlock extends CharmBlockWithEntity {
@@ -103,7 +104,7 @@ public class TotemBlock extends CharmBlockWithEntity {
             TotemOfPreservingItem.setXp(totemItem, totem.getXp());
 
             LogHelper.debug(getClass(), "Adding totem item to player's inventory: " + player);
-            player.getInventory().placeItemBackInInventory(totemItem);
+            PlayerHelper.addOrDropStack(player, totemItem);
             
             if (TotemOfPreserving.PROTECT_POSITIONS.containsKey(dimension)) {
                 TotemOfPreserving.PROTECT_POSITIONS.get(dimension).remove(pos);

@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.helper.EnchantmentsHelper;
+import svenhjol.charm.helper.PlayerHelper;
 import svenhjol.charm.loader.CharmModule;
 
 import java.util.Map;
@@ -35,12 +36,12 @@ public class CollectionEnchantment extends CharmModule {
     }
 
     public static boolean trySpawnToInventory(Level level, BlockPos pos, ItemStack stack) {
-        // Copy checks from Block#spawnAsEntity.
+        //copy checks from Block#spawnAsEntity
         if (!level.isClientSide && !stack.isEmpty() && level.getGameRules().getBoolean(GameRules.RULE_DOBLOCKDROPS)) {
             if (BREAKING.containsKey(pos)) {
                 Player player = level.getPlayerByUUID(BREAKING.get(pos));
                 if (player != null) {
-                    player.getInventory().placeItemBackInInventory(stack);
+                    PlayerHelper.addOrDropStack(player, stack);
                     return true;
                 }
             }
