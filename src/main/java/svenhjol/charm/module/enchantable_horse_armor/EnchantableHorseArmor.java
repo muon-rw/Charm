@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.enchantment.Enchantment;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
+import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.loader.CharmModule;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class EnchantableHorseArmor extends CharmModule {
 
     public static void registerEnchantment(ResourceLocation enchantment) {
         Registry.ENCHANTMENT.getOptional(enchantment).ifPresent(e -> {
-            Charm.LOG.debug(EnchantableHorseArmor.class, "Adding enchantment: " + enchantment);
+            LogHelper.debug(EnchantableHorseArmor.class, "Adding enchantment: " + enchantment);
             VALID_ENCHANTMENTS.add(e);
         });
     }

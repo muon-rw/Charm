@@ -7,7 +7,7 @@ import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import svenhjol.charm.Charm;
+import svenhjol.charm.helper.LogHelper;
 
 import java.util.Optional;
 
@@ -42,7 +42,7 @@ public abstract class ClientReceiver {
 
     protected void debug(String message) {
         if (showDebugMessages()) {
-            Charm.LOG.debug(getClass(), message);
+            LogHelper.debug(getClass(), message);
         }
     }
 

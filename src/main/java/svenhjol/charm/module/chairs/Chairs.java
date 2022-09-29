@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
+import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.registry.CommonRegistry;
 
@@ -56,14 +57,14 @@ public class Chairs extends CharmModule {
             ) {
                 var chair = new ChairEntity(level, pos);
                 level.addFreshEntity(chair);
-                Charm.LOG.debug(getClass(), "Added new chair entity");
+                LogHelper.debug(getClass(), "Added new chair entity");
 
                 var result = player.startRiding(chair);
-                Charm.LOG.debug(getClass(), "Player is now riding");
+                LogHelper.debug(getClass(), "Player is now riding");
                 if (result) {
                     player.moveTo(chair.getX(), chair.getY(), chair.getZ());
                     player.setPos(chair.getX(), chair.getY(), chair.getZ());
-                    Charm.LOG.debug(getClass(), "Moved player to chair pos");
+                    LogHelper.debug(getClass(), "Moved player to chair pos");
                 }
 
                 return InteractionResult.SUCCESS;

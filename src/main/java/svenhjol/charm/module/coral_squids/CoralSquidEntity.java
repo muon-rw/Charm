@@ -105,6 +105,10 @@ public class CoralSquidEntity extends WaterAnimal {
             && pos.getY() < level.getSeaLevel()
             && coralBelow;
 
+//        if (canSpawn) {
+//            LogHelper.debug(CoralSquidEntity.class, "Can spawn coral squid at pos: " + pos);
+//        }
+
         return canSpawn;
     }
 

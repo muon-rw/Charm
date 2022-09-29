@@ -11,7 +11,6 @@ import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import svenhjol.charm.Charm;
 
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
@@ -102,7 +101,7 @@ public class LootHelper {
                 if (Registry.ITEM.getOptional(res).isPresent()) {
                     map.computeIfAbsent(p, a -> new LinkedList<>()).add(Registry.ITEM.get(res));
                 } else {
-                    Charm.LOG.debug(LootHelper.class, "Could not find item in registry: " + res);
+                    LogHelper.debug(LootHelper.class, "Could not find item in registry: " + res);
                 }
             }
         }

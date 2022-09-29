@@ -8,9 +8,9 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.impl.builders.FieldBuilder;
 import me.shedaniel.clothconfig2.impl.builders.SubCategoryBuilder;
 import net.minecraft.network.chat.Component;
-import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.Config;
 import svenhjol.charm.helper.ConfigHelper;
+import svenhjol.charm.helper.LogHelper;
 import svenhjol.charm.helper.StringHelper;
 import svenhjol.charm.helper.TextHelper;
 import svenhjol.charm.loader.CharmModule;
@@ -121,7 +121,7 @@ public abstract class BaseModMenuPlugin<T extends CharmModule> implements ModMen
                 properties.put(prop, value);
 
             } catch (Exception e) {
-                Charm.LOG.error(this.getClass(), "Failed to read config property " + prop.getName() + " in " + module.getName());
+                LogHelper.error(this.getClass(), "Failed to read config property " + prop.getName() + " in " + module.getName());
             }
         });
 
