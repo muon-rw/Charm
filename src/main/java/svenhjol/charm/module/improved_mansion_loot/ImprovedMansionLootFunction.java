@@ -11,7 +11,7 @@ import net.minecraft.world.level.storage.loot.functions.LootItemConditionalFunct
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import svenhjol.charm.Charm;
-import svenhjol.charm.lib.CharmEnchantments;
+import svenhjol.charm.helper.EnchantmentsHelper;
 
 public class ImprovedMansionLootFunction extends LootItemConditionalFunction {
     protected ImprovedMansionLootFunction(LootItemCondition[] conditions) {
@@ -33,7 +33,7 @@ public class ImprovedMansionLootFunction extends LootItemConditionalFunction {
             if (f < 0.5F) {
                 var book = new ItemStack(Items.ENCHANTED_BOOK);
                 var enchantment = f < 0.25F ? Enchantments.MENDING : Enchantments.INFINITY_ARROWS;
-                CharmEnchantments.apply(book, enchantment, 1);
+                EnchantmentsHelper.apply(book, enchantment, 1);
                 return book;
             } else {
                 level = 30;

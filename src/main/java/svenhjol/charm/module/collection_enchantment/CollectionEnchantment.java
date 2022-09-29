@@ -7,7 +7,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
-import svenhjol.charm.lib.CharmEnchantments;
+import svenhjol.charm.helper.EnchantmentsHelper;
 import svenhjol.charm.loader.CharmModule;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ public class CollectionEnchantment extends CharmModule {
     }
 
     public static void startBreaking(Player player, BlockPos pos) {
-        if (Charm.LOADER.isEnabled(CollectionEnchantment.class) && CharmEnchantments.has(player.getMainHandItem(), ENCHANTMENT)) {
+        if (Charm.LOADER.isEnabled(CollectionEnchantment.class) && EnchantmentsHelper.has(player.getMainHandItem(), ENCHANTMENT)) {
             BREAKING.put(pos, player.getUUID());
         }
     }

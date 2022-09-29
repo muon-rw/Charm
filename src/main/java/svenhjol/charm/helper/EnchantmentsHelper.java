@@ -1,4 +1,4 @@
-package svenhjol.charm.lib;
+package svenhjol.charm.helper;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -8,8 +8,11 @@ import net.minecraft.world.item.enchantment.Enchantments;
 
 import java.util.Map;
 
+/**
+ * @version 4.0.0-charm
+ */
 @SuppressWarnings("unused")
-public class CharmEnchantments {
+public class EnchantmentsHelper {
     public static void apply(ItemStack stack, Enchantment enchantment, int level) {
         Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
         enchantments.put(enchantment, level);

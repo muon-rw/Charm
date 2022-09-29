@@ -186,9 +186,9 @@ public class WorldHelper {
      */
     public static BlockState getSurfaceBlockForDimension(ServerLevel level) {
         BlockState block;
-        if (level.dimension() == Level.END) {
+        if (DimensionHelper.isEnd(level)) {
             block = Blocks.END_STONE.defaultBlockState();
-        } else if (level.dimension() == Level.NETHER) {
+        } else if (DimensionHelper.isNether(level)) {
             block = Blocks.NETHERRACK.defaultBlockState();
         } else {
             block = Blocks.STONE.defaultBlockState();
