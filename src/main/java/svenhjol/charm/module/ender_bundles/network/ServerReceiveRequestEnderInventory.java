@@ -13,9 +13,4 @@ public class ServerReceiveRequestEnderInventory extends ServerReceiver {
     public void handle(MinecraftServer server, ServerPlayer player, FriendlyByteBuf buf) {
         server.execute(() -> EnderBundles.handleRequestEnderInventory(player));
     }
-    
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

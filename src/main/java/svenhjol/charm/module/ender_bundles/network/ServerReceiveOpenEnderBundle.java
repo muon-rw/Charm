@@ -13,9 +13,4 @@ public class ServerReceiveOpenEnderBundle extends ServerReceiver {
     public void handle(MinecraftServer server, ServerPlayer player, FriendlyByteBuf buf) {
         server.execute(() -> EnderBundles.handleReceiveOpenEnderBundle(player));
     }
-    
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

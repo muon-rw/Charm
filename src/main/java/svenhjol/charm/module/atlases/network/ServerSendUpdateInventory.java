@@ -9,9 +9,4 @@ public class ServerSendUpdateInventory extends ServerSender {
     public void send(ServerPlayer player, int slot) {
         super.send(player, buf -> buf.writeInt(slot));
     }
-
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

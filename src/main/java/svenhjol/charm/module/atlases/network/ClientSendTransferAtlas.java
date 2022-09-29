@@ -14,9 +14,4 @@ public class ClientSendTransferAtlas extends ClientSender {
             buf.writeEnum(mode);
         });
     }
-
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

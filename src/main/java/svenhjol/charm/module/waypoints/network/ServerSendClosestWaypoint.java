@@ -15,9 +15,4 @@ public class ServerSendClosestWaypoint extends ServerSender {
             buf.writeBoolean(playSound);
         });
     }
-
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

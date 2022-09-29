@@ -63,9 +63,4 @@ public class ServerReceiveTransferAtlas extends ServerReceiver {
             }
         });
     }
-
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

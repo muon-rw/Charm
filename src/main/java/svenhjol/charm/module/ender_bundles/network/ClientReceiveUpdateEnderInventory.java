@@ -13,9 +13,4 @@ public class ClientReceiveUpdateEnderInventory extends ClientReceiver {
         var tag = getCompoundTag(buf).orElseThrow();
         client.execute(() -> EnderBundlesClient.handleReceiveUpdateEnderInventory(client.player, tag));
     }
-    
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

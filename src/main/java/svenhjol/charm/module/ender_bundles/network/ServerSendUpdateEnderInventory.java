@@ -16,9 +16,4 @@ public class ServerSendUpdateEnderInventory extends ServerSender {
             buf.writeNbt(tag);
         });
     }
-    
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

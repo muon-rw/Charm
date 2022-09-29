@@ -5,8 +5,4 @@ import svenhjol.charm.network.ServerSender;
 
 @Id("charm:flush_waypoint")
 public class ServerSendFlushWaypoint extends ServerSender {
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

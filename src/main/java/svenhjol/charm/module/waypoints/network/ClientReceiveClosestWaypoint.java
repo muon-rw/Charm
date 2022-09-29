@@ -46,9 +46,4 @@ public class ClientReceiveClosestWaypoint extends ClientReceiver {
             WaypointsClient.broadcastMessageTime = Waypoints.broadcastDuration * 60;
         });
     }
-
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

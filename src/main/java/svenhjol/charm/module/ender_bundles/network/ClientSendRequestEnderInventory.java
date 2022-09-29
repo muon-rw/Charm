@@ -5,8 +5,4 @@ import svenhjol.charm.network.Id;
 
 @Id("charm:request_ender_inventory")
 public class ClientSendRequestEnderInventory extends ClientSender {
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

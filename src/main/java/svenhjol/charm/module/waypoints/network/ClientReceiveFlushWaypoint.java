@@ -15,9 +15,4 @@ public class ClientReceiveFlushWaypoint extends ClientReceiver {
             WaypointsClient.lastMessage = null;
         });
     }
-
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

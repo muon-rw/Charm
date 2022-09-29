@@ -5,8 +5,4 @@ import svenhjol.charm.network.Id;
 
 @Id("charm:open_ender_bundle")
 public class ClientSendOpenEnderBundle extends ClientSender {
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }

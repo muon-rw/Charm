@@ -13,9 +13,4 @@ public class ClientReceiveUpdateInventory extends ClientReceiver {
         int atlasSlot = buffer.readInt();
         client.execute(() -> AtlasesClient.updateInventory(atlasSlot));
     }
-
-    @Override
-    protected boolean showDebugMessages() {
-        return false;
-    }
 }
