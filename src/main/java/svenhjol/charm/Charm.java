@@ -1,14 +1,15 @@
 package svenhjol.charm;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
-import svenhjol.charm.helper.ConfigHelper;
-import svenhjol.charm.init.*;
+import svenhjol.charm.init.CharmDebug;
+import svenhjol.charm.init.CharmHacks;
+import svenhjol.charm.init.CharmParticles;
+import svenhjol.charm.init.CharmResources;
 import svenhjol.charm.lib.CharmAdvancements;
+import svenhjol.charm.lib.CharmTags;
 import svenhjol.charm.lib.LogWrapper;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.loader.CommonLoader;
-import svenhjol.charm.module.core.Core;
 
 @SuppressWarnings("unused")
 public class Charm implements ModInitializer {
@@ -26,20 +27,15 @@ public class Charm implements ModInitializer {
     public static void init() {
         if (hasStartedCharm) return;
 
+        CharmDebug.init();
         CharmHacks.init();
         CharmResources.init();
         CharmParticles.init();
         CharmTags.init();
-
         CharmAdvancements.init();
 
         LOADER.init();
 
         hasStartedCharm = true;
-    }
-
-    private static void setupDebugMode() {
-        var toml = ConfigHelper.readConfig(Charm.MOD_ID);
-        Core.debug = ConfigHelper.isDebugMode(toml) || FabricLoader.getInstance().isDevelopmentEnvironment();
     }
 }

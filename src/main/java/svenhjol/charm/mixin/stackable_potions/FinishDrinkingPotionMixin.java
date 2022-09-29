@@ -6,7 +6,6 @@ import net.minecraft.world.item.PotionItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import svenhjol.charm.helper.PlayerHelper;
 
 @Mixin(PotionItem.class)
 public class FinishDrinkingPotionMixin {
@@ -24,8 +23,8 @@ public class FinishDrinkingPotionMixin {
     private boolean hookGetInventory(Inventory inventory, ItemStack bottle) {
         var player = inventory.player;
         if (player != null) {
-            return PlayerHelper.addOrDropStack(player, bottle);
+            player.getInventory().placeItemBackInInventory(bottle);
         }
-        return false;
+        return true;
     }
 }

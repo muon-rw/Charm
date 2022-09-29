@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import svenhjol.charm.helper.DimensionHelper;
-import svenhjol.charm.init.CharmTags;
+import svenhjol.charm.lib.CharmTags;
 import svenhjol.charm.item.CharmItem;
 import svenhjol.charm.loader.CharmModule;
 

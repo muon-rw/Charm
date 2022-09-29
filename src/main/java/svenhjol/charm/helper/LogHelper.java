@@ -2,6 +2,7 @@ package svenhjol.charm.helper;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import svenhjol.charm.init.CharmDebug;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class LogHelper {
     }
 
     public static void debug(String modId, Class<?> source, String message, Object... args) {
-        if (DebugHelper.isDebugMode()) {
+        if (CharmDebug.isEnabled()) {
             instance(modId).info(assembleMessage(source, message), args);
         }
     }

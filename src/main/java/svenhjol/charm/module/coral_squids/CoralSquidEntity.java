@@ -41,7 +41,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import svenhjol.charm.Charm;
 import svenhjol.charm.helper.ItemNbtHelper;
-import svenhjol.charm.helper.PlayerHelper;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -310,7 +309,7 @@ public class CoralSquidEntity extends WaterAnimal {
             if (!this.level.isClientSide)
                 CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer)player, coralSquidBucket);
 
-            PlayerHelper.addOrDropStack(player, coralSquidBucket);
+            player.getInventory().placeItemBackInInventory(coralSquidBucket);
 
             this.discard();
             return InteractionResult.sidedSuccess(this.level.isClientSide);

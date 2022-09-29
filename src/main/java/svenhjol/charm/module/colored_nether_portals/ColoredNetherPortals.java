@@ -15,9 +15,9 @@ import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
-import svenhjol.charm.helper.PlayerHelper;
 import svenhjol.charm.helper.WorldHelper;
 import svenhjol.charm.lib.CharmAdvancements;
+import svenhjol.charm.lib.CharmPlayers;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.registry.CommonRegistry;
 
@@ -102,7 +102,7 @@ public class ColoredNetherPortals extends CharmModule {
             level.playSound(null, pos, ColoredNetherPortals.PORTAL_CHANGE_COLOR_SOUND, SoundSource.BLOCKS, 0.44F, new Random().nextFloat() * 0.4F + 0.8F);
 
             // Award the advancement to all nearby players.
-            PlayerHelper.getPlayersInRange(level, pos, 4.0D).forEach(player -> triggerColoredPortal((ServerPlayer)player));
+            CharmPlayers.getInRange(level, pos, 4.0D).forEach(player -> triggerColoredPortal((ServerPlayer)player));
         }
     }
 

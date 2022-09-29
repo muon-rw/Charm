@@ -23,7 +23,6 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.annotation.Config;
 import svenhjol.charm.helper.EnchantmentsHelper;
-import svenhjol.charm.helper.PlayerHelper;
 import svenhjol.charm.lib.CharmAdvancements;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.module.collection_enchantment.CollectionEnchantment;
@@ -94,7 +93,7 @@ public class QuickReplant extends CharmModule {
 
                     if (!drop.isEmpty()) {
                         if (hasCollection) {
-                            PlayerHelper.addOrDropStack(player, drop);
+                            player.getInventory().placeItemBackInInventory(drop);
                         } else {
                             Block.popResource(level, pos, drop);
                         }

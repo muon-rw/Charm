@@ -11,7 +11,7 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.annotation.Config;
 import svenhjol.charm.helper.TextHelper;
-import svenhjol.charm.init.CharmTags;
+import svenhjol.charm.lib.CharmTags;
 import svenhjol.charm.lib.CharmAdvancements;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.module.portable_crafting.network.ServerReceiveOpenCrafting;

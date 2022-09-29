@@ -1,12 +1,9 @@
 package svenhjol.charm.module.mooblooms;
 
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import svenhjol.charm.helper.DebugHelper;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -77,10 +74,6 @@ public class BeeMoveToMoobloomGoal extends Goal {
             moobloom = null;
         } else if (!bee.getNavigation().isInProgress()) {
             bee.pathfindRandomlyTowards(moobloom.blockPosition());
-
-            if (DebugHelper.isDebugMode()) {
-                bee.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100));
-            }
         } else {
 
             // update bee tracking to take into account a moving moobloom
@@ -91,11 +84,6 @@ public class BeeMoveToMoobloomGoal extends Goal {
             double dist = bee.position().distanceTo(moobloom.position());
             if (dist < 2.2) {
                 bee.setHasNectar(false);
-
-                if (DebugHelper.isDebugMode()) {
-                    bee.removeEffect(MobEffects.GLOWING);
-                }
-
                 moobloom.pollinate();
                 moobloom = null;
             }

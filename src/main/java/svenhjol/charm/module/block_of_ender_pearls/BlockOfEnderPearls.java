@@ -20,9 +20,9 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.annotation.CommonModule;
 import svenhjol.charm.annotation.Config;
 import svenhjol.charm.api.event.AddEntityCallback;
-import svenhjol.charm.lib.CharmAdvancements;
-import svenhjol.charm.helper.PlayerHelper;
 import svenhjol.charm.helper.WorldHelper;
+import svenhjol.charm.lib.CharmAdvancements;
+import svenhjol.charm.lib.CharmPlayers;
 import svenhjol.charm.loader.CharmModule;
 import svenhjol.charm.module.extra_wandering_trades.ExtraWanderingTrades;
 
@@ -138,7 +138,7 @@ public class BlockOfEnderPearls extends CharmModule {
     }
 
     public static void triggerConvertedSilverfishForNearbyPlayers(ServerLevel level, BlockPos pos) {
-        PlayerHelper.getPlayersInRange(level, pos).forEach(player
+        CharmPlayers.getInRange(level, pos, 8.0D).forEach(player
             -> CharmAdvancements.trigger((ServerPlayer)player, TRIGGER_CONVERTED_SILVERFISH));
     }
 

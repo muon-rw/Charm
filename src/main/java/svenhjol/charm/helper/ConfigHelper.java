@@ -6,6 +6,7 @@ import com.electronwill.nightconfig.toml.TomlWriter;
 import com.moandjiezana.toml.Toml;
 import net.fabricmc.loader.api.FabricLoader;
 import svenhjol.charm.annotation.Config;
+import svenhjol.charm.init.CharmDebug;
 import svenhjol.charm.loader.CharmModule;
 
 import java.io.File;
@@ -111,7 +112,9 @@ public class ConfigHelper {
                                 configValue = (float)(double) configValue;
 
                             // set the class property
-                            if (DebugHelper.isDebugMode()) LogHelper.info(ConfigHelper.class, "In module " + moduleName + ": setting `" + propName + "` to `" + configValue + "`");
+                            if (CharmDebug.isEnabled()) {
+                                LogHelper.info(ConfigHelper.class, "In module " + moduleName + ": setting `" + propName + "` to `" + configValue + "`");
+                            }
                             prop.set(null, configValue);
                         }
                     }
