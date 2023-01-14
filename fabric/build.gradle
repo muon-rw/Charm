@@ -1,6 +1,3 @@
-import groovy.json.JsonBuilder
-import groovy.json.JsonSlurper
-
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
@@ -35,7 +32,11 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${props.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${props.fabric_version}"
 
-    // Depend on Charm Core.
+    // Bundle Charm API.
+    include "svenhjol.charm:charm_api-fabric-${props.minecraft_version}:${props.api_version}"
+    modImplementation "svenhjol.charm:charm_api-fabric-${props.minecraft_version}:${props.api_version}"
+
+    // Bundle Charm Core.
     include "svenhjol.charm:charm_core-fabric-${props.minecraft_version}:${props.core_version}"
     modImplementation "svenhjol.charm:charm_core-fabric-${props.minecraft_version}:${props.core_version}"
 
@@ -64,6 +65,10 @@ processResources {
 
     filesMatching("fabric.mod.json") {
         expand "version": props.mod_version
+    }
+
+    filesMatching([props.mod_id + ".mixins.json", props.mod_id + ".fabric.mixins.json"]) {
+        expand "refmap_file": props.mod_id + "-fabric-${props.minecraft_version}" + "-refmap.json"
     }
     
     duplicatesStrategy(DuplicatesStrategy.INCLUDE)

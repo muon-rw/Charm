@@ -3,6 +3,18 @@
     {
       "identifier": {
         "group": "svenhjol",
+        "artifact": "charm_api"
+      },
+      "version": {
+        "range": "[5.0.0,)",
+        "artifactVersion": "5.0.0"
+      },
+      "path": "META-INF/jarjar/charm_api-forge-1.19.3-5.0.0.jar",
+      "isObfuscated": true
+    },
+    {
+      "identifier": {
+        "group": "svenhjol",
         "artifact": "charm_core"
       },
       "version": {

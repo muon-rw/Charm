@@ -32,5 +32,10 @@ public class ForgeInitializer {
         event.enqueueWork(INIT.getEvents()::doFinalTasks);
     }
 
-    public static class Initializer extends svenhjol.charm_core.forge.ForgeInitializer.Initializer { }
+    public static class Initializer extends svenhjol.charm_core.forge.ForgeInitializer.Initializer {
+        @Override
+        public String getNamespace() {
+            return Charm.MOD_ID;
+        }
+    }
 }

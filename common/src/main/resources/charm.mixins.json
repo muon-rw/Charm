@@ -8,6 +8,7 @@
   "mixins": [
   ],
   "client": [
+    "accessor.GuiAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -77,13 +77,22 @@ jarJar.enable()
 dependencies {
     minecraft "net.minecraftforge:forge:${props.minecraft_version}-${props.forge_version}"
 
-    // Required for jarjar to function.
-    implementation fg.deobf(group: 'svenhjol', name: 'charm_core-forge-1.19.3', version: '[' + props.core_version + ',)') {
+    // Depend on deobfuscated jarjar API and Core.
+    implementation fg.deobf(group: 'svenhjol', name: "charm_api-forge-${props.minecraft_version}", version: "[${props.api_version},)") {
+        jarJar.pin(it, props.api_version)
+    }
+
+    implementation fg.deobf(group: 'svenhjol', name: "charm_core-forge-${props.minecraft_version}", version: "[${props.core_version},)") {
         jarJar.pin(it, props.core_version)
     }
 
     // This generates the <mod_id>-refmap.json in the jar.
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+mixin {
+    // Adds the generated <mod_id>-refmap.json to the jar.
+    add sourceSets.main, props.mod_id + ".refmap.json"
 }
 
 jar {
