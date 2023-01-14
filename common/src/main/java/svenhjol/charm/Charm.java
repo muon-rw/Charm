@@ -2,10 +2,7 @@ package svenhjol.charm;
 
 import net.minecraft.resources.ResourceLocation;
 import svenhjol.charm_core.annotation.Feature;
-import svenhjol.charm_core.iface.IInitializer;
-import svenhjol.charm_core.iface.ILoader;
-import svenhjol.charm_core.iface.ILog;
-import svenhjol.charm_core.iface.IRegistry;
+import svenhjol.charm_core.iface.*;
 
 public class Charm {
     public static final String MOD_ID = "charm";
@@ -13,11 +10,13 @@ public class Charm {
     public static final String FEATURE_PREFIX = PREFIX + ".feature";
     public static ILog LOG;
     public static ILoader LOADER;
+    public static INetwork NETWORK;
     public static IRegistry REGISTRY;
 
     public Charm(IInitializer init) {
         LOG = init.getLog();
         LOADER = init.getLoader();
+        NETWORK = init.getNetwork();
         REGISTRY = init.getRegistry();
 
         LOADER.init(FEATURE_PREFIX, Feature.class);
