@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "svenhjol.charm.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${refmap_file}",
+  "plugin": "svenhjol.charm.mixin.MixinConfigPlugin",
+  "mixins": [
+    "extra_portal_frames.BaseFireBlockMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

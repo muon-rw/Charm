@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "charm",
+  "version": "${version}", 
+
+  "name": "Charm Nano",
+  "description": "Tweaks to Minecraft without changing core gameplay.",
+  "authors": [
+    "svenhjol"
+  ],
+
+  "license": "MIT",
+  "environment": "*",
+  "mixins": [
+    "charm.mixins.json",
+    "charm.fabric.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "svenhjol.charm.fabric.FabricModInitializer"
+    ],
+    "client": [
+      "svenhjol.charm.fabric.FabricClientModInitializer"
+    ]
+  },
+  "accessWidener": "charm.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.14.11",
+    "charm_api": "5.0.0",
+    "charm_core": "5.0.0",
+    "minecraft": "1.19.3",
+    "java": ">=17"
+  }
+}
