@@ -12,14 +12,15 @@
   "license": "MIT",
   "environment": "*",
   "mixins": [
-    "charm.mixins.json"
+    "charm.mixins.json",
+    "charm.fabric.mixins.json"
   ],
   "entrypoints": {
     "main": [
-      "svenhjol.charm.fabric.FabricInitializer"
+      "svenhjol.charm.fabric.FabricModInitializer"
     ],
     "client": [
-      "svenhjol.charm.fabric.FabricClientInitializer"
+      "svenhjol.charm.fabric.FabricClientModInitializer"
     ]
   },
   "accessWidener": "charm.accesswidener",

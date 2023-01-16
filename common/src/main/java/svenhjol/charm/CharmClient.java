@@ -6,11 +6,13 @@ import svenhjol.charm_core.iface.*;
 public class CharmClient {
     public static ILog LOG;
     public static ILoader LOADER;
+    public static IClientNetwork NETWORK;
     public static IClientRegistry REGISTRY;
 
     public CharmClient(IClientInitializer init) {
         LOG = init.getLog();
         LOADER = init.getLoader();
+        NETWORK = init.getNetwork();
         REGISTRY = init.getRegistry();
 
         LOADER.init(Charm.FEATURE_PREFIX, ClientFeature.class);

@@ -13,7 +13,11 @@ import svenhjol.charm_api.event.HudRenderEvent;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm.mixin.accessor.GuiAccessor;
 
-@ClientFeature(mod = Charm.MOD_ID, switchable = true, description = "Shows cardinal points and XYZ coordinates when holding a compass.")
+@ClientFeature(
+    mod = Charm.MOD_ID,
+    switchable = true,
+    description = "Shows cardinal points and XYZ coordinates when holding a compass."
+)
 public class CompassOverlay extends CharmFeature {
     @Configurable(name = "Facing", description = "If true, shows the cardinal direction that the player is facing.")
     public static boolean showFacing = true;

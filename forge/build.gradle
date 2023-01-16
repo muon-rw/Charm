@@ -36,7 +36,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=" + props.mod_id + ".mixins.json" // Comment out if no common mixins.
-//            arg "-mixin.config=" + props.mod_id + ".forge.mixins.json" // Comment out if no forge mixins.
+            arg "-mixin.config=" + props.mod_id + ".forge.mixins.json" // Comment out if no forge mixins.
             source sourceSets.main
         }
 
@@ -45,7 +45,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             arg "-mixin.config=" + props.mod_id + ".mixins.json" // Comment out if no common mixins.
-//            arg "-mixin.config=" + props.mod_id + ".forge.mixins.json" // Comment out if no forge mixins.
+            arg "-mixin.config=" + props.mod_id + ".forge.mixins.json" // Comment out if no forge mixins.
             source sourceSets.main
         }
     }
@@ -106,7 +106,7 @@ jar {
             "Implementation-Vendor"   : props.mod_id,
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
             "MixinConfigs"            : props.mod_id + ".mixins.json" // Comment out if no common mixins.
-//                + "," + props.mod_id + ".forge.mixins.json" // Comment out if no forge mixins.
+                + "," + props.mod_id + ".forge.mixins.json" // Comment out if no forge mixins.
         ])
     }
 }
