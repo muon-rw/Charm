@@ -9,7 +9,6 @@
     "extra_portal_frames.BaseFireBlockMixin"
   ],
   "client": [
-    "no_experimental_screen.WorldOpenFlowsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
