@@ -1,4 +1,4 @@
-package svenhjol.charm.mixin.no_experimental_screen;
+package svenhjol.charm.fabric.mixin.no_experimental_screen;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.worldselection.WorldOpenFlows;
