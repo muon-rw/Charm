@@ -6,7 +6,7 @@ import svenhjol.charm_core.fabric.base.BaseFabricClientInitializer;
 import svenhjol.charm_core.fabric.common.CommonRegistry;
 
 public class FabricClientModInitializer implements ClientModInitializer {
-    public static final Initializer INIT = new Initializer();
+    public static final ClientInitializer INIT = new ClientInitializer();
     private static Charm mod;
 
     @Override
@@ -20,7 +20,7 @@ public class FabricClientModInitializer implements ClientModInitializer {
         }
     }
 
-    public static class Initializer extends BaseFabricClientInitializer {
+    public static class ClientInitializer extends BaseFabricClientInitializer {
         @Override
         public CommonRegistry getCommonRegistry() {
             return null; // No common registry with client-only mods.
