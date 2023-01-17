@@ -1,6 +1,8 @@
 {
   "block.charm.smooth_glowstone": "Smooth Glowstone",
   "container.charm.portable_crafting_table": "Portable Crafting",
+  "enchantment.charm.aerial_affinity": "Aerial Affinity",
+  "enchantment.charm.aerial_affinity.desc": "Increases mining rate when not on the ground",
   "gui.charm.facing": "Facing %s",
   "gui.charm.north": "north",
   "gui.charm.east": "east",
