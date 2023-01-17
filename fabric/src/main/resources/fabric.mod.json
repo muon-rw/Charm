@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "charm",
+  "version": "${version}",
+
+  "name": "Charm (client)",
+  "description": "Client-only tweaks for Minecraft.",
+  "authors": [
+    "svenhjol"
+  ],
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "svenhjol.charm.fabric.FabricClientModInitializer"
+    ]
+  },
+  "mixins": [
+    "charm.mixins.json",
+    "charm.fabric.mixins.json"
+  ],
+  "accessWidener": "charm.accesswidener",
+  "depends": {
+    "charm_core": "5.0.*",
+    "fabricloader": ">=0.14.11",
+    "fabric-api": "*",
+    "fabric-key-binding-api-v1": "*",
+    "minecraft": "1.19.3",
+    "java": ">=17"
+  }
+}

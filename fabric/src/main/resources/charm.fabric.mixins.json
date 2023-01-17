@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "svenhjol.charm.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${refmap_file}",
+  "mixins": [
+  ],
+  "client": [
+    "no_experimental_screen.WorldOpenFlowsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
