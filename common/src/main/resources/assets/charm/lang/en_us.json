@@ -11,5 +11,9 @@
   "gui.charm.coords": "X: %s   Y: %s   Z: %s",
   "gui.charm.coords_only_xz": "X: %s   Z: %s",
   "gui.charm.repair_cost": "Repair Cost: %s",
-  "key.charm.open_portable_crafting": "Open portable crafting table"
+  "item.charm.atlas": "Atlas",
+  "key.charm.open_atlas": "Open atlas",
+  "key.charm.open_portable_crafting": "Open portable crafting table",
+  "subtitles.charm.item.atlas.open": "Atlas opens",
+  "subtitles.charm.item.atlas.close": "Atlas closes"
 }
