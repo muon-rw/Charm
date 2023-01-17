@@ -9,9 +9,8 @@ import svenhjol.charm_core.forge.base.BaseForgeInitializer;
 
 @Mod(Charm.MOD_ID)
 public class ForgeModInitializer {
-    private final Charm mod;
-
     public static final Initializer INIT = new Initializer();
+    private final Charm mod;
 
     public ForgeModInitializer() {
         var modEventBus = INIT.getModEventBus();

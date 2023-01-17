@@ -1,15 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "charm",
-  "version": "${version}", 
+  "version": "${version}",
 
-  "name": "Charm Nano",
+  "name": "Charm (nano)",
   "description": "Tweaks to Minecraft without changing core gameplay.",
   "authors": [
     "svenhjol"
   ],
 
   "license": "MIT",
+  "icon": "icon.png",
   "environment": "*",
   "mixins": [
     "charm.mixins.json",

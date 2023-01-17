@@ -7,8 +7,8 @@ import svenhjol.charm_core.forge.base.BaseForgeClientInitializer;
 
 public class ForgeClientModInitializer {
     private final CharmClient mod;
-
     public static final ClientInitializer INIT = new ClientInitializer();
+
     public ForgeClientModInitializer() {
         var modEventBus = INIT.getModEventBus();
         modEventBus.addListener(this::handleClientSetup);
