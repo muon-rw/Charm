@@ -27,7 +27,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-@ClientFeature(mod = Charm.MOD_ID, switchable = true, description = "Adds hover tooltips for some items that have content.")
+@ClientFeature(
+    mod = Charm.MOD_ID,
+    switchable = true,
+    description = "Adds hover tooltips for some items that have content."
+)
 public class ExtraTooltips extends CharmFeature {
     public static final RenderType MAP_BACKGROUND = RenderType.text(new ResourceLocation("textures/map/map_background.png"));
 

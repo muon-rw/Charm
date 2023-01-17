@@ -6,7 +6,7 @@ import svenhjol.charm_core.iface.*;
 
 public class Charm {
     public static final String MOD_ID = "charm";
-    public static final String PREFIX = "svenhjol.charm";
+    public static final String PREFIX = "svenhjol." + MOD_ID;
     public static final String FEATURE_PREFIX = PREFIX + ".feature";
     public static ILog LOG;
     public static ILoader LOADER;

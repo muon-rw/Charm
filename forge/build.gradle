@@ -146,7 +146,7 @@ processResources {
         def v = json.content.variants
         Iterable<String> variants
         if (v instanceof String) {
-            def f = file("${sourceSets.main.resources.srcDirs[1]}/META-INF/${v}.variants");
+            def f = file("${sourceSets.main.resources.srcDirs[1]}/META-INF/${v}.variants")
             if (!f.exists()) {
                 throw new Exception("Can't find ${f.name}")
             }

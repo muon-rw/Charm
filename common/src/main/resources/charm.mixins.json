@@ -37,7 +37,6 @@
     "enchantable_horse_armor.HorseArmorLayerMixin",
     "extractable_enchantments.GrindstoneScreenMixin",
     "no_chat_unverified_message.DisableToastMixin",
-    "no_experimental_screen.WorldOpenFlowsMixin",
     "no_spyglass_scope.RemoveSpyglassHudMixin",
     "show_repair_cost.AnvilScreenMixin",
     "unlimited_repair_cost.AnvilScreenMixin"
