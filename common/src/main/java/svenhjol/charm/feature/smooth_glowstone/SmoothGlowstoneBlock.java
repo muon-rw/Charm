@@ -14,7 +14,7 @@ public class SmoothGlowstoneBlock extends CharmBlock {
 
     public static class BlockItem extends CharmBlockItem {
         public BlockItem(CharmFeature feature, Supplier<SmoothGlowstoneBlock> block) {
-            super(feature, block, new Properties()); // TODO: tab!
+            super(feature, block, new Properties());
         }
     }
 }

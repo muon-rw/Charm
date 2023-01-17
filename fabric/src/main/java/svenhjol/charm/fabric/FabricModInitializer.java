@@ -20,8 +20,6 @@ public class FabricModInitializer implements ModInitializer {
         }
     }
 
-    // TODO: do we need initCharmFirst() anymore now we have core?
-
     public static class Initializer extends BaseFabricInitializer {
         @Override
         public String getNamespace() {
