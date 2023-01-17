@@ -15,7 +15,8 @@ public class BaseFireBlockMixin {
         method = "isPortal",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/state/BlockState;isPortalFrame(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;isPortalFrame(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)Z",
+            remap = false
         )
     )
     private static boolean hookIsPortal(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
