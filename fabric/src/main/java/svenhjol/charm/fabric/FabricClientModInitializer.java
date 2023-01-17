@@ -7,7 +7,7 @@ import svenhjol.charm_core.fabric.common.CommonRegistry;
 
 public class FabricClientModInitializer implements ClientModInitializer {
     public static final ClientInitializer INIT = new ClientInitializer();
-    private static Charm mod;
+    private Charm mod;
 
     @Override
     public void onInitializeClient() {
