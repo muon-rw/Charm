@@ -11,6 +11,11 @@ import svenhjol.charm_core.base.CharmFeature;
 public class SmoothGlowstoneClient extends CharmFeature {
     @Override
     public void register() {
-        CharmClient.REGISTRY.itemTab(SmoothGlowstone.BLOCK_ITEM, CreativeModeTabs.BUILDING_BLOCKS, Items.AMETHYST_BLOCK);
+        var enabled = Charm.LOADER.isEnabled(SmoothGlowstone.class);
+        addDependencyCheck(m -> enabled);
+
+        if (enabled) {
+            CharmClient.REGISTRY.itemTab(SmoothGlowstone.BLOCK_ITEM, CreativeModeTabs.BUILDING_BLOCKS, Items.AMETHYST_BLOCK);
+        }
     }
 }

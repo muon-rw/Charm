@@ -36,12 +36,16 @@ public class AtlasesClient extends CharmFeature {
     @Override
     public void register() {
         CharmClient.REGISTRY.menuScreen(Atlases.MENU_TYPE, () -> AtlasScreen::new);
-        CharmClient.REGISTRY.itemTab(Atlases.ITEM, CreativeModeTabs.TOOLS_AND_UTILITIES, null);
 
         OPEN_ATLAS_KEY = CharmClient.REGISTRY.key("open_atlas",
             () -> new KeyMapping("key.charm.open_atlas", GLFW.GLFW_KEY_R, "key.categories.inventory"));
 
-        addDependencyCheck(m -> Charm.LOADER.isEnabled(Atlases.class));
+        var enabled = Charm.LOADER.isEnabled(Atlases.class);
+        addDependencyCheck(m -> enabled);
+
+        if (enabled) {
+            CharmClient.REGISTRY.itemTab(Atlases.ITEM, CreativeModeTabs.TOOLS_AND_UTILITIES, null);
+        }
     }
 
     @Override
