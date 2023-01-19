@@ -1,6 +1,7 @@
 {
   "block.charm.smooth_glowstone": "Smooth Glowstone",
   "container.charm.portable_crafting_table": "Portable Crafting",
+  "effect.charm.echolocation": "Echolocation",
   "enchantment.charm.aerial_affinity": "Aerial Affinity",
   "enchantment.charm.aerial_affinity.desc": "Increases mining rate when not on the ground",
   "gui.charm.facing": "Facing %s",
@@ -12,8 +13,11 @@
   "gui.charm.coords_only_xz": "X: %s   Z: %s",
   "gui.charm.repair_cost": "Repair Cost: %s",
   "item.charm.atlas": "Atlas",
+  "item.charm.bat_bucket": "Bat in a Bucket",
   "key.charm.open_atlas": "Open atlas",
   "key.charm.open_portable_crafting": "Open portable crafting table",
   "subtitles.charm.item.atlas.open": "Atlas opens",
-  "subtitles.charm.item.atlas.close": "Atlas closes"
+  "subtitles.charm.item.atlas.close": "Atlas closes",
+  "subtitles.charm.item.bat_bucket.grab": "Bat grabbed in bucket",
+  "subtitles.charm.item.bat_bucket.release": "Bat escapes from bucket"
 }

@@ -40,5 +40,23 @@
       }
     ],
     "subtitle": "subtitles.charm.item.atlas.close"
+  },
+  "bat_bucket_grab": {
+    "sounds": [
+      {
+        "name": "charm:bat_bucket_grab",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.item.bat_bucket.grab"
+  },
+  "bat_bucket_release": {
+    "sounds": [
+      {
+        "name": "charm:bat_bucket_release",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.item.bat_bucket.release"
   }
 }
