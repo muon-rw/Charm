@@ -1,6 +1,5 @@
 package svenhjol.charm.feature.quick_replant;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -22,7 +21,6 @@ import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.helper.CharmEnchantmentHelper;
 import svenhjol.charm_core.init.CharmApi;
-import svenhjol.charm_core.init.GlobalLoaders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +81,7 @@ public class QuickReplant extends CharmFeature implements IProvidesHarvestables 
             var serverPlayer = (ServerPlayer)player;
             var serverLevel = (ServerLevel)serverPlayer.level;
             var drops = Block.getDrops(state, serverLevel, pos, null, player, ItemStack.EMPTY);
-            var hasCollection = GlobalLoaders.isEnabled(new ResourceLocation("charm_world", "collection"))
+            var hasCollection = Charm.LOADER.isEnabled("collection")
                 && CharmEnchantmentHelper.itemHasEnchantment(held, Charm.makeId("collection"));
 
             for (var drop : drops) {
