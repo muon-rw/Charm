@@ -1,5 +1,10 @@
 {
+  "block.charm.brain_sea_lantern": "Brain Sea Lantern",
+  "block.charm.bubble_sea_lantern": "Bubble Sea Lantern",
+  "block.charm.fire_sea_lantern": "Fire Sea Lantern",
+  "block.charm.horn_sea_lantern": "Horn Sea Lantern",
   "block.charm.smooth_glowstone": "Smooth Glowstone",
+  "block.charm.tube_sea_lantern": "Tube Sea Lantern",
   "container.charm.portable_crafting_table": "Portable Crafting",
   "effect.charm.echolocation": "Echolocation",
   "enchantment.charm.aerial_affinity": "Aerial Affinity",
