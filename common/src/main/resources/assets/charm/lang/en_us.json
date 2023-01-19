@@ -23,10 +23,12 @@
   "gui.charm.repair_cost": "Repair Cost: %s",
   "item.charm.atlas": "Atlas",
   "item.charm.bat_bucket": "Bat in a Bucket",
+  "item.charm.endermite_powder": "Endermite Powder",
   "key.charm.open_atlas": "Open atlas",
   "key.charm.open_portable_crafting": "Open portable crafting table",
   "subtitles.charm.item.atlas.open": "Atlas opens",
   "subtitles.charm.item.atlas.close": "Atlas closes",
   "subtitles.charm.item.bat_bucket.grab": "Bat grabbed in bucket",
-  "subtitles.charm.item.bat_bucket.release": "Bat escapes from bucket"
+  "subtitles.charm.item.bat_bucket.release": "Bat escapes from bucket",
+  "subtitles.charm.item.endermite_powder.launch": "Endermite powder launches"
 }

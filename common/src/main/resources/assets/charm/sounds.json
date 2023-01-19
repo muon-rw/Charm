@@ -58,5 +58,14 @@
       }
     ],
     "subtitle": "subtitles.charm.item.bat_bucket.release"
+  },
+  "endermite_powder_launch": {
+    "sounds": [
+      {
+        "name": "charm:endermite_powder",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.item.endermite_powder.launch"
   }
 }
