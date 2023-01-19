@@ -17,6 +17,7 @@
     "auto_restock.AnimalMixin",
     "auto_restock.ComposterBlockMixin",
     "auto_restock.ParrotMixin",
+    "beekeepers.PoiTypesMixin",
     "enchantable_horse_armor.EnchantmentMixin",
     "enchantable_horse_armor.HorseMixin",
     "extra_mob_drops.ChickenMixin",
