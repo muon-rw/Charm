@@ -1,3 +1,6 @@
+import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
@@ -72,6 +75,36 @@ processResources {
     }
     
     duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+
+    // Expand resource templates.
+    // TODO: generic build gradle.
+    filesMatching("**/*.template.json") {
+        JsonBuilder json = new JsonBuilder(new JsonSlurper().parseText(it.file.text))
+        String template = new JsonBuilder(json.content.template).toPrettyString()
+        def v = json.content.variants
+        Iterable<String> variants
+        if (v instanceof String) {
+            def f = file("${sourceSets.main.resources.srcDirs[1]}/META-INF/${v}.variants");
+            if (!f.exists()) {
+                throw new Exception("Can't find ${f.name}")
+            }
+            variants = f.readLines().findAll { !it.isEmpty() }
+        }
+        else variants = v
+        File dir = it.relativePath.parent.getFile(file("$buildDir/resources/main"))
+        dir.mkdirs()
+        String name = it.name.replace(".template.json", ".json")
+        String[] replacements = v instanceof String ? variants.remove(0).split(':') : ["VARIANT"]
+        for (variant in variants) {
+            Map<String, String> s = [replacements, variant.split(':', -1)].transpose().collectEntries()
+            def file = new File(dir, s.inject(name) { r, e -> r.replace(e.key, e.value) })
+            if (!file.exists()) {
+                file.createNewFile()
+                file.text = s.inject(template) { r, e -> r.replace(e.key, e.value) }
+            }
+        }
+        it.exclude()
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {
