@@ -4,6 +4,8 @@
   "effect.charm.echolocation": "Echolocation",
   "enchantment.charm.aerial_affinity": "Aerial Affinity",
   "enchantment.charm.aerial_affinity.desc": "Increases mining rate when not on the ground",
+  "enchantment.charm.collection": "Collection",
+  "enchantment.charm.collection.desc": "Tools automatically pick up drops",
   "entity.minecraft.villager.charm.beekeeper": "Beekeeper",
   "entity.minecraft.villager.charm.lumberjack": "Lumberjack",
   "gui.charm.facing": "Facing %s",
