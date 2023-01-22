@@ -82,9 +82,7 @@ public class InventoryTidyingClient extends CharmFeature
             if (BLOCK_ENTITY_SCREENS.contains(containerScreen.getClass()) && slot.index == 0) {
                 addSortingButton(screen, x, y + slot.y,
                     click -> InventoryTidyingNetwork.TidyInventory.send(TidyType.CONTAINER));
-            }
-
-            if (slot.container == client.player.getInventory()) {
+            } else if (slot.container == client.player.getInventory()) {
                 addSortingButton(screen, x, y + slot.y,
                     click -> InventoryTidyingNetwork.TidyInventory.send(TidyType.PLAYER));
                 break;
