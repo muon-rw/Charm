@@ -5,6 +5,9 @@ accessible class net/minecraft/client/particle/ParticleEngine$SpriteParticleRegi
 accessible class net/minecraft/world/item/crafting/SingleItemRecipe$Serializer$SingleItemMaker
 accessible class net/minecraft/world/level/block/state/properties/NoteBlockInstrument$Type
 
+# Constructors
+accessible method net/minecraft/world/item/crafting/SingleItemRecipe$Serializer <init> (Lnet/minecraft/world/item/crafting/SingleItemRecipe$Serializer$SingleItemMaker;)V
+
 # Fields
 accessible field net/minecraft/world/level/portal/PortalShape FRAME Lnet/minecraft/world/level/block/state/BlockBehaviour$StatePredicate;
 mutable    field net/minecraft/world/level/portal/PortalShape FRAME Lnet/minecraft/world/level/block/state/BlockBehaviour$StatePredicate;
