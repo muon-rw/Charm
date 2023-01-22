@@ -11,10 +11,10 @@ public class FabricModInitializer implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        // Always init Core first.
-        svenhjol.charm_core.fabric.FabricModInitializer.initCharmCore();
-
         if (mod == null) {
+            // Always init Core first.
+            svenhjol.charm_core.fabric.FabricModInitializer.initCharmCore();
+
             mod = new Charm(INIT);
             mod.run();
         }

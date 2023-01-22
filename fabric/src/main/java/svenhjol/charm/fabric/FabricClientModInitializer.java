@@ -12,10 +12,10 @@ public class FabricClientModInitializer implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        // Always init Core first.
-        svenhjol.charm_core.fabric.FabricClientModInitializer.initCharmCoreClient();
-
         if (mod == null) {
+            // Always init Core first.
+            svenhjol.charm_core.fabric.FabricClientModInitializer.initCharmCoreClient();
+
             mod = new CharmClient(INIT);
             mod.run();
         }
