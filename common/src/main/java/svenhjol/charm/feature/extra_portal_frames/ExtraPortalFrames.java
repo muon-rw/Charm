@@ -10,16 +10,22 @@ import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.proxy.ConfigHelperProxy;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
+
 @Feature(mod = Charm.MOD_ID, description = "Adds more blocks that can be used to build nether portal frames." +
     "By default this adds Crying Obsidian.")
 public class ExtraPortalFrames extends CharmFeature {
     public static TagKey<Block> NETHER_PORTAL_FRAMES;
 
     @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> !ConfigHelperProxy.isModLoaded("immersiveportals"));
+    }
+
+    @Override
     public void register() {
         NETHER_PORTAL_FRAMES = TagKey.create(BuiltInRegistries.BLOCK.key(), Charm.makeId("nether_portal_frames"));
-
-        addDependencyCheck(m -> !ConfigHelperProxy.isModLoaded("immersiveportals"));
     }
 
     @Override

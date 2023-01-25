@@ -12,6 +12,8 @@ import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmFeature;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 @ClientFeature
@@ -19,11 +21,14 @@ public class ClearItemFramesClient extends CharmFeature {
     static Supplier<SpriteParticleRegistration<SimpleParticleType>> PARTICLE;
 
     @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(ClearItemFrames.class));
+    }
+
+    @Override
     public void register() {
         PARTICLE = CharmClient.REGISTRY.particle(ClearItemFrames.PARTICLE_TYPE,
             () -> ApplyAmethystClientParticle::new);
-
-        addDependencyCheck(m -> Charm.LOADER.isEnabled(ClearItemFrames.class));
     }
 
     static void handleItemFrameInteraction(ClearItemFramesNetwork.IItemFrameInteraction message, Player player) {

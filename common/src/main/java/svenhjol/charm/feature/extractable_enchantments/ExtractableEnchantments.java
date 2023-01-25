@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.BooleanSupplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Extract enchantments from any enchanted item onto an empty book using the grindstone.")
 public class ExtractableEnchantments extends CharmFeature {
@@ -39,8 +40,8 @@ public class ExtractableEnchantments extends CharmFeature {
     public static boolean addRepairCost = true;
 
     @Override
-    public void register() {
-        addDependencyCheck(module -> !ConfigHelperProxy.isModLoaded("grindenchantments"));
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> !ConfigHelperProxy.isModLoaded("grindenchantments"));
     }
 
     @Override

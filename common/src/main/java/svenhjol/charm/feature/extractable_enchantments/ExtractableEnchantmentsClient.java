@@ -13,12 +13,13 @@ import svenhjol.charm_core.base.CharmFeature;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 @ClientFeature
 public class ExtractableEnchantmentsClient extends CharmFeature {
     @Override
-    public void register() {
-        addDependencyCheck(m -> Charm.LOADER.isEnabled(ExtractableEnchantments.class));
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(ExtractableEnchantments.class));
     }
 
     private static ExtractableEnchantments getParent() {
