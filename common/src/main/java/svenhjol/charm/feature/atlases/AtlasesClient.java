@@ -21,6 +21,8 @@ import svenhjol.charm_api.event.KeyPressEvent;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmFeature;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 @ClientFeature
@@ -34,16 +36,18 @@ public class AtlasesClient extends CharmFeature {
     public static Supplier<String> OPEN_ATLAS_KEY;
 
     @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(Atlases.class));
+    }
+
+    @Override
     public void register() {
         CharmClient.REGISTRY.menuScreen(Atlases.MENU_TYPE, () -> AtlasScreen::new);
 
         OPEN_ATLAS_KEY = CharmClient.REGISTRY.key("open_atlas",
             () -> new KeyMapping("key.charm.open_atlas", GLFW.GLFW_KEY_R, "key.categories.inventory"));
 
-        var enabled = Charm.LOADER.isEnabled(Atlases.class);
-        addDependencyCheck(m -> enabled);
-
-        if (enabled) {
+        if (isEnabled()) {
             CharmClient.REGISTRY.itemTab(Atlases.ITEM, CreativeModeTabs.TOOLS_AND_UTILITIES, null);
         }
     }

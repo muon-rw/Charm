@@ -9,11 +9,18 @@ import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmFeature;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 @ClientFeature
 public class MoobloomsClient extends CharmFeature {
     static Supplier<ModelLayerLocation> LAYER;
+
+    @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(Mooblooms.class));
+    }
 
     @Override
     public void register() {
@@ -23,10 +30,7 @@ public class MoobloomsClient extends CharmFeature {
         CharmClient.REGISTRY.entityRenderer(Mooblooms.ENTITY, () ->
             ctx -> new MoobloomEntityRenderer<>(ctx, new CowModel<>(ctx.bakeLayer(LAYER.get()))));
 
-        var enabled = Charm.LOADER.isEnabled(Mooblooms.class);
-
-        addDependencyCheck(m -> enabled);
-        if (enabled) {
+        if (isEnabled()) {
             CharmClient.REGISTRY.itemTab(Mooblooms.SPAWN_EGG_ITEM, CreativeModeTabs.SPAWN_EGGS, Items.AXOLOTL_SPAWN_EGG);
         }
     }

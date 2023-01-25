@@ -7,14 +7,19 @@ import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmFeature;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
+
 @ClientFeature(mod = Charm.MOD_ID)
 public class SmoothGlowstoneClient extends CharmFeature {
     @Override
-    public void register() {
-        var enabled = Charm.LOADER.isEnabled(SmoothGlowstone.class);
-        addDependencyCheck(m -> enabled);
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(SmoothGlowstone.class));
+    }
 
-        if (enabled) {
+    @Override
+    public void register() {
+        if (isEnabled()) {
             CharmClient.REGISTRY.itemTab(SmoothGlowstone.BLOCK_ITEM, CreativeModeTabs.BUILDING_BLOCKS, Items.AMETHYST_BLOCK);
         }
     }

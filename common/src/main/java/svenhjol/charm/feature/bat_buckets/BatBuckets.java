@@ -17,7 +17,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import svenhjol.charm.Charm;
-import svenhjol.charm.feature.echolocation.Echolocation;
 import svenhjol.charm_api.event.EntityUseEvent;
 import svenhjol.charm_api.iface.IProvidesWandererTrades;
 import svenhjol.charm_api.iface.IWandererTrade;
@@ -44,7 +43,6 @@ public class BatBuckets extends CharmFeature implements IProvidesWandererTrades 
         GRAB_SOUND = Charm.REGISTRY.soundEvent("bat_bucket_grab");
         RELEASE_SOUND = Charm.REGISTRY.soundEvent("bat_bucket_release");
 
-        addDependencyCheck(m -> Charm.LOADER.isEnabled(Echolocation.class));
         CharmApi.registerProvider(this);
     }
 

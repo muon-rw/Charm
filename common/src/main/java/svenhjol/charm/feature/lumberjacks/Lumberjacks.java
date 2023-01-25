@@ -12,6 +12,7 @@ import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.helper.GenericTradeOffers;
 
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Lumberjacks are villagers that trade wooden items. Their job site is the woodcutter.")
@@ -21,6 +22,11 @@ public class Lumberjacks extends CharmFeature {
     public static Supplier<SoundEvent> WORK_SOUND;
 
     @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(Woodcutters.class));
+    }
+
+    @Override
     public void register() {
         WORK_SOUND = Charm.REGISTRY.soundEvent("lumberjack");
 
@@ -28,10 +34,7 @@ public class Lumberjacks extends CharmFeature {
 
         Charm.REGISTRY.villagerGift(VILLAGER_ID);
 
-        var woodcuttersEnabled = Charm.LOADER.isEnabled(Woodcutters.class);
-        addDependencyCheck(m -> woodcuttersEnabled);
-
-        if (isEnabled() && woodcuttersEnabled) {
+        if (isEnabled()) {
             addTrades();
         }
     }

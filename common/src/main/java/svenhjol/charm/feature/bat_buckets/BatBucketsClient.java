@@ -7,14 +7,19 @@ import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmFeature;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
+
 @ClientFeature
 public class BatBucketsClient extends CharmFeature {
     @Override
-    public void register() {
-        var enabled = Charm.LOADER.isEnabled(BatBuckets.class);
-        addDependencyCheck(m -> enabled);
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(BatBuckets.class));
+    }
 
-        if (enabled) {
+    @Override
+    public void register() {
+        if (isEnabled()) {
             CharmClient.REGISTRY.itemTab(
                 BatBuckets.BAT_BUCKET_ITEM,
                 CreativeModeTabs.TOOLS_AND_UTILITIES,

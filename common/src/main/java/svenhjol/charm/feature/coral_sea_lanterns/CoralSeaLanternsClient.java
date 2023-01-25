@@ -9,15 +9,19 @@ import svenhjol.charm_core.base.CharmFeature;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.function.BooleanSupplier;
 
 @ClientFeature
 public class CoralSeaLanternsClient extends CharmFeature {
     @Override
-    public void register() {
-        var enabled = Charm.LOADER.isEnabled(CoralSeaLanterns.class);
-        addDependencyCheck(m -> enabled);
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(CoralSeaLanterns.class));
+    }
 
-        if (enabled) {
+    @Override
+    public void register() {
+        if (isEnabled()) {
             var values = new ArrayList<>(CoralSeaLanterns.BLOCK_ITEMS.values());
             Collections.reverse(values);
 
