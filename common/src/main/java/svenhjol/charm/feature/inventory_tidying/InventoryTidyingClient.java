@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BooleanSupplier;
 
 @ClientFeature
 public class InventoryTidyingClient extends CharmFeature
@@ -37,9 +38,13 @@ public class InventoryTidyingClient extends CharmFeature
     private static final Map<Class<? extends Screen>, Pair<Integer, Integer>> SCREEN_TWEAKS = new HashMap<>();
 
     @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(InventoryTidying.class));
+    }
+
+    @Override
     public void register() {
         CharmApi.registerProvider(this);
-        addDependencyCheck(m -> Charm.LOADER.isEnabled(InventoryTidying.class));
     }
 
     @Override

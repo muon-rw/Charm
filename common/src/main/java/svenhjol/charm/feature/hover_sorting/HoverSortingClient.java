@@ -9,11 +9,14 @@ import svenhjol.charm_api.event.MouseScrollEvent;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm.mixin.accessor.AbstractContainerScreenAccessor;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
+
 @ClientFeature
 public class HoverSortingClient extends CharmFeature {
     @Override
-    public void register() {
-        addDependencyCheck(m -> Charm.LOADER.isEnabled(HoverSorting.class));
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(HoverSorting.class));
     }
 
     @Override

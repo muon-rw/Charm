@@ -19,6 +19,8 @@ import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.helper.ScreenHelper;
 import svenhjol.charm_core.init.CoreResources;
 
+import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 @ClientFeature
@@ -29,11 +31,14 @@ public class PortableCraftingClient extends CharmFeature {
     private ImageButton craftingButton;
 
     @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> Charm.LOADER.isEnabled(PortableCrafting.class));
+    }
+
+    @Override
     public void register() {
         OPEN_PORTABLE_CRAFTING_KEY = CharmClient.REGISTRY.key("open_portable_crafting",
             () -> new KeyMapping("key.charm.open_portable_crafting", GLFW.GLFW_KEY_V, "key.categories.inventory"));
-
-        addDependencyCheck(m -> Charm.LOADER.isEnabled(PortableCrafting.class));
     }
 
     @Override
