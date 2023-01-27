@@ -71,7 +71,7 @@
   "gunpowder_dissolve": {
     "sounds": [
       {
-        "name": "charm_world:dissolve",
+        "name": "charm:dissolve",
         "volume": 1.0
       }
     ],
@@ -97,10 +97,31 @@
     ],
     "subtitle": "subtitles.charm.block.kiln.bake"
   },
+  "lumberjack": {
+    "sounds": [
+      {
+        "name": "charm:lumberjack1",
+        "volume": 1.0
+      },
+      {
+        "name": "charm:lumberjack2",
+        "volume": 1.0
+      },
+      {
+        "name": "charm:lumberjack3",
+        "volume": 1.0
+      },
+      {
+        "name": "charm:lumberjack4",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.entity.villager.work_lumberjack"
+  },
   "raid_horn_call_off_raid": {
     "sounds": [
       {
-        "name": "charm_world:horn_long",
+        "name": "charm:horn_long",
         "volume": 1.0
       }
     ],
@@ -130,15 +151,15 @@
   "raid_horn_squeak": {
     "sounds": [
       {
-        "name": "charm_world:horn_squeak1",
+        "name": "charm:horn_squeak1",
         "volume": 1.0
       },
       {
-        "name": "charm_world:horn_squeak2",
+        "name": "charm:horn_squeak2",
         "volume": 1.0
       },
       {
-        "name": "charm_world:horn_squeak3",
+        "name": "charm:horn_squeak3",
         "volume": 1.0
       }
     ],
@@ -147,7 +168,7 @@
   "sugar_dissolve": {
     "sounds": [
       {
-        "name": "charm_world:dissolve",
+        "name": "charm:dissolve",
         "volume": 1.0
       }
     ],
