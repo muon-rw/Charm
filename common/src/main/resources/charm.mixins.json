@@ -38,7 +38,12 @@
     "parrots_stay_on_shoulder.PlayerMixin",
     "stronger_anvils.AnvilBlockMixin",
     "totems_work_from_inventory.LivingEntityMixin",
-    "unlimited_repair_cost.AnvilMenuMixin"
+    "unlimited_repair_cost.AnvilMenuMixin",
+    "variant_chests.BoatItemMixin",
+    "variant_chests.ChestBoatMixin",
+    "variant_chests.ChestBoatSpawnMixin",
+    "wood.BoatMixin",
+    "wood.ChestBoatMixin"
   ],
   "client": [
     "accessor.AbstractContainerScreenAccessor",
@@ -51,7 +56,9 @@
     "no_chat_unverified_message.DisableToastMixin",
     "no_spyglass_scope.RemoveSpyglassHudMixin",
     "show_repair_cost.AnvilScreenMixin",
-    "unlimited_repair_cost.AnvilScreenMixin"
+    "unlimited_repair_cost.AnvilScreenMixin",
+    "variant_chests.BoatRendererMixin",
+    "variant_chests.SheetsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

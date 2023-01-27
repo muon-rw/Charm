@@ -11,3 +11,5 @@ accessible method net/minecraft/world/item/crafting/SingleItemRecipe$Serializer 
 # Fields
 accessible field net/minecraft/world/level/portal/PortalShape FRAME Lnet/minecraft/world/level/block/state/BlockBehaviour$StatePredicate;
 mutable    field net/minecraft/world/level/portal/PortalShape FRAME Lnet/minecraft/world/level/block/state/BlockBehaviour$StatePredicate;
+accessible field net/minecraft/world/entity/vehicle/Boat$Type planks Lnet/minecraft/world/level/block/Block;
+mutable    field net/minecraft/world/entity/vehicle/Boat$Type planks Lnet/minecraft/world/level/block/Block;
