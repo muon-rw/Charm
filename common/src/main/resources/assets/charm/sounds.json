@@ -68,6 +68,15 @@
     ],
     "subtitle": "subtitles.charm.item.endermite_powder.launch"
   },
+  "gunpowder_dissolve": {
+    "sounds": [
+      {
+        "name": "charm_world:dissolve",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.block.gunpowder_block.dissolve"
+  },
   "kiln_bake": {
     "sounds": [
       {
@@ -134,6 +143,15 @@
       }
     ],
     "subtitle": "subtitles.charm.item.raid_horn.squeak"
+  },
+  "sugar_dissolve": {
+    "sounds": [
+      {
+        "name": "charm_world:dissolve",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.block.sugar_block.dissolve"
   },
   "woodcutter_use": {
     "sounds": [

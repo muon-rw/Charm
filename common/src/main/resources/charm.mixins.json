@@ -21,6 +21,7 @@
     "auto_restock.ComposterBlockMixin",
     "auto_restock.ParrotMixin",
     "beekeepers.PoiTypesMixin",
+    "block_of_ender_pearls.ChorusFruitItemMixin",
     "collection.BlockMixin",
     "collection.ServerPlayerGameModeMixin",
     "enchantable_horse_armor.EnchantmentMixin",
