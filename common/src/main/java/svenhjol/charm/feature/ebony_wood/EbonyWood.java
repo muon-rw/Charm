@@ -1,6 +1,5 @@
 package svenhjol.charm.feature.ebony_wood;
 
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -10,7 +9,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.variant_barrels.VariantBarrels;
@@ -39,7 +37,6 @@ public class EbonyWood extends CharmFeature implements IProvidesWandererTrades, 
     static Supplier<CharmLeavesBlock> LEAVES_BLOCK;
     static Supplier<CharmLogBlock> LOG_BLOCK;
     static Supplier<CharmSaplingBlock> SAPLING_BLOCK;
-    static Supplier<Holder<ConfiguredFeature<TreeConfiguration, ?>>> TREE;
     static ResourceKey<ConfiguredFeature<?, ?>> TREE_FEATURE;
     static ResourceKey<ConfiguredFeature<?, ?>> TREES_FEATURE;
     static ResourceKey<PlacedFeature> TREE_PLACEMENT;
