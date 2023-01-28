@@ -48,7 +48,11 @@ public class AtlasesClient extends CharmFeature {
             () -> new KeyMapping("key.charm.open_atlas", GLFW.GLFW_KEY_R, "key.categories.inventory"));
 
         if (isEnabled()) {
-            CharmClient.REGISTRY.itemTab(Atlases.ITEM, CreativeModeTabs.TOOLS_AND_UTILITIES, null);
+            CharmClient.REGISTRY.itemTab(
+                Atlases.ITEM,
+                CreativeModeTabs.TOOLS_AND_UTILITIES,
+                Items.MAP
+            );
         }
     }
 

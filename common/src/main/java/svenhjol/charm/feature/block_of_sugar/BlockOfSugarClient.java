@@ -1,6 +1,7 @@
 package svenhjol.charm.feature.block_of_sugar;
 
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
 import svenhjol.charm.Charm;
 import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
@@ -21,8 +22,8 @@ public class BlockOfSugarClient extends CharmFeature {
         if (isEnabled()) {
             CharmClient.REGISTRY.itemTab(
                 BlockOfSugar.BLOCK_ITEM,
-                CreativeModeTabs.BUILDING_BLOCKS,
-                null
+                CreativeModeTabs.REDSTONE_BLOCKS,
+                Items.HONEY_BLOCK
             );
         }
     }

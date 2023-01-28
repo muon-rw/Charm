@@ -1,6 +1,7 @@
 package svenhjol.charm.feature.endermite_powder;
 
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Items;
 import svenhjol.charm.Charm;
 import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
@@ -21,7 +22,11 @@ public class EndermitePowderClient extends CharmFeature {
         CharmClient.REGISTRY.entityRenderer(EndermitePowder.ENTITY, () -> EndermitePowderEntityRenderer::new);
 
         if (isEnabled()) {
-            CharmClient.REGISTRY.itemTab(EndermitePowder.ITEM, CreativeModeTabs.TOOLS_AND_UTILITIES, null);
+            CharmClient.REGISTRY.itemTab(
+                EndermitePowder.ITEM,
+                CreativeModeTabs.TOOLS_AND_UTILITIES,
+                Items.ENDER_EYE
+            );
         }
     }
 }
