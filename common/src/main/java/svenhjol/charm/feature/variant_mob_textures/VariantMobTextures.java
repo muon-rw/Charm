@@ -10,7 +10,7 @@ import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.npc.WanderingTrader;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
-import svenhjol.charm.Charm;
+import svenhjol.charm.CharmClient;
 import svenhjol.charm_api.event.ClientEntityJoinEvent;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.annotation.Configurable;
@@ -19,7 +19,7 @@ import svenhjol.charm_core.base.CharmFeature;
 import javax.annotation.Nullable;
 import java.util.*;
 
-@ClientFeature(mod = Charm.MOD_ID, description = "Mobs may spawn with different textures.")
+@ClientFeature(mod = CharmClient.MOD_ID, description = "Mobs may spawn with different textures.")
 public class VariantMobTextures extends CharmFeature {
     static final String TEXTURES = "textures/entity";
     static final ResourceLocation DEFAULT_SHEEP = new ResourceLocation(TEXTURES + "//sheep/sheep.png");
@@ -78,51 +78,48 @@ public class VariantMobTextures extends CharmFeature {
     public static int rareVariantChance = 1000;
 
     @Override
-    public void register() {
+    public void runWhenEnabled() {
+        ClientEntityJoinEvent.INSTANCE.handle(this::handlePlayerJoin);
+
         if (chickens) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.CHICKEN, () -> VariantMobRenderer.RenderChicken::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.CHICKEN, () -> VariantMobRenderer.RenderChicken::new);
         }
 
         if (cows) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.COW, () -> VariantMobRenderer.RenderCow::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.COW, () -> VariantMobRenderer.RenderCow::new);
         }
 
         if (dolphins) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.DOLPHIN, () -> VariantMobRenderer.RenderDolphin::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.DOLPHIN, () -> VariantMobRenderer.RenderDolphin::new);
         }
 
         if (pigs) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.PIG, () -> VariantMobRenderer.RenderPig::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.PIG, () -> VariantMobRenderer.RenderPig::new);
         }
 
         if (sheep) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.SHEEP, () -> VariantMobRenderer.RenderSheep::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.SHEEP, () -> VariantMobRenderer.RenderSheep::new);
         }
 
         if (snowGolems) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.SNOW_GOLEM, () -> VariantMobRenderer.RenderSnowGolem::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.SNOW_GOLEM, () -> VariantMobRenderer.RenderSnowGolem::new);
         }
 
         if (squids) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.SQUID, () -> VariantMobRenderer.RenderSquid::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.SQUID, () -> VariantMobRenderer.RenderSquid::new);
         }
 
         if (turtles) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.TURTLE, () -> VariantMobRenderer.RenderTurtle::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.TURTLE, () -> VariantMobRenderer.RenderTurtle::new);
         }
 
         if (wolves) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.WOLF, () -> VariantMobRenderer.RenderWolf::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.WOLF, () -> VariantMobRenderer.RenderWolf::new);
         }
 
         if (wanderingTraders) {
-            Charm.REGISTRY.entityRenderer(() -> EntityType.WANDERING_TRADER, () -> VariantMobRenderer.RenderWanderingTrader::new);
+            CharmClient.REGISTRY.entityRenderer(() -> EntityType.WANDERING_TRADER, () -> VariantMobRenderer.RenderWanderingTrader::new);
         }
-    }
-
-    @Override
-    public void runWhenEnabled() {
-        ClientEntityJoinEvent.INSTANCE.handle(this::handlePlayerJoin);
     }
 
     public void handlePlayerJoin(Entity entity, Level level) {
@@ -329,7 +326,7 @@ public class VariantMobTextures extends CharmFeature {
     }
 
     private ResourceLocation createResource(MobType type, String texture) {
-        return new ResourceLocation(Charm.MOD_ID, TEXTURES + "/" + type.getSerializedName() + "/" + texture + ".png");
+        return new ResourceLocation(CharmClient.MOD_ID, TEXTURES + "/" + type.getSerializedName() + "/" + texture + ".png");
     }
 
     public enum MobType implements StringRepresentable {

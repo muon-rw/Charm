@@ -3,7 +3,7 @@ package svenhjol.charm.feature.show_repair_cost;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import svenhjol.charm.Charm;
+import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.helper.TextHelper;
@@ -11,7 +11,7 @@ import svenhjol.charm_core.helper.TextHelper;
 import java.util.List;
 
 @ClientFeature(
-    mod = Charm.MOD_ID,
+    mod = CharmClient.MOD_ID,
     switchable = true,
     description = "An item's repair cost is shown in their tooltip when looking at the anvil screen."
 )

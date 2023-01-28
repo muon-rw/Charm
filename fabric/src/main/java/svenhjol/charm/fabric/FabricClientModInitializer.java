@@ -1,13 +1,13 @@
 package svenhjol.charm.fabric;
 
 import net.fabricmc.api.ClientModInitializer;
-import svenhjol.charm.Charm;
+import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.fabric.base.BaseFabricClientInitializer;
 import svenhjol.charm_core.fabric.common.CommonRegistry;
 
 public class FabricClientModInitializer implements ClientModInitializer {
     public static final ClientInitializer INIT = new ClientInitializer();
-    private Charm mod;
+    private CharmClient mod;
 
     @Override
     public void onInitializeClient() {
@@ -15,7 +15,7 @@ public class FabricClientModInitializer implements ClientModInitializer {
         svenhjol.charm_core.fabric.FabricClientModInitializer.initCharmCoreClient();
 
         if (mod == null) {
-            mod = new Charm(INIT);
+            mod = new CharmClient(INIT);
             mod.run();
         }
     }
@@ -28,7 +28,7 @@ public class FabricClientModInitializer implements ClientModInitializer {
 
         @Override
         public String getNamespace() {
-            return Charm.MOD_ID;
+            return CharmClient.MOD_ID;
         }
     }
 }
