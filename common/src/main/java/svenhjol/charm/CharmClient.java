@@ -1,9 +1,13 @@
 package svenhjol.charm;
 
+import net.minecraft.resources.ResourceLocation;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.iface.*;
 
 public class CharmClient {
+    public static final String MOD_ID = "charm";
+    public static final String PREFIX = "svenhjol." + MOD_ID;
+    public static final String FEATURE_PREFIX = PREFIX + ".feature";
     public static ILog LOG;
     public static ILoader LOADER;
     public static IClientNetwork NETWORK;
@@ -15,10 +19,14 @@ public class CharmClient {
         NETWORK = init.getNetwork();
         REGISTRY = init.getRegistry();
 
-        LOADER.init(Charm.FEATURE_PREFIX, ClientFeature.class);
+        LOADER.init(FEATURE_PREFIX, ClientFeature.class);
     }
 
     public void run() {
         LOADER.run();
+    }
+
+    public static ResourceLocation makeId(String id) {
+        return !id.contains(":") ? new ResourceLocation(MOD_ID, id) : new ResourceLocation(id);
     }
 }

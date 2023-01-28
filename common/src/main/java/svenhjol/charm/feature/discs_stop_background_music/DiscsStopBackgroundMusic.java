@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.phys.BlockHitResult;
-import svenhjol.charm.Charm;
+import svenhjol.charm.CharmClient;
 import svenhjol.charm.mixin.accessor.SoundEngineAccessor;
 import svenhjol.charm.mixin.accessor.SoundManagerAccessor;
 import svenhjol.charm_api.event.BlockUseEvent;
@@ -27,7 +27,7 @@ import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmFeature;
 
 @ClientFeature(
-    mod = Charm.MOD_ID,
+    mod = CharmClient.MOD_ID,
     switchable = true,
     description = "Playing a music disc in a jukebox prevents background music from playing at the same time."
 )
@@ -74,7 +74,7 @@ public class DiscsStopBackgroundMusic extends CharmFeature {
             getPlayingSounds().forEach((category, s) -> {
                 if (category == SoundSource.RECORDS) {
                     musicToStop = sound;
-                    Charm.LOG.debug(getClass(), "Triggered background music while music disc playing");
+                    CharmClient.LOG.debug(getClass(), "Triggered background music while music disc playing");
                 }
             });
         }
