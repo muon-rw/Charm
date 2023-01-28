@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
-import svenhjol.charm.Charm;
+import svenhjol.charm.CharmClient;
 import svenhjol.charm.mixin.accessor.ShulkerBoxBlockEntityAccessor;
 import svenhjol.charm_api.event.TooltipComponentEvent;
 import svenhjol.charm_api.event.TooltipItemHoverEvent;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ClientFeature(
-    mod = Charm.MOD_ID,
+    mod = CharmClient.MOD_ID,
     switchable = true,
     description = "Adds hover tooltips for some items that have content."
 )
