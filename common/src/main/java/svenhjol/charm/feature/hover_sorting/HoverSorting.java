@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import svenhjol.charm.Charm;
-import svenhjol.charm.feature.extra_tooltips.ExtraTooltips;
 import svenhjol.charm.feature.hover_sorting.HoverSortingNetwork.ScrollOnHover;
 import svenhjol.charm.feature.inventory_tidying.InventoryTidyingHandler;
 import svenhjol.charm.mixin.accessor.BundleItemAccessor;
@@ -135,10 +134,8 @@ public class HoverSorting extends CharmFeature {
             var shulkerBoxes = BlockTags.SHULKER_BOXES;
             var values = TagHelper.getValues(level.registryAccess().registryOrThrow(shulkerBoxes.registry()), shulkerBoxes);
 
-            if (Charm.LOADER.isEnabled(ExtraTooltips.class) && ExtraTooltips.showShulkerBoxes) {
-                for (Block shulkerBox : values) {
-                    HoverSorting.addSortable(shulkerBox);
-                }
+            for (Block shulkerBox : values) {
+                HoverSorting.addSortable(shulkerBox);
             }
 
             // Add everything from the API.
