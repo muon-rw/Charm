@@ -1,0 +1,22 @@
+{
+  "template": {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "###",
+      "XXX",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:VANILLA_WOOD_planks"
+      },
+      "X": {
+        "item": "minecraft:book"
+      }
+    },
+    "result": {
+      "item": "charm:VANILLA_WOOD_bookshelf"
+    }
+  },
+  "variants": "vanilla_wood"
+}

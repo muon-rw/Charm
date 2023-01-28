@@ -1,7 +1,6 @@
 package svenhjol.charm.feature.wood;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.variant_barrels.VariantBarrels;
 import svenhjol.charm.feature.variant_bookshelves.VariantBookshelves;
@@ -183,19 +181,18 @@ public class Wood extends CharmFeature {
         return map;
     }
 
-    public static Pair<Supplier<CharmSaplingBlock>, Supplier<CharmSaplingBlock.BlockItem>> registerSapling(CharmFeature feature, IVariantMaterial material,
-                                                                                                           Supplier<Holder<ConfiguredFeature<TreeConfiguration, ?>>> tree) {
-        var id = material.getSerializedName() + "_sapling";
+    public static Pair<Supplier<CharmSaplingBlock>, Supplier<CharmSaplingBlock.BlockItem>> registerSapling(CharmFeature feature, IVariantMaterial material) {
+        var saplingId = material.getSerializedName() + "_sapling";
+        var treeId = material.getSerializedName() + "_tree";
+        var key = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(feature.getModId(), treeId));
 
-        var key = ResourceKey.create(Registries.CONFIGURED_FEATURE, Charm.makeId(id));
-
-        var sapling = Charm.REGISTRY.block(id, () -> new CharmSaplingBlock(feature, material, new AbstractTreeGrower() {
+        var sapling = Charm.REGISTRY.block(saplingId, () -> new CharmSaplingBlock(feature, material, new AbstractTreeGrower() {
             @Override
             protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean hasBees) {
                 return key;
             }
         }));
-        var saplingItem = Charm.REGISTRY.item(id, () -> new CharmSaplingBlock.BlockItem(feature, sapling));
+        var saplingItem = Charm.REGISTRY.item(saplingId, () -> new CharmSaplingBlock.BlockItem(feature, sapling));
 
         return Pair.of(sapling, saplingItem);
     }

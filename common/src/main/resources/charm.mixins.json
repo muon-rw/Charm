@@ -22,6 +22,7 @@
     "auto_restock.ParrotMixin",
     "beekeepers.PoiTypesMixin",
     "block_of_ender_pearls.ChorusFruitItemMixin",
+    "boat_type_enum.BoatTypeMixin",
     "collection.BlockMixin",
     "collection.ServerPlayerGameModeMixin",
     "enchantable_horse_armor.EnchantmentMixin",

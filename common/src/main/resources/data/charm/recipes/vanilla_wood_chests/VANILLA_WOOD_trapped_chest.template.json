@@ -1,0 +1,17 @@
+{
+  "template": {
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "charm:VANILLA_WOOD_chest"
+      },
+      {
+        "item": "minecraft:tripwire_hook"
+      }
+    ],
+    "result": {
+      "item": "charm:VANILLA_WOOD_trapped_chest"
+    }
+  },
+  "variants": "vanilla_wood"
+}

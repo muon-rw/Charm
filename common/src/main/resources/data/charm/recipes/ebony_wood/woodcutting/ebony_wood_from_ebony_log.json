@@ -1,0 +1,8 @@
+{
+  "type": "charm:woodcutting",
+  "ingredient": {
+    "item": "charm:ebony_log"
+  },
+  "result": "charm:ebony_wood",
+  "count": 1
+}
