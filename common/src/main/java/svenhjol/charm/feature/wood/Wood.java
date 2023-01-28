@@ -225,18 +225,6 @@ public class Wood extends CharmFeature {
         return Pair.of(trapdoor, trapdoorItem);
     }
 
-//    public static Pair<Holder<ConfiguredFeature<TreeConfiguration, ?>>, Holder<PlacedFeature>> postRegisterTree(
-//        CharmFeature feature, IVariantMaterial material, TreeConfiguration configuration, List<PlacementModifier> modifiers) {
-//
-//        var id = Charm.makeId(material.getSerializedName() + "_tree");
-//        var placementId = Charm.makeId(material.getSerializedName() + "_tree_checked");
-//
-//        var tree = FeatureUtils.register(id.toString(), net.minecraft.world.level.levelgen.feature.Feature.TREE, configuration);
-//        var placed = PlacementUtils.register(placementId.toString(), tree, modifiers);
-//
-//        return Pair.of(tree, placed);
-//    }
-
     public static void registerBarrel(IVariantMaterial material) {
         VariantBarrels.registerBarrel(material);
     }
