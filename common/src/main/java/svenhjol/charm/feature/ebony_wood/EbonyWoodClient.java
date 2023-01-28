@@ -8,7 +8,9 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -49,6 +51,15 @@ public class EbonyWoodClient extends CharmFeature {
         // Register foliage colors.
         CharmClient.REGISTRY.itemColor(this::handleItemColor, List.of(EbonyWood.LEAVES_BLOCK));
         CharmClient.REGISTRY.blockColor(this::handleBlockColor, List.of(EbonyWood.LEAVES_BLOCK));
+
+        if (isEnabled()) {
+            // Add the ebony sapling to the natural blocks tab.
+            CharmClient.REGISTRY.itemTab(
+                EbonyWood.SAPLING_BLOCK,
+                CreativeModeTabs.NATURAL_BLOCKS,
+                Items.SPRUCE_SAPLING
+            );
+        }
     }
 
     private int handleItemColor(ItemStack stack, int tintIndex) {
