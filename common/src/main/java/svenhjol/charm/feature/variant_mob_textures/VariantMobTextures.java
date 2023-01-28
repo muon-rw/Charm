@@ -78,9 +78,7 @@ public class VariantMobTextures extends CharmFeature {
     public static int rareVariantChance = 1000;
 
     @Override
-    public void runWhenEnabled() {
-        ClientEntityJoinEvent.INSTANCE.handle(this::handlePlayerJoin);
-
+    public void register() {
         if (chickens) {
             CharmClient.REGISTRY.entityRenderer(() -> EntityType.CHICKEN, () -> VariantMobRenderer.RenderChicken::new);
         }
@@ -120,6 +118,11 @@ public class VariantMobTextures extends CharmFeature {
         if (wanderingTraders) {
             CharmClient.REGISTRY.entityRenderer(() -> EntityType.WANDERING_TRADER, () -> VariantMobRenderer.RenderWanderingTrader::new);
         }
+    }
+
+    @Override
+    public void runWhenEnabled() {
+        ClientEntityJoinEvent.INSTANCE.handle(this::handlePlayerJoin);
     }
 
     public void handlePlayerJoin(Entity entity, Level level) {
