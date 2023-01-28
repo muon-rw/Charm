@@ -34,7 +34,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.Supplier;
 
-@SuppressWarnings({"unused", "deprecation", "UnusedReturnValue"})
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 @Feature(mod = Charm.MOD_ID, switchable = false, description = "Registers custom wood types.")
 public class Wood extends CharmFeature {
     private static final Map<Boat.Type, ResourceLocation> BOAT_PLANKS_IDENTIFIERS = new HashMap<>();
