@@ -15,6 +15,7 @@ import svenhjol.charm.feature.variant_barrels.VariantBarrels;
 import svenhjol.charm.feature.variant_chests.VariantChests;
 import svenhjol.charm.feature.variant_ladders.VariantLadders;
 import svenhjol.charm.feature.wood.Wood;
+import svenhjol.charm.feature.woodcutters.Woodcutters;
 import svenhjol.charm_api.event.LevelLoadEvent;
 import svenhjol.charm_api.iface.IRemovesRecipes;
 import svenhjol.charm_core.annotation.Feature;
@@ -23,7 +24,6 @@ import svenhjol.charm_core.base.block.CharmDoorBlock;
 import svenhjol.charm_core.base.block.CharmLogBlock;
 import svenhjol.charm_core.base.block.CharmTrapdoorBlock;
 import svenhjol.charm_core.init.CharmApi;
-import svenhjol.charm_core.init.GlobalLoaders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +97,7 @@ public class AzaleaWood extends CharmFeature implements IRemovesRecipes {
             remove.add(Charm.makeId("azalea_ladder"));
         }
 
-        if (!GlobalLoaders.isEnabled(new ResourceLocation("charm_world", "woodcutters"))) {
+        if (!Charm.LOADER.isEnabled(Woodcutters.class)) {
             remove.add(Charm.makeId("azalea_wood/woodcutting/"));
         }
 

@@ -17,6 +17,7 @@ import svenhjol.charm.feature.variant_barrels.VariantBarrels;
 import svenhjol.charm.feature.variant_chests.VariantChests;
 import svenhjol.charm.feature.variant_ladders.VariantLadders;
 import svenhjol.charm.feature.wood.Wood;
+import svenhjol.charm.feature.woodcutters.Woodcutters;
 import svenhjol.charm_api.iface.IProvidesWandererTrades;
 import svenhjol.charm_api.iface.IRemovesRecipes;
 import svenhjol.charm_api.iface.IWandererTrade;
@@ -24,7 +25,6 @@ import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.base.block.*;
 import svenhjol.charm_core.init.CharmApi;
-import svenhjol.charm_core.init.GlobalLoaders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +131,7 @@ public class EbonyWood extends CharmFeature implements IProvidesWandererTrades, 
             remove.add(Charm.makeId("ebony_ladder"));
         }
 
-        if (!GlobalLoaders.isEnabled(new ResourceLocation("charm_world", "woodcutters"))) {
+        if (!Charm.LOADER.isEnabled(Woodcutters.class)) {
             remove.add(Charm.makeId("ebony_wood/woodcutting/"));
         }
 
