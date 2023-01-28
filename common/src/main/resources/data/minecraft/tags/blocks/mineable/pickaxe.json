@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "charm:ender_pearl_block",
     "charm:kiln",
     "charm:player_pressure_plate"
   ]
