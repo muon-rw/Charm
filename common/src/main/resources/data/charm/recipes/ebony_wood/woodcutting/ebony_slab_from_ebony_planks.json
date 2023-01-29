@@ -1,8 +1,0 @@
-{
-  "type": "charm:woodcutting",
-  "ingredient": {
-    "item": "charm:ebony_planks"
-  },
-  "result": "charm:ebony_slab",
-  "count": 2
-}
