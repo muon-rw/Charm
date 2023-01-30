@@ -7,6 +7,7 @@ import svenhjol.charm.feature.variant_barrels.VariantBarrelBlock.BlockItem;
 import svenhjol.charm_api.iface.IVariantMaterial;
 import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
+import svenhjol.charm_core.iface.IRegistry;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,21 +19,21 @@ public class VariantBarrels extends CharmFeature {
     public static final Map<IVariantMaterial, Supplier<VariantBarrelBlock>> BARREL_BLOCKS = new HashMap<>();
     public static final Map<IVariantMaterial, Supplier<BlockItem>> BARREL_BLOCK_ITEMS = new HashMap<>();
 
-    public static void registerBarrel(IVariantMaterial material) {
+    public static void registerBarrel(IRegistry registry, IVariantMaterial material) {
         var id = material.getSerializedName() + "_barrel";
 
-        var block = Charm.REGISTRY.block(id, () -> new VariantBarrelBlock(material));
-        var blockItem = Charm.REGISTRY.item(id, () -> new BlockItem(block));
+        var block = registry.block(id, () -> new VariantBarrelBlock(material));
+        var blockItem = registry.item(id, () -> new BlockItem(block));
 
         BARREL_BLOCKS.put(material, block);
         BARREL_BLOCK_ITEMS.put(material, blockItem);
 
-        Charm.REGISTRY.fuel(blockItem);
+        registry.fuel(blockItem);
 
         // Associate the blocks with the block entity dynamically.
-        Charm.REGISTRY.blockEntityBlocks(() -> BlockEntityType.BARREL, List.of(block));
+        registry.blockEntityBlocks(() -> BlockEntityType.BARREL, List.of(block));
 
         // Add this barrel to the Fisherman's point of interest.
-        Charm.REGISTRY.pointOfInterestBlockStates(() -> PoiTypes.FISHERMAN, () -> block.get().getStateDefinition().getPossibleStates());
+        registry.pointOfInterestBlockStates(() -> PoiTypes.FISHERMAN, () -> block.get().getStateDefinition().getPossibleStates());
     }
 }

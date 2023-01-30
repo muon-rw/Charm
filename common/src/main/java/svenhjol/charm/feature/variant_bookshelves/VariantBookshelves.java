@@ -5,6 +5,7 @@ import svenhjol.charm.feature.variant_bookshelves.VariantBookshelfBlock.BlockIte
 import svenhjol.charm_api.iface.IVariantMaterial;
 import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
+import svenhjol.charm_core.iface.IRegistry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,16 +16,16 @@ public class VariantBookshelves extends CharmFeature {
     public static final Map<IVariantMaterial, Supplier<VariantBookshelfBlock>> BOOKSHELF_BLOCKS = new HashMap<>();
     public static final Map<IVariantMaterial, Supplier<BlockItem>> BOOKSHELF_BLOCK_ITEMS = new HashMap<>();
 
-    public static void registerBookshelf(IVariantMaterial material) {
+    public static void registerBookshelf(IRegistry registry, IVariantMaterial material) {
         var id = material.getSerializedName() + "_bookshelf";
 
-        var block = Charm.REGISTRY.block(id, () -> new VariantBookshelfBlock(material));
-        var blockItem = Charm.REGISTRY.item(id, () -> new BlockItem(block));
+        var block = registry.block(id, () -> new VariantBookshelfBlock(material));
+        var blockItem = registry.item(id, () -> new BlockItem(block));
 
         BOOKSHELF_BLOCKS.put(material, block);
         BOOKSHELF_BLOCK_ITEMS.put(material, blockItem);
 
-        Charm.REGISTRY.ignite(block);
-        Charm.REGISTRY.fuel(blockItem);
+        registry.ignite(block);
+        registry.fuel(blockItem);
     }
 }

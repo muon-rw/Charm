@@ -11,7 +11,7 @@ public class VanillaWoodBookshelves extends CharmFeature {
     @Override
     public void register() {
         for (var material  : VanillaWood.getTypes()) {
-            VariantBookshelves.registerBookshelf(material);
+            VariantBookshelves.registerBookshelf(Charm.REGISTRY, material);
         }
     }
 }

@@ -7,6 +7,7 @@ import svenhjol.charm_api.event.EntityUseEvent;
 import svenhjol.charm_api.iface.IVariantMaterial;
 import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
+import svenhjol.charm_core.iface.IRegistry;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,31 +35,31 @@ public class VariantChests extends CharmFeature {
         EntityUseEvent.INSTANCE.handle(AnimalInteraction::handle);
     }
 
-    public static void registerChest(IVariantMaterial material) {
+    public static void registerChest(IRegistry registry, IVariantMaterial material) {
         var id = material.getSerializedName() + "_chest";
 
-        var block = Charm.REGISTRY.block(id, () -> new VariantChestBlock(material));
-        var blockItem = Charm.REGISTRY.item(id, () -> new VariantChestBlock.BlockItem(block));
+        var block = registry.block(id, () -> new VariantChestBlock(material));
+        var blockItem = registry.item(id, () -> new VariantChestBlock.BlockItem(block));
 
         NORMAL_CHEST_BLOCKS.put(material, block);
         NORMAL_CHEST_BLOCK_ITEMS.put(material, blockItem);
 
         // Associate the blocks with the block entity dynamically.
-        Charm.REGISTRY.blockEntityBlocks(NORMAL_BLOCK_ENTITY, List.of(block));
-        Charm.REGISTRY.fuel(blockItem);
+        registry.blockEntityBlocks(NORMAL_BLOCK_ENTITY, List.of(block));
+        registry.fuel(blockItem);
     }
 
-    public static void registerTrappedChest(IVariantMaterial material) {
+    public static void registerTrappedChest(IRegistry registry, IVariantMaterial material) {
         var id = material.getSerializedName() + "_trapped_chest";
 
-        var block = Charm.REGISTRY.block(id, () -> new VariantTrappedChestBlock(material));
-        var blockItem = Charm.REGISTRY.item(id, () -> new BlockItem(block));
+        var block = registry.block(id, () -> new VariantTrappedChestBlock(material));
+        var blockItem = registry.item(id, () -> new BlockItem(block));
 
         TRAPPED_CHEST_BLOCKS.put(material, block);
         TRAPPED_CHEST_BLOCK_ITEMS.put(material, blockItem);
 
         // Associate the blocks with the block entity dynamically.
-        Charm.REGISTRY.blockEntityBlocks(TRAPPED_BLOCK_ENTITY, List.of(block));
-        Charm.REGISTRY.fuel(blockItem);
+        registry.blockEntityBlocks(TRAPPED_BLOCK_ENTITY, List.of(block));
+        registry.fuel(blockItem);
     }
 }

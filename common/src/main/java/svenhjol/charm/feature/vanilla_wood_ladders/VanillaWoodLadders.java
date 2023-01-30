@@ -18,7 +18,7 @@ public class VanillaWoodLadders extends CharmFeature implements IRemovesRecipes 
     @Override
     public void register() {
         for (var material : VanillaWood.getTypes()) {
-            VariantLadders.registerLadder(material);
+            VariantLadders.registerLadder(Charm.REGISTRY, material);
         }
 
         CharmApi.registerProvider(this);

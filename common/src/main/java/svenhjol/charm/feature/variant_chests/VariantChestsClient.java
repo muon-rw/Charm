@@ -1,14 +1,15 @@
 package svenhjol.charm.feature.variant_chests;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import svenhjol.charm.Charm;
 import svenhjol.charm.CharmClient;
-import svenhjol.charm.feature.variant_chest_boats.VariantChestBoats;
 import svenhjol.charm_api.event.BlockItemRenderEvent;
 import svenhjol.charm_api.iface.IVariantMaterial;
 import svenhjol.charm_core.annotation.ClientFeature;
@@ -32,6 +33,31 @@ public class VariantChestsClient extends CharmFeature {
     public void register() {
         CharmClient.REGISTRY.blockEntityRenderer(VariantChests.NORMAL_BLOCK_ENTITY, () -> VariantChestBlockEntityRenderer::new);
         CharmClient.REGISTRY.blockEntityRenderer(VariantChests.TRAPPED_BLOCK_ENTITY, () -> VariantChestBlockEntityRenderer::new);
+
+        if (isEnabled()) {
+            // Add chests to functional and redstone tab.
+            for (var item : VariantChests.NORMAL_CHEST_BLOCKS.values()) {
+                CharmClient.REGISTRY.itemTab(
+                    item,
+                    CreativeModeTabs.FUNCTIONAL_BLOCKS,
+                    Items.CHEST
+                );
+                CharmClient.REGISTRY.itemTab(
+                    item,
+                    CreativeModeTabs.REDSTONE_BLOCKS,
+                    Items.CHEST
+                );
+            }
+
+            // Add trapped chests to redstone tab.
+            for (var item : VariantChests.TRAPPED_CHEST_BLOCKS.values()) {
+                CharmClient.REGISTRY.itemTab(
+                    item,
+                    CreativeModeTabs.REDSTONE_BLOCKS,
+                    Items.TRAPPED_CHEST
+                );
+            }
+        }
     }
 
     @Override

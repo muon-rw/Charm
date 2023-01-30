@@ -13,8 +13,8 @@ public class VanillaWoodChests extends CharmFeature {
     @Override
     public void register() {
         for (var material : VanillaWood.getTypes()) {
-            VariantChests.registerChest(material);
-            VariantChests.registerTrappedChest(material);
+            VariantChests.registerChest(Charm.REGISTRY, material);
+            VariantChests.registerTrappedChest(Charm.REGISTRY, material);
         }
 
         VariantChestBoats.registerChestBoat(() -> Items.ACACIA_BOAT, () -> Items.ACACIA_CHEST_BOAT);

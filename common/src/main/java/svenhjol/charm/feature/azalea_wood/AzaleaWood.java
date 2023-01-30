@@ -40,27 +40,28 @@ public class AzaleaWood extends CharmFeature implements IRemovesRecipes {
     public void register() {
         var material = AzaleaMaterial.AZALEA;
         var values = Boat.Type.values(); // TODO: Hack to inject the boat type enums early, fixme.
+        var registry = Charm.REGISTRY;
 
-        WOOD_TYPE = Wood.registerWoodType(material);
-        DOOR_BLOCK = Wood.registerDoor(this, material).getFirst();
-        TRAPDOOR_BLOCK = Wood.registerTrapdoor(this, material).getFirst();
+        WOOD_TYPE = Wood.registerWoodType(registry, material);
+        DOOR_BLOCK = Wood.registerDoor(registry, this, material).getFirst();
+        TRAPDOOR_BLOCK = Wood.registerTrapdoor(registry, this, material).getFirst();
+        LOG_BLOCK = Wood.registerLog(registry, this, material).get("azalea_log").getFirst();
 
-        var log = Wood.registerLog(this, material);
-        LOG_BLOCK = log.get("azalea_log").getFirst(); // Need reference to add to tree feature.
+        Wood.registerBoat(registry, this, material);
 
-        Wood.registerBoat(this, material);
-        Wood.registerButton(this, material);
-        Wood.registerFence(this, material);
-        Wood.registerGate(this, material);
-        Wood.registerPlanksSlabsAndStairs(this, material);
-        Wood.registerPressurePlate(this, material);
-        Wood.registerSign(this, material);
+        Wood.registerButton(registry, this, material);
+        Wood.registerFence(registry, this, material);
+        Wood.registerGate(registry, this, material);
 
-        Wood.registerBarrel(material);
-        Wood.registerBookshelf(material);
-        Wood.registerChest(material);
-        Wood.registerTrappedChest(material);
-        Wood.registerLadder(material);
+        Wood.registerPlanksSlabsAndStairs(registry, this, material);
+        Wood.registerSign(registry, this, material).get("azalea_sign");
+        Wood.registerPressurePlate(registry, this, material);
+
+        Wood.registerBarrel(registry, material);
+        Wood.registerBookshelf(registry, material);
+        Wood.registerChest(registry, material);
+        Wood.registerTrappedChest(registry, material);
+        Wood.registerLadder(registry, material);
 
         CharmApi.registerProvider(this);
     }

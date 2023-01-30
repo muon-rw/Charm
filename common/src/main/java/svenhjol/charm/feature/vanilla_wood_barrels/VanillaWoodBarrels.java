@@ -11,7 +11,7 @@ public class VanillaWoodBarrels extends CharmFeature {
     @Override
     public void register() {
         for (var material : VanillaWood.getTypes()) {
-            VariantBarrels.registerBarrel(material);
+            VariantBarrels.registerBarrel(Charm.REGISTRY, material);
         }
     }
 }

@@ -9,6 +9,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BoatItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,6 +28,7 @@ import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.base.block.*;
 import svenhjol.charm_core.base.item.CharmBoatItem;
 import svenhjol.charm_core.base.item.CharmSignItem;
+import svenhjol.charm_core.iface.IRegistry;
 import svenhjol.charm_core.mixin.accessor.BlockItemAccessor;
 import svenhjol.charm_core.mixin.accessor.StandingAndWallBlockItemAccessor;
 
@@ -41,6 +43,10 @@ public class Wood extends CharmFeature {
     private static final Map<Boat.Type, Supplier<CharmBoatItem>> TYPE_TO_BOAT = new HashMap<>();
     private static final Map<Boat.Type, Supplier<CharmBoatItem>> TYPE_TO_CHEST_BOAT = new HashMap<>();
     private static final List<Supplier<CharmSignItem>> SIGN_ITEMS = new ArrayList<>();
+    static final Map<String, Map<String, Supplier<? extends Item>>> CREATIVE_TAB_ITEMS = new HashMap<>();
+    static final List<Supplier<WoodType>> WOOD_TYPES = new ArrayList<>();
+    static final List<String> WOOD_NAMES = new ArrayList<>();
+    static final List<String> BOAT_IDS = new ArrayList<>();
 
     @Override
     public void runWhenEnabled() {
@@ -58,11 +64,11 @@ public class Wood extends CharmFeature {
         }
     }
 
-    public static Pair<Supplier<CharmBoatItem>, Supplier<CharmBoatItem>> registerBoat(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmBoatItem>, Supplier<CharmBoatItem>> registerBoat(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var woodName = material.getSerializedName();
-        var boatType = Boat.Type.valueOf((Charm.MOD_ID + "_" + woodName).toUpperCase(Locale.ROOT));
-        var boat = Charm.REGISTRY.item(woodName + "_boat", () -> new CharmBoatItem(feature, false, boatType));
-        var chestBoat = Charm.REGISTRY.item(woodName + "_chest_boat", () -> new CharmBoatItem(feature, true, boatType));
+        var boatType = Boat.Type.valueOf((feature.getModId() + "_" + woodName).toUpperCase(Locale.ROOT));
+        var boat = registry.item(woodName + "_boat", () -> new CharmBoatItem(feature, false, boatType));
+        var chestBoat = registry.item(woodName + "_chest_boat", () -> new CharmBoatItem(feature, true, boatType));
 
         TYPE_TO_BOAT.put(boatType, boat);
         TYPE_TO_CHEST_BOAT.put(boatType, chestBoat);
@@ -71,72 +77,90 @@ public class Wood extends CharmFeature {
         VariantChestBoats.registerChestBoat(boat, chestBoat);
         VariantChestBoats.registerChestLayerColor(material);
 
+        addCreativeTabItem(feature.getModId(), "boat", boat);
+        addCreativeTabItem(feature.getModId(), "chest_boat", chestBoat);
+
         return Pair.of(boat, chestBoat);
     }
 
-    public static Pair<Supplier<CharmWoodButtonBlock>, Supplier<CharmWoodButtonBlock.BlockItem>> registerButton(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmWoodButtonBlock>, Supplier<CharmWoodButtonBlock.BlockItem>> registerButton(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var id = material.getSerializedName() + "_button";
-        var button = Charm.REGISTRY.block(id, () -> new CharmWoodButtonBlock(feature, material));
-        var buttonItem = Charm.REGISTRY.item(id, () -> new CharmWoodButtonBlock.BlockItem(feature, button));
+        var button = registry.block(id, () -> new CharmWoodButtonBlock(feature, material));
+        var buttonItem = registry.item(id, () -> new CharmWoodButtonBlock.BlockItem(feature, button));
+
+        addCreativeTabItem(feature.getModId(), "button", buttonItem);
+
         return Pair.of(button, buttonItem);
     }
 
-    public static Pair<Supplier<CharmDoorBlock>, Supplier<CharmDoorBlock.BlockItem>> registerDoor(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmDoorBlock>, Supplier<CharmDoorBlock.BlockItem>> registerDoor(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var id = material.getSerializedName() + "_door";
-        var door = Charm.REGISTRY.block(id, () -> new CharmDoorBlock(feature, material));
-        var doorItem = Charm.REGISTRY.item(id, () -> new CharmDoorBlock.BlockItem(feature, door));
+        var door = registry.block(id, () -> new CharmDoorBlock(feature, material));
+        var doorItem = registry.item(id, () -> new CharmDoorBlock.BlockItem(feature, door));
+
+        addCreativeTabItem(feature.getModId(), "door", doorItem);
+
         return Pair.of(door, doorItem);
     }
 
-    public static Pair<Supplier<CharmFenceBlock>, Supplier<CharmFenceBlock.BlockItem>> registerFence(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmFenceBlock>, Supplier<CharmFenceBlock.BlockItem>> registerFence(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var id = material.getSerializedName() + "_fence";
-        var fence = Charm.REGISTRY.block(id, () -> new CharmFenceBlock(feature, material));
-        var fenceItem = Charm.REGISTRY.item(id, () -> new CharmFenceBlock.BlockItem(feature, fence));
-        Charm.REGISTRY.ignite(fence); // Fences can set on fire.
+        var fence = registry.block(id, () -> new CharmFenceBlock(feature, material));
+        var fenceItem = registry.item(id, () -> new CharmFenceBlock.BlockItem(feature, fence));
+
+        registry.ignite(fence); // Fences can set on fire.
+        addCreativeTabItem(feature.getModId(), "fence", fenceItem);
+
         return Pair.of(fence, fenceItem);
     }
 
-    public static Pair<Supplier<CharmFenceGateBlock>, Supplier<CharmFenceGateBlock.BlockItem>> registerGate(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmFenceGateBlock>, Supplier<CharmFenceGateBlock.BlockItem>> registerGate(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var id = material.getSerializedName() + "_fence_gate";
-        var gate = Charm.REGISTRY.block(id, () -> new CharmFenceGateBlock(feature, material));
-        var gateItem = Charm.REGISTRY.item(id, () -> new CharmFenceGateBlock.BlockItem(feature, gate));
-        Charm.REGISTRY.ignite(gate); // Gates can set on fire.
+        var gate = registry.block(id, () -> new CharmFenceGateBlock(feature, material));
+        var gateItem = registry.item(id, () -> new CharmFenceGateBlock.BlockItem(feature, gate));
+
+        registry.ignite(gate); // Gates can set on fire.
+        addCreativeTabItem(feature.getModId(), "fence_gate", gateItem);
+
         return Pair.of(gate, gateItem);
     }
 
-    public static Pair<Supplier<CharmLeavesBlock>, Supplier<CharmLeavesBlock.BlockItem>> registerLeaves(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmLeavesBlock>, Supplier<CharmLeavesBlock.BlockItem>> registerLeaves(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var id = material.getSerializedName() + "_leaves";
-        var leaves = Charm.REGISTRY.block(id, () -> new CharmLeavesBlock(feature, material));
-        var leavesItem = Charm.REGISTRY.item(id, () -> new CharmLeavesBlock.BlockItem(feature, leaves));
-        Charm.REGISTRY.ignite(leaves); // Leaves can set on fire.
+        var leaves = registry.block(id, () -> new CharmLeavesBlock(feature, material));
+        var leavesItem = registry.item(id, () -> new CharmLeavesBlock.BlockItem(feature, leaves));
+
+        registry.ignite(leaves); // Leaves can set on fire.
+        addCreativeTabItem(feature.getModId(), "leaves", leavesItem);
+
         return Pair.of(leaves, leavesItem);
     }
 
-    public static Map<String, Pair<Supplier<CharmLogBlock>, Supplier<CharmLogBlock.BlockItem>>> registerLog(CharmFeature feature, IVariantMaterial material) {
+    public static Map<String, Pair<Supplier<CharmLogBlock>, Supplier<CharmLogBlock.BlockItem>>> registerLog(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var logId = material.getSerializedName() + "_log";
         var woodId = material.getSerializedName() + "_wood";
         var strippedLogId = "stripped_" + material.getSerializedName() + "_log";
         var strippedWoodId = "stripped_" + material.getSerializedName() + "_wood";
 
-        var log = Charm.REGISTRY.block(logId, () -> new CharmLogBlock(feature, material));
-        var logItem = Charm.REGISTRY.item(logId, () -> new CharmLogBlock.BlockItem(feature, log));
-        var strippedLog = Charm.REGISTRY.block(strippedLogId, () -> new CharmLogBlock(feature, material));
-        var strippedLogItem = Charm.REGISTRY.item(strippedLogId, () -> new CharmLogBlock.BlockItem(feature, strippedLog));
+        var log = registry.block(logId, () -> new CharmLogBlock(feature, material));
+        var logItem = registry.item(logId, () -> new CharmLogBlock.BlockItem(feature, log));
+        var strippedLog = registry.block(strippedLogId, () -> new CharmLogBlock(feature, material));
+        var strippedLogItem = registry.item(strippedLogId, () -> new CharmLogBlock.BlockItem(feature, strippedLog));
 
-        var wood = Charm.REGISTRY.block(woodId, () -> new CharmLogBlock(feature, material));
-        var woodItem = Charm.REGISTRY.item(woodId, () -> new CharmLogBlock.BlockItem(feature, wood));
-        var strippedWood = Charm.REGISTRY.block(strippedWoodId, () -> new CharmLogBlock(feature, material));
-        var strippedWoodItem = Charm.REGISTRY.item(strippedWoodId, () -> new CharmLogBlock.BlockItem(feature, strippedWood));
+        var wood = registry.block(woodId, () -> new CharmLogBlock(feature, material));
+        var woodItem = registry.item(woodId, () -> new CharmLogBlock.BlockItem(feature, wood));
+        var strippedWood = registry.block(strippedWoodId, () -> new CharmLogBlock(feature, material));
+        var strippedWoodItem = registry.item(strippedWoodId, () -> new CharmLogBlock.BlockItem(feature, strippedWood));
 
         // Logs and wood can set on fire.
-        Charm.REGISTRY.ignite(log);
-        Charm.REGISTRY.ignite(wood);
-        Charm.REGISTRY.ignite(strippedLog);
-        Charm.REGISTRY.ignite(strippedWood);
+        registry.ignite(log);
+        registry.ignite(wood);
+        registry.ignite(strippedLog);
+        registry.ignite(strippedWood);
 
         // Logs and wood can be stripped.
-        Charm.REGISTRY.strippable(log, strippedLog);
-        Charm.REGISTRY.strippable(wood, strippedWood);
+        registry.strippable(log, strippedLog);
+        registry.strippable(wood, strippedWood);
 
         Map<String, Pair<Supplier<CharmLogBlock>, Supplier<CharmLogBlock.BlockItem>>> map = new HashMap<>();
 
@@ -145,66 +169,82 @@ public class Wood extends CharmFeature {
         map.put(strippedLogId, Pair.of(strippedLog, strippedLogItem));
         map.put(strippedWoodId, Pair.of(strippedWood, strippedWoodItem));
 
+        addCreativeTabItem(feature.getModId(), "log", logItem);
+        addCreativeTabItem(feature.getModId(), "wood", woodItem);
+        addCreativeTabItem(feature.getModId(), "stripped_log", strippedLogItem);
+        addCreativeTabItem(feature.getModId(), "stripped_wood", strippedWoodItem);
+
         return map;
     }
 
-    public static Pair<Supplier<CharmPressurePlateBlock>, Supplier<CharmPressurePlateBlock.BlockItem>> registerPressurePlate(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmPressurePlateBlock>, Supplier<CharmPressurePlateBlock.BlockItem>> registerPressurePlate(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var id = material.getSerializedName() + "_pressure_plate";
-        var pressurePlate = Charm.REGISTRY.block(id, () -> new CharmPressurePlateBlock(feature, material));
-        var pressurePlateItem = Charm.REGISTRY.item(id, () -> new CharmPressurePlateBlock.BlockItem(feature, pressurePlate));
+        var pressurePlate = registry.block(id, () -> new CharmPressurePlateBlock(feature, material));
+        var pressurePlateItem = registry.item(id, () -> new CharmPressurePlateBlock.BlockItem(feature, pressurePlate));
+
+        addCreativeTabItem(feature.getModId(), "pressure_plate", pressurePlateItem);
+
         return Pair.of(pressurePlate, pressurePlateItem);
     }
 
-    public static Map<String, Pair<Supplier<? extends Block>, Supplier<? extends BlockItem>>> registerPlanksSlabsAndStairs(CharmFeature feature, IVariantMaterial material) {
+    public static Map<String, Pair<Supplier<? extends Block>, Supplier<? extends BlockItem>>> registerPlanksSlabsAndStairs(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var planksId = material.getSerializedName() + "_planks";
         var slabId = material.getSerializedName() + "_slab";
         var stairsId = material.getSerializedName() + "_stairs";
 
-        var planks = Charm.REGISTRY.block(planksId, () -> new CharmPlanksBlock(feature, material));
-        var planksItem = Charm.REGISTRY.item(planksId, () -> new CharmPlanksBlock.BlockItem(feature, planks));
+        var planks = registry.block(planksId, () -> new CharmPlanksBlock(feature, material));
+        var planksItem = registry.item(planksId, () -> new CharmPlanksBlock.BlockItem(feature, planks));
 
-        var slab = Charm.REGISTRY.block(slabId, () -> new CharmSlabBlock(feature, material));
-        var slabItem = Charm.REGISTRY.item(slabId, () -> new CharmSlabBlock.BlockItem(feature, slab));
+        var slab = registry.block(slabId, () -> new CharmSlabBlock(feature, material));
+        var slabItem = registry.item(slabId, () -> new CharmSlabBlock.BlockItem(feature, slab));
 
-        var stairs = Charm.REGISTRY.stairsBlock(stairsId, feature, material, () -> planks.get().defaultBlockState());
+        var stairs = registry.stairsBlock(stairsId, feature, material, () -> planks.get().defaultBlockState());
 
-        Charm.REGISTRY.ignite(planks); // Planks can set on fire.
-        Charm.REGISTRY.ignite(slab); // Slabs can set on fire.
-        Charm.REGISTRY.ignite(stairs.getFirst()); // Stairs can set on fire.
+        registry.ignite(planks); // Planks can set on fire.
+        registry.ignite(slab); // Slabs can set on fire.
+        registry.ignite(stairs.getFirst()); // Stairs can set on fire.
+
+        var stairsItem = stairs.getSecond();
 
         Map<String, Pair<Supplier<? extends Block >, Supplier<? extends BlockItem>>> map = new HashMap<>();
 
         map.put(planksId, Pair.of(planks, planksItem));
         map.put(slabId, Pair.of(slab, slabItem));
-        map.put(stairsId, Pair.of(stairs.getFirst(), stairs.getSecond()));
+        map.put(stairsId, Pair.of(stairs.getFirst(), stairsItem));
+
+        addCreativeTabItem(feature.getModId(), "planks", planksItem);
+        addCreativeTabItem(feature.getModId(), "slab", slabItem);
+        addCreativeTabItem(feature.getModId(), "stairs", stairsItem);
 
         return map;
     }
 
-    public static Pair<Supplier<CharmSaplingBlock>, Supplier<CharmSaplingBlock.BlockItem>> registerSapling(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmSaplingBlock>, Supplier<CharmSaplingBlock.BlockItem>> registerSapling(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var saplingId = material.getSerializedName() + "_sapling";
         var treeId = material.getSerializedName() + "_tree";
         var key = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(feature.getModId(), treeId));
 
-        var sapling = Charm.REGISTRY.block(saplingId, () -> new CharmSaplingBlock(feature, material, new AbstractTreeGrower() {
+        var sapling = registry.block(saplingId, () -> new CharmSaplingBlock(feature, material, new AbstractTreeGrower() {
             @Override
             protected ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean hasBees) {
-                return key;
+            return key;
             }
         }));
-        var saplingItem = Charm.REGISTRY.item(saplingId, () -> new CharmSaplingBlock.BlockItem(feature, sapling));
+        var saplingItem = registry.item(saplingId, () -> new CharmSaplingBlock.BlockItem(feature, sapling));
+
+        addCreativeTabItem(feature.getModId(), "sapling", saplingItem);
 
         return Pair.of(sapling, saplingItem);
     }
 
-    public static Map<String, Pair<Supplier<? extends SignBlock>, Supplier<? extends BlockItem>>> registerSign(CharmFeature feature, IVariantMaterial material) {
+    public static Map<String, Pair<Supplier<? extends SignBlock>, Supplier<? extends BlockItem>>> registerSign(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var signId = material.getSerializedName() + "_sign";
         var wallSignId = material.getSerializedName() + "_wall_sign";
         var woodType = getWoodType(feature, material);
 
-        var sign = Charm.REGISTRY.block(signId, () -> new CharmStandingSignBlock(feature, material, woodType));
-        var wallSign = Charm.REGISTRY.wallSignBlock(wallSignId, feature, material, sign, woodType);
-        var signItem = Charm.REGISTRY.item(signId, () -> new CharmSignItem(feature, material, sign, wallSign));
+        var sign = registry.block(signId, () -> new CharmStandingSignBlock(feature, material, woodType));
+        var wallSign = registry.wallSignBlock(wallSignId, feature, material, sign, woodType);
+        var signItem = registry.item(signId, () -> new CharmSignItem(feature, material, sign, wallSign));
 
         SIGN_ITEMS.add(signItem);
 
@@ -213,40 +253,49 @@ public class Wood extends CharmFeature {
         map.put(wallSignId, Pair.of(wallSign, signItem));
 
         // Associate with the sign block entity.
-        Charm.REGISTRY.blockEntityBlocks(() -> BlockEntityType.SIGN, List.of(sign, wallSign));
+        registry.blockEntityBlocks(() -> BlockEntityType.SIGN, List.of(sign, wallSign));
+
+        addCreativeTabItem(feature.getModId(), "sign", signItem);
 
         return map;
     }
 
-    public static Pair<Supplier<CharmTrapdoorBlock>, Supplier<CharmTrapdoorBlock.BlockItem>> registerTrapdoor(CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmTrapdoorBlock>, Supplier<CharmTrapdoorBlock.BlockItem>> registerTrapdoor(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
         var id = material.getSerializedName() + "_trapdoor";
-        var trapdoor = Charm.REGISTRY.block(id, () -> new CharmTrapdoorBlock(feature, material));
-        var trapdoorItem = Charm.REGISTRY.item(id, () -> new CharmTrapdoorBlock.BlockItem(feature, trapdoor));
+        var trapdoor = registry.block(id, () -> new CharmTrapdoorBlock(feature, material));
+        var trapdoorItem = registry.item(id, () -> new CharmTrapdoorBlock.BlockItem(feature, trapdoor));
+
+        addCreativeTabItem(feature.getModId(), "trapdoor", trapdoorItem);
+
         return Pair.of(trapdoor, trapdoorItem);
     }
 
-    public static void registerBarrel(IVariantMaterial material) {
-        VariantBarrels.registerBarrel(material);
+    public static void registerBarrel(IRegistry registry, IVariantMaterial material) {
+        VariantBarrels.registerBarrel(registry, material);
     }
 
-    public static void registerBookshelf(IVariantMaterial material) {
-        VariantBookshelves.registerBookshelf(material);
+    public static void registerBookshelf(IRegistry registry, IVariantMaterial material) {
+        VariantBookshelves.registerBookshelf(registry, material);
     }
 
-    public static void registerChest(IVariantMaterial material) {
-        VariantChests.registerChest(material);
+    public static void registerChest(IRegistry registry, IVariantMaterial material) {
+        VariantChests.registerChest(registry, material);
     }
 
-    public static void registerTrappedChest(IVariantMaterial material) {
-        VariantChests.registerTrappedChest(material);
+    public static void registerTrappedChest(IRegistry registry, IVariantMaterial material) {
+        VariantChests.registerTrappedChest(registry, material);
     }
 
-    public static void registerLadder(IVariantMaterial material) {
-        VariantLadders.registerLadder(material);
+    public static void registerLadder(IRegistry registry, IVariantMaterial material) {
+        VariantLadders.registerLadder(registry, material);
     }
 
-    public static Supplier<WoodType> registerWoodType(IVariantMaterial material) {
-        return Charm.REGISTRY.woodType(material.getSerializedName());
+    public static Supplier<WoodType> registerWoodType(IRegistry registry, IVariantMaterial material) {
+        var name = material.getSerializedName();
+        var woodType = registry.woodType(name);
+        WOOD_TYPES.add(woodType);
+        WOOD_NAMES.add(name);
+        return woodType;
     }
 
     @Nullable
@@ -265,5 +314,9 @@ public class Wood extends CharmFeature {
 
     public static WoodType getWoodTypeByName(String name) {
         return WoodType.values().filter(w -> w.name().equals(name)).findFirst().orElseThrow();
+    }
+
+    private static void addCreativeTabItem(String modId, String name, Supplier<? extends Item> item) {
+        CREATIVE_TAB_ITEMS.computeIfAbsent(modId, m -> new LinkedHashMap<>()).put(name, item);
     }
 }
