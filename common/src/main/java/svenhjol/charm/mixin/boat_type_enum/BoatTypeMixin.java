@@ -1,5 +1,7 @@
 package svenhjol.charm.mixin.boat_type_enum;
 
+import net.minecraft.util.ByIdMap;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -10,10 +12,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import svenhjol.charm.init.BoatTypeEnums;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Enum solution from LudoCrypt:
@@ -43,5 +42,9 @@ public class BoatTypeMixin {
         List<Boat.Type> variants = new ArrayList<>(Arrays.asList(BoatTypeMixin.$VALUES));
         variants.add(invokeInit(newName.toUpperCase(Locale.ROOT), variants.get(variants.size() - 1).ordinal() + 1, block, typeName));
         BoatTypeMixin.$VALUES = variants.toArray(new Boat.Type[0]);
+
+        // Reset the codec index.
+        Boat.Type.CODEC = StringRepresentable.fromEnum(Boat.Type::values);
+        Boat.Type.BY_ID = ByIdMap.continuous(Enum::ordinal, $VALUES, ByIdMap.OutOfBoundsStrategy.ZERO);
     }
 }

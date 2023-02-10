@@ -8,7 +8,6 @@ public class BoatTypeEnums {
      * {@link net.minecraft.world.entity.vehicle.Boat.Type}
      */
     public static final List<String> BOAT_TYPE_ENUMS = List.of(
-        "charm_azalea",
-        "charm_ebony"
+        "charm_azalea"
     );
 }

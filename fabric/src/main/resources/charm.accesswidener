@@ -24,3 +24,8 @@ mutable    field net/minecraft/world/entity/vehicle/Boat$Type planks Lnet/minecr
 
 accessible field net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration trunkProvider Lnet/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProvider;
 mutable    field net/minecraft/world/level/levelgen/feature/configurations/TreeConfiguration trunkProvider Lnet/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProvider;
+
+accessible field net/minecraft/world/entity/vehicle/Boat$Type CODEC Lnet/minecraft/util/StringRepresentable$EnumCodec;
+mutable    field net/minecraft/world/entity/vehicle/Boat$Type CODEC Lnet/minecraft/util/StringRepresentable$EnumCodec;
+accessible field net/minecraft/world/entity/vehicle/Boat$Type BY_ID Ljava/util/function/IntFunction;
+mutable    field net/minecraft/world/entity/vehicle/Boat$Type BY_ID Ljava/util/function/IntFunction;
