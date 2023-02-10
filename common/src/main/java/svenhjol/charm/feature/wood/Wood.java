@@ -72,7 +72,7 @@ public class Wood extends CharmFeature {
 
         TYPE_TO_BOAT.put(boatType, boat);
         TYPE_TO_CHEST_BOAT.put(boatType, chestBoat);
-        BOAT_PLANKS_IDENTIFIERS.put(boatType, Charm.makeId(material.getSerializedName() + "_planks"));
+        BOAT_PLANKS_IDENTIFIERS.put(boatType, new ResourceLocation(feature.getModId(), material.getSerializedName() + "_planks"));
 
         VariantChestBoats.registerChestBoat(boat, chestBoat);
         VariantChestBoats.registerChestLayerColor(material);
