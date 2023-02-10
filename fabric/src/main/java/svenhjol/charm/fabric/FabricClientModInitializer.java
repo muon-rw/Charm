@@ -7,10 +7,14 @@ import svenhjol.charm_core.fabric.common.CommonRegistry;
 
 public class FabricClientModInitializer implements ClientModInitializer {
     public static final ClientInitializer INIT = new ClientInitializer();
-    private CharmClient mod;
+    private static CharmClient mod;
 
     @Override
     public void onInitializeClient() {
+        initCharmClient();
+    }
+
+    public static void initCharmClient() {
         if (mod == null) {
             // Always init Core first.
             svenhjol.charm_core.fabric.FabricClientModInitializer.initCharmCoreClient();

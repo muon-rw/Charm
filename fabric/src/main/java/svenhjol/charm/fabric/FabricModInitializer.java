@@ -5,12 +5,15 @@ import svenhjol.charm.Charm;
 import svenhjol.charm_core.fabric.base.BaseFabricInitializer;
 
 public class FabricModInitializer implements ModInitializer {
-    private Charm mod;
-
+    private static Charm mod;
     public static final Initializer INIT = new Initializer();
 
     @Override
     public void onInitialize() {
+        initCharm();
+    }
+
+    public static void initCharm() {
         if (mod == null) {
             // Always init Core first.
             svenhjol.charm_core.fabric.FabricModInitializer.initCharmCore();
