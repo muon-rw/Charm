@@ -309,7 +309,7 @@ public class Wood extends CharmFeature {
     }
 
     public static WoodType getWoodType(CharmFeature feature, IVariantMaterial material) {
-        return getWoodTypeByName(Charm.MOD_ID + "_" + material.getSerializedName());
+        return getWoodTypeByName(feature.getModId() + "_" + material.getSerializedName());
     }
 
     public static WoodType getWoodTypeByName(String name) {
