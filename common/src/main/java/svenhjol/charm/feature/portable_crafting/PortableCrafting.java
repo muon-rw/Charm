@@ -43,17 +43,15 @@ public class PortableCrafting extends CharmFeature implements IChecksInventoryTa
     public static boolean hasCraftingTable(Player player) {
         var uuid = player.getUUID();
 
-        if (!CACHED_HAS_CRAFTING_TABLE.contains(uuid) || player.getLevel().getGameTime() % CHECK_TICKS_FAST == 0) {
+        if (!CACHED_HAS_CRAFTING_TABLE.contains(uuid)) {
             var hasCraftingTable = CharmApi.getProviders(IChecksInventoryTag.class).stream()
                 .flatMap(s -> s.getInventoryTagChecks().stream())
                 .anyMatch(check -> check.test(player, CRAFTING_TABLES));
 
+            CACHED_HAS_CRAFTING_TABLE.remove(uuid);
+
             if (hasCraftingTable) {
-                if (!CACHED_HAS_CRAFTING_TABLE.contains(uuid)){
-                    CACHED_HAS_CRAFTING_TABLE.add(uuid);
-                }
-            } else {
-                CACHED_HAS_CRAFTING_TABLE.remove(uuid);
+                CACHED_HAS_CRAFTING_TABLE.add(uuid);
             }
         }
 
