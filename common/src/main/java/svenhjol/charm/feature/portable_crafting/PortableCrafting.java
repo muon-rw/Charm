@@ -48,7 +48,7 @@ public class PortableCrafting extends CharmFeature implements IChecksInventoryTa
                 .flatMap(s -> s.getInventoryTagChecks().stream())
                 .anyMatch(check -> check.test(player, CRAFTING_TABLES));
 
-            if (hasCraftingTable) {
+            if (hasCraftingTable && !CACHED_HAS_CRAFTING_TABLE.contains(uuid)) {
                 CACHED_HAS_CRAFTING_TABLE.add(uuid);
             } else {
                 CACHED_HAS_CRAFTING_TABLE.remove(uuid);
