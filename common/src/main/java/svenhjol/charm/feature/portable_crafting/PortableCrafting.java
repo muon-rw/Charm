@@ -28,7 +28,7 @@ import java.util.function.BiPredicate;
 public class PortableCrafting extends CharmFeature implements IChecksInventoryTag {
     private static final ResourceLocation ADVANCEMENT = Charm.makeId("used_portable_crafting_table");
     private static final Component CONTAINER_LABEL = TextHelper.translatable("container.charm.portable_crafting_table");
-    private static final int CHECK_TICKS_FAST = 10;
+    private static final int CHECK_TICKS_FAST = 5;
     private static final List<UUID> CACHED_HAS_CRAFTING_TABLE = new ArrayList<>();
     public static TagKey<Item> CRAFTING_TABLES;
 
@@ -43,7 +43,7 @@ public class PortableCrafting extends CharmFeature implements IChecksInventoryTa
     public static boolean hasCraftingTable(Player player) {
         var uuid = player.getUUID();
 
-        if (!CACHED_HAS_CRAFTING_TABLE.contains(uuid)) {
+        if (!CACHED_HAS_CRAFTING_TABLE.contains(uuid) || player.level.getGameTime() % CHECK_TICKS_FAST == 0) {
             var hasCraftingTable = CharmApi.getProviders(IChecksInventoryTag.class).stream()
                 .flatMap(s -> s.getInventoryTagChecks().stream())
                 .anyMatch(check -> check.test(player, CRAFTING_TABLES));
