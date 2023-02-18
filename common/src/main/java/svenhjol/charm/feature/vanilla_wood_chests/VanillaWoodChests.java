@@ -19,6 +19,7 @@ public class VanillaWoodChests extends CharmFeature {
 
         VariantChestBoats.registerChestBoat(() -> Items.ACACIA_BOAT, () -> Items.ACACIA_CHEST_BOAT);
         VariantChestBoats.registerChestBoat(() -> Items.BIRCH_BOAT, () -> Items.BIRCH_CHEST_BOAT);
+        VariantChestBoats.registerChestBoat(() -> Items.CHERRY_BOAT, () -> Items.CHERRY_CHEST_BOAT);
         VariantChestBoats.registerChestBoat(() -> Items.DARK_OAK_BOAT, () -> Items.DARK_OAK_CHEST_BOAT);
         VariantChestBoats.registerChestBoat(() -> Items.JUNGLE_BOAT, () -> Items.JUNGLE_CHEST_BOAT);
         VariantChestBoats.registerChestBoat(() -> Items.MANGROVE_BOAT, () -> Items.MANGROVE_CHEST_BOAT);
