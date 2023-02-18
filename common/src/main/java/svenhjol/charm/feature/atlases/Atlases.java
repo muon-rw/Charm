@@ -5,6 +5,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.CartographyTableMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.ResultContainer;
@@ -51,7 +52,7 @@ public class Atlases extends CharmFeature implements IProvidesWandererTrades {
     @Override
     public void register() {
         ITEM = Charm.REGISTRY.item("atlas", () -> new AtlasItem(this));
-        MENU_TYPE = Charm.REGISTRY.menuType("atlas", () -> new MenuType<>(AtlasContainer::new));
+        MENU_TYPE = Charm.REGISTRY.menuType("atlas", () -> new MenuType<>(AtlasContainer::new, FeatureFlags.VANILLA_SET));
         OPEN_SOUND = Charm.REGISTRY.soundEvent("atlas_open");
         CLOSE_SOUND = Charm.REGISTRY.soundEvent("atlas_close");
 

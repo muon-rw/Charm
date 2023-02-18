@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -31,6 +32,7 @@ import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Azalea wood is obtainable from naturally occurring azalea trees or by growing azalea saplings.")
 public class AzaleaWood extends CharmFeature implements IRemovesRecipes {
+    static Supplier<BlockSetType> BLOCK_SET_TYPE;
     static Supplier<WoodType> WOOD_TYPE;
     static Supplier<CharmDoorBlock> DOOR_BLOCK;
     static Supplier<CharmTrapdoorBlock> TRAPDOOR_BLOCK;
@@ -42,6 +44,7 @@ public class AzaleaWood extends CharmFeature implements IRemovesRecipes {
         var values = Boat.Type.values(); // TODO: Hack to inject the boat type enums early, fixme.
         var registry = Charm.REGISTRY;
 
+        BLOCK_SET_TYPE = registry.blockSetType(material);
         WOOD_TYPE = Wood.registerWoodType(registry, material);
         DOOR_BLOCK = Wood.registerDoor(registry, this, material).getFirst();
         TRAPDOOR_BLOCK = Wood.registerTrapdoor(registry, this, material).getFirst();

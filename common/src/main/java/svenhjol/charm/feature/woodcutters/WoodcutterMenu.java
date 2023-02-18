@@ -145,7 +145,7 @@ public class WoodcutterMenu extends AbstractContainerMenu {
         if (!this.availableRecipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipe.get())) {
             var woodcuttingRecipe = this.availableRecipes.get(this.selectedRecipe.get());
             this.output.setRecipeUsed(woodcuttingRecipe);
-            this.outputSlot.set(woodcuttingRecipe.assemble(this.input));
+            this.outputSlot.set(woodcuttingRecipe.assemble(this.input, this.level.registryAccess()));
         } else {
             this.outputSlot.set(ItemStack.EMPTY);
         }

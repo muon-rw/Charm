@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import svenhjol.charm.Charm;
-import svenhjol.charm_api.iface.IVariantMaterial;
+import svenhjol.charm_api.iface.IVariantWoodMaterial;
 import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
 
@@ -29,7 +29,7 @@ public class VariantChestBoats extends CharmFeature {
         VariantChestBoats.CHEST_BOAT_MAP_SUPPLIER.put(boatItem, chestBoatItem);
     }
 
-    public static void registerChestLayerColor(IVariantMaterial material) {
+    public static void registerChestLayerColor(IVariantWoodMaterial material) {
         VariantChestBoats.CHEST_LAYER_COLORS.put(material.getSerializedName(), material.chestBoatColor());
     }
 

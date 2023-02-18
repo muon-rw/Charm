@@ -1,5 +1,6 @@
 package svenhjol.charm.feature.variant_chest_boats;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
@@ -50,7 +51,7 @@ public class VariantChestBoatRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container) {
+    public ItemStack assemble(CraftingContainer container, RegistryAccess registryAccess) {
         var target = ItemStack.EMPTY;
         var chest = Blocks.CHEST;
         var someDefault = new ItemStack(Items.OAK_CHEST_BOAT);

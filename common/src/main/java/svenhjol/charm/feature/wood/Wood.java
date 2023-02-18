@@ -23,6 +23,7 @@ import svenhjol.charm.feature.variant_chest_boats.VariantChestBoats;
 import svenhjol.charm.feature.variant_chests.VariantChests;
 import svenhjol.charm.feature.variant_ladders.VariantLadders;
 import svenhjol.charm_api.iface.IVariantMaterial;
+import svenhjol.charm_api.iface.IVariantWoodMaterial;
 import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.base.block.*;
@@ -64,7 +65,7 @@ public class Wood extends CharmFeature {
         }
     }
 
-    public static Pair<Supplier<CharmBoatItem>, Supplier<CharmBoatItem>> registerBoat(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmBoatItem>, Supplier<CharmBoatItem>> registerBoat(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var woodName = material.getSerializedName();
         var boatType = Boat.Type.valueOf((feature.getModId() + "_" + woodName).toUpperCase(Locale.ROOT));
         var boat = registry.item(woodName + "_boat", () -> new CharmBoatItem(feature, false, boatType));
@@ -83,7 +84,7 @@ public class Wood extends CharmFeature {
         return Pair.of(boat, chestBoat);
     }
 
-    public static Pair<Supplier<CharmWoodButtonBlock>, Supplier<CharmWoodButtonBlock.BlockItem>> registerButton(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmWoodButtonBlock>, Supplier<CharmWoodButtonBlock.BlockItem>> registerButton(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_button";
         var button = registry.block(id, () -> new CharmWoodButtonBlock(feature, material));
         var buttonItem = registry.item(id, () -> new CharmWoodButtonBlock.BlockItem(feature, button));
@@ -93,7 +94,7 @@ public class Wood extends CharmFeature {
         return Pair.of(button, buttonItem);
     }
 
-    public static Pair<Supplier<CharmDoorBlock>, Supplier<CharmDoorBlock.BlockItem>> registerDoor(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmDoorBlock>, Supplier<CharmDoorBlock.BlockItem>> registerDoor(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_door";
         var door = registry.block(id, () -> new CharmDoorBlock(feature, material));
         var doorItem = registry.item(id, () -> new CharmDoorBlock.BlockItem(feature, door));
@@ -103,7 +104,7 @@ public class Wood extends CharmFeature {
         return Pair.of(door, doorItem);
     }
 
-    public static Pair<Supplier<CharmFenceBlock>, Supplier<CharmFenceBlock.BlockItem>> registerFence(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmFenceBlock>, Supplier<CharmFenceBlock.BlockItem>> registerFence(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_fence";
         var fence = registry.block(id, () -> new CharmFenceBlock(feature, material));
         var fenceItem = registry.item(id, () -> new CharmFenceBlock.BlockItem(feature, fence));
@@ -114,7 +115,7 @@ public class Wood extends CharmFeature {
         return Pair.of(fence, fenceItem);
     }
 
-    public static Pair<Supplier<CharmFenceGateBlock>, Supplier<CharmFenceGateBlock.BlockItem>> registerGate(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmFenceGateBlock>, Supplier<CharmFenceGateBlock.BlockItem>> registerGate(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_fence_gate";
         var gate = registry.block(id, () -> new CharmFenceGateBlock(feature, material));
         var gateItem = registry.item(id, () -> new CharmFenceGateBlock.BlockItem(feature, gate));
@@ -177,7 +178,7 @@ public class Wood extends CharmFeature {
         return map;
     }
 
-    public static Pair<Supplier<CharmPressurePlateBlock>, Supplier<CharmPressurePlateBlock.BlockItem>> registerPressurePlate(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmPressurePlateBlock>, Supplier<CharmPressurePlateBlock.BlockItem>> registerPressurePlate(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_pressure_plate";
         var pressurePlate = registry.block(id, () -> new CharmPressurePlateBlock(feature, material));
         var pressurePlateItem = registry.item(id, () -> new CharmPressurePlateBlock.BlockItem(feature, pressurePlate));
@@ -260,7 +261,7 @@ public class Wood extends CharmFeature {
         return map;
     }
 
-    public static Pair<Supplier<CharmTrapdoorBlock>, Supplier<CharmTrapdoorBlock.BlockItem>> registerTrapdoor(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmTrapdoorBlock>, Supplier<CharmTrapdoorBlock.BlockItem>> registerTrapdoor(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_trapdoor";
         var trapdoor = registry.block(id, () -> new CharmTrapdoorBlock(feature, material));
         var trapdoorItem = registry.item(id, () -> new CharmTrapdoorBlock.BlockItem(feature, trapdoor));
@@ -290,9 +291,9 @@ public class Wood extends CharmFeature {
         VariantLadders.registerLadder(registry, material);
     }
 
-    public static Supplier<WoodType> registerWoodType(IRegistry registry, IVariantMaterial material) {
+    public static Supplier<WoodType> registerWoodType(IRegistry registry, IVariantWoodMaterial material) {
         var name = material.getSerializedName();
-        var woodType = registry.woodType(name);
+        var woodType = registry.woodType(name, material);
         WOOD_TYPES.add(woodType);
         WOOD_NAMES.add(name);
         return woodType;

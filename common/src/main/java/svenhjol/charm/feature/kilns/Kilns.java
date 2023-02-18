@@ -1,6 +1,7 @@
 package svenhjol.charm.feature.kilns;
 
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
 import net.minecraft.world.item.BlockItem;
@@ -34,7 +35,7 @@ public class Kilns extends CharmFeature {
         BLOCK_ENTITY = Charm.REGISTRY.blockEntity(BLOCK_ID, () -> KilnBlockEntity::new, List.of(BLOCK));
 
         RECIPE_BOOK_TYPE = Charm.REGISTRY.recipeBookType(BLOCK_ID);
-        MENU = Charm.REGISTRY.menuType(BLOCK_ID, () -> new MenuType<>(KilnMenu::new));
+        MENU = Charm.REGISTRY.menuType(BLOCK_ID, () -> new MenuType<>(KilnMenu::new, FeatureFlags.VANILLA_SET));
 
         BAKE_SOUND = Charm.REGISTRY.soundEvent("kiln_bake");
     }

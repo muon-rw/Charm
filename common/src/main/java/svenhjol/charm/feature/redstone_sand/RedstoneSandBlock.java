@@ -11,6 +11,7 @@ import svenhjol.charm.Charm;
 import svenhjol.charm_core.base.CharmBlockItem;
 import svenhjol.charm_core.base.CharmFeature;
 
+@SuppressWarnings("deprecation")
 public class RedstoneSandBlock extends FallingBlock {
     public static CharmFeature getParent() {
         return Charm.LOADER.get(RedstoneSand.class).orElseThrow();

@@ -1,12 +1,12 @@
 package svenhjol.charm.feature.player_pressure_plates;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import svenhjol.charm_core.base.CharmBlockItem;
@@ -24,8 +24,7 @@ public class PlayerPressurePlateBlock extends PressurePlateBlock {
             .requiresCorrectToolForDrops()
             .noCollission()
             .strength(2F, 1200F),
-            SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF,
-            SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON);
+            BlockSetType.STONE);
 
         this.feature = feature;
     }

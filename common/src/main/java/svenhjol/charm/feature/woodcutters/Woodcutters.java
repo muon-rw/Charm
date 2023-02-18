@@ -3,6 +3,7 @@ package svenhjol.charm.feature.woodcutters;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
 import svenhjol.charm.Charm;
@@ -38,7 +39,7 @@ public class Woodcutters extends CharmFeature {
 
         RECIPE_BOOK_TYPE = Charm.REGISTRY.recipeBookType(BLOCK_ID);
         MENU = Charm.REGISTRY.menuType(BLOCK_ID,
-            () -> new MenuType<>(WoodcutterMenu::new));
+            () -> new MenuType<>(WoodcutterMenu::new, FeatureFlags.VANILLA_SET));
 
         USE_SOUND = Charm.REGISTRY.soundEvent("woodcutter_use");
     }
