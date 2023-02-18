@@ -2,7 +2,7 @@
     "template": {
         "parent": "builtin/entity",
         "textures": {
-            "particle": "minecraft:block/VARIANT_WOOD_planks"
+            "particle": "NAMESPACE:block/VARIANT_WOOD_planks"
         },
         "display": {
             "gui": {
