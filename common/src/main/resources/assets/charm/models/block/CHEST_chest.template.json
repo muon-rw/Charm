@@ -1,7 +1,7 @@
 {
   "template": {
     "textures": {
-      "particle": "WOOD_MOD:block/WOOD_planks"
+      "particle": "WOOD_SRC:block/WOOD_NAME_planks"
     }
   },
   "variants": "chest"

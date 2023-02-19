@@ -25,7 +25,7 @@
                     }
                   }
                 ],
-                "name": "charm:VARIANT_WOOD_bookshelf"
+                "name": "MOD:BOOKSHELF_bookshelf"
               },
               {
                 "type": "minecraft:item",
@@ -46,5 +46,5 @@
       }
     ]
   },
-  "variants": "variant_wood"
+  "variants": "bookshelf"
 }
