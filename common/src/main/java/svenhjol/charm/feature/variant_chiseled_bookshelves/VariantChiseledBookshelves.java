@@ -20,7 +20,7 @@ public class VariantChiseledBookshelves extends CharmFeature {
     static final Map<IVariantMaterial, Supplier<VariantChiseledBookshelfBlock.BlockItem>> CHISELED_BOOKSHELF_BLOCK_ITEMS = new HashMap<>();
 
     public static void registerChiseledBookshelf(IRegistry registry, IVariantWoodMaterial material) {
-        var id = material.getSerializedName() + "_chiseled_bookshelf";
+        var id = "chiseled_" + material.getSerializedName() + "_bookshelf";
         var block = registry.block(id, () -> new VariantChiseledBookshelfBlock(material));
         var blockItem = registry.item(id, () -> new BlockItem(block));
 

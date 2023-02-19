@@ -3,7 +3,7 @@
     "multipart": [
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf",
           "uvlock": true,
           "y": 270
         },
@@ -13,7 +13,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_left",
           "y": 270
         },
         "when": {
@@ -29,7 +29,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_left",
           "y": 270
         },
         "when": {
@@ -45,7 +45,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_right",
           "y": 270
         },
         "when": {
@@ -61,7 +61,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_right",
           "y": 270
         },
         "when": {
@@ -77,7 +77,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_left",
           "y": 270
         },
         "when": {
@@ -93,7 +93,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_left",
           "y": 270
         },
         "when": {
@@ -109,7 +109,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_mid",
           "y": 270
         },
         "when": {
@@ -125,7 +125,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_mid",
           "y": 270
         },
         "when": {
@@ -141,7 +141,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_right",
           "y": 270
         },
         "when": {
@@ -157,7 +157,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_right",
           "y": 270
         },
         "when": {
@@ -173,7 +173,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_mid",
           "y": 270
         },
         "when": {
@@ -189,7 +189,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_mid",
           "y": 270
         },
         "when": {
@@ -205,7 +205,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf",
           "uvlock": true,
           "y": 0
         },
@@ -215,7 +215,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_left",
           "y": 0
         },
         "when": {
@@ -231,7 +231,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_left",
           "y": 0
         },
         "when": {
@@ -247,7 +247,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_right",
           "y": 0
         },
         "when": {
@@ -263,7 +263,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_right",
           "y": 0
         },
         "when": {
@@ -279,7 +279,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_left",
           "y": 0
         },
         "when": {
@@ -295,7 +295,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_left",
           "y": 0
         },
         "when": {
@@ -311,7 +311,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_mid",
           "y": 0
         },
         "when": {
@@ -327,7 +327,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_mid",
           "y": 0
         },
         "when": {
@@ -343,7 +343,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_right",
           "y": 0
         },
         "when": {
@@ -359,7 +359,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_right",
           "y": 0
         },
         "when": {
@@ -375,7 +375,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_mid",
           "y": 0
         },
         "when": {
@@ -391,7 +391,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_mid",
           "y": 0
         },
         "when": {
@@ -407,7 +407,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf",
           "uvlock": true,
           "y": 90
         },
@@ -417,7 +417,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_left",
           "y": 90
         },
         "when": {
@@ -433,7 +433,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_left",
           "y": 90
         },
         "when": {
@@ -449,7 +449,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_right",
           "y": 90
         },
         "when": {
@@ -465,7 +465,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_right",
           "y": 90
         },
         "when": {
@@ -481,7 +481,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_left",
           "y": 90
         },
         "when": {
@@ -497,7 +497,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_left",
           "y": 90
         },
         "when": {
@@ -513,7 +513,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_mid",
           "y": 90
         },
         "when": {
@@ -529,7 +529,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_mid",
           "y": 90
         },
         "when": {
@@ -545,7 +545,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_right",
           "y": 90
         },
         "when": {
@@ -561,7 +561,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_right",
           "y": 90
         },
         "when": {
@@ -577,7 +577,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_mid",
           "y": 90
         },
         "when": {
@@ -593,7 +593,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_mid",
           "y": 90
         },
         "when": {
@@ -609,7 +609,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf",
           "uvlock": true,
           "y": 180
         },
@@ -619,7 +619,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_left",
           "y": 180
         },
         "when": {
@@ -635,7 +635,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_left",
           "y": 180
         },
         "when": {
@@ -651,7 +651,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_right",
           "y": 180
         },
         "when": {
@@ -667,7 +667,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_right",
           "y": 180
         },
         "when": {
@@ -683,7 +683,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_left",
           "y": 180
         },
         "when": {
@@ -699,7 +699,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_left",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_left",
           "y": 180
         },
         "when": {
@@ -715,7 +715,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_mid",
           "y": 180
         },
         "when": {
@@ -731,7 +731,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_mid",
           "y": 180
         },
         "when": {
@@ -747,7 +747,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_top_right",
           "y": 180
         },
         "when": {
@@ -763,7 +763,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_top_right",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_top_right",
           "y": 180
         },
         "when": {
@@ -779,7 +779,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_occupied_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_occupied_slot_bottom_mid",
           "y": 180
         },
         "when": {
@@ -795,7 +795,7 @@
       },
       {
         "apply": {
-          "model": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty_slot_bottom_mid",
+          "model": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty_slot_bottom_mid",
           "y": 180
         },
         "when": {

@@ -2,7 +2,7 @@
   "template": {
     "parent": "minecraft:block/template_chiseled_bookshelf_slot_bottom_right",
     "textures": {
-      "texture": "MOD:block/CHISELED_BOOKSHELF_chiseled_bookshelf_empty"
+      "texture": "MOD:block/chiseled_CHISELED_BOOKSHELF_bookshelf_empty"
     }
   },
   "variants": "chiseled_bookshelf"
