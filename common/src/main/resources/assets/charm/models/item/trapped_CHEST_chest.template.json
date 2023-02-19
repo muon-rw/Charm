@@ -2,5 +2,5 @@
   "template": {
     "parent": "item/chest"
   },
-  "variants": "vanilla_wood"
+  "variants": "chest"
 }

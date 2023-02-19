@@ -21,6 +21,7 @@ import svenhjol.charm.feature.variant_barrels.VariantBarrels;
 import svenhjol.charm.feature.variant_bookshelves.VariantBookshelves;
 import svenhjol.charm.feature.variant_chest_boats.VariantChestBoats;
 import svenhjol.charm.feature.variant_chests.VariantChests;
+import svenhjol.charm.feature.variant_chiseled_bookshelves.VariantChiseledBookshelves;
 import svenhjol.charm.feature.variant_ladders.VariantLadders;
 import svenhjol.charm_api.iface.IVariantWoodMaterial;
 import svenhjol.charm_core.annotation.Feature;
@@ -306,6 +307,10 @@ public class Wood extends CharmFeature {
 
     public static void registerBookshelf(IRegistry registry, IVariantWoodMaterial material) {
         VariantBookshelves.registerBookshelf(registry, material);
+    }
+
+    public static void registerChiseledBookshelf(IRegistry registry, IVariantWoodMaterial material) {
+        VariantChiseledBookshelves.registerChiseledBookshelf(registry, material);
     }
 
     public static void registerChest(IRegistry registry, IVariantWoodMaterial material) {

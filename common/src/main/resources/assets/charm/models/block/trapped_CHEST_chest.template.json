@@ -1,0 +1,8 @@
+{
+  "template": {
+    "textures": {
+      "particle": "MOD:block/CHEST_planks"
+    }
+  },
+  "variants": "chest"
+}

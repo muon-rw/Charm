@@ -1,0 +1,8 @@
+{
+  "template": {
+    "textures": {
+      "particle": "WOOD_MOD:block/WOOD_planks"
+    }
+  },
+  "variants": "chest"
+}

@@ -23,9 +23,9 @@
     "charm:trapped_mangrove_chest",
     "charm:trapped_oak_chest",
     "charm:trapped_spruce_chest",
-    "charm:trapped_warped_chest"
+    "charm:trapped_warped_chest",
     "charm:warped_chest",
     "minecraft:chest",
-    "minecraft:trapped_chest",
+    "minecraft:trapped_chest"
   ]
 }

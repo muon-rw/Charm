@@ -2,7 +2,7 @@
     "template": {
         "parent": "builtin/entity",
         "textures": {
-            "particle": "NAMESPACE:block/VARIANT_WOOD_planks"
+            "particle": "WOOD_MOD:block/WOOD_planks"
         },
         "display": {
             "gui": {
@@ -37,5 +37,5 @@
             }
         }
     },
-    "variants": "variant_wood"
+    "variants": "chest"
 }

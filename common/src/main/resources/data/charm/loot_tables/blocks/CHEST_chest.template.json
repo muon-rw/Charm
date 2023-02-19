@@ -13,7 +13,7 @@
                 "source": "block_entity"
               }
             ],
-            "name": "charm:VANILLA_WOOD_chest"
+            "name": "MOD:CHEST_chest"
           }
         ],
         "conditions": [
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "variants": "vanilla_wood"
+  "variants": "chest"
 }
