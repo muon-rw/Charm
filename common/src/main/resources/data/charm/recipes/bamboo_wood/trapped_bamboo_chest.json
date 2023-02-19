@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "charm:azalea_chest"
+      "item": "charm:bamboo_chest"
     },
     {
       "item": "minecraft:tripwire_hook"
     }
   ],
   "result": {
-    "item": "charm:azalea_trapped_chest"
+    "item": "charm:trapped_bamboo_chest"
   }
 }
