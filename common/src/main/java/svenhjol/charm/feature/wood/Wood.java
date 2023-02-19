@@ -22,12 +22,12 @@ import svenhjol.charm.feature.variant_bookshelves.VariantBookshelves;
 import svenhjol.charm.feature.variant_chest_boats.VariantChestBoats;
 import svenhjol.charm.feature.variant_chests.VariantChests;
 import svenhjol.charm.feature.variant_ladders.VariantLadders;
-import svenhjol.charm_api.iface.IVariantMaterial;
 import svenhjol.charm_api.iface.IVariantWoodMaterial;
 import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.base.block.*;
 import svenhjol.charm_core.base.item.CharmBoatItem;
+import svenhjol.charm_core.base.item.CharmHangingSignItem;
 import svenhjol.charm_core.base.item.CharmSignItem;
 import svenhjol.charm_core.iface.IRegistry;
 import svenhjol.charm_core.mixin.accessor.BlockItemAccessor;
@@ -44,6 +44,7 @@ public class Wood extends CharmFeature {
     private static final Map<Boat.Type, Supplier<CharmBoatItem>> TYPE_TO_BOAT = new HashMap<>();
     private static final Map<Boat.Type, Supplier<CharmBoatItem>> TYPE_TO_CHEST_BOAT = new HashMap<>();
     private static final List<Supplier<CharmSignItem>> SIGN_ITEMS = new ArrayList<>();
+    private static final List<Supplier<CharmHangingSignItem>> HANGING_SIGN_ITEMS = new ArrayList<>();
     static final Map<String, Map<String, Supplier<? extends Item>>> CREATIVE_TAB_ITEMS = new HashMap<>();
     static final List<Supplier<WoodType>> WOOD_TYPES = new ArrayList<>();
     static final List<String> WOOD_NAMES = new ArrayList<>();
@@ -57,8 +58,13 @@ public class Wood extends CharmFeature {
             planks.ifPresent(block -> entry.getKey().planks = block);
         }
 
-        // Sign blocks can't be set early so resolve them here.
+        // Sign and hanging sign blocks can't be set early so resolve them here.
         for (var supplier : SIGN_ITEMS) {
+            var sign = supplier.get();
+            ((StandingAndWallBlockItemAccessor)sign).setWallBlock(sign.getWallSignBlock().get());
+            ((BlockItemAccessor)sign).setBlock(sign.getSignBlock().get());
+        }
+        for (var supplier : HANGING_SIGN_ITEMS) {
             var sign = supplier.get();
             ((StandingAndWallBlockItemAccessor)sign).setWallBlock(sign.getWallSignBlock().get());
             ((BlockItemAccessor)sign).setBlock(sign.getSignBlock().get());
@@ -126,7 +132,7 @@ public class Wood extends CharmFeature {
         return Pair.of(gate, gateItem);
     }
 
-    public static Pair<Supplier<CharmLeavesBlock>, Supplier<CharmLeavesBlock.BlockItem>> registerLeaves(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmLeavesBlock>, Supplier<CharmLeavesBlock.BlockItem>> registerLeaves(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_leaves";
         var leaves = registry.block(id, () -> new CharmLeavesBlock(feature, material));
         var leavesItem = registry.item(id, () -> new CharmLeavesBlock.BlockItem(feature, leaves));
@@ -137,7 +143,7 @@ public class Wood extends CharmFeature {
         return Pair.of(leaves, leavesItem);
     }
 
-    public static Map<String, Pair<Supplier<CharmLogBlock>, Supplier<CharmLogBlock.BlockItem>>> registerLog(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Map<String, Pair<Supplier<CharmLogBlock>, Supplier<CharmLogBlock.BlockItem>>> registerLog(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var logId = material.getSerializedName() + "_log";
         var woodId = material.getSerializedName() + "_wood";
         var strippedLogId = "stripped_" + material.getSerializedName() + "_log";
@@ -188,7 +194,7 @@ public class Wood extends CharmFeature {
         return Pair.of(pressurePlate, pressurePlateItem);
     }
 
-    public static Map<String, Pair<Supplier<? extends Block>, Supplier<? extends BlockItem>>> registerPlanksSlabsAndStairs(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Map<String, Pair<Supplier<? extends Block>, Supplier<? extends BlockItem>>> registerPlanksSlabsAndStairs(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var planksId = material.getSerializedName() + "_planks";
         var slabId = material.getSerializedName() + "_slab";
         var stairsId = material.getSerializedName() + "_stairs";
@@ -220,7 +226,7 @@ public class Wood extends CharmFeature {
         return map;
     }
 
-    public static Pair<Supplier<CharmSaplingBlock>, Supplier<CharmSaplingBlock.BlockItem>> registerSapling(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Pair<Supplier<CharmSaplingBlock>, Supplier<CharmSaplingBlock.BlockItem>> registerSapling(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var saplingId = material.getSerializedName() + "_sapling";
         var treeId = material.getSerializedName() + "_tree";
         var key = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(feature.getModId(), treeId));
@@ -238,7 +244,7 @@ public class Wood extends CharmFeature {
         return Pair.of(sapling, saplingItem);
     }
 
-    public static Map<String, Pair<Supplier<? extends SignBlock>, Supplier<? extends BlockItem>>> registerSign(IRegistry registry, CharmFeature feature, IVariantMaterial material) {
+    public static Map<String, Pair<Supplier<? extends SignBlock>, Supplier<? extends BlockItem>>> registerSign(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var signId = material.getSerializedName() + "_sign";
         var wallSignId = material.getSerializedName() + "_wall_sign";
         var woodType = getWoodType(feature, material);
@@ -261,6 +267,29 @@ public class Wood extends CharmFeature {
         return map;
     }
 
+    public static Map<String, Pair<Supplier<? extends SignBlock>, Supplier<? extends BlockItem>>> registerHangingSign(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
+        var signId = material.getSerializedName() + "_hanging_sign";
+        var wallSignId = material.getSerializedName() + "_wall_hanging_sign";
+        var woodType = getWoodType(feature, material);
+
+        var sign = registry.block(signId, () -> new CharmCeilingHangingSignBlock(feature, material, woodType));
+        var wallSign = registry.wallHangingSignBlock(wallSignId, feature, material, sign, woodType);
+        var signItem = registry.item(signId, () -> new CharmHangingSignItem(feature, material, sign, wallSign));
+
+        HANGING_SIGN_ITEMS.add(signItem);
+
+        Map<String, Pair<Supplier<? extends SignBlock>, Supplier<? extends BlockItem>>> map = new HashMap<>();
+        map.put(signId, Pair.of(sign, signItem));
+        map.put(wallSignId, Pair.of(wallSign, signItem));
+
+        // Associate with the hanging sign block entity.
+        registry.blockEntityBlocks(() -> BlockEntityType.HANGING_SIGN, List.of(sign, wallSign));
+
+        addCreativeTabItem(feature.getModId(), "hanging_sign", signItem);
+
+        return map;
+    }
+
     public static Pair<Supplier<CharmTrapdoorBlock>, Supplier<CharmTrapdoorBlock.BlockItem>> registerTrapdoor(IRegistry registry, CharmFeature feature, IVariantWoodMaterial material) {
         var id = material.getSerializedName() + "_trapdoor";
         var trapdoor = registry.block(id, () -> new CharmTrapdoorBlock(feature, material));
@@ -271,23 +300,23 @@ public class Wood extends CharmFeature {
         return Pair.of(trapdoor, trapdoorItem);
     }
 
-    public static void registerBarrel(IRegistry registry, IVariantMaterial material) {
+    public static void registerBarrel(IRegistry registry, IVariantWoodMaterial material) {
         VariantBarrels.registerBarrel(registry, material);
     }
 
-    public static void registerBookshelf(IRegistry registry, IVariantMaterial material) {
+    public static void registerBookshelf(IRegistry registry, IVariantWoodMaterial material) {
         VariantBookshelves.registerBookshelf(registry, material);
     }
 
-    public static void registerChest(IRegistry registry, IVariantMaterial material) {
+    public static void registerChest(IRegistry registry, IVariantWoodMaterial material) {
         VariantChests.registerChest(registry, material);
     }
 
-    public static void registerTrappedChest(IRegistry registry, IVariantMaterial material) {
+    public static void registerTrappedChest(IRegistry registry, IVariantWoodMaterial material) {
         VariantChests.registerTrappedChest(registry, material);
     }
 
-    public static void registerLadder(IRegistry registry, IVariantMaterial material) {
+    public static void registerLadder(IRegistry registry, IVariantWoodMaterial material) {
         VariantLadders.registerLadder(registry, material);
     }
 
@@ -309,7 +338,7 @@ public class Wood extends CharmFeature {
         return TYPE_TO_CHEST_BOAT.getOrDefault(boatType, () -> null).get();
     }
 
-    public static WoodType getWoodType(CharmFeature feature, IVariantMaterial material) {
+    public static WoodType getWoodType(CharmFeature feature, IVariantWoodMaterial material) {
         return getWoodTypeByName(feature.getModId() + "_" + material.getSerializedName());
     }
 

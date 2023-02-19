@@ -57,7 +57,8 @@ public class AzaleaWood extends CharmFeature implements IRemovesRecipes {
         Wood.registerGate(registry, this, material);
 
         Wood.registerPlanksSlabsAndStairs(registry, this, material);
-        Wood.registerSign(registry, this, material).get("azalea_sign");
+        Wood.registerSign(registry, this, material);
+        Wood.registerHangingSign(registry, this, material);
         Wood.registerPressurePlate(registry, this, material);
 
         Wood.registerBarrel(registry, material);

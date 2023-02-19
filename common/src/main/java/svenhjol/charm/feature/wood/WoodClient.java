@@ -53,6 +53,10 @@ public class WoodClient extends CharmFeature {
                     item -> CharmClient.REGISTRY.itemTab(item, CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.ACACIA_SIGN)
                 );
 
+                Optional.ofNullable(items.get("hanging_sign")).ifPresent(
+                    item -> CharmClient.REGISTRY.itemTab(item, CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.ACACIA_HANGING_SIGN)
+                );
+
                 Optional.ofNullable(items.get("chest_boat")).ifPresent(
                     item -> CharmClient.REGISTRY.itemTab(item, CreativeModeTabs.TOOLS_AND_UTILITIES, Items.ACACIA_CHEST_BOAT)
                 );
