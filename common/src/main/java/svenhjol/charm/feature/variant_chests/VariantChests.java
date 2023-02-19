@@ -50,7 +50,7 @@ public class VariantChests extends CharmFeature {
     }
 
     public static void registerTrappedChest(IRegistry registry, IVariantMaterial material) {
-        var id = material.getSerializedName() + "_trapped_chest";
+        var id = "trapped_" + material.getSerializedName() + "_chest";
 
         var block = registry.block(id, () -> new VariantTrappedChestBlock(material));
         var blockItem = registry.item(id, () -> new BlockItem(block));

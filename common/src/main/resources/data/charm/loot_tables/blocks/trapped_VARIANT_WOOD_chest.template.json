@@ -13,7 +13,7 @@
                 "source": "block_entity"
               }
             ],
-            "name": "charm:VANILLA_WOOD_trapped_chest"
+            "name": "charm:trapped_VARIANT_WOOD_chest"
           }
         ],
         "conditions": [
@@ -24,5 +24,5 @@
       }
     ]
   },
-  "variants": "vanilla_wood"
+  "variants": "variant_wood"
 }
