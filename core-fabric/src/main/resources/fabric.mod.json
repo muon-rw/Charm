@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "charm_core",
+  "version": "${version}", 
+
+  "name": "Charm core",
+  "description": "Charm core.",
+  "authors": [
+    "svenhjol"
+  ],
+
+  "license": "MIT",
+  "environment": "*",
+  "mixins": [
+    "charm_core.mixins.json",
+    "charm_core.fabric.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "svenhjol.charm_core.fabric.FabricModInitializer"
+    ],
+    "client": [
+      "svenhjol.charm_core.fabric.FabricClientModInitializer"
+    ]
+  },
+  "accessWidener": "charm_core.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "charm_api": "5.0.0",
+    "minecraft": "*",
+    "java": ">=17"
+  }
+}

@@ -1,0 +1,25 @@
+modLoader="javafml"
+loaderVersion="[44,)"
+license="MIT"
+[[mods]]
+modId="charm_api"
+version="${version}"
+displayName="Charm API"
+credits=""
+authors="svenhjol"
+description='''
+Charm API.
+'''
+logoFile="icon.png"
+[[dependencies.charm_api]]
+    modId="forge"
+    mandatory=true
+    versionRange="[44,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.charm_api]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.3,1.20)"
+    ordering="NONE"
+    side="BOTH"

@@ -1,0 +1,26 @@
+accessWidener v1 named
+
+## Classes and Interfaces
+accessible class net/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration
+accessible class net/minecraft/world/item/crafting/SingleItemRecipe$Serializer$SingleItemMaker
+accessible class net/minecraft/world/level/block/state/properties/NoteBlockInstrument$Type
+
+## Constructors
+accessible method net/minecraft/sounds/SoundEvent <init> (Lnet/minecraft/resources/ResourceLocation;FZ)V
+accessible method net/minecraft/world/level/block/state/properties/WoodType <init> (Ljava/lang/String;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
+accessible method net/minecraft/world/item/crafting/SingleItemRecipe$Serializer <init> (Lnet/minecraft/world/item/crafting/SingleItemRecipe$Serializer$SingleItemMaker;)V
+accessible method net/minecraft/world/level/block/state/properties/NoteBlockInstrument$Type <init> (Ljava/lang/String;I)V
+
+## Methods
+accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
+accessible method net/minecraft/world/level/block/state/properties/BlockSetType register (Lnet/minecraft/world/level/block/state/properties/BlockSetType;)Lnet/minecraft/world/level/block/state/properties/BlockSetType;
+
+## Fields
+accessible field net/minecraft/world/entity/vehicle/Boat$Type planks Lnet/minecraft/world/level/block/Block;
+mutable    field net/minecraft/world/entity/vehicle/Boat$Type planks Lnet/minecraft/world/level/block/Block;
+
+accessible field net/minecraft/world/level/block/state/properties/NoteBlockInstrument soundEvent Lnet/minecraft/core/Holder;
+mutable    field net/minecraft/world/level/block/state/properties/NoteBlockInstrument soundEvent Lnet/minecraft/core/Holder;
+
+accessible field net/minecraft/world/level/block/state/properties/NoteBlockInstrument type Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument$Type;
+mutable    field net/minecraft/world/level/block/state/properties/NoteBlockInstrument type Lnet/minecraft/world/level/block/state/properties/NoteBlockInstrument$Type;

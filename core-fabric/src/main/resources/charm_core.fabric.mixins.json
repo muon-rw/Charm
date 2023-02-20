@@ -1,0 +1,37 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "svenhjol.charm_core.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${refmap_file}",
+  "plugin": "svenhjol.charm_core.mixin.MixinConfigPlugin",
+  "mixins": [
+    "accessor.GiveGiftToHeroAccessor",
+    "accessor.PoiTypesAccessor",
+    "accessor.VillagerProfessionAccessor",
+    "block_break_speed_callback.PlayerMixin",
+    "entity_hurt.LivingEntityMixin",
+    "item_tooltip_image.ItemStackMixin",
+    "player_login_callback.PlayerListMixin",
+    "player_tick_callback.ServerPlayerMixin",
+    "recipe_book.RecipeBookTypeMixin",
+    "villager_name.VillagerMixin"
+  ],
+  "client": [
+    "accessor.OptionsAccessor",
+    "mouse_scroll.MouseHandlerMixin",
+    "particle_engine.ParticleEngineMixin",
+    "play_sound_callback.SoundEngineMixin",
+    "player_tick_callback.LocalPlayerMixin",
+    "recipe_book.ClientRecipeBookMixin",
+    "recipe_book.RecipeBookCategoriesMixin",
+    "recipe_book.RecipeBookLookupMixin",
+    "render_held_item_callback.ItemInHandRendererMixin",
+    "render_screen_callback.AbstractContainerScreenMixin",
+    "render_tooltip_callback.ScreenMixin",
+    "setup_screen_callback.ScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

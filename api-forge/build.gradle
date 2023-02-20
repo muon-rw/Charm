@@ -1,0 +1,107 @@
+import groovy.json.JsonBuilder
+import groovy.json.JsonSlurper
+
+buildscript {
+    dependencies {
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7+'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+// Load props from parent gradle.properties.
+def props = new Properties()
+file("common/gradle.properties").withInputStream { props.load(it) }
+
+archivesBaseName = "${props.mod_id}-forge-${props.minecraft_version}"
+version = props.mod_version
+group = props.maven_group
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+minecraft {
+    mappings channel: "${props.mapping_channel}", version: "${props.mapping_version}"
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            source sourceSets.main
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            source sourceSets.main
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "src/main/java"
+            srcDir "common/src/main/java"
+        }
+        resources {
+            srcDir 'src/main/resources'
+            srcDir 'common/src/main/resources'
+        }
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${props.minecraft_version}-${props.forge_version}"
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title"     : props.mod_id,
+            "Specification-Vendor"    : props.mod_id,
+            "Specification-Version"   : "1", // We are version 1 of ourselves
+            "Implementation-Title"    : props.mod_id,
+            "Implementation-Version"  : project.jar.archiveVersion,
+            "Implementation-Vendor"   : props.mod_id,
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+processResources {
+    inputs.property "version", props.mod_version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": props.mod_version
+    }
+
+    duplicatesStrategy(DuplicatesStrategy.INCLUDE)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

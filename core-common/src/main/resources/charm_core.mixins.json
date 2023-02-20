@@ -1,0 +1,39 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "svenhjol.charm_core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "${refmap_file}",
+  "plugin": "svenhjol.charm_core.mixin.MixinConfigPlugin",
+  "mixins": [
+    "accessor.AbstractHorseAccessor",
+    "accessor.AxeItemAccessor",
+    "accessor.BlockEntityTypeAccessor",
+    "accessor.BlockItemAccessor",
+    "accessor.FireBlockAccessor",
+    "accessor.RecipeBookSettingsAccessor",
+    "accessor.RecipeManagerAccessor",
+    "accessor.StandingAndWallBlockItemAccessor",
+    "core.advancement_handler.AdvancementListMixin",
+    "core.recipe_manager_holder.ReloadableServerResourcesMixin",
+    "event.anvil_repair.AnvilMenuMixin",
+    "event.apply_beacon_effects.BeaconBlockEntityMixin",
+    "event.entity_drop.LivingEntityMixin",
+    "event.grindstone.GrindstoneMenuInputMixin",
+    "event.grindstone.GrindstoneMenuMixin",
+    "event.grindstone.GrindstoneMenuOutputMixin",
+    "event.item_drag_drop.ItemMixin",
+    "event.player_inventory_drop.PlayerMixin",
+    "event.tooltip_component.ItemMixin"
+  ],
+  "client": [
+    "accessor.ParticleAccessor",
+    "accessor.RecipeBookCategoriesAccessor",
+    "accessor.ScreenAccessor",
+    "core.client_bundle_tooltip.ClientBundleTooltipMixin",
+    "event.render_block_item.BlockEntityWithoutLevelRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

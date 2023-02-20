@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[44,)"
+license="MIT"
+[[mods]]
+modId="charm_core"
+version="${version}"
+displayName="Charm core"
+credits=""
+authors="svenhjol"
+description='''
+Charm core.
+'''
+logoFile="icon.png"
+[[dependencies.charm_core]]
+    modId="forge"
+    mandatory=true
+    versionRange="[44,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.charm_core]]
+    modId="charm_api"
+    mandatory=true
+    versionRange="[5.0.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.charm_core]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19.3,1.20)"
+    ordering="NONE"
+    side="BOTH"

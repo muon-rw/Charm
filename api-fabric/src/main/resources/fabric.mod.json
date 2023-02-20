@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "charm_api",
+  "version": "${version}", 
+
+  "name": "Charm API",
+  "description": "Charm API.",
+  "authors": [
+    "svenhjol"
+  ],
+
+  "license": "MIT",
+  "environment": "*",
+
+  "depends": {
+    "fabricloader": ">=0.14.14",
+    "minecraft": "*",
+    "java": ">=17"
+  }
+}
