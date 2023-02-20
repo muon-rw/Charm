@@ -2,8 +2,8 @@
   "template": {
     "ambientocclusion": false,
     "textures": {
-      "particle": "charm:block/VANILLA_WOOD_ladder",
-      "texture": "charm:block/VANILLA_WOOD_ladder"
+      "particle": "MOD:block/LADDER_ladder",
+      "texture": "MOD:block/LADDER_ladder"
     },
     "elements": [
       {   "from": [ 0, 0, 15.2 ],
@@ -16,5 +16,5 @@
       }
     ]
   },
-  "variants": "vanilla_wood"
+  "variants": "ladder"
 }

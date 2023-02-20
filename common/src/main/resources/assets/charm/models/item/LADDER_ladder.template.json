@@ -2,8 +2,8 @@
   "template": {
     "parent": "minecraft:item/generated",
     "textures": {
-      "layer0": "NAMESPACE:block/CUSTOM_WOOD_ladder"
+      "layer0": "MOD:block/LADDER_ladder"
     }
   },
-  "variants": "custom_wood"
+  "variants": "ladder"
 }

@@ -7,7 +7,7 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "charm:VARIANT_WOOD_ladder"
+            "name": "MOD:CUSTOM_WOOD_ladder"
           }
         ],
         "conditions": [
@@ -18,5 +18,5 @@
       }
     ]
   },
-  "variants": "variant_wood"
+  "variants": "ladder"
 }
