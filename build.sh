@@ -8,5 +8,5 @@ build() {
   cd ..
 }
 
-build fabric
-# build forge
+build charm-fabric
+# build charm-forge
