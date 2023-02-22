@@ -68,7 +68,7 @@ public class FormEndermiteGoal extends RandomStrollGoal {
 
         var relative = pos.relative(facing);
         var state = level.getBlockState(relative);
-        var entityPos = new BlockPos(relative.getX() + 0.5, relative.getY() + 0.5, relative.getZ() + 0.5);
+        var entityPos = new BlockPos((int) (relative.getX() + 0.5), (int) (relative.getY() + 0.5), (int) (relative.getZ() + 0.5));
 
         if (state.is(BlockOfEnderPearls.BLOCK.get())) {
              MobHelper.spawn(EntityType.ENDERMITE, serverLevel, entityPos, MobSpawnType.CONVERSION, m -> {
@@ -82,6 +82,6 @@ public class FormEndermiteGoal extends RandomStrollGoal {
 
     private BlockPos getPosition(Silverfish silverfish) {
         var pos = silverfish.blockPosition();
-        return new BlockPos(pos.getX(), pos.getY() + 0.5D, pos.getZ());
+        return new BlockPos(pos.getX(), (int) (pos.getY() + 0.5D), pos.getZ());
     }
 }

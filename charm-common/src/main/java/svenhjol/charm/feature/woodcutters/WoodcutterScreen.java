@@ -48,7 +48,7 @@ public class WoodcutterScreen extends AbstractContainerScreen<WoodcutterMenu> {
       int m = this.getY() + 14;
       int n = this.scrollOffset + 12;
       this.renderRecipeBackground(poseStack, mouseX, mouseY, l, m, n);
-      this.renderRecipeIcons(l, m, n);
+      this.renderRecipeIcons(poseStack, l, m, n);
    }
 
    protected void renderTooltip(PoseStack poseStack, int x, int y) {
@@ -88,7 +88,7 @@ public class WoodcutterScreen extends AbstractContainerScreen<WoodcutterMenu> {
 
    }
 
-   private void renderRecipeIcons(int x, int y, int scrollOffset) {
+   private void renderRecipeIcons(PoseStack poseStack, int x, int y, int scrollOffset) {
       List<WoodcuttingRecipe> list = (this.menu).getAvailableRecipes();
 
       for(int i = this.scrollOffset; i < scrollOffset && i < (this.menu).getAvailableRecipeCount(); ++i) {
@@ -96,7 +96,7 @@ public class WoodcutterScreen extends AbstractContainerScreen<WoodcutterMenu> {
          int k = x + j % 4 * 16;
          int l = j / 4;
          int m = y + l * 18 + 2;
-         this.minecraft.getItemRenderer().renderAndDecorateItem((list.get(i)).getResultItem(), k, m);
+         this.minecraft.getItemRenderer().renderAndDecorateItem(poseStack, (list.get(i)).getResultItem(), k, m);
       }
 
    }

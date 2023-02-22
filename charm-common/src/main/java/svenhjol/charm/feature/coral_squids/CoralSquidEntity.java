@@ -361,8 +361,8 @@ public class CoralSquidEntity extends WaterAnimal {
             var livingEntity = CoralSquidEntity.this.getLastHurtByMob();
             if (livingEntity != null) {
                 var vec3d = new Vec3(CoralSquidEntity.this.getX() - livingEntity.getX(), CoralSquidEntity.this.getY() - livingEntity.getY(), CoralSquidEntity.this.getZ() - livingEntity.getZ());
-                var blockState = CoralSquidEntity.this.level.getBlockState(new BlockPos(CoralSquidEntity.this.getX() + vec3d.x, CoralSquidEntity.this.getY() + vec3d.y, CoralSquidEntity.this.getZ() + vec3d.z));
-                var fluidState = CoralSquidEntity.this.level.getFluidState(new BlockPos(CoralSquidEntity.this.getX() + vec3d.x, CoralSquidEntity.this.getY() + vec3d.y, CoralSquidEntity.this.getZ() + vec3d.z));
+                var blockState = CoralSquidEntity.this.level.getBlockState(new BlockPos((int) (CoralSquidEntity.this.getX() + vec3d.x), (int) (CoralSquidEntity.this.getY() + vec3d.y), (int) (CoralSquidEntity.this.getZ() + vec3d.z)));
+                var fluidState = CoralSquidEntity.this.level.getFluidState(new BlockPos((int) (CoralSquidEntity.this.getX() + vec3d.x), (int) (CoralSquidEntity.this.getY() + vec3d.y), (int) (CoralSquidEntity.this.getZ() + vec3d.z)));
                 if (fluidState.is(FluidTags.WATER) || blockState.isAir()) {
                     double d = vec3d.length();
                     if (d > 0.0D) {

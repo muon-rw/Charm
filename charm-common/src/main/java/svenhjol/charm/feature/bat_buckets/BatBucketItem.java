@@ -34,7 +34,7 @@ public class BatBucketItem extends CharmItem {
             var x = pos.getX() + 0.5D + facing.getStepX();
             var y = pos.getY() + 0.65D + (level.random.nextDouble() / 2.0D) + facing.getStepY();
             var z = pos.getZ() + 0.5D + facing.getStepZ();
-            var spawnPos = new BlockPos(x, y, z);
+            var spawnPos = new BlockPos((int) x, (int) y, (int) z);
 
             // Spawn the bat.
             MobHelper.spawn(EntityType.BAT, (ServerLevel)level, spawnPos, MobSpawnType.BUCKET, mob -> {
