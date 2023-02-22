@@ -7,8 +7,7 @@
   "plugin": "svenhjol.charm.mixin.MixinConfigPlugin",
   "mixins": [
     "accessor.ShulkerBoxBlockEntityAccessor",
-    "gentle_potion_particles.LivingEntityMixin",
-    "no_potion_glint.PotionItemMixin"
+    "gentle_potion_particles.LivingEntityMixin"
   ],
   "client": [
     "accessor.GuiAccessor",
