@@ -33,7 +33,6 @@
     "extra_stackables.StewItemMixin",
     "gentle_potion_particles.LivingEntityMixin",
     "no_crop_trampling.FarmBlockMixin",
-    "no_potion_glint.PotionItemMixin",
     "note_block_enum.NoteBlockInstrumentMixin",
     "open_both_doors.DoorBlockMixin",
     "parrots_stay_on_shoulder.PlayerMixin",
