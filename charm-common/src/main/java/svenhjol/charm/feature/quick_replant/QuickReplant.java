@@ -31,6 +31,9 @@ import java.util.function.Supplier;
 @Feature(mod = Charm.MOD_ID, description = "Right-click with a hoe to quickly harvest and replant a fully-grown crop.")
 public class QuickReplant extends CharmFeature implements IProvidesHarvestables {
     static final List<BlockState> REPLANTABLE = new ArrayList<>();
+    static final List<Block> NOT_REPLANTABLE = List.of(
+        Blocks.TORCHFLOWER
+    );
 
     @Override
     public void register() {
@@ -61,6 +64,7 @@ public class QuickReplant extends CharmFeature implements IProvidesHarvestables 
         var pos = hitResult.getBlockPos();
         var state = level.getBlockState(pos);
         var block = state.getBlock();
+        var doReplant = !NOT_REPLANTABLE.contains(block);
 
         if (!REPLANTABLE.contains(state)) {
             return InteractionResult.PASS;
@@ -85,7 +89,7 @@ public class QuickReplant extends CharmFeature implements IProvidesHarvestables 
                 && CharmEnchantmentHelper.itemHasEnchantment(held, Charm.makeId("collection"));
 
             for (var drop : drops) {
-                if (drop.getItem() == blockItem) {
+                if (doReplant && drop.getItem() == blockItem ) {
                     drop.shrink(1);
                 }
 
@@ -96,6 +100,11 @@ public class QuickReplant extends CharmFeature implements IProvidesHarvestables 
                         Block.popResource(level, pos, drop);
                     }
                 }
+            }
+
+            // If this crop should not be replanted, just set the new state to air.
+            if (!doReplant) {
+                newState = Blocks.AIR.defaultBlockState();
             }
 
             level.globalLevelEvent(2001, pos, Block.getId(newState));
@@ -122,7 +131,8 @@ public class QuickReplant extends CharmFeature implements IProvidesHarvestables 
             () -> Blocks.CARROTS.defaultBlockState().setValue(CarrotBlock.AGE, 7),
             () -> Blocks.NETHER_WART.defaultBlockState().setValue(NetherWartBlock.AGE, 3),
             () -> Blocks.POTATOES.defaultBlockState().setValue(PotatoBlock.AGE, 7),
-            () -> Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, 7)
+            () -> Blocks.WHEAT.defaultBlockState().setValue(CropBlock.AGE, 7),
+            () -> Blocks.TORCHFLOWER.defaultBlockState()
         ));
 
         // Cocoa also has FACING property. We need to capture all states with AGE=2.
