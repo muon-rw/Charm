@@ -9,9 +9,9 @@
 export MSYS=winsymlinks:nativestrict
 
 create_symlinks() {
-	fabric="fabric"
-	forge="forge"
-	common="common"
+	fabric="$1-fabric"
+	forge="$1-forge"
+	common="$1-common"
 
   cd "$fabric" || exit 1
 	if [[ ! -e "common" ]]; then
@@ -26,5 +26,4 @@ create_symlinks() {
 	cd ..
 }
 
-create_symlinks api
-create_symlinks core
+create_symlinks charm
