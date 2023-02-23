@@ -29,7 +29,7 @@
     "fabricloader": ">=0.14.11",
     "charm_api": "5.0.0",
     "charm_core": "5.0.0",
-    "minecraft": "1.19.3",
+    "minecraft": "1.19.4-beta.1",
     "java": ">=17"
   }
 }
