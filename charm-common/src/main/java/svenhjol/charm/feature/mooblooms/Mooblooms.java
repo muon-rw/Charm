@@ -25,6 +25,8 @@ public class Mooblooms extends CharmFeature {
     static Supplier<Item> SPAWN_EGG_ITEM;
     static Supplier<EntityType<MoobloomEntity>> ENTITY;
     public static final TagKey<Biome> SPAWNS_MOOBLOOMS = TagKey.create(Registries.BIOME, Charm.makeId("spawns_mooblooms"));
+    public static final TagKey<Biome> SPAWNS_CHERRY_BLOSSOM_MOOBLOOMS = TagKey.create(Registries.BIOME, Charm.makeId("spawns_cherry_blossom_mooblooms"));
+
 
     @Override
     public void register() {

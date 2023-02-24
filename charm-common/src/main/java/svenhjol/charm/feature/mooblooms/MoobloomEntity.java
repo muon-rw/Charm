@@ -35,10 +35,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import svenhjol.charm.Charm;
 
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @SuppressWarnings({"deprecation", "unused"})
 public class MoobloomEntity extends Cow implements Shearable {
@@ -62,8 +59,20 @@ public class MoobloomEntity extends Cow implements Shearable {
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnReason, @Nullable SpawnGroupData entityData, @Nullable CompoundTag entityTag) {
         entityData = super.finalizeSpawn(level, difficulty, spawnReason, entityData, entityTag);
+        List<Type> types;
 
-        var types = Arrays.asList(Type.values());
+        if (level.getBiome(this.blockPosition()).is(Mooblooms.SPAWNS_CHERRY_BLOSSOM_MOOBLOOMS)) {
+            // Get themed mooblooms.
+            types = List.of(
+                Type.LILY_OF_THE_VALLEY,
+                Type.PINK_TULIP,
+                Type.DANDELION
+            );
+        } else {
+            // Get all moobloom types.
+            types = Arrays.asList(Type.values());
+        }
+
         var type = types.get(random.nextInt(types.size()));
         setMoobloomType(type);
 
