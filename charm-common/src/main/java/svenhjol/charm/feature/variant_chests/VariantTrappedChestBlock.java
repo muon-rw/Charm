@@ -37,7 +37,7 @@ public class VariantTrappedChestBlock extends ChestBlock implements IVariantChes
         return Charm.LOADER.get(VariantChests.class).orElseThrow();
     }
 
-    static class BlockItem extends CharmBlockItem implements IFuelProvider {
+    public static class BlockItem extends CharmBlockItem implements IFuelProvider {
         private final IVariantMaterial material;
 
         public BlockItem(Supplier<VariantTrappedChestBlock> block) {
