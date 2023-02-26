@@ -7,7 +7,7 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "MOD:CUSTOM_WOOD_ladder"
+            "name": "MOD:LADDER_ladder"
           }
         ],
         "conditions": [
