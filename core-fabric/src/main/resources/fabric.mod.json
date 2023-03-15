@@ -25,9 +25,9 @@
   },
   "accessWidener": "charm_core.accesswidener",
   "depends": {
-    "fabricloader": ">=0.14.14",
+    "fabricloader": ">=0.14.17",
     "charm_api": "5.0.0",
-    "minecraft": "*",
+    "minecraft": "1.19.4",
     "java": ">=17"
   }
 }

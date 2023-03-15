@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DO_FABRIC=true
-DO_FORGE=false
+DO_FORGE=true
 
 build() {
   cd "$1" || exit 1
