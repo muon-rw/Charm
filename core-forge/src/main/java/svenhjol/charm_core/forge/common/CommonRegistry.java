@@ -28,13 +28,11 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SignBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -46,8 +44,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import svenhjol.charm_api.iface.IVariantMaterial;
+import svenhjol.charm_api.iface.IVariantWoodMaterial;
 import svenhjol.charm_core.base.CharmFeature;
 import svenhjol.charm_core.forge.block.CharmStairBlock;
+import svenhjol.charm_core.forge.block.CharmWallHangingSignBlock;
 import svenhjol.charm_core.forge.block.CharmWallSignBlock;
 import svenhjol.charm_core.forge.network.ClientToServerPacket;
 import svenhjol.charm_core.forge.network.ServerToClientPacket;
@@ -150,6 +150,12 @@ public class CommonRegistry implements IRegistry {
     @Override
     public <T extends BlockEntity> void blockEntityBlocks(Supplier<BlockEntityType<T>> supplier, List<Supplier<? extends Block>> blocks) {
         deferred.blockEntityBlocks.add(new DeferredBlockEntityBlocks(supplier, blocks));
+    }
+
+    @Override
+    public Supplier<BlockSetType> blockSetType(IVariantWoodMaterial material) {
+        var registered = BlockSetType.register(new BlockSetType(material.getSerializedName()));
+        return () -> registered;
     }
 
     @Override
@@ -358,7 +364,14 @@ public class CommonRegistry implements IRegistry {
     }
 
     @Override
-    public <W extends WallSignBlock, S extends SignBlock> Supplier<W> wallSignBlock(String id, CharmFeature feature, IVariantMaterial material, Supplier<S> drops, WoodType type) {
+    public <W extends WallHangingSignBlock, S extends CeilingHangingSignBlock> Supplier<W> wallHangingSignBlock(String id, CharmFeature feature, IVariantWoodMaterial material, Supplier<S> drops, WoodType type) {
+        getLog().debug(getClass(), "Registering wall hanging sign block " + id);
+        var block = block(id, () -> new CharmWallHangingSignBlock(feature, material, drops, type));
+        return (Supplier<W>)block;
+    }
+
+    @Override
+    public <W extends WallSignBlock, S extends SignBlock> Supplier<W> wallSignBlock(String id, CharmFeature feature, IVariantWoodMaterial material, Supplier<S> drops, WoodType type) {
         getLog().debug(getClass(), "Registering wall sign block " + id);
         var block = block(id, () -> new CharmWallSignBlock(feature, material, drops, type));
         return (Supplier<W>)block;
@@ -370,9 +383,9 @@ public class CommonRegistry implements IRegistry {
     }
 
     @Override
-    public <T extends WoodType> Supplier<T> woodType(String id) {
+    public <T extends WoodType> Supplier<T> woodType(String id, IVariantWoodMaterial material) {
         getLog().debug(getClass(), "Registering wood type " + id);
-        var registered = WoodType.register(new WoodType(makeId(id).toString().replace(":", "_")));
+        var registered = WoodType.register(new WoodType(makeId(id).toString().replace(":", "_"), material.getBlockSetType()));
         return () -> (T)registered;
     }
 
