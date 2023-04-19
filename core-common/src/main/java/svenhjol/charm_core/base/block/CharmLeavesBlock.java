@@ -16,7 +16,7 @@ public class CharmLeavesBlock extends LeavesBlock implements IIgniteProvider {
     protected final IVariantMaterial variantMaterial;
 
     public CharmLeavesBlock(CharmFeature feature, IVariantMaterial material) {
-        super(Properties.of(Material.LEAVES)
+        super(Properties.of(Material.DEPRECATED_NOTSOLIDBLOCKING)
             .strength(0.2F)
             .randomTicks()
             .sound(SoundType.GRASS)

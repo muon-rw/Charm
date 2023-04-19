@@ -17,8 +17,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootDataManager;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +58,7 @@ public class CommonEvents implements IEvents {
         return EntityAttackEvent.INSTANCE.invoke(player, level, handle, entity, hitResult);
     }
 
-    private void handleLootTableModify(ResourceManager resourceManager, LootTables lootTables, ResourceLocation id, LootTable.Builder supplier, LootTableSource lootTableSource) {
+    private void handleLootTableModify(ResourceManager resourceManager, LootDataManager lootTables, ResourceLocation id, LootTable.Builder supplier, LootTableSource lootTableSource) {
         LootTableModifyEvent.INSTANCE.invoke(lootTables, id, supplier::withPool);
     }
 
