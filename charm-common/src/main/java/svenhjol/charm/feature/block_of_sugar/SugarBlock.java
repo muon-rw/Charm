@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,7 +51,7 @@ public class SugarBlock extends FallingBlock {
         for (var facing : Direction.values()) {
             if (facing != Direction.DOWN) {
                 var below = pos.relative(facing);
-                if (level.getBlockState(below).getMaterial() == Material.WATER) {
+                if (level.getBlockState(below).is(Blocks.WATER)) {
                     waterBelow = true;
                     break;
                 }

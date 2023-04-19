@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,7 +46,7 @@ public class GunpowderBlock extends FallingBlock {
         for (var facing : Direction.values()) {
             if (facing != Direction.DOWN) {
                 var below = pos.relative(facing);
-                if (level.getBlockState(below).getMaterial() == Material.LAVA) {
+                if (level.getBlockState(below).is(Blocks.LAVA)) {
                     lavaBelow = true;
                     break;
                 }

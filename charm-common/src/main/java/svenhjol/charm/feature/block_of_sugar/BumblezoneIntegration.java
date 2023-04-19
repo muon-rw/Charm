@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import svenhjol.charm_core.proxy.ConfigHelperProxy;
@@ -36,7 +37,7 @@ public class BumblezoneIntegration {
             BlockState neighborBlock = level.getBlockState(neighborPos);
 
             // Found watery block to replace, store the position of the water
-            if (!neighborBlock.getBlock().equals(bumblezoneFluid) && neighborBlock.getMaterial() == Material.WATER && neighborBlock.getFluidState().isSource()) {
+            if (!neighborBlock.getBlock().equals(bumblezoneFluid) && neighborBlock.is(Blocks.WATER) && neighborBlock.getFluidState().isSource()) {
                 waterPos.add(neighborPos.immutable());
                 recursiveReplaceWater(level, neighborPos, depth + 1, maxDepth, waterPos);
             }

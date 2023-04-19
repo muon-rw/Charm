@@ -90,7 +90,7 @@ public class BlockOfEnderPearls extends CharmFeature {
             // Avoid suffocation.
             var state1 = level.getBlockState(p.above(1));
             var state2 = level.getBlockState(p.above(2));
-            if (state1.getMaterial() != Material.AIR || state2.getMaterial() != Material.AIR) return;
+            if (!state1.isAir() || !state2.isAir()) return;
 
             var dist = getDistanceSquared(pos, above);
             candidates.put(dist, above);
