@@ -27,7 +27,7 @@
   "depends": {
     "fabricloader": ">=0.14.17",
     "charm_api": "5.0.0",
-    "minecraft": "1.19.4",
+    "minecraft": "*",
     "java": ">=17"
   }
 }
