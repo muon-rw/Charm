@@ -1,6 +1,8 @@
 {
   "pack": {
     "description": "Charm client resources",
-    "pack_format": 15
+    "pack_format": 15,
+    "forge:resource_pack_format": 15,
+    "forge:data_pack_format": 15
   }
 }

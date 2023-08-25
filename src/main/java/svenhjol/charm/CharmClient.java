@@ -1,51 +1,45 @@
 package svenhjol.charm;
 
 import net.minecraft.resources.ResourceLocation;
-import svenhjol.charm_core.CharmCoreClient;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import svenhjol.charm_core.Log;
 import svenhjol.charm_core.annotation.ClientFeature;
+import svenhjol.charm_core.base.CharmConfig;
 import svenhjol.charm_core.client.*;
 import svenhjol.charm_core.iface.*;
 
 public class CharmClient {
-    private static CharmClient INSTANCE;
-    public static final String MOD_ID = "charm";
+    public static final String MOD_ID = Charm.MOD_ID;
     public static final String PREFIX = "svenhjol." + MOD_ID;
     public static final String FEATURE_PREFIX = PREFIX + ".feature";
     public static ILog LOG;
-    public static IConfig CONFIG;
+    public static CharmConfig CONFIG;
     public static ILoader LOADER;
     public static IEvents EVENTS;
-    public static IClientRegistry REGISTRY;
+    public static ClientRegistry REGISTRY;
     public static IClientNetwork NETWORK;
 
     public CharmClient() {
-        LOG = new Log(MOD_ID);
-        CONFIG = new ClientConfig(MOD_ID, LOG);
+        var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::handleClientSetup);
+
+        LOG = new Log();
+        CONFIG = new ClientConfig(LOG);
         LOADER = new ClientLoader(MOD_ID, LOG, CONFIG);
         REGISTRY = new ClientRegistry(MOD_ID, LOG);
-        EVENTS = new ClientEvents(REGISTRY);
+        EVENTS = new ClientEvents(LOG, REGISTRY, modEventBus);
         NETWORK = new ClientNetwork();
 
         // Autoload all annotated client features from the feature namespace.
         LOADER.init(FEATURE_PREFIX, ClientFeature.class);
     }
 
-    public static void init() {
-        // Start Core first.
-        CharmCoreClient.init();
-
-        if (INSTANCE == null) {
-            INSTANCE = new CharmClient();
-            INSTANCE.run();
-        }
-    }
-
-    public void run() {
-        LOADER.run();
-    }
-
     public static ResourceLocation makeId(String id) {
         return !id.contains(":") ? new ResourceLocation(MOD_ID, id) : new ResourceLocation(id);
+    }
+
+    private void handleClientSetup(FMLClientSetupEvent event) {
+        LOADER.run();
     }
 }
