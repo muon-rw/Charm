@@ -17,7 +17,6 @@
     "accessor.SoundEngineAccessor",
     "accessor.SoundManagerAccessor",
     "no_chat_unverified_message.DisableToastMixin",
-    "no_experimental_screen.WorldOpenFlowsMixin",
     "no_spyglass_scope.RemoveSpyglassHudMixin",
     "show_repair_cost.AnvilScreenMixin"
   ],
