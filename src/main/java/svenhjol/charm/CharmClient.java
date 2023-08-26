@@ -6,6 +6,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import svenhjol.charm_core.Log;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmConfig;
+import svenhjol.charm_core.base.CharmLoader;
 import svenhjol.charm_core.client.*;
 import svenhjol.charm_core.iface.*;
 
@@ -15,10 +16,10 @@ public class CharmClient {
     public static final String FEATURE_PREFIX = PREFIX + ".feature";
     public static ILog LOG;
     public static CharmConfig CONFIG;
-    public static ILoader LOADER;
-    public static IEvents EVENTS;
+    public static CharmLoader LOADER;
+    public static ClientEvents EVENTS;
     public static ClientRegistry REGISTRY;
-    public static IClientNetwork NETWORK;
+    public static ClientNetwork NETWORK;
 
     public CharmClient() {
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
