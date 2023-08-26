@@ -31,6 +31,9 @@ public class CharmClient {
         EVENTS = new ClientEvents(LOG, REGISTRY, modEventBus);
         NETWORK = new ClientNetwork();
 
+        // Listen to Forge config changes.
+        modEventBus.addListener(CONFIG::refresh);
+
         // Autoload all annotated client features from the feature namespace.
         LOADER.init(FEATURE_PREFIX, ClientFeature.class);
     }
