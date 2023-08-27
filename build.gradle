@@ -22,5 +22,4 @@ build.dependsOn downloadCore
 
 dependencies {
     implementation fg.deobf("svenhjol:charm_core-forge-${props.minecraft_version}:${props.core_version}")
-
 }
