@@ -1,7 +1,11 @@
 package svenhjol.charm;
 
 import net.minecraft.resources.ResourceLocation;
-import svenhjol.charm_core.CharmCore;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import svenhjol.charm_core.Log;
 import svenhjol.charm_core.annotation.Feature;
 import svenhjol.charm_core.base.CharmConfig;
@@ -13,8 +17,8 @@ import svenhjol.charm_core.common.CommonRegistry;
 import svenhjol.charm_core.iface.ILog;
 import svenhjol.charm_core.server.ServerNetwork;
 
+@Mod(Charm.MOD_ID)
 public class Charm {
-    public static Charm INSTANCE;
     public static final String MOD_ID = "charm";
     public static final String PREFIX = "svenhjol." + MOD_ID;
     public static final String FEATURE_PREFIX = PREFIX + ".feature";
@@ -26,33 +30,31 @@ public class Charm {
     public static CharmConfig CONFIG;
 
     public Charm() {
-        LOG = new Log(MOD_ID);
-        CONFIG = new CommonConfig(MOD_ID, LOG);
+        var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::handleCommonSetup);
+
+        LOG = new Log();
+        CONFIG = new CommonConfig(LOG);
         REGISTRY = new CommonRegistry(MOD_ID, LOG);
-        EVENTS = new CommonEvents();
+        EVENTS = new CommonEvents(LOG, REGISTRY, modEventBus);
         NETWORK = new ServerNetwork(LOG);
-        EVENTS = new CommonEvents();
         LOADER = new CommonLoader(MOD_ID, LOG, CONFIG);
 
         // Autoload all annotated features from the feature namespace.
         LOADER.init(FEATURE_PREFIX, Feature.class);
-    }
 
-    public static void init() {
-        // Start Core first.
-        CharmCore.init();
+        // Listen to Forge config changes.
+        modEventBus.addListener(CONFIG::refresh);
 
-        if (INSTANCE == null) {
-            INSTANCE = new Charm();
-            INSTANCE.run();
-        }
-    }
-
-    public void run() {
-        LOADER.run();
+        // Execute client init so that client registration happens.
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CharmClient::new);
     }
 
     public static ResourceLocation makeId(String id) {
         return !id.contains(":") ? new ResourceLocation(MOD_ID, id) : new ResourceLocation(id);
+    }
+
+    private void handleCommonSetup(FMLCommonSetupEvent event) {
+        LOADER.run();
     }
 }

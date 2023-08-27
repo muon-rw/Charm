@@ -1,0 +1,16 @@
+{
+  "jars": [
+    {
+      "identifier": {
+        "group": "svenhjol",
+        "artifact": "charm_core"
+      },
+      "version": {
+        "range": "[${core_version},)",
+        "artifactVersion": "${core_version}"
+      },
+      "path": "META-INF/jarjar/charm_core-forge-${minecraft_version}-${core_version}.jar",
+      "isObfuscated": true
+    }
+  ]
+}
