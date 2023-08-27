@@ -30,7 +30,7 @@ public class CharmClient {
         LOADER = new ClientLoader(MOD_ID, LOG, CONFIG);
         REGISTRY = new ClientRegistry(MOD_ID, LOG);
         EVENTS = new ClientEvents(LOG, REGISTRY, modEventBus);
-        NETWORK = new ClientNetwork();
+        NETWORK = new ClientNetwork(LOG);
 
         // Listen to Forge config changes.
         modEventBus.addListener(CONFIG::refresh);
