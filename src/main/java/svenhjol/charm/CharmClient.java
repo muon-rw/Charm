@@ -3,6 +3,7 @@ package svenhjol.charm;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import svenhjol.charm_core.CharmCoreClient;
 import svenhjol.charm_core.Log;
 import svenhjol.charm_core.annotation.ClientFeature;
 import svenhjol.charm_core.base.CharmConfig;
@@ -30,7 +31,7 @@ public class CharmClient {
         LOADER = new ClientLoader(MOD_ID, LOG, CONFIG);
         REGISTRY = new ClientRegistry(MOD_ID, LOG);
         EVENTS = new ClientEvents(LOG, REGISTRY, modEventBus);
-        NETWORK = new ClientNetwork();
+        NETWORK = new ClientNetwork(LOG);
 
         // Listen to Forge config changes.
         modEventBus.addListener(CONFIG::refresh);

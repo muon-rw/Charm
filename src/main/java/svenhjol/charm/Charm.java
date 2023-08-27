@@ -37,14 +37,17 @@ public class Charm {
         CONFIG = new CommonConfig(LOG);
         REGISTRY = new CommonRegistry(MOD_ID, LOG);
         EVENTS = new CommonEvents(LOG, REGISTRY, modEventBus);
-        NETWORK = new ServerNetwork(LOG);
         LOADER = new CommonLoader(MOD_ID, LOG, CONFIG);
+        NETWORK = new ServerNetwork(LOG);
 
         // Autoload all annotated features from the feature namespace.
         LOADER.init(FEATURE_PREFIX, Feature.class);
 
         // Listen to Forge config changes.
         modEventBus.addListener(CONFIG::refresh);
+
+        // Add all the registers to the Forge event bus.
+        REGISTRY.register(modEventBus);
 
         // Execute client init so that client registration happens.
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CharmClient::new);
