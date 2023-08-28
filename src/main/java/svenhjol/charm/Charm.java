@@ -30,9 +30,11 @@ public class Charm {
     public static CharmConfig CONFIG;
 
     public Charm() {
+        // Get a reference to the mod event bus for adding listeners.
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::handleCommonSetup);
 
+        // Initialize services.
         LOG = new Log();
         CONFIG = new CommonConfig(LOG);
         REGISTRY = new CommonRegistry(MOD_ID, LOG);
@@ -59,5 +61,8 @@ public class Charm {
 
     private void handleCommonSetup(FMLCommonSetupEvent event) {
         LOADER.run();
+
+        // Do final registry tasks.
+        event.enqueueWork(EVENTS::doFinalTasks);
     }
 }
