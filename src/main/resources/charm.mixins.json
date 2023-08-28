@@ -6,6 +6,7 @@
   "refmap": "${refmap_file}",
   "plugin": "svenhjol.charm.mixin.MixinConfigPlugin",
   "mixins": [
+    "accessor.BundleItemAccessor",
     "accessor.ItemAccessor",
     "auto_restock.AnimalMixin",
     "auto_restock.ComposterBlockMixin",
@@ -18,6 +19,7 @@
     "extra_stackables.StewItemMixin"
   ],
   "client": [
+    "accessor.AbstractContainerScreenAccessor",
     "accessor.EntityRenderDispatcherAccessor",
     "accessor.GuiAccessor",
     "accessor.LivingEntityRendererAccessor",
