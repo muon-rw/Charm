@@ -22,9 +22,11 @@ public class CharmClient {
     public static ClientNetwork NETWORK;
 
     public CharmClient() {
+        // Get a reference to the mod event bus for adding listeners.
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::handleClientSetup);
 
+        // Initialize services.
         LOG = new Log();
         CONFIG = new ClientConfig(LOG);
         LOADER = new ClientLoader(MOD_ID, LOG, CONFIG);
@@ -45,5 +47,8 @@ public class CharmClient {
 
     private void handleClientSetup(FMLClientSetupEvent event) {
         LOADER.run();
+
+        // Do final registry tasks.
+        event.enqueueWork(EVENTS::doFinalTasks);
     }
 }

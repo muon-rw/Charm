@@ -9,6 +9,7 @@ public class Charm {
     public static final String MOD_ID = "charm";
 
     public Charm() {
+        // There is no common code so just execute the client.
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CharmClient::new);
     }
 }
