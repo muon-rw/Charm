@@ -1,68 +1,20 @@
 package svenhjol.charm;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import svenhjol.charm_core.Log;
-import svenhjol.charm_core.annotation.Feature;
-import svenhjol.charm_core.base.CharmConfig;
-import svenhjol.charm_core.base.CharmLoader;
-import svenhjol.charm_core.common.CommonConfig;
-import svenhjol.charm_core.common.CommonEvents;
-import svenhjol.charm_core.common.CommonLoader;
-import svenhjol.charm_core.common.CommonRegistry;
-import svenhjol.charm_core.iface.ILog;
-import svenhjol.charm_core.server.ServerNetwork;
+import svenhjol.charm_core.base.DefaultMod;
 
-@Mod(Charm.MOD_ID)
-public class Charm {
+public class Charm extends DefaultMod {
     public static final String MOD_ID = "charm";
-    public static final String PREFIX = "svenhjol." + MOD_ID;
-    public static final String FEATURE_PREFIX = PREFIX + ".feature";
-    public static ILog LOG;
-    public static CharmLoader LOADER;
-    public static CommonRegistry REGISTRY;
-    public static CommonEvents EVENTS;
-    public static ServerNetwork NETWORK;
-    public static CharmConfig CONFIG;
+    private static Charm instance;
 
-    public Charm() {
-        // Get a reference to the mod event bus for adding listeners.
-        var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(this::handleCommonSetup);
-
-        // Initialize services.
-        LOG = new Log();
-        CONFIG = new CommonConfig(LOG);
-        REGISTRY = new CommonRegistry(MOD_ID, LOG);
-        EVENTS = new CommonEvents(LOG, REGISTRY, modEventBus);
-        LOADER = new CommonLoader(MOD_ID, LOG, CONFIG);
-        NETWORK = new ServerNetwork(LOG);
-
-        // Autoload all annotated features from the feature namespace.
-        LOADER.init(FEATURE_PREFIX, Feature.class);
-
-        // Listen to Forge config changes.
-        modEventBus.addListener(CONFIG::refresh);
-
-        // Add all the registers to the Forge event bus.
-        REGISTRY.register(modEventBus);
-
-        // Execute client init so that client registration happens.
-        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CharmClient::new);
+    public static Charm instance() {
+        if (instance == null) {
+            instance = new Charm();
+        }
+        return instance;
     }
 
-    public static ResourceLocation makeId(String id) {
-        return !id.contains(":") ? new ResourceLocation(MOD_ID, id) : new ResourceLocation(id);
-    }
-
-    private void handleCommonSetup(FMLCommonSetupEvent event) {
-        LOADER.run();
-
-        // Do final registry tasks.
-        event.enqueueWork(EVENTS::doFinalTasks);
+    @Override
+    public String modId() {
+        return MOD_ID;
     }
 }
