@@ -4,10 +4,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import svenhjol.charm.Charm;
-import svenhjol.charm_core.Core;
 import svenhjol.charm_core.annotation.Feature;
 
-@Mod(Core.MOD_ID)
+@Mod(Charm.MOD_ID)
 public class Initializer {
     public Initializer() {
         var charm = Charm.instance();

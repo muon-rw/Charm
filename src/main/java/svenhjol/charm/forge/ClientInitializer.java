@@ -1,11 +1,11 @@
 package svenhjol.charm.forge;
 
-import svenhjol.charm_core.CoreClient;
+import svenhjol.charm.CharmClient;
 import svenhjol.charm_core.annotation.ClientFeature;
 
 public class ClientInitializer {
     public ClientInitializer() {
-        var client = CoreClient.instance();
+        var client = CharmClient.instance();
         var loader = client.loader();
 
         // Autoload all annotated client features from the feature namespace.
