@@ -24,6 +24,7 @@
     "open_both_doors.DoorBlockMixin",
     "parrots_stay_on_shoulder.PlayerMixin",
     "stronger_anvils.AnvilBlockMixin",
+    "torchflowers_emit_light.BlockBehaviourPropertiesMixin",
     "totems_work_from_inventory.LivingEntityMixin",
     "unlimited_repair_cost.AnvilMenuMixin"
   ],
@@ -42,7 +43,6 @@
     "no_chat_unverified_message.DisableToastMixin",
     "no_spyglass_scope.RemoveSpyglassHudMixin",
     "show_repair_cost.AnvilScreenMixin",
-    "torchflowers_emit_light.BlockBehaviourPropertiesMixin",
     "unlimited_repair_cost.AnvilScreenMixin"
   ],
   "injectors": {
