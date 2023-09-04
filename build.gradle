@@ -13,18 +13,3 @@ plugins {
 
 apply from: "https://charmony.work/gradle/forge.build.gradle"
 apply from: "https://charmony.work/gradle/forge-tasks.build.gradle"
-
-// Load props from gradle.properties.
-def props = new Properties()
-file("gradle.properties").withInputStream { props.load(it) }
-
-build.dependsOn downloadCore
-
-dependencies {
-//    implementation (group: 'svenhjol', name: "charm_core-forge-${props.minecraft_version}-${props.core_version}", version: "[${props.core_version},)") {
-//        jarJar.pin(it, "${props.core_version}")
-//    }
-
-    implementation fg.deobf("svenhjol:charm_core-forge-${props.minecraft_version}:${props.core_version}")
-
-}
