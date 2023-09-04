@@ -1,7 +1,6 @@
 package svenhjol.charm.forge;
 
 import svenhjol.charm.CharmClient;
-import svenhjol.charm_core.annotation.ClientFeature;
 
 public class ClientInitializer {
     public ClientInitializer() {
@@ -9,6 +8,6 @@ public class ClientInitializer {
         var loader = client.loader();
 
         // Autoload all annotated client features from the feature namespace.
-        loader.init(client.featurePrefix(), ClientFeature.class);
+        loader.init(client.featurePrefix(), client.featureAnnotation());
     }
 }
