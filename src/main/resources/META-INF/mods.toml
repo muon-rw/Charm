@@ -21,9 +21,9 @@ Client-only tweaks for Minecraft. Works on vanilla servers!
     side="CLIENT"
 
 [[dependencies.charm]]
-    modId="charm_core"
+    modId="charmony"
     mandatory=true
-    versionRange="[${core_version},)"
+    versionRange="[${charmony_version},)"
     ordering="AFTER"
     side="CLIENT"
 
