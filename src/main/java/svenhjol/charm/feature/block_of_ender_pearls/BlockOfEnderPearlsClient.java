@@ -1,4 +1,4 @@
-package svenhjol.charm.feature.bat_buckets;
+package svenhjol.charm.feature.block_of_ender_pearls;
 
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.function.BooleanSupplier;
 
 @ClientFeature
-public class BatBucketsClient extends CharmFeature {
+public class BlockOfEnderPearlsClient extends CharmFeature {
     @Override
     public List<BooleanSupplier> checks() {
-        return List.of(() -> Charm.instance().loader().isEnabled(BatBuckets.class));
+        return List.of(() -> Charm.instance().loader().isEnabled(BlockOfEnderPearls.class));
     }
 
     @Override
     public void register() {
         if (isEnabled()) {
             CharmClient.instance().registry().itemTab(
-                BatBuckets.BAT_BUCKET_ITEM,
-                CreativeModeTabs.TOOLS_AND_UTILITIES,
-                Items.TADPOLE_BUCKET
+                BlockOfEnderPearls.BLOCK_ITEM,
+                CreativeModeTabs.FUNCTIONAL_BLOCKS,
+                Items.ENDER_EYE
             );
         }
     }
