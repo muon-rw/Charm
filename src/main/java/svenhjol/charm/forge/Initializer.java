@@ -4,7 +4,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import svenhjol.charm.Charm;
-import svenhjol.charm_core.annotation.Feature;
+import svenhjol.charmony.annotation.Feature;
 
 @Mod(Charm.MOD_ID)
 public class Initializer {

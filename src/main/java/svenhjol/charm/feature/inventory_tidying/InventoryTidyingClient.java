@@ -9,18 +9,18 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.*;
 import svenhjol.charm.Charm;
 import svenhjol.charm.mixin.accessor.AbstractContainerScreenAccessor;
-import svenhjol.charm_api.CharmApi;
-import svenhjol.charm_api.event.ScreenRenderEvent;
-import svenhjol.charm_api.event.ScreenSetupEvent;
-import svenhjol.charm_api.iface.IHasBlacklistedScreens;
-import svenhjol.charm_api.iface.IHasBlockEntityScreens;
-import svenhjol.charm_api.iface.IHasScreenOffsetTweaks;
-import svenhjol.charm_api.iface.IScreenOffsetTweak;
-import svenhjol.charm_core.annotation.ClientFeature;
-import svenhjol.charm_core.base.CharmFeature;
-import svenhjol.charm_core.helper.ApiHelper;
-import svenhjol.charm_core.helper.ResourceHelper;
-import svenhjol.charm_core.helper.ScreenHelper;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.ScreenRenderEvent;
+import svenhjol.charmony.api.event.ScreenSetupEvent;
+import svenhjol.charmony.api.iface.IHasBlacklistedScreens;
+import svenhjol.charmony.api.iface.IHasBlockEntityScreens;
+import svenhjol.charmony.api.iface.IHasScreenOffsetTweaks;
+import svenhjol.charmony.api.iface.IScreenOffsetTweak;
+import svenhjol.charmony.annotation.ClientFeature;
+import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.helper.ApiHelper;
+import svenhjol.charmony.helper.ResourceHelper;
+import svenhjol.charmony.helper.ScreenHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +45,7 @@ public class InventoryTidyingClient extends CharmFeature
 
     @Override
     public void register() {
-        CharmApi.registerProvider(this);
+        CharmonyApi.registerProvider(this);
     }
 
     @Override

@@ -9,13 +9,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import svenhjol.charm.Charm;
-import svenhjol.charm_api.CharmApi;
-import svenhjol.charm_api.iface.IProvidesWandererTrades;
-import svenhjol.charm_api.iface.IWandererTrade;
-import svenhjol.charm_core.annotation.Configurable;
-import svenhjol.charm_core.annotation.Feature;
-import svenhjol.charm_core.base.CharmFeature;
-import svenhjol.charm_core.helper.GenericTradeOffers;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.iface.IProvidesWandererTrades;
+import svenhjol.charmony.api.iface.IWandererTrade;
+import svenhjol.charmony.annotation.Configurable;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.helper.GenericTradeOffers;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -42,7 +42,7 @@ public class ExtraTrades extends CharmFeature implements IProvidesWandererTrades
 
     @Override
     public void register() {
-        CharmApi.registerProvider(this);
+        CharmonyApi.registerProvider(this);
         var registry = Charm.instance().registry();
 
         if (enchantedBooks) {

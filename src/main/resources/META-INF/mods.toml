@@ -3,33 +3,33 @@ loaderVersion="[47,)"
 license="MIT"
 
 [[mods]]
-modId="charm"
-version="${version}"
-displayName="Charm (nano)"
-credits=""
-authors="svenhjol"
-description='''
+    modId="charm"
+    version="${version}"
+    displayName="Charm (nano)"
+    credits=""
+    authors="svenhjol"
+    description='''
 Lightweight tweaks and enhancements to Minecraft. Charm Nano can be added or removed from vanilla Minecraft worlds without causing data corruption.
-'''
-logoFile="icon.png"
+    '''
+    logoFile="icon.png"
 
 [[dependencies.charm]]
-modId="forge"
-mandatory=true
-versionRange="[47,)"
-ordering="NONE"
-side="BOTH"
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
 
 [[dependencies.charm]]
-modId="charm_core"
-mandatory=true
-versionRange="[${core_version},)"
-ordering="AFTER"
-side="BOTH"
+    modId="charmony"
+    mandatory=true
+    versionRange="[${charmony_version},)"
+    ordering="AFTER"
+    side="BOTH"
 
 [[dependencies.charm]]
-modId="minecraft"
-mandatory=true
-versionRange="[${minecraft_version},)"
-ordering="NONE"
-side="BOTH"
+    modId="minecraft"
+    mandatory=true
+    versionRange="[${minecraft_version},)"
+    ordering="NONE"
+    side="BOTH"

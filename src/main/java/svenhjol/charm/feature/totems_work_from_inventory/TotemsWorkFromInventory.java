@@ -7,11 +7,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import svenhjol.charm.Charm;
-import svenhjol.charm_api.CharmApi;
-import svenhjol.charm_api.iface.IGetTotemFromInventory;
-import svenhjol.charm_core.annotation.Feature;
-import svenhjol.charm_core.base.CharmFeature;
-import svenhjol.charm_core.helper.ApiHelper;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.iface.IGetTotemFromInventory;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.helper.ApiHelper;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -21,7 +21,7 @@ public class TotemsWorkFromInventory extends CharmFeature implements IGetTotemFr
 
     @Override
     public void register() {
-        CharmApi.registerProvider(this);
+        CharmonyApi.registerProvider(this);
     }
 
     public static ItemStack tryUsingTotemFromInventory(LivingEntity entity) {

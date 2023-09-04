@@ -15,13 +15,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.Charm;
-import svenhjol.charm_api.CharmApi;
-import svenhjol.charm_api.event.BlockUseEvent;
-import svenhjol.charm_api.iface.IProvidesHarvestables;
-import svenhjol.charm_core.annotation.Feature;
-import svenhjol.charm_core.base.CharmFeature;
-import svenhjol.charm_core.helper.ApiHelper;
-import svenhjol.charm_core.helper.CharmEnchantmentHelper;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.BlockUseEvent;
+import svenhjol.charmony.api.iface.IProvidesHarvestables;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.helper.ApiHelper;
+import svenhjol.charmony.helper.CharmEnchantmentHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class QuickReplant extends CharmFeature implements IProvidesHarvestables 
 
     @Override
     public void register() {
-        CharmApi.registerProvider(this);
+        CharmonyApi.registerProvider(this);
     }
 
     @Override
