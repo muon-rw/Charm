@@ -1,7 +1,7 @@
 package svenhjol.charm.feature.torchflowers_emit_light;
 
 import svenhjol.charm.CharmClient;
-import svenhjol.charmony.annotation.ClientFeature;
+import svenhjol.charmony.annotation.Feature;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.base.CharmFeature;
 

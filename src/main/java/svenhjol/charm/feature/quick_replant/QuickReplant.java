@@ -17,7 +17,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.api.CharmonyApi;
 import svenhjol.charmony.api.event.BlockUseEvent;
-import svenhjol.charmony.api.iface.IProvidesHarvestables;
+import svenhjol.charmony.api.iface.IQuickReplantProvider;
 import svenhjol.charmony.annotation.Feature;
 import svenhjol.charmony.base.CharmFeature;
 import svenhjol.charmony.helper.ApiHelper;
@@ -30,7 +30,7 @@ import java.util.function.Supplier;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @Feature(mod = Charm.MOD_ID, description = "Right-click with a hoe to quickly harvest and replant a fully-grown crop.")
-public class QuickReplant extends CharmFeature implements IProvidesHarvestables {
+public class QuickReplant extends CharmFeature implements IQuickReplantProvider {
     static final List<BlockState> REPLANTABLE = new ArrayList<>();
     static final List<Block> NOT_REPLANTABLE = List.of(
         Blocks.TORCHFLOWER,
@@ -40,14 +40,15 @@ public class QuickReplant extends CharmFeature implements IProvidesHarvestables 
 
     @Override
     public void register() {
+        ApiHelper.addConsumer(IQuickReplantProvider.class,
+            provider -> provider.getHarvestableBlocks().forEach(
+                supplier -> REPLANTABLE.add(supplier.get())));
+
         CharmonyApi.registerProvider(this);
     }
 
     @Override
     public void runWhenEnabled() {
-        ApiHelper.getProviderData(IProvidesHarvestables.class, provider -> provider.getHarvestableBlocks().stream())
-            .forEach(s -> REPLANTABLE.add(s.get()));
-
         BlockUseEvent.INSTANCE.handle(this::handleBlockUse);
     }
 

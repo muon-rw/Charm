@@ -10,7 +10,7 @@ import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.ItemLike;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.api.CharmonyApi;
-import svenhjol.charmony.api.iface.IProvidesWandererTrades;
+import svenhjol.charmony.api.iface.IWandererTradeProvider;
 import svenhjol.charmony.api.iface.IWandererTrade;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.annotation.Feature;
@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @Feature(mod = Charm.MOD_ID, description = "Adds more villager trades.")
-public class ExtraTrades extends CharmFeature implements IProvidesWandererTrades {
+public class ExtraTrades extends CharmFeature implements IWandererTradeProvider {
     @Configurable(name = "Enchanted books", description = "If true, librarians will buy any enchanted book in return for emeralds.")
     public static boolean enchantedBooks = true;
 
@@ -42,7 +42,6 @@ public class ExtraTrades extends CharmFeature implements IProvidesWandererTrades
 
     @Override
     public void register() {
-        CharmonyApi.registerProvider(this);
         var registry = Charm.instance().registry();
 
         if (enchantedBooks) {
@@ -87,11 +86,8 @@ public class ExtraTrades extends CharmFeature implements IProvidesWandererTrades
             registry.villagerTrade(() -> VillagerProfession.LEATHERWORKER, tier, () -> new GenericTradeOffers.EmeraldsForItems(
                 Items.BUNDLE, 12, 10, 1, 0, xp, 1));
         }
-    }
 
-    @Override
-    public List<IWandererTrade> getWandererTrades() {
-        return List.of();
+        CharmonyApi.registerProvider(this);
     }
 
     @Override

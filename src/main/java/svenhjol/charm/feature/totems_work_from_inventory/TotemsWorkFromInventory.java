@@ -8,28 +8,30 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.api.CharmonyApi;
-import svenhjol.charmony.api.iface.IGetTotemFromInventory;
+import svenhjol.charmony.api.iface.ITotemInventoryCheckProvider;
 import svenhjol.charmony.annotation.Feature;
 import svenhjol.charmony.base.CharmFeature;
 import svenhjol.charmony.helper.ApiHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
 @Feature(mod = Charm.MOD_ID, description = "A totem will work from anywhere in the player's inventory as well as held in the main or offhand.")
-public class TotemsWorkFromInventory extends CharmFeature implements IGetTotemFromInventory {
+public class TotemsWorkFromInventory extends CharmFeature implements ITotemInventoryCheckProvider {
+    static List<BiFunction<Player, ItemLike, ItemStack>> inventoryChecks = new ArrayList<>();
 
     @Override
     public void register() {
+        ApiHelper.addConsumer(ITotemInventoryCheckProvider.class,
+            provider -> inventoryChecks.addAll(provider.getTotemInventoryChecks()));
+
         CharmonyApi.registerProvider(this);
     }
 
     public static ItemStack tryUsingTotemFromInventory(LivingEntity entity) {
         if (entity instanceof Player player) {
-            var checks = ApiHelper.getProviderData(IGetTotemFromInventory.class,
-                provider -> provider.getTotem().stream());
-
-            for (var check : checks) {
+            for (var check : inventoryChecks) {
                 var result = check.apply(player, Items.TOTEM_OF_UNDYING);
                 if (!result.isEmpty()) {
                     return result;
@@ -41,7 +43,7 @@ public class TotemsWorkFromInventory extends CharmFeature implements IGetTotemFr
     }
 
     @Override
-    public List<BiFunction<Player, ItemLike, ItemStack>> getTotem() {
+    public List<BiFunction<Player, ItemLike, ItemStack>> getTotemInventoryChecks() {
         return List.of(
             // Main hand check.
             (player, item) -> {
