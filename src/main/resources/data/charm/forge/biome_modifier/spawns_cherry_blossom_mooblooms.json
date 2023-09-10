@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#charm:spawns_cherry_blossom_mooblooms",
+  "spawners": {
+    "type": "charm:moobloom",
+    "weight": 5,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}
