@@ -3,6 +3,18 @@
     {
       "identifier": {
         "group": "svenhjol",
+        "artifact": "charmony_api"
+      },
+      "version": {
+        "range": "[${charmony_api_version},)",
+        "artifactVersion": "${charmony_api_version}"
+      },
+      "path": "META-INF/jarjar/charmony_api-forge-${minecraft_version}-${charmony_api_version}.jar",
+      "isObfuscated": true
+    },
+    {
+      "identifier": {
+        "group": "svenhjol",
         "artifact": "charmony"
       },
       "version": {

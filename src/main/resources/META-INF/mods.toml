@@ -4,7 +4,7 @@ license="MIT"
 
 [[mods]]
     modId="charm"
-    version="${version}"
+    version="${mod_version}"
     displayName="Charm"
     credits=""
     authors="svenhjol"
