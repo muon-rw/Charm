@@ -35,4 +35,12 @@ public class CharmTags {
         Charm.instance().makeId("spawners/drops_spider_eyes"));
     public static final TagKey<EntityType<?>> SPAWNER_DROPS_STRING = TagKey.create(ENTITY_TYPE_KEY,
         Charm.instance().makeId("spawners/drops_string"));
+    public static final TagKey<Block> PISTONS = TagKey.create(BLOCK_KEY,
+        Charm.instance().makeId("pistons"));
+    public static final TagKey<Block> STICKY_PISTONS = TagKey.create(BLOCK_KEY,
+        Charm.instance().makeId("sticky_pistons"));
+    public static final TagKey<Block> PISTON_HEADS = TagKey.create(BLOCK_KEY,
+        Charm.instance().makeId("piston_heads"));
+    public static final TagKey<Block> MOVING_PISTONS = TagKey.create(BLOCK_KEY,
+        Charm.instance().makeId("moving_pistons"));
 }
