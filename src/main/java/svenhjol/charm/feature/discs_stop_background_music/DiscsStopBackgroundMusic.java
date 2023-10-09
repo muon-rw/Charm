@@ -18,19 +18,17 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.CharmClient;
-import svenhjol.charm.mixin.accessor.SoundEngineAccessor;
-import svenhjol.charm.mixin.accessor.SoundManagerAccessor;
 import svenhjol.charmony.annotation.ClientFeature;
+import svenhjol.charmony.base.CharmonyFeature;
 import svenhjol.charmony_api.event.BlockUseEvent;
 import svenhjol.charmony_api.event.ClientTickEvent;
 import svenhjol.charmony_api.event.SoundPlayEvent;
-import svenhjol.charmony.base.CharmFeature;
 
 @ClientFeature(
     mod = CharmClient.MOD_ID,
     description = "Playing a music disc in a jukebox prevents background music from playing at the same time."
 )
-public class DiscsStopBackgroundMusic extends CharmFeature {
+public class DiscsStopBackgroundMusic extends CharmonyFeature {
     private static final int CHECK_TICKS = 10;
     private SoundInstance musicToStop = null;
     private int ticksBeforeStop = 0;
@@ -93,7 +91,7 @@ public class DiscsStopBackgroundMusic extends CharmFeature {
     }
 
     Multimap<SoundSource, SoundInstance> getPlayingSounds() {
-        var soundEngine = ((SoundManagerAccessor)getSoundManager()).getSoundEngine();
-        return ((SoundEngineAccessor)soundEngine).getInstanceBySource();
+        var soundEngine = getSoundManager().soundEngine;
+        return soundEngine.instanceBySource;
     }
 }

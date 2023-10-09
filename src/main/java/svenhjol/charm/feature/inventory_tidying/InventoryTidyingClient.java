@@ -9,50 +9,43 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.*;
 import svenhjol.charm.Charm;
-import svenhjol.charm.mixin.accessor.AbstractContainerScreenAccessor;
+import svenhjol.charm.CharmClient;
+import svenhjol.charmony.annotation.ClientFeature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.helper.ApiHelper;
+import svenhjol.charmony.helper.ScreenHelper;
 import svenhjol.charmony_api.CharmonyApi;
 import svenhjol.charmony_api.event.ScreenRenderEvent;
 import svenhjol.charmony_api.event.ScreenSetupEvent;
-import svenhjol.charmony_api.iface.IHasScreenOffsetTweaks;
+import svenhjol.charmony_api.iface.IContainerOffsetTweak;
+import svenhjol.charmony_api.iface.IContainerOffsetTweakProvider;
 import svenhjol.charmony_api.iface.IInventoryTidyingBlacklistProvider;
 import svenhjol.charmony_api.iface.IInventoryTidyingWhitelistProvider;
-import svenhjol.charmony_api.iface.IScreenOffsetTweakProvider;
-import svenhjol.charmony.annotation.ClientFeature;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charmony.helper.ApiHelper;
-import svenhjol.charmony.helper.ScreenHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BooleanSupplier;
 
-@ClientFeature
-public class InventoryTidyingClient extends CharmFeature
-    implements IHasScreenOffsetTweaks, IInventoryTidyingWhitelistProvider, IInventoryTidyingBlacklistProvider {
+@ClientFeature(mod = CharmClient.MOD_ID, feature = InventoryTidying.class)
+public class InventoryTidyingClient extends CharmonyFeature
+    implements IInventoryTidyingWhitelistProvider, IInventoryTidyingBlacklistProvider, IContainerOffsetTweakProvider {
     private static final int LEFT = 159;
     private static final int TOP = 12;
     private static final List<ImageButton> SORTING_BUTTONS = new ArrayList<>();
     private static final List<Class<? extends Screen>> WHITELISTED_SCREENS = new ArrayList<>();
     private static final List<Class<? extends Screen>> BLACKLISTED_SCREENS = new ArrayList<>();
-    private static final Map<Class<? extends Screen>, Pair<Integer, Integer>> SCREEN_TWEAKS = new HashMap<>();
+    private static final Map<Class<? extends Screen>, Pair<Integer, Integer>> CONTAINER_OFFSETS = new HashMap<>();
     static final WidgetSprites TIDY_BUTTON = new WidgetSprites(
         Charm.instance().makeId("widget/inventory_tidying/tidy_button"),
         Charm.instance().makeId("widget/inventory_tidying/tidy_button_highlighted")
     );
 
     @Override
-    public List<BooleanSupplier> checks() {
-        return List.of(() -> Charm.instance().loader().isEnabled(InventoryTidying.class));
-    }
-
-    @Override
     public void register() {
-        // TODO: IHasBlockEntityScreens and IHasBlacklistedScreens need to be more specific to inventory tidying.
-        ApiHelper.consume(IHasScreenOffsetTweaks.class,
-            provider -> provider.getScreenOffsetTweaks().forEach(
-                tweak -> SCREEN_TWEAKS.put(tweak.getScreen(), tweak.getOffset())));
+        ApiHelper.consume(IContainerOffsetTweakProvider.class,
+            provider -> provider.getContainerOffsetTweaks().forEach(
+                tweak -> CONTAINER_OFFSETS.put(tweak.getScreen(), tweak.getOffset())));
 
         ApiHelper.consume(IInventoryTidyingWhitelistProvider.class,
             provider -> WHITELISTED_SCREENS.addAll(provider.getWhitelistedInventoryTidyingScreens()));
@@ -80,11 +73,11 @@ public class InventoryTidyingClient extends CharmFeature
 
         var clazz = containerScreen.getClass();
         var menu = containerScreen.getMenu();
-        var x = ((AbstractContainerScreenAccessor)containerScreen).getLeftPos() + LEFT;
-        var y = ((AbstractContainerScreenAccessor)containerScreen).getTopPos() - TOP;
+        var x = containerScreen.leftPos + LEFT;
+        var y = containerScreen.topPos - TOP;
 
-        if (SCREEN_TWEAKS.containsKey(clazz)) {
-            var pair = SCREEN_TWEAKS.get(clazz);
+        if (CONTAINER_OFFSETS.containsKey(clazz)) {
+            var pair = CONTAINER_OFFSETS.get(clazz);
             x += pair.getFirst();
             y += pair.getSecond();
         }
@@ -114,15 +107,15 @@ public class InventoryTidyingClient extends CharmFeature
         if (BLACKLISTED_SCREENS.contains(screen.getClass())) return;
 
         // Re-render when recipe is opened/closed.
-        var x = ((AbstractContainerScreenAccessor)screen).getLeftPos();
+        var x = screen.leftPos;
         SORTING_BUTTONS.forEach(button -> button.setPosition(x + LEFT, button.getY()));
     }
 
     @Override
-    public List<IScreenOffsetTweakProvider> getScreenOffsetTweaks() {
+    public List<IContainerOffsetTweak> getContainerOffsetTweaks() {
         // Offset the button by these X and Y coordinates on these screens.
         return List.of(
-            new IScreenOffsetTweakProvider() {
+            new IContainerOffsetTweak() {
                 @Override
                 public Class<? extends Screen> getScreen() {
                     return MerchantScreen.class;
@@ -133,7 +126,7 @@ public class InventoryTidyingClient extends CharmFeature
                     return Pair.of(100, 0);
                 }
             },
-            new IScreenOffsetTweakProvider() {
+            new IContainerOffsetTweak() {
                 @Override
                 public Class<? extends Screen> getScreen() {
                     return InventoryScreen.class;

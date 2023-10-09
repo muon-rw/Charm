@@ -3,6 +3,7 @@ package svenhjol.charm.feature.storage_blocks.sugar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -12,8 +13,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.storage_blocks.StorageBlocks;
-import svenhjol.charmony.base.CharmBlockItem;
-import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.base.CharmonyBlockItem;
+import svenhjol.charmony.base.CharmonyFeature;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +27,7 @@ public class SugarBlock extends FallingBlock {
             .strength(0.5F));
     }
 
-    public static CharmFeature getParent() {
+    public static CharmonyFeature getParent() {
         return Charm.instance().loader().get(StorageBlocks.class).orElseThrow();
     }
 
@@ -78,14 +79,14 @@ public class SugarBlock extends FallingBlock {
             }
 
             if (!level.isClientSide()) {
-                // TODO: advancement.
+                Sugar.triggerDissolvedSugar((ServerLevel) level, pos);
             }
         }
 
         return waterBelow;
     }
 
-    static class BlockItem extends CharmBlockItem {
+    static class BlockItem extends CharmonyBlockItem {
         public BlockItem() {
             super(getParent(), Sugar.block, new Properties());
         }

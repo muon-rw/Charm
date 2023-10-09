@@ -23,18 +23,19 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.inventory_tidying.InventoryTidyingHandler;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony_api.event.ItemDragDropEvent;
 import svenhjol.charmony_api.event.ItemDragDropEvent.StackType;
 import svenhjol.charmony_api.event.LevelLoadEvent;
 import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.base.CharmonyFeature;
 import svenhjol.charmony.helper.TagHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Feature(mod = Charm.MOD_ID, description = "Drag and drop items into a shulkerbox from within your inventory.")
-public class ShulkerBoxDragDrop extends CharmFeature {
+public class ShulkerBoxDragDrop extends CharmonyFeature {
     public static final List<ItemLike> BLACKLIST = new ArrayList<>();
 
     @Override
@@ -129,6 +130,7 @@ public class ShulkerBoxDragDrop extends CharmFeature {
                 }
 
                 shulkerBox.saveToItem(dest);
+                triggerDraggedItemToShulkerBox(player);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -160,5 +162,9 @@ public class ShulkerBoxDragDrop extends CharmFeature {
         entity.playSound(SoundEvents.SHULKER_BOX_OPEN,
             0.1f + entity.level().getRandom().nextFloat() * 0.3f,
             0.67f + entity.level().getRandom().nextFloat() * 0.4f);
+    }
+
+    public static void triggerDraggedItemToShulkerBox(Player player) {
+        Advancements.trigger(Charm.instance().makeId("dragged_item_to_shulker_box"), player);
     }
 }

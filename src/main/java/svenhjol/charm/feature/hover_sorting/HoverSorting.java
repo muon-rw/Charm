@@ -10,10 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -23,16 +20,15 @@ import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.hover_sorting.HoverSortingNetwork.ScrollOnHover;
 import svenhjol.charm.feature.inventory_tidying.InventoryTidyingHandler;
-import svenhjol.charm.mixin.accessor.BundleItemAccessor;
-import svenhjol.charm.mixin.accessor.ShulkerBoxBlockEntityAccessor;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
+import svenhjol.charmony.helper.ApiHelper;
+import svenhjol.charmony.helper.TagHelper;
 import svenhjol.charmony_api.CharmonyApi;
 import svenhjol.charmony_api.event.ItemHoverSortEvent;
 import svenhjol.charmony_api.event.LevelLoadEvent;
 import svenhjol.charmony_api.iface.IHoverSortableItemProvider;
-import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charmony.helper.ApiHelper;
-import svenhjol.charmony.helper.TagHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +37,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Feature(mod = Charm.MOD_ID, description = "Scroll the mouse while hovering over a bundle or shulker box to cycle the order of its contents.")
-public class HoverSorting extends CharmFeature implements IHoverSortableItemProvider {
+public class HoverSorting extends CharmonyFeature implements IHoverSortableItemProvider {
     private final List<ItemLike> cachedSortables = new ArrayList<>();
     private final List<TagKey<Block>> cachedBlockTags = new ArrayList<>();
     private final List<TagKey<Item>> cachedItemTags = new ArrayList<>();
@@ -87,8 +83,8 @@ public class HoverSorting extends CharmFeature implements IHoverSortableItemProv
 
     private void handleBundleSorting(ServerPlayer player, ItemStack stack, ItemHoverSortEvent.SortDirection direction) {
         if (stack.is(Items.BUNDLE) && sortables.contains(Items.BUNDLE)) {
-            var itemsTag = BundleItemAccessor.getTagItems();
-            var contents = BundleItemAccessor.invokeGetContents(stack)
+            var itemsTag = BundleItem.TAG_ITEMS;
+            var contents = BundleItem.getContents(stack)
                 .collect(Collectors.toCollection(LinkedList::new));
 
             if (contents.isEmpty()) {
@@ -108,6 +104,8 @@ public class HoverSorting extends CharmFeature implements IHoverSortableItemProv
                 itemStack.save(t);
                 list.add(0, t);
             });
+
+            triggerSortedItems(player);
         }
     }
 
@@ -125,7 +123,7 @@ public class HoverSorting extends CharmFeature implements IHoverSortableItemProv
             }
 
             if (blockEntity instanceof ShulkerBoxBlockEntity shulkerBox) {
-                var itemStacks = ((ShulkerBoxBlockEntityAccessor) shulkerBox).getItemStacks();
+                var itemStacks = shulkerBox.itemStacks;
                 if (itemStacks.isEmpty()) return;
 
                 // Merge and sort contents.
@@ -136,8 +134,10 @@ public class HoverSorting extends CharmFeature implements IHoverSortableItemProv
                 // Write contents back to shulker box.
                 NonNullList<ItemStack> list = NonNullList.create();
                 list.addAll(stacks);
-                ((ShulkerBoxBlockEntityAccessor)shulkerBox).setItemStacks(list);
+                shulkerBox.itemStacks = list;
                 shulkerBox.saveToItem(stack);
+
+                triggerSortedItems(player);
             }
         }
     }
@@ -175,5 +175,9 @@ public class HoverSorting extends CharmFeature implements IHoverSortableItemProv
     @Override
     public List<TagKey<Block>> getHoverSortableBlockTags() {
         return List.of(BlockTags.SHULKER_BOXES);
+    }
+
+    public static void triggerSortedItems(Player player) {
+        Advancements.trigger(Charm.instance().makeId("sorted_items"), player);
     }
 }

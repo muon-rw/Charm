@@ -22,19 +22,17 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import svenhjol.charm.Charm;
-import svenhjol.charm.mixin.accessor.MineshaftPieceAccessor;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
 import svenhjol.charmony_api.event.LevelLoadEvent;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charmony.mixin.accessor.BlockItemAccessor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Feature(mod = Charm.MOD_ID, description = "Adds decoration and more ores to mineshafts.")
-public class ImprovedMineshafts extends CharmFeature {
+public class ImprovedMineshafts extends CharmonyFeature {
     static final List<BlockState> FLOOR_BLOCKS = new ArrayList<>();
     static final List<BlockState> CEILING_BLOCKS = new ArrayList<>();
     static final List<BlockState> PILE_BLOCKS = new ArrayList<>();
@@ -82,7 +80,7 @@ public class ImprovedMineshafts extends CharmFeature {
 
     public static void generatePiece(StructurePiece piece, WorldGenLevel level, StructureManager accessor, ChunkGenerator chunkGenerator, RandomSource rand, BoundingBox box, ChunkPos chunkPos, BlockPos blockPos) {
         // Don't add any decoration to mesa mineshafts.
-        if (((MineshaftPieceAccessor)piece).getType() == MineshaftStructure.Type.MESA) return;
+        if (((MineshaftPieces.MineShaftPiece)piece).type == MineshaftStructure.Type.MESA) return;
 
         if (piece instanceof MineshaftPieces.MineShaftCorridor) {
             Generation.decorateCorridor((MineshaftPieces.MineShaftCorridor)piece, level, accessor, chunkGenerator, rand, box, chunkPos, blockPos);
@@ -130,7 +128,7 @@ public class ImprovedMineshafts extends CharmFeature {
                 var prop = definition.getProperty(key);
                 if (prop == null) continue;
                 var propString = Objects.requireNonNull(blockStateTag.get(key)).getAsString();
-                state = BlockItemAccessor.invokeUpdateState(state, prop, propString);
+                state = BlockItem.updateState(state, prop, propString);
             }
         }
 

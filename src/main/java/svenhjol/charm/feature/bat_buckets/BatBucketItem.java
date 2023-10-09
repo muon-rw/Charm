@@ -12,15 +12,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import svenhjol.charm.feature.echolocation.Echolocation;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charmony.base.CharmItem;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.base.CharmonyItem;
 import svenhjol.charmony.helper.ItemNbtHelper;
 import svenhjol.charmony.helper.MobHelper;
 
-public class BatBucketItem extends CharmItem {
+public class BatBucketItem extends CharmonyItem {
     static final String STORED_BAT_TAG = "stored_bat";
 
-    public BatBucketItem(CharmFeature feature) {
+    public BatBucketItem(CharmonyFeature feature) {
         super(feature, new Properties().stacksTo(1));
     }
 
@@ -56,7 +56,7 @@ public class BatBucketItem extends CharmItem {
         player.swing(hand);
 
         if (!player.level().isClientSide()) {
-            // TODO: advancement.
+            BatBuckets.triggerUsedBatBucket(player);
             player.addEffect(new MobEffectInstance(Echolocation.MOB_EFFECT.get(), BatBuckets.GLOW_TIME * 20));
         }
 

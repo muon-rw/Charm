@@ -87,7 +87,11 @@ public class MoobloomEntity extends Cow implements Shearable {
                 player.setItemInHand(hand, out);
                 entityData.set(POLLINATED, false);
 
-                // TODO: Advancement
+                Mooblooms.triggerMilkedMoobloom(player);
+
+                if (MoobloomType.RARE_TYPES.contains(this.getMoobloomType())) {
+                    Mooblooms.triggerMilkedRareMoobloom(player);
+                }
             }
 
             return InteractionResult.sidedSuccess(level.isClientSide());

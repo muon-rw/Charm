@@ -14,16 +14,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony_api.event.EntityJoinEvent;
 import svenhjol.charmony_api.event.PlayerTickEvent;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charm.mixin.accessor.MobAccessor;
-
-import java.util.List;
 
 @SuppressWarnings("UnusedReturnValue")
 @Feature(mod = Charm.MOD_ID, description = "Villagers are attracted when the player holds a block of emeralds.")
-public class VillagersFollowEmeraldBlocks extends CharmFeature {
+public class VillagersFollowEmeraldBlocks extends CharmonyFeature {
     public static final ResourceLocation TRIGGER_LURED_VILLAGER = new ResourceLocation(Charm.MOD_ID, "lured_villager");
 
     @Override
@@ -35,7 +33,7 @@ public class VillagersFollowEmeraldBlocks extends CharmFeature {
     private InteractionResult handleEntityJoin(Entity entity, Level level) {
         if (entity instanceof Villager villager) {
             var ingredient = Ingredient.of(Blocks.EMERALD_BLOCK);
-            var goalSelector = ((MobAccessor)villager).getGoalSelector();
+            var goalSelector = villager.goalSelector;
 
             if (goalSelector.getAvailableGoals().stream().noneMatch(g -> g.getGoal() instanceof TemptGoal)) {
                 goalSelector.addGoal(3, new TemptGoal(villager, 0.6, ingredient, false));
@@ -50,7 +48,7 @@ public class VillagersFollowEmeraldBlocks extends CharmFeature {
             && player.level().getGameTime() % 40 == 0
             && player.getMainHandItem().getItem() == Items.EMERALD_BLOCK
         ) {
-            List<Villager> villagers = player.level().getEntitiesOfClass(Villager.class, new AABB(player.blockPosition()).inflate(8.0D));
+            var villagers = player.level().getEntitiesOfClass(Villager.class, new AABB(player.blockPosition()).inflate(8.0D));
             if (!villagers.isEmpty()) {
                 triggerLuredVillager((ServerPlayer) player);
             }
@@ -58,6 +56,6 @@ public class VillagersFollowEmeraldBlocks extends CharmFeature {
     }
 
     public static void triggerLuredVillager(ServerPlayer player) {
-        // TODO: advancement
+        Advancements.trigger(TRIGGER_LURED_VILLAGER, player);
     }
 }

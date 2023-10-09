@@ -1,6 +1,7 @@
 package svenhjol.charm.feature.kilns;
 
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
@@ -8,14 +9,15 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.feature.firing.Firing;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "A functional block that speeds up cooking of clay, glass, bricks and terracotta.")
-public class Kilns extends CharmFeature {
+public class Kilns extends CharmonyFeature {
     private static final String BLOCK_ID = "kiln";
     public static Supplier<KilnBlock> block;
     public static Supplier<BlockItem> blockItem;
@@ -44,5 +46,9 @@ public class Kilns extends CharmFeature {
         menu = registry.menuType(BLOCK_ID, () -> new MenuType<>(KilnMenu::new, FeatureFlags.VANILLA_SET));
 
         bakeSound = registry.soundEvent("kiln_bake");
+    }
+
+    public static void triggerFiredItem(Player player) {
+        Advancements.trigger(Charm.instance().makeId("fired_item"), player);
     }
 }

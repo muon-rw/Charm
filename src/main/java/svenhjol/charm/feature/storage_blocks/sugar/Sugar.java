@@ -1,10 +1,14 @@
 package svenhjol.charm.feature.storage_blocks.sugar;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.storage_blocks.StorageBlocks;
+import svenhjol.charmony.feature.advancements.Advancements;
+import svenhjol.charmony.helper.PlayerHelper;
 import svenhjol.charmony_api.iface.IStorageBlockFeature;
 
 import java.util.List;
@@ -17,6 +21,11 @@ public class Sugar implements IStorageBlockFeature {
     static Supplier<Item> item;
     static Supplier<SoundEvent> dissolveSound;
     static boolean enabled;
+
+    @Override
+    public List<BooleanSupplier> checks() {
+        return List.of(() -> StorageBlocks.sugarEnabled);
+    }
 
     @Override
     public void register() {
@@ -32,8 +41,8 @@ public class Sugar implements IStorageBlockFeature {
         return enabled;
     }
 
-    @Override
-    public List<BooleanSupplier> checks() {
-        return List.of(() -> StorageBlocks.sugarEnabled);
+    static void triggerDissolvedSugar(ServerLevel level, BlockPos pos) {
+        PlayerHelper.getPlayersInRange(level, pos, 8.0d).forEach(
+            player -> Advancements.trigger(Charm.instance().makeId("dissolved_sugar"), player));
     }
 }

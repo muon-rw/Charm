@@ -10,22 +10,24 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Endermite;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import svenhjol.charm.Charm;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony_api.CharmonyApi;
 import svenhjol.charmony_api.event.EntityKilledDropEvent;
 import svenhjol.charmony_api.iface.IWandererTrade;
 import svenhjol.charmony_api.iface.IWandererTradeProvider;
-import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Endermites drop endermite powder that can be used to locate an End City.")
-public class EndermitePowder extends CharmFeature implements IWandererTradeProvider {
+public class EndermitePowder extends CharmonyFeature implements IWandererTradeProvider {
     static final String ID = "endermite_powder";
     static Supplier<EntityType<EndermitePowderEntity>> entity;
     static Supplier<EndermitePowderItem> item;
@@ -83,5 +85,9 @@ public class EndermitePowder extends CharmFeature implements IWandererTradeProvi
                 return 20;
             }
         });
+    }
+
+    public static void triggerUsedEndermitePowder(Player player) {
+        Advancements.trigger(Charm.instance().makeId("used_endermite_powder"), player);
     }
 }

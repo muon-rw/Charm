@@ -1,5 +1,6 @@
 package svenhjol.charm.feature.pigs_find_mushrooms;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -9,18 +10,19 @@ import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import svenhjol.charm.Charm;
-import svenhjol.charm.mixin.accessor.MobAccessor;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
+import svenhjol.charmony.helper.PlayerHelper;
 import svenhjol.charmony_api.event.EntityJoinEvent;
-import svenhjol.charmony.base.CharmFeature;
 
 import java.util.UUID;
 import java.util.WeakHashMap;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Pigs have a chance to find mushrooms from mycelium and podzol blocks.")
-public class PigsFindMushrooms extends CharmFeature {
+public class PigsFindMushrooms extends CharmonyFeature {
     /**
      * Tracks the animation ticks for a pig UUID.
      */
@@ -54,7 +56,7 @@ public class PigsFindMushrooms extends CharmFeature {
 
     private void handleEntityJoin(Entity entity, Level level) {
         if (entity instanceof Pig pig) {
-            var goalSelector = ((MobAccessor) pig).getGoalSelector();
+            var goalSelector = pig.goalSelector;
             if (goalSelector.getAvailableGoals().stream().noneMatch(
                 g -> g.getGoal() instanceof FindMushroomGoal)) {
                 goalSelector.addGoal(3, new FindMushroomGoal(pig));
@@ -86,5 +88,11 @@ public class PigsFindMushrooms extends CharmFeature {
             return 0.63f;
         }
         return pig.getXRot() * ((float)Math.PI / 180);
+    }
+
+    public static void triggerUnearthedMushroom(Level level, BlockPos pos) {
+        PlayerHelper.getPlayersInRange(level, pos, 8.0d).forEach(
+            player -> Advancements.trigger(Charm.instance().makeId("unearthed_mushroom"), player));
+
     }
 }

@@ -13,18 +13,19 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import svenhjol.charm.Charm;
-import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony_api.event.EntityAttackEvent;
-import svenhjol.charmony_api.event.EntityUseEvent;
-import svenhjol.charmony.base.CharmFeature;
 import svenhjol.charm.feature.clear_item_frames.ClearItemFramesNetwork.AddAmethyst;
 import svenhjol.charm.feature.clear_item_frames.ClearItemFramesNetwork.RemoveAmethyst;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
+import svenhjol.charmony_api.event.EntityAttackEvent;
+import svenhjol.charmony_api.event.EntityUseEvent;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Add amethyst shards to item frames to make them invisible.")
-public class ClearItemFrames extends CharmFeature {
+public class ClearItemFrames extends CharmonyFeature {
     static Supplier<SimpleParticleType> particleType;
 
     @Override
@@ -81,13 +82,18 @@ public class ClearItemFrames extends CharmFeature {
             }
 
             if (!level.isClientSide()) {
-                AddAmethyst.send(frame.blockPosition(), (ServerPlayer)player);
-                // TODO: advancement for placing amethyst.
+                var serverPlayer = (ServerPlayer)player;
+                AddAmethyst.send(frame.blockPosition(), serverPlayer);
+                triggerMadeClearItemFrame(serverPlayer);
             }
 
             return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
         return InteractionResult.PASS;
+    }
+
+    public static void triggerMadeClearItemFrame(Player player) {
+        Advancements.trigger(Charm.instance().makeId("made_clear_item_frame"), player);
     }
 }

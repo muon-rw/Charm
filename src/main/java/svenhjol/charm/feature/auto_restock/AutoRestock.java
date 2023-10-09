@@ -8,8 +8,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony_api.event.PlayerTickEvent;
-import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.base.CharmonyFeature;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Objects;
 import java.util.WeakHashMap;
 
 @Feature(mod = Charm.MOD_ID, description = "Refills hotbar from your inventory.")
-public class AutoRestock extends CharmFeature {
+public class AutoRestock extends CharmonyFeature {
     // Remember which items were in our hands and how often they were used.
     private final Map<Player, EnumMap<InteractionHand, StackData>> handCache = new WeakHashMap<>();
 
@@ -61,6 +62,7 @@ public class AutoRestock extends CharmFeature {
                 && Objects.equals(stackData.enchantments, possibleReplacement.getEnchantmentTags())) {
                 player.setItemInHand(hand, possibleReplacement.copy());
                 inventory.removeItem(i, inventory.getMaxStackSize());
+                triggerRestockedCurrentItem(player);
                 break;
             }
         }
@@ -85,5 +87,9 @@ public class AutoRestock extends CharmFeature {
             stackData.enchantments = enchantments;
             stackData.used = used;
         }
+    }
+
+    public static void triggerRestockedCurrentItem(Player player) {
+        Advancements.trigger(Charm.instance().makeId("restocked_current_item"), player);
     }
 }

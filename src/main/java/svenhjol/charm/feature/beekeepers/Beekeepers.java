@@ -5,18 +5,20 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.GenericTradeOffers;
 
 import java.util.List;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Beekeepers are villagers that trade beekeeping items. Their job site is the beehive.")
-public class Beekeepers extends CharmFeature {
+public class Beekeepers extends CharmonyFeature {
     private static final String VILLAGER_ID = "beekeeper";
     private static final String BLOCK_ID = "minecraft:beehive";
     static final TagKey<Item> BEEKEEPER_SELLS_FLOWERS = TagKey.create(BuiltInRegistries.ITEM.key(),
@@ -73,5 +75,9 @@ public class Beekeepers extends CharmFeature {
 
         registry.villagerTrade(profession, 5, () -> new BeekeeperTradeOffers.PopulatedBeehiveForEmeralds(
             21, 14, 30, 1));
+    }
+
+    public static void triggerTradedWithBeekeeper(Player player) {
+        Advancements.trigger(Charm.instance().makeId("traded_with_beekeeper"), player);
     }
 }

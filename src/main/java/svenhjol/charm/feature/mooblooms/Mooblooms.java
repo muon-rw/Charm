@@ -8,20 +8,22 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Bee;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.Heightmap;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony_api.event.EntityJoinEvent;
-import svenhjol.charmony.base.CharmFeature;
 
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Mooblooms are cow-like mobs that come in a variety of flower types.\n" +
     "They spawn flowers where they walk and can be milked for suspicious stew.")
-public class Mooblooms extends CharmFeature {
+public class Mooblooms extends CharmonyFeature {
     static final String ID = "moobloom";
     static Supplier<Item> spawnEggItem;
     static Supplier<EntityType<MoobloomEntity>> entity;
@@ -73,5 +75,13 @@ public class Mooblooms extends CharmFeature {
                 bee.getGoalSelector().addGoal(4, new BeeMoveToMoobloomGoal(bee));
             }
         }
+    }
+
+    public static void triggerMilkedMoobloom(Player player) {
+        Advancements.trigger(Charm.instance().makeId("milked_moobloom"), player);
+    }
+
+    public static void triggerMilkedRareMoobloom(Player player) {
+        Advancements.trigger(Charm.instance().makeId("milked_rare_moobloom"), player);
     }
 }

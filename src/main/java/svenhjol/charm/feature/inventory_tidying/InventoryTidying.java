@@ -1,19 +1,16 @@
 package svenhjol.charm.feature.inventory_tidying;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.inventory_tidying.InventoryTidyingNetwork.TidyInventory;
 import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charmony.helper.AdvancementHelper;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
 
 @Feature(mod = Charm.MOD_ID, description = "Button to automatically tidy inventories.")
-public class InventoryTidying extends CharmFeature {
-    private static final ResourceLocation ADVANCEMENT = Charm.instance().makeId("tidied_inventory");
-
+public class InventoryTidying extends CharmonyFeature {
     @Override
     public void runWhenEnabled() {
         InventoryTidyingHandler.init();
@@ -53,7 +50,11 @@ public class InventoryTidying extends CharmFeature {
         }
 
         if (hasItemsInContainer) {
-            AdvancementHelper.trigger(ADVANCEMENT, serverPlayer);
+            triggerTidiedInventory(player);
         }
+    }
+
+    public static void triggerTidiedInventory(Player player) {
+        Advancements.trigger(Charm.instance().makeId("tidied_inventory"), player);
     }
 }

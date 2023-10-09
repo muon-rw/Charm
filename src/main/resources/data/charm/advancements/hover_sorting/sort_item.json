@@ -1,0 +1,31 @@
+{
+  "parent": "charm:inventory_tidying/tidy_inventory",
+  "display": {
+    "icon": {
+      "item": "minecraft:brown_shulker_box"
+    },
+    "title": {
+      "translate": "advancements.charm.sort_item.title"
+    },
+    "description": {
+      "translate": "advancements.charm.sort_item.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "sorted_item": {
+      "trigger": "charmony_action_performed",
+      "conditions": {
+        "action": "charm:sorted_item"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "sorted_item"
+    ]
+  ]
+}

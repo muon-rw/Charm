@@ -17,20 +17,21 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import svenhjol.charm.Charm;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
+import svenhjol.charmony.helper.ItemNbtHelper;
 import svenhjol.charmony_api.CharmonyApi;
 import svenhjol.charmony_api.event.EntityUseEvent;
 import svenhjol.charmony_api.iface.IWandererTrade;
 import svenhjol.charmony_api.iface.IWandererTradeProvider;
-import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charmony.helper.ItemNbtHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Right-click a bat with a bucket to capture it. Right-click again to release it and locate entities around you.")
-public class BatBuckets extends CharmFeature implements IWandererTradeProvider {
+public class BatBuckets extends CharmonyFeature implements IWandererTradeProvider {
     static Supplier<BatBucketItem> bucketItem;
     private static Supplier<SoundEvent> grabSound;
     private static Supplier<SoundEvent> releaseSound;
@@ -91,7 +92,7 @@ public class BatBuckets extends CharmFeature implements IWandererTradeProvider {
             player.swing(hand);
             entity.discard();
 
-            // TODO: advancement.
+            triggerCapturedBat(player);
             return InteractionResult.CONSUME;
         }
 
@@ -116,5 +117,13 @@ public class BatBuckets extends CharmFeature implements IWandererTradeProvider {
                 return 8;
             }
         });
+    }
+
+    public static void triggerCapturedBat(Player player) {
+        Advancements.trigger(Charm.instance().makeId("captured_bat"), player);
+    }
+
+    public static void triggerUsedBatBucket(Player player) {
+        Advancements.trigger(Charm.instance().makeId("used_bat_bucket"), player);
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.ChestType;
-import svenhjol.charm.Charm;
 import svenhjol.charm.CharmClient;
 import svenhjol.charm.feature.variant_wood.block.VariantChestBlock;
 import svenhjol.charm.feature.variant_wood.block.VariantTrappedChestBlock;
@@ -21,25 +20,18 @@ import svenhjol.charm.feature.variant_wood.registry.CustomChestBoat;
 import svenhjol.charm.feature.variant_wood.registry.CustomTrappedChest;
 import svenhjol.charm.feature.variant_wood.renderer.VariantChestBlockEntityRenderer;
 import svenhjol.charmony.annotation.ClientFeature;
-import svenhjol.charmony_api.event.BlockItemRenderEvent;
-import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.base.CharmonyFeature;
 import svenhjol.charmony.iface.IClientRegistry;
+import svenhjol.charmony_api.event.BlockItemRenderEvent;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.BooleanSupplier;
 
-@ClientFeature(canBeDisabled = false)
-public class VariantWoodClient extends CharmFeature {
+@ClientFeature(feature = VariantWood.class)
+public class VariantWoodClient extends CharmonyFeature {
     private VariantChestBlockEntity cachedNormalChest;
     private VariantTrappedChestBlockEntity cachedTrappedChest;
     private static final int DEFAULT_CHEST_BOAT_LAYER_COLOR = 0xdf9f43;
-
-    @Override
-    public List<BooleanSupplier> checks() {
-        return List.of(() -> Charm.instance().loader().isEnabled(VariantWood.class));
-    }
 
     @Override
     public void register() {
@@ -53,7 +45,7 @@ public class VariantWoodClient extends CharmFeature {
             if (VariantWood.variantBarrels) {
                 VariantWood.BARRELS.forEach((material, barrel) -> {
                     registry.itemTab(barrel.item, CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.BARREL);
-                    registry.itemTab(barrel.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.BARREL);
+                    registry.itemTab(barrel.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.REDSTONE_ORE);
                 });
             }
 
@@ -65,16 +57,16 @@ public class VariantWoodClient extends CharmFeature {
             if (VariantWood.variantChests) {
                 VariantWood.CHESTS.forEach((material, chest) -> {
                     registry.itemTab(chest.item, CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.CHEST);
-                    registry.itemTab(chest.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.CHEST);
+                    registry.itemTab(chest.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.REDSTONE_ORE);
                 });
                 VariantWood.TRAPPED_CHESTS.forEach((material, trappedChest) ->
-                    registry.itemTab(trappedChest.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.TRAPPED_CHEST));
+                    registry.itemTab(trappedChest.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.REDSTONE_ORE));
             }
 
             if (VariantWood.variantChiseledBookshelves) {
                 VariantWood.CHISELED_BOOKSHELVES.forEach((material, chiseledBookshelf) -> {
                     registry.itemTab(chiseledBookshelf.item, CreativeModeTabs.FUNCTIONAL_BLOCKS, Items.CHISELED_BOOKSHELF);
-                    registry.itemTab(chiseledBookshelf.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.CHISELED_BOOKSHELF);
+                    registry.itemTab(chiseledBookshelf.item, CreativeModeTabs.REDSTONE_BLOCKS, Items.REDSTONE_ORE);
                 });
             }
 

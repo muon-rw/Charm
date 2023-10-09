@@ -59,6 +59,27 @@
     ],
     "subtitle": "subtitles.charm.item.bat_bucket.release"
   },
+  "dirt_to_path": {
+    "sounds": [
+      {
+        "name": "minecraft:item/shovel/flatten1",
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/shovel/flatten2",
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/shovel/flatten3",
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/shovel/flatten4",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.item.path.convert_from_dirt"
+  },
   "endermite_powder_launch": {
     "sounds": [
       {
@@ -152,6 +173,27 @@
     ],
     "subtitle": "subtitles.charm.entity.moobloom.milk"
   },
+  "path_to_dirt": {
+    "sounds": [
+      {
+        "name": "minecraft:item/shovel/flatten1",
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/shovel/flatten2",
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/shovel/flatten3",
+        "volume": 1.0
+      },
+      {
+        "name": "minecraft:item/shovel/flatten4",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "subtitles.charm.item.path.convert_to_dirt"
+  },
   "pig_sniffing": {
     "sounds": [
       {
@@ -159,54 +201,16 @@
         "volume": 0.8
       }
     ],
-    "subtitle": "subtitles.charm.entity.pig_sniffing"
+    "subtitle": "subtitles.charm.entity.pig.sniffing"
   },
-  "raid_horn_call_off_raid": {
+  "pot_item_place": {
     "sounds": [
       {
-        "name": "charm:horn_long",
-        "volume": 0.9
-      }
-    ],
-    "subtitle": "subtitles.charm.item.raid_horn.call_off_raid"
-  },
-  "raid_horn_call_patrol": {
-    "sounds": [
-      {
-        "name": "minecraft:event/raid/raidhorn_01",
-        "volume": 1.0
-      },
-      {
-        "name": "minecraft:event/raid/raidhorn_02",
-        "volume": 1.0
-      },
-      {
-        "name": "minecraft:event/raid/raidhorn_03",
-        "volume": 1.0
-      },
-      {
-        "name": "minecraft:event/raid/raidhorn_04",
+        "name": "charm:pot_item_place",
         "volume": 1.0
       }
     ],
-    "subtitle": "subtitles.charm.item.raid_horn.call_patrol"
-  },
-  "raid_horn_squeak": {
-    "sounds": [
-      {
-        "name": "charm:horn_squeak1",
-        "volume": 1.0
-      },
-      {
-        "name": "charm:horn_squeak2",
-        "volume": 1.0
-      },
-      {
-        "name": "charm:horn_squeak3",
-        "volume": 1.0
-      }
-    ],
-    "subtitle": "subtitles.charm.item.raid_horn.squeak"
+    "subtitle": "subtitles.charm.block.pot.item_place"
   },
   "sugar_dissolve": {
     "sounds": [

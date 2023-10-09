@@ -20,9 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.joml.Matrix4f;
-import svenhjol.charmony.base.CharmContainerScreen;
+import svenhjol.charmony.base.CharmonyContainerScreen;
 import svenhjol.charmony.helper.KeyboardHelper;
-import svenhjol.charmony.mixin.accessor.ScreenAccessor;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -36,7 +35,7 @@ import java.util.stream.Collector;
  * @since 28.12.2020
  */
 @SuppressWarnings("ConstantConditions")
-public class AtlasScreen extends CharmContainerScreen<AtlasContainer> {
+public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
 
     private static final int SIZE = 48;
     private static final int LEFT = 74;
@@ -146,7 +145,7 @@ public class AtlasScreen extends CharmContainerScreen<AtlasContainer> {
             button.visible = mapGui.buttonVisible(direction);
             if (button.visible) {
                 button.active = mapGui.buttonEnabled(direction);
-                if (!((ScreenAccessor)this).getNarratables().contains(button)) {
+                if (!(this.narratables.contains(button))) {
                     addRenderableWidget(button);
                 }
             } else {
@@ -156,8 +155,8 @@ public class AtlasScreen extends CharmContainerScreen<AtlasContainer> {
     }
 
     private void removeButton(AbstractWidget button) {
-        ((ScreenAccessor)this).getNarratables().remove(button);
-        ((ScreenAccessor)this).getChildren().remove(button);
+        this.narratables.remove(button);
+        this.children.remove(button);
     }
 
     @Override

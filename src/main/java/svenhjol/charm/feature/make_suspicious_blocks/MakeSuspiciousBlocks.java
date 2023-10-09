@@ -11,19 +11,20 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BrushableBlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.Charm;
-import svenhjol.charm.mixin.accessor.BrushableBlockEntityAccessor;
 import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony_api.event.BlockUseEvent;
-import svenhjol.charmony.base.CharmFeature;
+import svenhjol.charmony.base.CharmonyFeature;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Add an item to sand and gravel when holding a brush in your offhand.")
-public class MakeSuspiciousBlocks extends CharmFeature {
+public class MakeSuspiciousBlocks extends CharmonyFeature {
     static final Map<Block, Block> SUSPICIOUS_BLOCK_CONVERSIONS = new HashMap<>();
     static Supplier<SoundEvent> addItemSound;
 
@@ -61,9 +62,9 @@ public class MakeSuspiciousBlocks extends CharmFeature {
 
         var optional = level.getBlockEntity(pos, BlockEntityType.BRUSHABLE_BLOCK);
         if (optional.isPresent()) {
-            var wrapper = (BrushableBlockEntityAccessor) optional.get();
-            wrapper.setLootTable(null);
-            wrapper.setItem(mainHand.copy());
+            var brushable = (BrushableBlockEntity) optional.get();
+            brushable.lootTable = null;
+            brushable.item = mainHand.copy();
 
             if (!player.getAbilities().instabuild) {
                 mainHand.shrink(mainHand.getCount());
@@ -73,19 +74,24 @@ public class MakeSuspiciousBlocks extends CharmFeature {
                 var random = level.getRandom();
                 for (int i = 0; i < 18; i++) {
                     level.addParticle(ParticleTypes.ASH,
-                        pos.getX() + (random.nextDouble() * 1.25D),
-                        pos.getY() + 1.08D,
-                        pos.getZ() + (random.nextDouble() * 1.25D),
-                        0.0D, 0.0D, 0.0D);
+                        pos.getX() + (random.nextDouble() * 1.25d),
+                        pos.getY() + 1.08d,
+                        pos.getZ() + (random.nextDouble() * 1.25d),
+                        0.0d, 0.0d, 0.0d);
                 }
             }
 
-            level.playSound(null, pos, addItemSound.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.playSound(null, pos, addItemSound.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
             player.swing(InteractionHand.OFF_HAND);
+            triggerMadeSuspiciousBlock(player);
             
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
         return InteractionResult.PASS;
+    }
+
+    public static void triggerMadeSuspiciousBlock(Player player) {
+        Advancements.trigger(Charm.instance().makeId("made_suspicious_block"), player);
     }
 }

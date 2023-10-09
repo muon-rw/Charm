@@ -13,13 +13,14 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import svenhjol.charm.Charm;
 import svenhjol.charm.CharmTags;
+import svenhjol.charmony.annotation.Configurable;
+import svenhjol.charmony.annotation.Feature;
+import svenhjol.charmony.base.CharmonyFeature;
+import svenhjol.charmony.feature.advancements.Advancements;
+import svenhjol.charmony.feature.colored_glints.ColoredGlints;
 import svenhjol.charmony_api.event.LootTableModifyEvent;
 import svenhjol.charmony_api.event.SmithingTableEvents;
 import svenhjol.charmony_api.event.SmithingTableEvents.SmithingTableInstance;
-import svenhjol.charmony.annotation.Configurable;
-import svenhjol.charmony.annotation.Feature;
-import svenhjol.charmony.base.CharmFeature;
-import svenhjol.charmony.feature.colored_glints.ColoredGlints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 @Feature(mod = Charm.MOD_ID, description = "Smithing template that changes the glint color of any enchanted item.")
-public class ColoredGlintSmithingTemplates extends CharmFeature {
+public class ColoredGlintSmithingTemplates extends CharmonyFeature {
     public static final String ITEM_ID = "colored_glint_smithing_template";
 
     static List<ResourceLocation> emptyDyes = new ArrayList<>();
@@ -65,6 +66,7 @@ public class ColoredGlintSmithingTemplates extends CharmFeature {
         SmithingTableEvents.CAN_PLACE.handle(this::handleCanPlace);
         SmithingTableEvents.CALCULATE_OUTPUT.handle(this::handleCalculateOutput);
         SmithingTableEvents.CAN_TAKE.handle(this::handleCanTake);
+        SmithingTableEvents.ON_TAKE.handle(this::handleOnTake);
         LootTableModifyEvent.INSTANCE.handle(this::handleLootTableModify);
     }
 
@@ -113,6 +115,7 @@ public class ColoredGlintSmithingTemplates extends CharmFeature {
         return false;
     }
 
+    @SuppressWarnings("RedundantIfStatement")
     private boolean handleCanPlace(ItemStack template, int slotNumber, ItemStack stack) {
         if (slotNumber == 0 && stack.is(template.getItem())) {
             return true;
@@ -123,5 +126,19 @@ public class ColoredGlintSmithingTemplates extends CharmFeature {
         }
 
         return false;
+    }
+
+    /**
+     * We just hook in here to trigger the advancement.
+     */
+    private boolean handleOnTake(SmithingTableInstance instance, Player player, ItemStack stack) {
+        if (ColoredGlints.hasColoredGlint(stack)) {
+            triggerAppliedColoredGlintTemplate(player);
+        }
+        return false;
+    }
+
+    public static void triggerAppliedColoredGlintTemplate(Player player) {
+        Advancements.trigger(Charm.instance().makeId("applied_colored_glint_template"), player);
     }
 }
