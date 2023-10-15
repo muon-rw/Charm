@@ -1,5 +1,5 @@
 {
-  "parent": "charm:hover_sorting/sort_item",
+  "parent": "charm:hover_sorting/sort_items",
   "display": {
     "icon": {
       "item": "minecraft:white_shulker_box"
@@ -12,7 +12,7 @@
     },
     "frame": "goal",
     "show_toast": true,
-    "announce_to_chat": false,
+    "announce_to_chat": true,
     "hidden": false
   },
   "criteria": {

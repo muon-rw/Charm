@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "tag": "charm:colored_dyes"
+  },
+  "base": {
+    "tag": "charm:enchantable_items"
+  },
+  "result": {
+    "item": "charm:colored_glint_smithing_template"
+  },
+  "template": {
+    "item": "charm:colored_glint_smithing_template"
+  }
+}
