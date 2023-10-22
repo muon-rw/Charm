@@ -1,5 +1,42 @@
 # Changelog
 
+## 6.0.10
+
+- Add Arcane Purpur blocks
+- Add Chorus Teleport feature (migrate from Ender pearl blocks)
+- Fix grave mode not dropping a totem when only one item in inventory
+- Fix modmenu reloading settings that don't need reloading
+- Add missing description to PathConversion
+- Translations from previous version
+- Update documentation
+- Move bumblezone integration to covalent. Sugar block dissolving now uses a charmony API event. Require charmony API 6.4.2
+
+## 6.0.9
+
+- Fix totem not dropping if it's the only item in the inventory.
+- Totem of preserving block holder now has glass particles when attacked in creative
+- Fix missing azalea hanging sign drop (https://trello.com/c/viGFHWm2)
+- Add sound when totem stores items on death
+
+## 6.0.8
+
+- Rewrite totem inventory checking API (https://trello.com/c/MEONBUqx)
+- Totem of Preserving now uses the new inventory checking API (https://trello.com/c/MEONBUqx)
+- Totems of Preserving now show their contents on tooltip hover
+- Totem holder block now inherits from glass rather than air, because sodium
+- Add missing bundle recipe
+- Fix stronger anvils not working because of a typo in the feature name
+- Limit proximity workstations to just crafting table for now
+- Move last workstation check first in conditions checking to avoid ghost menu
+
+## 6.0.7
+
+- Lumberjack and beekeeper balance fixes (https://trello.com/c/9XAfucm2, https://trello.com/c/leCo6jlD)
+- Port totem of preserving code
+- Totem of Preserving functionality (https://trello.com/c/U4Tj4Oz4)
+- Advancement and recipe handling for totem
+- Add totem sound
+
 ## 6.0.6
 
 - Lumberjack bark for logs trade now expects one emerald

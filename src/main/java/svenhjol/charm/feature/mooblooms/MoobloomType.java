@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.LevelAccessor;
 import svenhjol.charm.Charm;
+import svenhjol.charm.CharmTags;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public enum MoobloomType {
     MoobloomType(String name, FlowerBlockState flower) {
         this.name = name;
         this.flower = flower;
-        this.texture = Charm.instance().makeId("textures/entity/moobloom/" + name + ".png");
+        this.texture = new ResourceLocation(Charm.ID, "textures/entity/moobloom/" + name + ".png");
     }
 
     public FlowerBlockState getFlower() {
@@ -68,9 +69,9 @@ public enum MoobloomType {
         List<MoobloomType> types;
         var biome = level.getBiome(pos);
 
-        if (biome.is(Mooblooms.SPAWNS_CHERRY_BLOSSOM_MOOBLOOMS)) {
+        if (biome.is(CharmTags.SPAWNS_CHERRY_BLOSSOM_MOOBLOOMS)) {
             types = List.of(MoobloomType.CHERRY_BLOSSOM);
-        } else if (biome.is(Mooblooms.SPAWNS_SUNFLOWER_MOOBLOOMS)) {
+        } else if (biome.is(CharmTags.SPAWNS_SUNFLOWER_MOOBLOOMS)) {
             types = List.of(MoobloomType.SUNFLOWER);
         } else {
             types = MoobloomType.COMMON_TYPES;
