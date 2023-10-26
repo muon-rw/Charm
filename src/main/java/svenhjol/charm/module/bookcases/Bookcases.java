@@ -75,7 +75,12 @@ public class Bookcases extends CharmModule {
     }
 
     public static boolean isValidItem(ItemStack stack) {
-        return VALID_ITEMS.contains(stack.getItem());
+        for (var item : VALID_ITEMS) {
+            if (stack.is(item)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void triggerAddedBookToBookcase(ServerPlayer player) {
