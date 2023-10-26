@@ -32,7 +32,7 @@ public class Bookcases extends CharmModule {
     public static final ResourceLocation TRIGGER_ADDED_BOOK_TO_BOOKCASE = new ResourceLocation(Charm.MOD_ID, "added_book_to_bookcase");
 
     @Config(name = "Valid items", description = "Items that may be placed in bookcases.")
-    public static List<String> configValidItems = Arrays.asList(
+    public static List<String> validItems = Arrays.asList(
         "minecraft:book",
         "minecraft:enchanted_book",
         "minecraft:written_book",
@@ -54,12 +54,6 @@ public class Bookcases extends CharmModule {
         for (VanillaWoodMaterial material : VanillaWoodMaterial.values()) {
             registerBookcase(this, material);
         }
-
-        // Register all items that can be placed inside bookcase containers.
-        for (String configItem : configValidItems) {
-            Registry.ITEM.getOptional(new ResourceLocation(configItem))
-                .ifPresent(Bookcases::registerValidItem);
-        }
     }
 
     public static BookcaseBlock registerBookcase(CharmModule module, IWoodMaterial material) {
@@ -68,19 +62,9 @@ public class Bookcases extends CharmModule {
         return bookcase;
     }
 
-    public static void registerValidItem(Item validItem) {
-        if (!VALID_ITEMS.contains(validItem)) {
-            VALID_ITEMS.add(validItem);
-        }
-    }
-
     public static boolean isValidItem(ItemStack stack) {
-        for (var item : VALID_ITEMS) {
-            if (stack.is(item)) {
-                return true;
-            }
-        }
-        return false;
+        var key = Registry.ITEM.getKey(stack.getItem()).toString();
+        return validItems.contains(key);
     }
 
     public static void triggerAddedBookToBookcase(ServerPlayer player) {
