@@ -8,7 +8,7 @@ import me.shedaniel.rei.api.common.registry.RecipeManagerContext;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,15 +22,15 @@ import java.util.Optional;
  */
 @SuppressWarnings("unused")
 public class FiringDisplay extends BasicDisplay implements SimpleGridMenuDisplay {
-    private final RecipeHolder<?> recipe;
+    private final Recipe<?> recipe;
     private final float xp;
     private final double cookTime;
 
     @SuppressWarnings("UnstableApiUsage")
-    public FiringDisplay(RecipeHolder<? extends AbstractCookingRecipe> recipe) {
-        this(EntryIngredients.ofIngredients(recipe.value().getIngredients()),
-            Collections.singletonList(EntryIngredients.of(recipe.value().getResultItem(BasicDisplay.registryAccess()))),
-            recipe, recipe.value().getExperience(), recipe.value().getCookingTime());
+    public FiringDisplay(AbstractCookingRecipe recipe) {
+        this(EntryIngredients.ofIngredients(recipe.getIngredients()),
+            Collections.singletonList(EntryIngredients.of(recipe.getResultItem(BasicDisplay.registryAccess()))),
+            recipe, recipe.getExperience(), recipe.getCookingTime());
     }
 
     public FiringDisplay(List<EntryIngredient> input, List<EntryIngredient> output, CompoundTag tag) {
@@ -38,8 +38,8 @@ public class FiringDisplay extends BasicDisplay implements SimpleGridMenuDisplay
             tag.getFloat("xp"), tag.getDouble("cookTime"));
     }
 
-    public FiringDisplay(List<EntryIngredient> input, List<EntryIngredient> output, @Nullable RecipeHolder<?> recipe, float xp, double cookTime) {
-        super(input, output, Optional.ofNullable(recipe).map(RecipeHolder::id));
+    public FiringDisplay(List<EntryIngredient> input, List<EntryIngredient> output, @Nullable Recipe<?> recipe, float xp, double cookTime) {
+        super(input, output, Optional.ofNullable(recipe).map(Recipe::getId));
         this.recipe = recipe;
         this.xp = xp;
         this.cookTime = cookTime;
@@ -64,7 +64,7 @@ public class FiringDisplay extends BasicDisplay implements SimpleGridMenuDisplay
     }
 
     @ApiStatus.Internal
-    public Optional<RecipeHolder<?>> getOptionalRecipe() {
+    public Optional<Recipe<?>> getOptionalRecipe() {
         return Optional.ofNullable(recipe);
     }
 

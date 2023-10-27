@@ -5,7 +5,6 @@ import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import svenhjol.charmony.feature.woodcutting.WoodcuttingRecipe;
 
 import java.util.Collections;
@@ -19,10 +18,10 @@ import java.util.Optional;
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
 public class WoodcuttingDisplay extends BasicDisplay {
     @SuppressWarnings("UnstableApiUsage")
-    public WoodcuttingDisplay(RecipeHolder<WoodcuttingRecipe> recipe) {
-        this(EntryIngredients.ofIngredients(recipe.value().getIngredients()),
-            Collections.singletonList(EntryIngredients.of(recipe.value().getResultItem(BasicDisplay.registryAccess()))),
-            Optional.of(recipe.id()));
+    public WoodcuttingDisplay(WoodcuttingRecipe recipe) {
+        this(EntryIngredients.ofIngredients(recipe.getIngredients()),
+            Collections.singletonList(EntryIngredients.of(recipe.getResultItem(BasicDisplay.registryAccess()))),
+            Optional.of(recipe.getId()));
     }
 
     public WoodcuttingDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs, Optional<ResourceLocation> location) {

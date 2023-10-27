@@ -76,7 +76,8 @@ public class MoobloomEntity extends Cow implements Shearable {
 
                 if (!effects.isEmpty()) {
                     stew = new ItemStack(Items.SUSPICIOUS_STEW);
-                    SuspiciousStewItem.saveMobEffects(stew, effects);
+                    var effect = effects.get(0);
+                    SuspiciousStewItem.saveMobEffect(stew, effect.effect(), effect.duration());
                 } else {
                     stew = new ItemStack(Items.MUSHROOM_STEW);
                 }

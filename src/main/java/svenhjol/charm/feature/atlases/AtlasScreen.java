@@ -7,9 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.MapRenderer;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickType;
@@ -37,6 +38,8 @@ import java.util.stream.Collector;
 @SuppressWarnings("ConstantConditions")
 public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
 
+    private static final RenderType MAP_DECORATIONS
+        = RenderType.text(new ResourceLocation("textures/map/map_icons.png"));
     private static final int SIZE = 48;
     private static final int LEFT = 74;
     private static final int TOP = 16;
@@ -69,24 +72,22 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
     protected void init() {
         super.init();
 
-        var atlasInventory = menu.getInventory();
-        var mapInfos = atlasInventory.getCurrentDimensionMapInfos(minecraft.level);
+        AtlasInventory atlasInventory = menu.getInventory();
+        this.slot = inventory.findSlotMatchingItem(atlasInventory.getAtlasItem());
 
-        slot = inventory.findSlotMatchingItem(atlasInventory.getAtlasItem());
+        Map<AtlasInventory.Index, AtlasInventory.MapInfo> mapInfos = atlasInventory.getCurrentDimensionMapInfos(minecraft.level);
         lastSize = mapInfos.size();
         mapGui = lastSize > 1 ? getWorldMap() : getSingleMap(lastSize == 0 ? null : mapInfos.values().iterator().next());
         buttons = new EnumMap<>(ButtonDirection.class);
-
-        for (var direction : ButtonDirection.values()) {
+        for (ButtonDirection direction : ButtonDirection.values()) {
             buttons.put(direction, createButton(direction));
         }
-
         mapItemRenderer = minecraft.gameRenderer.getMapRenderer();
     }
 
     private AtlasImageButton createButton(ButtonDirection dir) {
         return new AtlasImageButton(() -> getX() + LEFT + dir.left, () -> getY() + TOP + dir.top, dir.width, dir.height,
-            dir.sprite, it -> mapGui.buttonClick(dir));
+            dir.texStart, 0, dir.height, 2 * dir.height, AtlasesClient.INVENTORY_BUTTONS, it -> mapGui.buttonClick(dir));
     }
 
     private WorldMap getWorldMap() {
@@ -126,9 +127,8 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
     }
 
     private void updateGui() {
-        var mapInfos = menu.getInventory().getCurrentDimensionMapInfos(Minecraft.getInstance().level);
-        var size = mapInfos.size();
-
+        Map<AtlasInventory.Index, AtlasInventory.MapInfo> mapInfos = menu.getInventory().getCurrentDimensionMapInfos(Minecraft.getInstance().level);
+        int size = mapInfos.size();
         if (mapGui instanceof WorldMap) {
             if (mapInfos.size() <= 1) {
                 changeGui(getSingleMap(mapInfos.isEmpty() ? null : mapInfos.values().iterator().next()));
@@ -136,7 +136,6 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
         } else if (mapGui instanceof SingleMap && size > lastSize) {
             mapInfos.values().stream().skip(size - 1).findAny().ifPresent(it -> changeGui(getSingleMap(it)));
         }
-
         lastSize = size;
     }
 
@@ -145,7 +144,7 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
             button.visible = mapGui.buttonVisible(direction);
             if (button.visible) {
                 button.active = mapGui.buttonEnabled(direction);
-                if (!(this.narratables.contains(button))) {
+                if (!this.narratables.contains(button)) {
                     addRenderableWidget(button);
                 }
             } else {
@@ -183,21 +182,21 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
     private void renderDecorations(PoseStack pose, MultiBufferSource buffer, MapItemSavedData mapData, float relativeScale, Predicate<MapDecoration> filter) {
         int k = 0;
 
-        for (var decoration : mapData.getDecorations()) {
-            if (!filter.test(decoration)) continue;
+        for (MapDecoration mapdecoration : mapData.getDecorations()) {
+            if (!filter.test(mapdecoration)) continue;
 
             pose.pushPose();
-            pose.translate(decoration.x() / 2f + 64, decoration.y() / 2f + 64, 0.02);
-            pose.mulPose(Axis.ZP.rotationDegrees(decoration.rot() * 22.5f));
+            pose.translate(mapdecoration.getX() / 2f + 64, mapdecoration.getY() / 2f + 64, 0.02);
+            pose.mulPose(Axis.ZP.rotationDegrees(mapdecoration.getRot() * 22.5f));
             pose.scale(relativeScale * 4, relativeScale * 4, 3);
             pose.translate(-0.125, 0.125, 0);
-            byte b0 = decoration.getImage();
+            byte b0 = mapdecoration.getImage();
             float f1 = (float) (b0 % 16) / 16f;
             float f2 = (float) (b0 / 16) / 16f;
             float f3 = (float) (b0 % 16 + 1) / 16f;
             float f4 = (float) (b0 / 16 + 1) / 16f;
             Matrix4f matrix4f = pose.last().pose();
-            VertexConsumer builder = buffer.getBuffer(AtlasesClient.MAP_DECORATIONS);
+            VertexConsumer builder = buffer.getBuffer(MAP_DECORATIONS);
             float z = k * 0.001f;
             builder.vertex(matrix4f, -1, 1, z).color(255, 255, 255, 255).uv(f1, f2).uv2(LIGHT).endVertex();
             builder.vertex(matrix4f, 1, 1, z).color(255, 255, 255, 255).uv(f3, f2).uv2(LIGHT).endVertex();
@@ -218,26 +217,26 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
     }
 
     private enum ButtonDirection {
-        LEFT(-BUTTON_SIZE - BUTTON_DISTANCE, CENTER, BUTTON_SIZE, BUTTON_SIZE, AtlasesClient.LEFT_BUTTON, -1, 0),
-        UP(CENTER, -BUTTON_SIZE - BUTTON_DISTANCE, BUTTON_SIZE, BUTTON_SIZE, AtlasesClient.UP_BUTTON, 0, -1),
-        RIGHT(SIZE + BUTTON_DISTANCE, CENTER, BUTTON_SIZE, BUTTON_SIZE, AtlasesClient.RIGHT_BUTTON, 1, 0),
-        DOWN(CENTER, SIZE + BUTTON_DISTANCE, BUTTON_SIZE, BUTTON_SIZE, AtlasesClient.DOWN_BUTTON, 0, 1),
-        BACK(82, -12, 16, 16, AtlasesClient.BACK_BUTTON, 0, 0),
-        ZOOM_OUT(79, SIZE + BUTTON_DISTANCE - 5, 8, 9, AtlasesClient.ZOOM_OUT_BUTTON, 0, 0),
-        ZOOM_IN(87, SIZE + BUTTON_DISTANCE - 5, 8, 9, AtlasesClient.ZOOM_IN_BUTTON, 0, 0);
+        LEFT(-BUTTON_SIZE - BUTTON_DISTANCE, CENTER, BUTTON_SIZE, BUTTON_SIZE, 77, -1, 0),
+        TOP(CENTER, -BUTTON_SIZE - BUTTON_DISTANCE, BUTTON_SIZE, BUTTON_SIZE, 50, 0, -1),
+        RIGHT(SIZE + BUTTON_DISTANCE, CENTER, BUTTON_SIZE, BUTTON_SIZE, 68, 1, 0),
+        BOTTOM(CENTER, SIZE + BUTTON_DISTANCE, BUTTON_SIZE, BUTTON_SIZE, 59, 0, 1),
+        BACK(82, -12, 16, 16, 86, 0, 0),
+        OUT(79, SIZE + BUTTON_DISTANCE - 5, 8, 9, 102, 0, 0),
+        IN(87, SIZE + BUTTON_DISTANCE - 5, 8, 9, 110, 0, 0);
         final int left;
         final int top;
         final int width;
         final int height;
-        final WidgetSprites sprite;
+        final int texStart;
         final AtlasInventory.Index vector;
 
-        ButtonDirection(int left, int top, int width, int height, WidgetSprites sprite, int x, int y) {
+        ButtonDirection(int left, int top, int width, int height, int texStart, int x, int y) {
             this.left = left;
             this.top = top;
             this.width = width;
             this.height = height;
-            this.sprite = sprite;
+            this.texStart = texStart;
             this.vector = AtlasInventory.Index.of(x, y);
         }
     }
@@ -347,8 +346,8 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
                     mapItemRenderer.render(pose, bufferSource, mapId, mapData, false, LIGHT);
                     pose.translate(0, 0, 0.2);
                     renderDecorations(pose, bufferSource, mapData, 1.5f * mapDistance,
-                        it -> it.type() != MapDecoration.Type.PLAYER_OFF_MAP && it.type() != MapDecoration.Type.PLAYER_OFF_LIMITS &&
-                            (it.type() != MapDecoration.Type.PLAYER || key.equals(playerIndex)));
+                        it -> it.getType() != MapDecoration.Type.PLAYER_OFF_MAP && it.getType() != MapDecoration.Type.PLAYER_OFF_LIMITS &&
+                            (it.getType() != MapDecoration.Type.PLAYER || key.equals(playerIndex)));
                     pose.popPose();
                 }
             }
@@ -402,12 +401,12 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
         @Override
         public void buttonClick(ButtonDirection direction) {
             switch (direction) {
-                case LEFT, UP, RIGHT, DOWN -> {
+                case LEFT, TOP, RIGHT, BOTTOM -> {
                     if (corner != null) {
                         corner = corner.plus(direction.vector.multiply(mapDistance)).clamp(extremes.min, extremes.max.plus(1 - mapDistance));
                     }
                 }
-                case ZOOM_IN -> {
+                case IN -> {
                     fixedMapDistance = true;
                     --mapDistance;
                     if (mapDistance == 1) {
@@ -415,7 +414,7 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
                         changeGui(getSingleMap(mapInfos.get(corner != null ? corner : extremes.min)));
                     }
                 }
-                case ZOOM_OUT -> {
+                case OUT -> {
                     fixedMapDistance = true;
                     ++mapDistance;
                 }
@@ -425,8 +424,8 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
         @Override
         public boolean buttonVisible(ButtonDirection direction) {
             return switch (direction) {
-                case LEFT, UP, RIGHT, DOWN -> corner != null;
-                case ZOOM_IN, ZOOM_OUT -> true;
+                case LEFT, TOP, RIGHT, BOTTOM -> corner != null;
+                case IN, OUT -> true;
                 default -> false;
             };
         }
@@ -435,11 +434,11 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
         public boolean buttonEnabled(ButtonDirection direction) {
             return switch (direction) {
                 case LEFT -> corner != null && corner.x > extremes.min.x;
-                case UP -> corner != null && corner.y > extremes.min.y;
+                case TOP -> corner != null && corner.y > extremes.min.y;
                 case RIGHT -> corner != null && corner.x + mapDistance <= extremes.max.x;
-                case DOWN -> corner != null && corner.y + mapDistance <= extremes.max.y;
-                case ZOOM_IN -> mapDistance > 1;
-                case ZOOM_OUT -> mapDistance < maxMapDistance;
+                case BOTTOM -> corner != null && corner.y + mapDistance <= extremes.max.y;
+                case IN -> mapDistance > 1;
+                case OUT -> mapDistance < maxMapDistance;
                 default -> false;
             };
         }
@@ -450,8 +449,8 @@ public class AtlasScreen extends CharmonyContainerScreen<AtlasContainer> {
     }
 
     private class SingleMap implements MapGui {
-        private final Set<ButtonDirection> supportedDirections = EnumSet.of(ButtonDirection.LEFT, ButtonDirection.UP, ButtonDirection.RIGHT,
-            ButtonDirection.DOWN, ButtonDirection.BACK);
+        private final Set<ButtonDirection> supportedDirections = EnumSet.of(ButtonDirection.LEFT, ButtonDirection.TOP, ButtonDirection.RIGHT,
+            ButtonDirection.BOTTOM, ButtonDirection.BACK);
         private AtlasInventory.MapInfo mapInfo;
 
         public SingleMap(AtlasInventory.MapInfo mapInfo) {
