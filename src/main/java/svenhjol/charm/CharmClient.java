@@ -23,7 +23,7 @@ import svenhjol.charm.feature.mooblooms.MoobloomsClient;
 import svenhjol.charm.feature.no_chat_unverified_message.NoChatUnverifiedMessage;
 import svenhjol.charm.feature.no_spyglass_scope.NoSpyglassScope;
 import svenhjol.charm.feature.player_pressure_plates.PlayerPressurePlatesClient;
-import svenhjol.charm.feature.proximity_workstations.ProximityWorkstationsClient;
+import svenhjol.charm.feature.nearby_workstations.NearbyWorkstationsClient;
 import svenhjol.charm.feature.redstone_sand.RedstoneSandClient;
 import svenhjol.charm.feature.show_repair_cost.ShowRepairCost;
 import svenhjol.charm.feature.smooth_glowstone.SmoothGlowstoneClient;
@@ -69,7 +69,7 @@ public class CharmClient extends ClientMod {
             NoChatUnverifiedMessage.class,
             NoSpyglassScope.class,
             PlayerPressurePlatesClient.class,
-            ProximityWorkstationsClient.class,
+            NearbyWorkstationsClient.class,
             RedstoneSandClient.class,
             ShowRepairCost.class,
             SmoothGlowstoneClient.class,

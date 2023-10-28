@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.0.14
+
+- Bump to Charmony 6.7.4 to fix a mixin config issue
+- Update ladder textures
+
+## 6.0.13
+
+- ProximityWorkstations now called NearbyWorkstations
+- Fix incorrect language string keys
+- Update nether wood barrel and chest textures
+- Update jungle chest texture
+
 ## 6.0.12
 
 - Revert modmenu to subcategory view
