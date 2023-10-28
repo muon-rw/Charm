@@ -8,7 +8,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import svenhjol.charmony.feature.woodcutting.Woodcutting;
 import svenhjol.charmony.feature.woodcutting.WoodcuttingRecipe;
@@ -17,13 +16,12 @@ import java.util.List;
 
 /**
  * Much copypasta from {@link StonecutterMenu}.
- * TODO: resync with StonecutterMenu
  */
 public class WoodcutterMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess context;
     private final DataSlot selectedRecipe;
     private final Level level;
-    private List<RecipeHolder<WoodcuttingRecipe>> recipes;
+    private List<WoodcuttingRecipe> availableRecipes;
     private ItemStack inputStack;
     private long lastTakeTime;
     final Slot inputSlot;
@@ -39,7 +37,7 @@ public class WoodcutterMenu extends AbstractContainerMenu {
     public WoodcutterMenu(int syncId, Inventory playerInventory, final ContainerLevelAccess context) {
         super(Woodcutters.menu.get(), syncId);
         this.selectedRecipe = DataSlot.standalone();
-        this.recipes = Lists.newArrayList();
+        this.availableRecipes = Lists.newArrayList();
         this.inputStack = ItemStack.EMPTY;
         this.contentsChangedListener = () -> {
         };
@@ -64,7 +62,7 @@ public class WoodcutterMenu extends AbstractContainerMenu {
                 WoodcutterMenu.this.output.awardUsedRecipes(player, this.getRelevantItems());
                 ItemStack itemStack = WoodcutterMenu.this.inputSlot.remove(1);
                 if (!itemStack.isEmpty()) {
-                    WoodcutterMenu.this.setupResultSlot();
+                    WoodcutterMenu.this.populateResult();
                 }
 
                 context.execute((level, blockPos) -> {
@@ -95,20 +93,20 @@ public class WoodcutterMenu extends AbstractContainerMenu {
         this.addDataSlot(this.selectedRecipe);
     }
 
-    public int getSelectedRecipeIndex() {
+    public int getSelectedRecipe() {
         return this.selectedRecipe.get();
     }
 
-    public List<RecipeHolder<WoodcuttingRecipe>> getRecipes() {
-        return this.recipes;
+    public List<WoodcuttingRecipe> getAvailableRecipes() {
+        return this.availableRecipes;
     }
 
-    public int getNumRecipes() {
-        return this.recipes.size();
+    public int getAvailableRecipeCount() {
+        return this.availableRecipes.size();
     }
 
     public boolean canCraft() {
-        return this.inputSlot.hasItem() && !this.recipes.isEmpty();
+        return this.inputSlot.hasItem() && !this.availableRecipes.isEmpty();
     }
 
     public boolean stillValid(Player player) {
@@ -118,14 +116,14 @@ public class WoodcutterMenu extends AbstractContainerMenu {
     public boolean clickMenuButton(Player player, int id) {
         if (this.isValidRecipeIndex(id)) {
             this.selectedRecipe.set(id);
-            this.setupResultSlot();
+            this.populateResult();
         }
 
         return true;
     }
 
     private boolean isValidRecipeIndex(int i) {
-        return i >= 0 && i < this.recipes.size();
+        return i >= 0 && i < this.availableRecipes.size();
     }
 
     public void slotsChanged(Container inventory) {
@@ -138,28 +136,20 @@ public class WoodcutterMenu extends AbstractContainerMenu {
     }
 
     private void updateInput(Container input, ItemStack stack) {
-        this.recipes.clear();
+        this.availableRecipes.clear();
         this.selectedRecipe.set(-1);
         this.outputSlot.set(ItemStack.EMPTY);
         if (!stack.isEmpty()) {
-            this.recipes = this.level.getRecipeManager().getRecipesFor(Woodcutting.recipeType.get(), input, this.level);
+            this.availableRecipes = this.level.getRecipeManager().getRecipesFor(Woodcutting.recipeType.get(), input, this.level);
         }
 
     }
 
-    private void setupResultSlot() {
-        if (!this.recipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipe.get())) {
-            var recipeHolder = this.recipes.get(this.selectedRecipe.get());
-            var stack = recipeHolder.value()
-                .assemble(this.input, this.level.registryAccess());
-
-            if (stack.isItemEnabled(this.level.enabledFeatures())) {
-                this.output.setRecipeUsed(recipeHolder);
-                this.outputSlot.set(stack);
-            } else {
-                this.outputSlot.set(ItemStack.EMPTY);
-            }
-
+    private void populateResult() {
+        if (!this.availableRecipes.isEmpty() && this.isValidRecipeIndex(this.selectedRecipe.get())) {
+            var woodcuttingRecipe = this.availableRecipes.get(this.selectedRecipe.get());
+            this.output.setRecipeUsed(woodcuttingRecipe);
+            this.outputSlot.set(woodcuttingRecipe.assemble(this.input, this.level.registryAccess()));
         } else {
             this.outputSlot.set(ItemStack.EMPTY);
         }

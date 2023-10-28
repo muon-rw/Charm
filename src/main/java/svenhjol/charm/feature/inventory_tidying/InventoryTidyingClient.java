@@ -5,7 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.*;
 import net.minecraft.resources.ResourceLocation;
@@ -31,14 +30,11 @@ public class InventoryTidyingClient extends ClientFeature
     implements IInventoryTidyingWhitelistProvider, IInventoryTidyingBlacklistProvider, IContainerOffsetTweakProvider {
     private static final int LEFT = 159;
     private static final int TOP = 12;
+    private static final ResourceLocation INVENTORY_BUTTONS = new ResourceLocation(Charm.ID, "textures/gui/inventory_buttons.png");
     private static final List<ImageButton> SORTING_BUTTONS = new ArrayList<>();
     private static final List<Class<? extends Screen>> WHITELISTED_SCREENS = new ArrayList<>();
     private static final List<Class<? extends Screen>> BLACKLISTED_SCREENS = new ArrayList<>();
     private static final Map<Class<? extends Screen>, Pair<Integer, Integer>> CONTAINER_OFFSETS = new HashMap<>();
-    static final WidgetSprites TIDY_BUTTON = new WidgetSprites(
-        new ResourceLocation(Charm.ID, "widget/inventory_tidying/tidy_button"),
-        new ResourceLocation(Charm.ID, "widget/inventory_tidying/tidy_button_highlighted")
-    );
 
     @Override
     public Class<? extends CommonFeature> commonFeature() {
@@ -104,7 +100,7 @@ public class InventoryTidyingClient extends ClientFeature
     }
 
     private void addSortingButton(Screen screen, int x, int y, Button.OnPress callback) {
-        SORTING_BUTTONS.add(new ImageButton(x, y, 10, 10, TIDY_BUTTON, callback));
+        SORTING_BUTTONS.add(new ImageButton(x, y, 10, 10, 40, 0, 10, INVENTORY_BUTTONS, callback));
     }
 
     private void handleScreenRender(AbstractContainerScreen<?> screen, GuiGraphics guiGraphics, int mouseX, int mouseY) {

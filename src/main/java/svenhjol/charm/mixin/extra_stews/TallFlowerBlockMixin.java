@@ -1,5 +1,6 @@
 package svenhjol.charm.mixin.extra_stews;
 
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SuspiciousEffectHolder;
@@ -8,21 +9,22 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import svenhjol.charm.feature.extra_stews.ExtraStews;
 
-import java.util.List;
-
 @Mixin(TallFlowerBlock.class)
 public class TallFlowerBlockMixin implements SuspiciousEffectHolder {
     @Override
-    public List<EffectEntry> getSuspiciousEffects() {
+    public MobEffect getSuspiciousEffect() {
+        return MobEffects.HEALTH_BOOST;
+    }
+
+    @Override
+    public int getEffectDuration() {
         if (isSunflower()) {
             var duration = ExtraStews.getSunflowerEffectDuration();
             if (duration > 0) {
-                return List.of(
-                    new SuspiciousEffectHolder.EffectEntry(MobEffects.HEALTH_BOOST, duration * 20)
-                );
+                return duration * 20;
             }
         }
-        return List.of();
+        return 0;
     }
 
     @Unique

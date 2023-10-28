@@ -3,7 +3,6 @@ package svenhjol.charm.feature.atlases;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.CartographyTableScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -17,7 +16,6 @@ import net.minecraft.world.item.Items;
 import org.lwjgl.glfw.GLFW;
 import svenhjol.charm.Charm;
 import svenhjol.charm.mixin.atlases.CartographyTableScreenMixin;
-import svenhjol.charmony.base.Mods;
 import svenhjol.charmony.client.ClientFeature;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony_api.event.HeldItemRenderEvent;
@@ -30,13 +28,7 @@ public class AtlasesClient extends ClientFeature {
     static final RenderType MAP_BACKGROUND = RenderType.text(new ResourceLocation("textures/map/map_background.png"));
     static final RenderType MAP_DECORATIONS = RenderType.text(new ResourceLocation("textures/map/map_icons.png"));
     static final ResourceLocation CONTAINER_BACKGROUND = new ResourceLocation(Charm.ID, "textures/gui/atlas.png");
-    static final WidgetSprites UP_BUTTON = makeButton("up");
-    static final WidgetSprites DOWN_BUTTON = makeButton("down");
-    static final WidgetSprites LEFT_BUTTON = makeButton("left");
-    static final WidgetSprites RIGHT_BUTTON = makeButton("right");
-    static final WidgetSprites BACK_BUTTON = makeButton("back");
-    static final WidgetSprites ZOOM_IN_BUTTON = makeButton("zoom_in");
-    static final WidgetSprites ZOOM_OUT_BUTTON = makeButton("zoom_out");
+    static final ResourceLocation INVENTORY_BUTTONS = new ResourceLocation(Charm.ID, "textures/gui/inventory_buttons.png");
     private AtlasRenderer renderer;
     private static int swappedSlot = -1;
     public static Supplier<String> OPEN_ATLAS_KEY;
@@ -107,14 +99,5 @@ public class AtlasesClient extends ClientFeature {
     @SuppressWarnings("unused")
     public static void handleSwappedSlot(AtlasesNetwork.SwappedAtlasSlot packet, Player player) {
         swappedSlot = packet.getSlot();
-    }
-
-    private static WidgetSprites makeButton(String name) {
-        var instance = Mods.client(Charm.ID);
-
-        return new WidgetSprites(
-            instance.id("widget/atlases/" + name + "_button"),
-            instance.id("widget/atlases/" + name + "_button_disabled"),
-            instance.id("widget/atlases/" + name + "_button_highlighted"));
     }
 }

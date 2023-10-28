@@ -4,11 +4,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.StairBlock;
-import org.joml.Vector3f;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.base.Mods;
 
@@ -57,12 +55,8 @@ public class ChairEntity extends Entity {
     }
 
     @Override
-    protected Vector3f getPassengerAttachmentPoint(Entity entity, EntityDimensions entityDimensions, float f) {
-        return new Vector3f(0.0f, getPassengersRidingOffsetY(entityDimensions), 0.0f);
-    }
-
-    protected float getPassengersRidingOffsetY(EntityDimensions entityDimensions) {
-        return entityDimensions.height - 0.25f;
+    public double getPassengersRidingOffset() {
+        return -0.25F;
     }
 
     @Override
