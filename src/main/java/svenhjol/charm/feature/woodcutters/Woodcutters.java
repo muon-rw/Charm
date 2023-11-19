@@ -7,7 +7,6 @@ import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.RecipeBookType;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony.feature.woodcutting.Woodcutting;
 
 import java.util.function.Supplier;
 
@@ -37,15 +36,12 @@ public class Woodcutters extends CommonFeature {
 
     @Override
     public void register() {
-        // Must register Charmony's woodcutting recipe serializer as a dependency or woodcutting recipes will fail.
-        Woodcutting.registerDependency();
-
         var registry = mod().registry();
 
         block = registry.block(BLOCK_ID,
             () -> new WoodcutterBlock(this));
         blockItem = registry.item(BLOCK_ID,
-            () -> new WoodcutterBlock.BlockItem(this, block));
+            () -> new WoodcutterBlock.BlockItem(block));
 
         poiType = registry.pointOfInterestType(BLOCK_ID,
             () -> new PoiType(ImmutableSet.copyOf(block.get().getStateDefinition().getPossibleStates()), 1, 1));

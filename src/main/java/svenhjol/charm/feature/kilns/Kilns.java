@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony.feature.firing.Firing;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -37,13 +36,10 @@ public class Kilns extends CommonFeature {
 
     @Override
     public void register() {
-        // Must register Charmony's firing recipe serializer as a dependency or firing recipes will fail.
-        Firing.registerDependency();
-
         var registry = mod().registry();
 
         block = registry.block(BLOCK_ID, () -> new KilnBlock(this));
-        blockItem = registry.item(BLOCK_ID, () -> new KilnBlock.BlockItem(this, block));
+        blockItem = registry.item(BLOCK_ID, () -> new KilnBlock.BlockItem(block));
         blockEntity = registry.blockEntity(BLOCK_ID, () -> KilnBlockEntity::new, List.of(block));
 
         recipeBookType = registry.recipeBookType(BLOCK_ID);
