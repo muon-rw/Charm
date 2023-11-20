@@ -11,22 +11,14 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.custom_wood.CustomWood;
-import svenhjol.charmony.feature.woodcutting.Woodcutting;
+import svenhjol.charmony.feature.variant_wood.VariantWood;
 import svenhjol.charmony_api.CharmonyApi;
 import svenhjol.charmony_api.event.LevelLoadEvent;
-import svenhjol.charmony_api.iface.*;
+import svenhjol.charmony_api.iface.IVariantWoodMaterial;
 
-import java.util.List;
 import java.util.function.Supplier;
 
-public class AzaleaWood extends CommonFeature implements
-    IVariantBarrelProvider,
-    IVariantBookshelfProvider,
-    IVariantChestProvider,
-    IVariantChestBoatProvider,
-    IVariantChiseledBookshelfProvider,
-    IVariantLadderProvider
-{
+public class AzaleaWood extends CommonFeature {
     static Supplier<BlockSetType> blockSetType;
     static Supplier<WoodType> woodType;
     static IVariantWoodMaterial material;
@@ -38,14 +30,12 @@ public class AzaleaWood extends CommonFeature implements
 
     @Override
     public void register() {
-        // Must register Charmony's woodcutting recipe serializer as a dependency or woodcutting recipes will fail.
-        Woodcutting.registerDependency();
-
         material = AzaleaMaterial.AZALEA;
         blockSetType = mod().registry().blockSetType(material);
         woodType = mod().registry().woodType(material.getSerializedName(), material);
 
-        CustomWood.registerWood(this, mod().registry(), new AzaleaWoodDefinition());
+        CustomWood.registerWood(mod().registry(), new AzaleaWoodDefinition());
+        VariantWood.registerWood(mod().registry(), material);
 
         CharmonyApi.registerProvider(this);
         CharmonyApi.registerProvider(new AzaleaWoodRecipeProvider());
@@ -68,35 +58,5 @@ public class AzaleaWood extends CommonFeature implements
 
         ((ConfiguredFeature<TreeConfiguration, ?>)feature).config().trunkProvider
             = new SimpleStateProvider(log.block.get().defaultBlockState());
-    }
-
-    @Override
-    public List<IVariantMaterial> getVariantBarrels() {
-        return List.of(material);
-    }
-
-    @Override
-    public List<IVariantMaterial> getVariantBookshelves() {
-        return List.of(material);
-    }
-
-    @Override
-    public List<IVariantMaterial> getVariantChests() {
-        return List.of(material);
-    }
-
-    @Override
-    public List<IVariantMaterial> getVariantChiseledBookshelves() {
-        return List.of(material);
-    }
-
-    @Override
-    public List<IVariantMaterial> getVariantLadders() {
-        return List.of(material);
-    }
-
-    @Override
-    public List<IVariantChestBoatDefinition> getVariantChestBoatDefinitions() {
-        return List.of(new AzaleaChestBoatDefinition());
     }
 }

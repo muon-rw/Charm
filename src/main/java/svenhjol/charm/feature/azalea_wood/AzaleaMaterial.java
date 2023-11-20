@@ -22,11 +22,6 @@ public enum AzaleaMaterial implements IVariantWoodMaterial {
     }
 
     @Override
-    public int chestBoatColor() {
-        return 0x9577b1;
-    }
-
-    @Override
     public BlockSetType getBlockSetType() {
         return AzaleaWood.blockSetType.get();
     }
@@ -43,6 +38,7 @@ public enum AzaleaMaterial implements IVariantWoodMaterial {
 
     @Override
     public BlockBehaviour.Properties blockProperties() {
-        return IVariantWoodMaterial.super.blockProperties().noOcclusion();
+        return IVariantWoodMaterial.super.blockProperties()
+            .noOcclusion();
     }
 }
