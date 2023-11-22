@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 
 public class ArcanePurpurBlock extends CharmonyBlock {
     public ArcanePurpurBlock() {
-        super(Properties.copy(Blocks.PURPUR_BLOCK));
+        super(Properties.ofFullCopy(Blocks.PURPUR_BLOCK));
     }
 
     public static class BlockItem<T extends ArcanePurpurBlock> extends CharmonyBlockItem {

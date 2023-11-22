@@ -23,8 +23,7 @@ public class AerialAffinity extends CommonFeature {
 
     @Override
     public void register() {
-        ENCHANTMENT = mod().registry().enchantment(ID,
-            () -> new AerialAffinityEnchantment(this));
+        ENCHANTMENT = mod().registry().enchantment(ID, AerialAffinityEnchantment::new);
     }
     
     @Override

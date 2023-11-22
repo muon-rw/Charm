@@ -65,8 +65,7 @@ public class SpawnerDrops extends CommonFeature {
 
         if (state.getBlock() == Blocks.SPAWNER && level.getBlockEntity(pos) instanceof SpawnerBlockEntity spawner) {
             var baseSpawner = spawner.getSpawner();
-            var random = level.getRandom();
-            var entity = baseSpawner.getOrCreateDisplayEntity(level, random, pos);
+            var entity = baseSpawner.getOrCreateDisplayEntity(level, pos);
             if (entity == null) return true;
 
             var type = entity.getType();

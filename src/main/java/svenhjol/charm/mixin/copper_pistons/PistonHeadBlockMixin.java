@@ -2,7 +2,7 @@ package svenhjol.charm.mixin.copper_pistons;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -28,7 +28,7 @@ public class PistonHeadBlockMixin {
         at = @At("HEAD"),
         cancellable = true
     )
-    private void hookGetCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<ItemStack> cir) {
+    private void hookGetCloneItemStack(LevelReader levelReader, BlockPos blockPos, BlockState blockState, CallbackInfoReturnable<ItemStack> cir) {
         if (isCopperPistonBlock()) {
             VariantPistons.debug("changing itemstack to copper");
             var newStack = new ItemStack(

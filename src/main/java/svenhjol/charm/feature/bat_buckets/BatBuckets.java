@@ -47,7 +47,7 @@ public class BatBuckets extends CommonFeature implements IWandererTradeProvider 
     public void register() {
         var registry = mod().registry();
 
-        bucketItem = registry.item("bat_bucket", () -> new BatBucketItem(this));
+        bucketItem = registry.item("bat_bucket", BatBucketItem::new);
         grabSound = registry.soundEvent("bat_bucket_grab");
         releaseSound = registry.soundEvent("bat_bucket_release");
 

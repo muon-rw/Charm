@@ -1,8 +1,8 @@
 package svenhjol.charm.feature.storage_blocks.gunpowder;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
@@ -10,18 +10,28 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import svenhjol.charm.Charm;
 import svenhjol.charmony.base.CharmonyBlockItem;
+import svenhjol.charmony.base.CharmonyFallingBlock;
 
 @SuppressWarnings({"deprecation", "BooleanMethodIsAlwaysInverted", "unused"})
-public class GunpowderBlock extends FallingBlock {
-    public static final ResourceLocation TRIGGER_DISSOLVED_GUNPOWDER = new ResourceLocation(Charm.ID, "dissolved_gunpowder");
+public class GunpowderBlock extends CharmonyFallingBlock {
+    static final MapCodec<GunpowderBlock> CODEC = simpleCodec(GunpowderBlock::new);
 
     public GunpowderBlock() {
-        super(Properties.of()
+        this(Properties.of()
             .sound(SoundType.SAND)
             .strength(0.5f));
+    }
+
+    private GunpowderBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends FallingBlock> codec() {
+        return CODEC;
     }
 
     @Override

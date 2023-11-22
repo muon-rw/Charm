@@ -10,11 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import svenhjol.charmony.base.CharmonyItem;
-import svenhjol.charmony.common.CommonFeature;
 
 public class AtlasItem extends CharmonyItem {
-    public AtlasItem(CommonFeature feature) {
-        super(feature, new Properties()
+    public AtlasItem() {
+        super(new Properties()
             .stacksTo(1));
     }
 

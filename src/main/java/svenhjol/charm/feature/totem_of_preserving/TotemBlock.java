@@ -1,5 +1,6 @@
 package svenhjol.charm.feature.totem_of_preserving;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -19,19 +21,31 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import svenhjol.charm.Charm;
 import svenhjol.charmony.base.CharmonyBlockWithEntity;
-import svenhjol.charmony.common.CommonFeature;
+import svenhjol.charmony.base.Mods;
+import svenhjol.charmony.iface.ILog;
 
 @SuppressWarnings("deprecation")
 public class TotemBlock extends CharmonyBlockWithEntity {
+    static final MapCodec<TotemBlock> CODEC = simpleCodec(TotemBlock::new);
     static final VoxelShape SHAPE = Block.box(2, 2, 2, 14, 14, 14);
 
-    public TotemBlock(CommonFeature feature) {
-        super(feature, Properties.copy(Blocks.GLASS)
+    public TotemBlock() {
+        this(Properties.ofFullCopy(Blocks.GLASS)
             .strength(-1.0f, 3600000.0f)
             .noCollission()
             .noOcclusion()
             .noLootTable());
+    }
+
+    private TotemBlock(Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
     @Nullable
@@ -65,7 +79,6 @@ public class TotemBlock extends CharmonyBlockWithEntity {
      */
     @Override
     public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState state, boolean bl) {
-        var log = feature.mod().log();
         var dimension = level.dimension().location();
 
         if (TotemOfPreserving.PROTECT_POSITIONS.containsKey(dimension)
@@ -73,14 +86,14 @@ public class TotemBlock extends CharmonyBlockWithEntity {
             && level.getBlockEntity(pos) instanceof TotemBlockEntity totem
             && !level.isClientSide) {
 
-            log.debug(getClass(), "Something wants to overwrite the totem block, emergency item drop");
+            log().debug(getClass(), "Something wants to overwrite the totem block, emergency item drop");
             var items = totem.getItems();
             for (ItemStack stack : items) {
                 var itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), stack);
                 level.addFreshEntity(itemEntity);
             }
         }
-        log.debug(getClass(), "Going to remove a totem block");
+        log().debug(getClass(), "Going to remove a totem block");
         super.onRemove(blockState, level, pos, state, bl);
     }
 
@@ -96,12 +109,11 @@ public class TotemBlock extends CharmonyBlockWithEntity {
             && (!TotemOfPreserving.ownerOnly
                 || (totem.getOwner().equals(player.getUUID()) || player.getAbilities().instabuild))
         ) {
-            var log = feature.mod().log();
             var serverLevel = (ServerLevel)level;
             var dimension = serverLevel.dimension().location();
 
             // Create a new totem item and give it to player.
-            log.debug(getClass(), "Player has interacted with totem holder block at pos: " + pos + ", player: " + player);
+            log().debug(getClass(), "Player has interacted with totem holder block at pos: " + pos + ", player: " + player);
             var totemItem = new ItemStack(TotemOfPreserving.item.get());
 
             TotemItem.setItems(totemItem, totem.getItems());
@@ -109,7 +121,7 @@ public class TotemBlock extends CharmonyBlockWithEntity {
             TotemItem.setTotemDamage(totemItem, totem.getDamage());
             TotemItem.setGlint(totemItem, true);
 
-            log.debug(getClass(), "Adding totem item to player's inventory: " + player);
+            log().debug(getClass(), "Adding totem item to player's inventory: " + player);
             player.getInventory().add(totemItem);
 
             level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 0.6f, 1.0f);
@@ -119,10 +131,14 @@ public class TotemBlock extends CharmonyBlockWithEntity {
             }
 
             // Remove the totem block.
-            log.debug(getClass(), "Removing totem holder block and block entity: " + pos);
+            log().debug(getClass(), "Removing totem holder block and block entity: " + pos);
             level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
         }
 
         super.entityInside(state, level, pos, entity);
+    }
+
+    static ILog log() {
+        return Mods.common(Charm.ID).log();
     }
 }

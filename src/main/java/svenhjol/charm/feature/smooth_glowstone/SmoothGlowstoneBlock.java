@@ -8,7 +8,7 @@ import java.util.function.Supplier;
 
 public class SmoothGlowstoneBlock extends CharmonyBlock {
     public SmoothGlowstoneBlock() {
-        super(Properties.copy(Blocks.GLOWSTONE));
+        super(Properties.ofFullCopy(Blocks.GLOWSTONE));
     }
 
     public static class BlockItem extends CharmonyBlockItem {

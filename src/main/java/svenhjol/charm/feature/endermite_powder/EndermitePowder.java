@@ -37,7 +37,7 @@ public class EndermitePowder extends CommonFeature implements IWandererTradeProv
     @Override
     public void register() {
         var registry = mod().registry();
-        item = registry.item(ID, () -> new EndermitePowderItem(this));
+        item = registry.item(ID, EndermitePowderItem::new);
         launchSound = registry.soundEvent("endermite_powder_launch");
 
         entity = registry.entity(ID, () -> EntityType.Builder

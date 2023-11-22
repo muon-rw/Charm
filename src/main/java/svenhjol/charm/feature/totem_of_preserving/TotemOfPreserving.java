@@ -82,12 +82,12 @@ public class TotemOfPreserving extends CommonFeature {
     public void register() {
         var registry = mod().registry();
 
-        block = registry.block("totem_of_preserving_holder",
-            () -> new TotemBlock(this));
+        block = registry.block("totem_of_preserving_holder", TotemBlock::new);
+        item = registry.item("totem_of_preserving", TotemItem::new);
+
         blockEntity = registry.blockEntity("totem_block",
             () -> TotemBlockEntity::new, List.of(block));
-        item = registry.item("totem_of_preserving",
-            () -> new TotemItem(this));
+
         releaseSound = registry.soundEvent("totem_release_items");
         storeSound = registry.soundEvent("totem_store_items");
 

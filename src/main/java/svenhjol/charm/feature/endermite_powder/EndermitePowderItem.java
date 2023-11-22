@@ -10,11 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import svenhjol.charm.CharmTags;
 import svenhjol.charmony.base.CharmonyItem;
-import svenhjol.charmony.common.CommonFeature;
 
 public class EndermitePowderItem extends CharmonyItem {
-    public EndermitePowderItem(CommonFeature feature) {
-        super(feature, new Properties());
+    public EndermitePowderItem() {
+        super(new Properties());
     }
 
     @Override

@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.base.CharmonyItem;
 import svenhjol.charmony.base.Mods;
-import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.colored_glints.ColoredGlints;
 import svenhjol.charmony.helper.ClientEffectHelper;
 import svenhjol.charmony.helper.ItemNbtHelper;
@@ -32,8 +31,8 @@ public class TotemItem extends CharmonyItem {
     static final String ITEMS_TAG = "items";
     static final String GLINT_TAG = "glint";
 
-    public TotemItem(CommonFeature feature) {
-        super(feature, new Item.Properties()
+    public TotemItem() {
+        super(new Item.Properties()
             .stacksTo(1)
             .durability(TotemOfPreserving.durability)
             .rarity(Rarity.UNCOMMON));

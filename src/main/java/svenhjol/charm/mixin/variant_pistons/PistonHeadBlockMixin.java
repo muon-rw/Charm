@@ -10,7 +10,6 @@ import svenhjol.charm.feature.variant_pistons.VariantPistons;
 
 @Mixin(PistonHeadBlock.class)
 public class PistonHeadBlockMixin {
-
     @Redirect(
         method = {"isFittingBase", "canSurvive"},
         at = @At(

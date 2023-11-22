@@ -30,7 +30,7 @@ public class Collection extends CommonFeature {
     @Override
     public void register() {
         enchantment = mod().registry()
-            .enchantment("collection", () -> new CollectionEnchantment(this));
+            .enchantment("collection", CollectionEnchantment::new);
     }
     
     public static void startBreaking(Player player, BlockPos pos) {

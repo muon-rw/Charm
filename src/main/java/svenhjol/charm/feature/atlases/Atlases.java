@@ -57,7 +57,7 @@ public class Atlases extends CommonFeature implements IWandererTradeProvider {
     public void register() {
         var registry = mod().registry();
 
-        ITEM = registry.item("atlas", () -> new AtlasItem(this));
+        ITEM = registry.item("atlas", AtlasItem::new);
         MENU_TYPE = registry.menuType("atlas", () -> new MenuType<>(AtlasContainer::new, FeatureFlags.VANILLA_SET));
         OPEN_SOUND = registry.soundEvent("atlas_open");
         CLOSE_SOUND = registry.soundEvent("atlas_close");

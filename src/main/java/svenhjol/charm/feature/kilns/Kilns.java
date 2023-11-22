@@ -38,7 +38,7 @@ public class Kilns extends CommonFeature {
     public void register() {
         var registry = mod().registry();
 
-        block = registry.block(BLOCK_ID, () -> new KilnBlock(this));
+        block = registry.block(BLOCK_ID, KilnBlock::new);
         blockItem = registry.item(BLOCK_ID, () -> new KilnBlock.BlockItem(block));
         blockEntity = registry.blockEntity(BLOCK_ID, () -> KilnBlockEntity::new, List.of(block));
 

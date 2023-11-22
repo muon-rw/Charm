@@ -9,14 +9,12 @@ import java.util.function.Supplier;
 public class AtlasImageButton extends ImageButton {
     private final Supplier<Integer> x;
     private final Supplier<Integer> y;
-    private final WidgetSprites sprite;
 
     public AtlasImageButton(Supplier<Integer> x, Supplier<Integer> y, int width, int height,
                             WidgetSprites sprite, OnPress onPress) {
         super(x.get(), y.get(), width, height, sprite, onPress);
         this.x = x;
         this.y = y;
-        this.sprite = sprite;
     }
 
     @Override
@@ -32,17 +30,4 @@ public class AtlasImageButton extends ImageButton {
         setY(y.get());
         return super.mouseClicked(mouseX, mouseY, button);
     }
-
-//    public void renderButton(GuiGraphics guiGraphics, int mouseX, int mouseY, float mouseDelta) {
-//        int yTex = yTexStart;
-//
-//        if (!active) {
-//            yTex += yDiffDisabled;
-//        } else if (isHoveredOrFocused()) {
-//            yTex += yDiffHighlight;
-//        }
-//
-//        RenderSystem.enableDepthTest();
-//        guiGraphics.blit(resourceLocation, getX(), getY(), xTexStart, yTex, width, height, 256, 256);
-//    }
 }

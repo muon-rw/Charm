@@ -1,8 +1,10 @@
 package svenhjol.charm.feature.kilns;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -11,33 +13,35 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charmony.base.CharmonyBlockItem;
-import svenhjol.charmony.common.CommonFeature;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class KilnBlock extends AbstractFurnaceBlock {
-    protected CommonFeature feature;
+    static final MapCodec<KilnBlock> CODEC = simpleCodec(KilnBlock::new);
 
-    public KilnBlock(CommonFeature feature) {
-        super(Properties.of()
+    public KilnBlock() {
+        this(Properties.of()
             .strength(3.5F)
             .lightLevel(l -> l.getValue(BlockStateProperties.LIT) ? 13 : 0));
+    }
 
-        this.feature = feature;
+    private KilnBlock(BlockBehaviour.Properties properties) {
+        super(properties);
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractFurnaceBlock> codec() {
+        return CODEC;
     }
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if (!feature.isEnabled()) {
-            return InteractionResult.FAIL;
-        }
-
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
 
@@ -61,7 +65,7 @@ public class KilnBlock extends AbstractFurnaceBlock {
         return new KilnBlockEntity(pos, state);
     }
 
-    public void animateTick(BlockState state, Level level, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (state.getValue(LIT)) {
             var x = pos.getX() + 0.5D;
             var y = pos.getY();

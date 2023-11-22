@@ -22,12 +22,12 @@ public enum AzaleaMaterial implements IVariantWoodMaterial {
     }
 
     @Override
-    public BlockSetType getBlockSetType() {
+    public BlockSetType blockSetType() {
         return AzaleaWood.blockSetType.get();
     }
 
     @Override
-    public WoodType getWoodType() {
+    public WoodType woodType() {
         return AzaleaWood.woodType.get();
     }
 
