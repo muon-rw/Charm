@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.0.20
+
+- Fix for unenchanted items being added to middle slot of smithing table
+- Variant Pistons foundation feature moved to Charmony; Copper Pistons unchanged
+- Update wood textures for ladders and chests
+- Update ender pearl block texture
+- Update Bucket of Coral Squid item texture
+- Fix missing azalea axe tags
+
 ## 6.0.19
 
 - Horses wearing armor with custom enchantment color now properly display the given color
