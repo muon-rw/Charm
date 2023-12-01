@@ -1,11 +1,26 @@
 # Changelog
 
+## 6.0.20
+
+- Fix for unenchanted items being added to middle slot of smithing table
+- Variant Pistons foundation feature moved to Charmony; Copper Pistons unchanged
+- Update wood textures for ladders and chests
+- Update ender pearl block texture
+- Update Bucket of Coral Squid item texture
+- Fix missing azalea axe tags
+
+## 6.0.19
+
+- Horses wearing armor with custom enchantment color now properly display the given color
+- Fix issues with chair activation and multiple players occupying the same chair
+
 ## 6.0.18
 
 - Fix soul sand being a tag instead of an item in advancement
 - Fix missing tags for bamboo and cheery barrels and bookshelves
 - Fix dedicated server crash
 - Registration changes for variant wood
+- Blacklist ExtraStackables when 'allstackable' present
 
 ## 6.0.17
 

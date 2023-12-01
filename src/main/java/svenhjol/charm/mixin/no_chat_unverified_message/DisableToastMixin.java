@@ -1,7 +1,8 @@
 package svenhjol.charm.mixin.no_chat_unverified_message;
 
+import net.minecraft.client.gui.components.toasts.Toast;
+import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.multiplayer.ClientPacketListener;
-import net.minecraft.network.protocol.game.ClientboundServerDataPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -12,11 +13,10 @@ public class DisableToastMixin {
         method = "handleServerData",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/network/protocol/game/ClientboundServerDataPacket;enforcesSecureChat()Z",
-            ordinal = 1
+            target = "Lnet/minecraft/client/gui/components/toasts/ToastComponent;addToast(Lnet/minecraft/client/gui/components/toasts/Toast;)V"
         )
     )
-    private boolean hookStopNaggingMe(ClientboundServerDataPacket instance) {
-        return true; // Flip the condition.
+    private void hookStopNaggingMe(ToastComponent instance, Toast toast) {
+        // Don't add the toast.
     }
 }
