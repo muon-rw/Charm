@@ -5,7 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony_api.event.PlayerLoginEvent;
+import svenhjol.charmony.api.event.PlayerLoginEvent;
 
 public class Core extends CommonFeature {
     @Override

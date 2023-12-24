@@ -15,8 +15,8 @@ import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ConfigHelper;
-import svenhjol.charmony_api.event.GrindstoneEvents;
-import svenhjol.charmony_api.event.GrindstoneEvents.GrindstoneMenuInstance;
+import svenhjol.charmony.api.event.GrindstoneEvents;
+import svenhjol.charmony.api.event.GrindstoneEvents.GrindstoneMenuInstance;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;

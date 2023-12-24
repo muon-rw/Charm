@@ -4,10 +4,10 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.feature.storage_blocks.StorageBlocks;
 import svenhjol.charmony.base.Mods;
 import svenhjol.charmony.common.CommonLoader;
-import svenhjol.charmony_api.iface.IConditionalAdvancement;
-import svenhjol.charmony_api.iface.IConditionalAdvancementProvider;
-import svenhjol.charmony_api.iface.IConditionalRecipe;
-import svenhjol.charmony_api.iface.IConditionalRecipeProvider;
+import svenhjol.charmony.api.iface.IConditionalAdvancement;
+import svenhjol.charmony.api.iface.IConditionalAdvancementProvider;
+import svenhjol.charmony.api.iface.IConditionalRecipe;
+import svenhjol.charmony.api.iface.IConditionalRecipeProvider;
 
 import java.util.ArrayList;
 import java.util.List;

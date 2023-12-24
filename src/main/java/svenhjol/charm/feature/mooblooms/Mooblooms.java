@@ -15,7 +15,7 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.CharmTags;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony_api.event.EntityJoinEvent;
+import svenhjol.charmony.api.event.EntityJoinEvent;
 
 import java.util.function.Supplier;
 

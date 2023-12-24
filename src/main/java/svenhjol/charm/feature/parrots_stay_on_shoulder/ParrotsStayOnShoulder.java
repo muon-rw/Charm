@@ -5,7 +5,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.PlayerTickEvent;
+import svenhjol.charmony.api.event.PlayerTickEvent;
 
 public class ParrotsStayOnShoulder extends CommonFeature {
     private static final long STAY_MOUNTED_TIME = 20L;

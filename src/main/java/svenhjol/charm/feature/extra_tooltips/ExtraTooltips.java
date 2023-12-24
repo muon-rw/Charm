@@ -16,9 +16,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.client.ClientFeature;
-import svenhjol.charmony_api.event.TooltipComponentEvent;
-import svenhjol.charmony_api.event.TooltipItemHoverEvent;
-import svenhjol.charmony_api.event.TooltipRenderEvent;
+import svenhjol.charmony.api.event.TooltipComponentEvent;
+import svenhjol.charmony.api.event.TooltipItemHoverEvent;
+import svenhjol.charmony.api.event.TooltipRenderEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;

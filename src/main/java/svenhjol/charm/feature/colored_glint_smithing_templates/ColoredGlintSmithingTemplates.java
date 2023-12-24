@@ -17,9 +17,9 @@ import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.feature.colored_glints.ColoredGlints;
-import svenhjol.charmony_api.event.LootTableModifyEvent;
-import svenhjol.charmony_api.event.SmithingTableEvents;
-import svenhjol.charmony_api.event.SmithingTableEvents.SmithingTableInstance;
+import svenhjol.charmony.api.event.LootTableModifyEvent;
+import svenhjol.charmony.api.event.SmithingTableEvents;
+import svenhjol.charmony.api.event.SmithingTableEvents.SmithingTableInstance;
 
 import java.util.ArrayList;
 import java.util.List;

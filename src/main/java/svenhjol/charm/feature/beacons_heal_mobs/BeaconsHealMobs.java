@@ -12,7 +12,7 @@ import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.PlayerHelper;
-import svenhjol.charmony_api.event.ApplyBeaconEffectsEvent;
+import svenhjol.charmony.api.event.ApplyBeaconEffectsEvent;
 
 public class BeaconsHealMobs extends CommonFeature {
     @Override

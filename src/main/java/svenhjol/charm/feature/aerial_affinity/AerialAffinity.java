@@ -8,7 +8,7 @@ import svenhjol.charm.Charm;
 import svenhjol.charmony.base.Mods;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony_api.event.BlockBreakSpeedEvent;
+import svenhjol.charmony.api.event.BlockBreakSpeedEvent;
 
 import java.util.function.Supplier;
 

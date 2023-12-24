@@ -8,7 +8,7 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.world.item.Items;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.client.ClientFeature;
-import svenhjol.charmony_api.event.HudRenderEvent;
+import svenhjol.charmony.api.event.HudRenderEvent;
 
 public class CompassOverlay extends ClientFeature {
     @Configurable(

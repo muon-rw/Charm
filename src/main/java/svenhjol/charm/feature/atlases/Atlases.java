@@ -24,11 +24,11 @@ import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ItemNbtHelper;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.event.PlayerLoginEvent;
-import svenhjol.charmony_api.event.PlayerTickEvent;
-import svenhjol.charmony_api.iface.IWandererTrade;
-import svenhjol.charmony_api.iface.IWandererTradeProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.PlayerLoginEvent;
+import svenhjol.charmony.api.event.PlayerTickEvent;
+import svenhjol.charmony.api.iface.IWandererTrade;
+import svenhjol.charmony.api.iface.IWandererTradeProvider;
 
 import java.util.List;
 import java.util.UUID;

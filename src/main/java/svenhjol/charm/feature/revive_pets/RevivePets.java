@@ -19,8 +19,8 @@ import net.minecraft.world.level.Level;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony_api.event.EntityKilledEvent;
-import svenhjol.charmony_api.event.ItemUseEvent;
+import svenhjol.charmony.api.event.EntityKilledEvent;
+import svenhjol.charmony.api.event.ItemUseEvent;
 
 public class RevivePets extends CommonFeature {
     public static final String REVIVABLE_TAG = "charm_revivable_pet";

@@ -3,8 +3,8 @@ package svenhjol.charm.feature.azalea_wood;
 import svenhjol.charm.Charm;
 import svenhjol.charm.feature.woodcutters.Woodcutters;
 import svenhjol.charmony.base.Mods;
-import svenhjol.charmony_api.iface.IConditionalRecipe;
-import svenhjol.charmony_api.iface.IConditionalRecipeProvider;
+import svenhjol.charmony.api.iface.IConditionalRecipe;
+import svenhjol.charmony.api.iface.IConditionalRecipeProvider;
 
 import java.util.List;
 

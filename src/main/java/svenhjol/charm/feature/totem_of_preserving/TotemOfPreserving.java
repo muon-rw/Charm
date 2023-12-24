@@ -22,12 +22,12 @@ import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ApiHelper;
 import svenhjol.charmony.helper.TextHelper;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.enums.TotemType;
-import svenhjol.charmony_api.event.AnvilUpdateEvent;
-import svenhjol.charmony_api.event.PlayerInventoryDropEvent;
-import svenhjol.charmony_api.iface.ITotemInventoryCheckProvider;
-import svenhjol.charmony_api.iface.ITotemPreservingProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.enums.TotemType;
+import svenhjol.charmony.api.event.AnvilUpdateEvent;
+import svenhjol.charmony.api.event.PlayerInventoryDropEvent;
+import svenhjol.charmony.api.iface.ITotemInventoryCheckProvider;
+import svenhjol.charmony.api.iface.ITotemPreservingProvider;
 
 import java.util.*;
 import java.util.function.Supplier;

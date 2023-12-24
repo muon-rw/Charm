@@ -18,8 +18,8 @@ import svenhjol.charm.feature.clear_item_frames.ClearItemFramesNetwork.AddAmethy
 import svenhjol.charm.feature.clear_item_frames.ClearItemFramesNetwork.RemoveAmethyst;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony_api.event.EntityAttackEvent;
-import svenhjol.charmony_api.event.EntityUseEvent;
+import svenhjol.charmony.api.event.EntityAttackEvent;
+import svenhjol.charmony.api.event.EntityUseEvent;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;

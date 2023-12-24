@@ -11,8 +11,8 @@ import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.helper.ApiHelper;
 import svenhjol.charmony.helper.GenericTradeOffers;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.iface.IWandererTradeProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.iface.IWandererTradeProvider;
 
 import javax.annotation.Nullable;
 

@@ -12,9 +12,9 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProv
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.custom_wood.CustomWood;
 import svenhjol.charmony.feature.variant_wood.VariantWood;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.event.LevelLoadEvent;
-import svenhjol.charmony_api.iface.IVariantWoodMaterial;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.LevelLoadEvent;
+import svenhjol.charmony.api.iface.IVariantWoodMaterial;
 
 import java.util.function.Supplier;
 

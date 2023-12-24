@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.BlockUseEvent;
+import svenhjol.charmony.api.event.BlockUseEvent;
 
 import java.util.function.Supplier;
 

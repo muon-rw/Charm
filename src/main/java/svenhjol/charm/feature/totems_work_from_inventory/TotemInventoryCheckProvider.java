@@ -3,8 +3,8 @@ package svenhjol.charm.feature.totems_work_from_inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import svenhjol.charmony_api.enums.TotemType;
-import svenhjol.charmony_api.iface.ITotemInventoryCheckProvider;
+import svenhjol.charmony.api.enums.TotemType;
+import svenhjol.charmony.api.iface.ITotemInventoryCheckProvider;
 
 import java.util.Optional;
 

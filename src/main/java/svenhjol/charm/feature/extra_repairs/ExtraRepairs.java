@@ -8,7 +8,7 @@ import net.minecraft.world.level.GameRules;
 import svenhjol.charm.CharmTags;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.AnvilRepairEvent;
+import svenhjol.charmony.api.event.AnvilRepairEvent;
 
 public class ExtraRepairs extends CommonFeature {
     @Configurable(name = "Repair tridents using prismarine", description = "Use prismarine shards to repair trident damage.")

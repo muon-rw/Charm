@@ -17,7 +17,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.EntityKilledDropEvent;
+import svenhjol.charmony.api.event.EntityKilledDropEvent;
 
 public class ExtraMobDrops extends CommonFeature {
     private static final double LOOTING_BOOST = 0.1D;

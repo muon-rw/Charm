@@ -1,5 +1,10 @@
 # Changelog
 
+## 6.0.21
+
+- Increase NearbyWorkstations range to 16 blocks.
+- Bump to Charmony 6.15.0
+
 ## 6.0.20
 
 - Fix for unenchanted items being added to middle slot of smithing table

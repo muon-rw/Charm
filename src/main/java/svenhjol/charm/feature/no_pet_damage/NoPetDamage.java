@@ -11,8 +11,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.EntityAttackEvent;
-import svenhjol.charmony_api.event.EntityHurtEvent;
+import svenhjol.charmony.api.event.EntityAttackEvent;
+import svenhjol.charmony.api.event.EntityHurtEvent;
 
 public class NoPetDamage extends CommonFeature {
     @Override
