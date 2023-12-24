@@ -38,7 +38,7 @@ public class NearbyWorkstations extends CommonFeature {
     static final Component ENCHANTMENT_MENU_TITLE = Component.translatable("container.enchant");
 
     @Configurable(name = "Distance", description = "Range from which player can access a workstation.")
-    public static int distance = 10;
+    public static int distance = 16;
 
     @Override
     public String description() {
