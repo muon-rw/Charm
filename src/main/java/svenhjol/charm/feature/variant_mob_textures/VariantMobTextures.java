@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.client.ClientFeature;
-import svenhjol.charmony_api.event.ClientEntityJoinEvent;
+import svenhjol.charmony.api.event.ClientEntityJoinEvent;
 
 import javax.annotation.Nullable;
 import java.util.*;

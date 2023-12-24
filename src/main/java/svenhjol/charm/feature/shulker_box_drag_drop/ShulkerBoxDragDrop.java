@@ -27,9 +27,9 @@ import svenhjol.charm.feature.inventory_tidying.InventoryTidyingHandler;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.TagHelper;
-import svenhjol.charmony_api.event.ItemDragDropEvent;
-import svenhjol.charmony_api.event.ItemDragDropEvent.StackType;
-import svenhjol.charmony_api.event.LevelLoadEvent;
+import svenhjol.charmony.api.event.ItemDragDropEvent;
+import svenhjol.charmony.api.event.ItemDragDropEvent.StackType;
+import svenhjol.charmony.api.event.LevelLoadEvent;
 
 import java.util.ArrayList;
 import java.util.List;

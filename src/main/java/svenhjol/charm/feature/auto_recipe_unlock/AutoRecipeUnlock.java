@@ -2,7 +2,7 @@ package svenhjol.charm.feature.auto_recipe_unlock;
 
 import net.minecraft.world.entity.player.Player;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.PlayerLoginEvent;
+import svenhjol.charmony.api.event.PlayerLoginEvent;
 
 public class AutoRecipeUnlock extends CommonFeature {
     @Override

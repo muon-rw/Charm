@@ -20,9 +20,9 @@ import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ApiHelper;
 import svenhjol.charmony.helper.CharmonyEnchantmentHelper;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.event.BlockUseEvent;
-import svenhjol.charmony_api.iface.IQuickReplantProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.BlockUseEvent;
+import svenhjol.charmony.api.iface.IQuickReplantProvider;
 
 import java.util.ArrayList;
 import java.util.List;

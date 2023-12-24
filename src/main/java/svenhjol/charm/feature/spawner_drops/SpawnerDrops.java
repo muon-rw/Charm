@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import svenhjol.charm.CharmTags;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.BlockBreakEvent;
+import svenhjol.charmony.api.event.BlockBreakEvent;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

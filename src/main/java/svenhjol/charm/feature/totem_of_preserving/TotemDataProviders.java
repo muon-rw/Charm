@@ -2,8 +2,8 @@ package svenhjol.charm.feature.totem_of_preserving;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import svenhjol.charmony_api.enums.TotemType;
-import svenhjol.charmony_api.iface.*;
+import svenhjol.charmony.api.enums.TotemType;
+import svenhjol.charmony.api.iface.*;
 
 import java.util.ArrayList;
 import java.util.List;

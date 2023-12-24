@@ -2,9 +2,9 @@ package svenhjol.charm.feature.coral_sea_lanterns;
 
 import net.minecraft.world.level.ItemLike;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.iface.IWandererTrade;
-import svenhjol.charmony_api.iface.IWandererTradeProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.iface.IWandererTrade;
+import svenhjol.charmony.api.iface.IWandererTradeProvider;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

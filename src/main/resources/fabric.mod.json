@@ -22,13 +22,22 @@
     ],
     "client": [
       "svenhjol.charm.fabric.ClientInitializer"
+    ],
+    "rei_common": [
+      "svenhjol.charm.integration.rei.CharmReiPlugin"
+    ],
+    "rei_client": [
+      "svenhjol.charm.integration.rei.CharmReiClientPlugin"
+    ],
+    "modmenu": [
+      "svenhjol.charm.integration.modmenu.CharmModMenuPlugin"
     ]
   },
   "accessWidener": "charm.accesswidener",
   "depends": {
     "fabricloader": ">=${loader_version}",
     "charmony": ">=${charmony_version}",
-    "minecraft": "*",
+    "minecraft": "${minecraft_version}",
     "java": ">=17"
   },
   "contact": {

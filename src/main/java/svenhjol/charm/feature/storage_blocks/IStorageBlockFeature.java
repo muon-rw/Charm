@@ -1,6 +1,6 @@
 package svenhjol.charm.feature.storage_blocks;
 
-import svenhjol.charmony_api.iface.IRegistry;
+import svenhjol.charmony.api.iface.IRegistry;
 
 import java.util.List;
 import java.util.function.BooleanSupplier;

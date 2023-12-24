@@ -14,8 +14,8 @@ import net.minecraft.world.phys.AABB;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony_api.event.EntityJoinEvent;
-import svenhjol.charmony_api.event.PlayerTickEvent;
+import svenhjol.charmony.api.event.EntityJoinEvent;
+import svenhjol.charmony.api.event.PlayerTickEvent;
 
 import java.util.List;
 

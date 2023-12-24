@@ -1,7 +1,7 @@
 package svenhjol.charm.feature.storage_blocks;
 
-import svenhjol.charmony_api.iface.IConditionalRecipe;
-import svenhjol.charmony_api.iface.IConditionalRecipeProvider;
+import svenhjol.charmony.api.iface.IConditionalRecipe;
+import svenhjol.charmony.api.iface.IConditionalRecipeProvider;
 
 import java.util.List;
 

@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import svenhjol.charmony.base.CharmonyBlockItem;
 import svenhjol.charmony.base.CharmonyFallingBlock;
-import svenhjol.charmony_api.event.SugarDissolveEvent;
+import svenhjol.charmony.api.event.SugarDissolveEvent;
 
 @SuppressWarnings({"deprecation", "BooleanMethodIsAlwaysInverted", "unused"})
 public class SugarBlock extends CharmonyFallingBlock {
