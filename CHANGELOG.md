@@ -2,7 +2,8 @@
 
 ## 6.0.21
 
-- Increase NearbyWorkstations range to 16 blocks.
+- Increase NearbyWorkstations range to 16 blocks
+- Fix compass overlay compact view coords hidden when at far distance
 - Bump to Charmony 6.15.0
 
 ## 6.0.20
