@@ -8,7 +8,7 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.world.item.Items;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.client.ClientFeature;
-import svenhjol.charmony_api.event.HudRenderEvent;
+import svenhjol.charmony.api.event.HudRenderEvent;
 
 public class CompassOverlay extends ClientFeature {
     @Configurable(
@@ -113,25 +113,31 @@ public class CompassOverlay extends ClientFeature {
         var facing = I18n.get("gui.charm.facing", direction.getName());
         var facingLength = font.width(facing);
         var facingColor = 0xFFEEDD;
-        float midX;
+        int facingOffsetX;
+        int coordsOffsetX;
+        int biomeOffsetX;
+        float x;
 
         if (compactView) {
-            midX = gui.screenWidth / 9.0F;
+            x = 10;
             y = 10;
+            facingOffsetX = coordsOffsetX = 0;
             lineHeight = 9;
         } else {
-            midX = gui.screenWidth / 2.0F;
+            x = gui.screenWidth / 2.0F;
             y = 40;
+            facingOffsetX = -facingLength / 2;
+            coordsOffsetX = -coordsLength / 2;
             lineHeight = 12;
         }
 
         if (CompassOverlay.showFacing) {
-            renderText(guiGraphics, font, facing, midX, y, -facingLength / 2, 0, facingColor | alpha);
+            renderText(guiGraphics, font, facing, x, y, facingOffsetX, 0, facingColor | alpha);
             y += lineHeight;
         }
 
         if (CompassOverlay.showCoords) {
-            renderText(guiGraphics, font, coords, midX, y, -coordsLength / 2, 0, coordsColor | alpha);
+            renderText(guiGraphics, font, coords, x, y, coordsOffsetX, 0, coordsColor | alpha);
             y += lineHeight;
         }
 
@@ -141,7 +147,14 @@ public class CompassOverlay extends ClientFeature {
                 var biomeName = I18n.get("biome." + biomeRes.getNamespace() + "." + biomeRes.getPath());
                 var biomeLength = font.width(biomeName);
                 var biomeColor = 0x9ACCAA;
-                renderText(guiGraphics, font, biomeName, midX, y, -biomeLength / 2, 0, biomeColor | alpha);
+
+                if (compactView) {
+                    biomeOffsetX = 0;
+                } else {
+                    biomeOffsetX = -biomeLength / 2;
+                }
+
+                renderText(guiGraphics, font, biomeName, x, y, biomeOffsetX, 0, biomeColor | alpha);
             }
         }
     }

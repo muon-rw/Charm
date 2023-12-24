@@ -10,9 +10,9 @@ import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ApiHelper;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.enums.TotemType;
-import svenhjol.charmony_api.iface.ITotemInventoryCheckProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.enums.TotemType;
+import svenhjol.charmony.api.iface.ITotemInventoryCheckProvider;
 
 import java.util.ArrayList;
 import java.util.List;

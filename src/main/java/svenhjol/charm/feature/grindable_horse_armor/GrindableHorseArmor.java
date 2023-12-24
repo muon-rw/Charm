@@ -12,10 +12,10 @@ import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ApiHelper;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.event.GrindstoneEvents;
-import svenhjol.charmony_api.event.GrindstoneEvents.GrindstoneMenuInstance;
-import svenhjol.charmony_api.iface.IGrindableItemProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.GrindstoneEvents;
+import svenhjol.charmony.api.event.GrindstoneEvents.GrindstoneMenuInstance;
+import svenhjol.charmony.api.iface.IGrindableItemProvider;
 
 import java.util.HashMap;
 import java.util.List;

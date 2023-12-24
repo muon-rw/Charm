@@ -18,9 +18,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.JukeboxBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charmony.client.ClientFeature;
-import svenhjol.charmony_api.event.BlockUseEvent;
-import svenhjol.charmony_api.event.ClientTickEvent;
-import svenhjol.charmony_api.event.SoundPlayEvent;
+import svenhjol.charmony.api.event.BlockUseEvent;
+import svenhjol.charmony.api.event.ClientTickEvent;
+import svenhjol.charmony.api.event.SoundPlayEvent;
 
 public class DiscsStopBackgroundMusic extends ClientFeature {
     private static final int CHECK_TICKS = 10;

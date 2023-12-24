@@ -25,10 +25,10 @@ import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ApiHelper;
 import svenhjol.charmony.helper.TagHelper;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.event.ItemHoverSortEvent;
-import svenhjol.charmony_api.event.LevelLoadEvent;
-import svenhjol.charmony_api.iface.IHoverSortableItemProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.ItemHoverSortEvent;
+import svenhjol.charmony.api.event.LevelLoadEvent;
+import svenhjol.charmony.api.iface.IHoverSortableItemProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;

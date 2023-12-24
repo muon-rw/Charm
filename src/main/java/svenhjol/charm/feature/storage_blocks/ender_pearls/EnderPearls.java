@@ -13,7 +13,7 @@ import svenhjol.charm.feature.storage_blocks.StorageBlocks;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.PlayerHelper;
 import svenhjol.charmony.iface.ICommonRegistry;
-import svenhjol.charmony_api.event.EntityJoinEvent;
+import svenhjol.charmony.api.event.EntityJoinEvent;
 
 import java.util.List;
 import java.util.function.BooleanSupplier;

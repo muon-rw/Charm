@@ -18,8 +18,8 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.mixin.atlases.CartographyTableScreenMixin;
 import svenhjol.charmony.client.ClientFeature;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.HeldItemRenderEvent;
-import svenhjol.charmony_api.event.KeyPressEvent;
+import svenhjol.charmony.api.event.HeldItemRenderEvent;
+import svenhjol.charmony.api.event.KeyPressEvent;
 
 import java.util.function.Supplier;
 

@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.PlayerTickEvent;
+import svenhjol.charmony.api.event.PlayerTickEvent;
 
 import java.util.function.Supplier;
 

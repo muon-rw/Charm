@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import svenhjol.charmony.base.CharmonyBlockItem;
-import svenhjol.charmony_api.event.SugarDissolveEvent;
+import svenhjol.charmony.api.event.SugarDissolveEvent;
 
 @SuppressWarnings({"deprecation", "BooleanMethodIsAlwaysInverted", "unused"})
 public class SugarBlock extends FallingBlock {

@@ -2,7 +2,7 @@ package svenhjol.charm.feature.extra_recipes;
 
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.CharmonyApi;
+import svenhjol.charmony.api.CharmonyApi;
 
 public class ExtraRecipes extends CommonFeature {
     @Configurable(name = "Ore block from raw ore block", description = "If true, adds a blast furnace recipe for smelting raw ore blocks into ore blocks.")

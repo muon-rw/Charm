@@ -17,7 +17,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony_api.event.BlockUseEvent;
+import svenhjol.charmony.api.event.BlockUseEvent;
 
 import java.util.HashMap;
 import java.util.Map;

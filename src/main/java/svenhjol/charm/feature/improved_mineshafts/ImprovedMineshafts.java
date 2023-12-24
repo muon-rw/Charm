@@ -24,7 +24,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.event.LevelLoadEvent;
+import svenhjol.charmony.api.event.LevelLoadEvent;
 
 import java.util.ArrayList;
 import java.util.List;

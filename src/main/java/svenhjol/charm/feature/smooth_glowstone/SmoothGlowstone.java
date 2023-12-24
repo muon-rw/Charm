@@ -5,9 +5,9 @@ import svenhjol.charm.Charm;
 import svenhjol.charm.feature.firing.Firing;
 import svenhjol.charmony.base.Mods;
 import svenhjol.charmony.common.CommonFeature;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.iface.IConditionalRecipe;
-import svenhjol.charmony_api.iface.IConditionalRecipeProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.iface.IConditionalRecipe;
+import svenhjol.charmony.api.iface.IConditionalRecipeProvider;
 
 import java.util.List;
 import java.util.function.Supplier;

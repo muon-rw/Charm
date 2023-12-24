@@ -6,7 +6,7 @@ import svenhjol.charmony.annotation.Packet;
 import svenhjol.charmony.base.Mods;
 import svenhjol.charmony.enums.PacketDirection;
 import svenhjol.charmony.iface.IPacketRequest;
-import svenhjol.charmony_api.event.ItemHoverSortEvent;
+import svenhjol.charmony.api.event.ItemHoverSortEvent;
 
 public class HoverSortingNetwork {
     public static void register() {

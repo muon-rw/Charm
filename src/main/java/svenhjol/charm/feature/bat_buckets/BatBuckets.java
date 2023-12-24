@@ -21,10 +21,10 @@ import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.ItemNbtHelper;
-import svenhjol.charmony_api.CharmonyApi;
-import svenhjol.charmony_api.event.EntityUseEvent;
-import svenhjol.charmony_api.iface.IWandererTrade;
-import svenhjol.charmony_api.iface.IWandererTradeProvider;
+import svenhjol.charmony.api.CharmonyApi;
+import svenhjol.charmony.api.event.EntityUseEvent;
+import svenhjol.charmony.api.iface.IWandererTrade;
+import svenhjol.charmony.api.iface.IWandererTradeProvider;
 
 import javax.annotation.Nullable;
 import java.util.List;

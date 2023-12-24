@@ -14,8 +14,8 @@ import svenhjol.charm.feature.storage_blocks.StorageBlocks;
 import svenhjol.charmony.feature.advancements.Advancements;
 import svenhjol.charmony.helper.PlayerHelper;
 import svenhjol.charmony.iface.ICommonRegistry;
-import svenhjol.charmony_api.enums.EventResult;
-import svenhjol.charmony_api.event.SugarDissolveEvent;
+import svenhjol.charmony.api.enums.EventResult;
+import svenhjol.charmony.api.event.SugarDissolveEvent;
 
 import java.util.List;
 import java.util.function.BooleanSupplier;

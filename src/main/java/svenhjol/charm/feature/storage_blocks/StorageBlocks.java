@@ -6,7 +6,7 @@ import svenhjol.charm.feature.storage_blocks.sugar.Sugar;
 import svenhjol.charmony.annotation.Configurable;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.iface.ICommonRegistry;
-import svenhjol.charmony_api.CharmonyApi;
+import svenhjol.charmony.api.CharmonyApi;
 
 import java.util.HashMap;
 import java.util.List;
