@@ -22,6 +22,7 @@
     "copper_pistons.PistonBaseBlockMixin",
     "copper_pistons.PistonHeadBlockMixin",
     "copper_pistons.PistonMovingBlockEntityMixin",
+    "decorated_pot_activation.DecoratedPotBlockMixin",
     "deepslate_dungeons.MonsterRoomFeatureMixin",
     "enchantable_horse_armor.EnchantmentMixin",
     "enchantable_horse_armor.HorseMixin",
