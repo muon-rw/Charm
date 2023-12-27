@@ -4,7 +4,9 @@
 
 - Increase NearbyWorkstations range to 16 blocks
 - Fix compass overlay compact view coords hidden when at far distance
-- Bump to Charmony 6.15.0
+- Fix variant mob textures crash when feature disabled
+- Disable ColoredEnchantmentSmithingTemplates when optifabric is installed
+- Bump to Charmony 6.15.1
 
 ## 6.0.20
 
