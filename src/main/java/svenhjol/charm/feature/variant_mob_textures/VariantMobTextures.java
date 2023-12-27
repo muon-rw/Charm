@@ -87,7 +87,10 @@ public class VariantMobTextures extends ClientFeature {
     }
 
     @Override
-    public void register() {
+    public void runWhenEnabled() {
+        ClientEntityJoinEvent.INSTANCE.handle(this::handlePlayerJoin);
+
+        // EntityRenderers are deferred in forge so we can safely register in runWhenEnabled.
         var registry = mod().registry();
 
         if (chickens) {
@@ -139,11 +142,6 @@ public class VariantMobTextures extends ClientFeature {
             registry.entityRenderer(() -> EntityType.WANDERING_TRADER,
                 () -> VariantMobRenderer.RenderWanderingTrader::new);
         }
-    }
-
-    @Override
-    public void runWhenEnabled() {
-        ClientEntityJoinEvent.INSTANCE.handle(this::handlePlayerJoin);
     }
 
     public void handlePlayerJoin(Entity entity, Level level) {
