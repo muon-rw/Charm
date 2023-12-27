@@ -16,6 +16,7 @@ public class MixinConfigPlugin extends CharmonyMixinConfigPlugin {
     @Override
     protected List<Predicate<String>> runtimeBlacklist() {
         return List.of(
+            feature -> feature.equals("ColoredGlintSmithingTemplates") && ConfigHelper.isModLoaded("optifabric"),
             feature -> feature.equals("NoChatUnverifiedMessage") && ConfigHelper.isModLoaded("chatsigninghider"),
             feature -> feature.equals("ExtraStackables") && ConfigHelper.isModLoaded("allstackable")
         );
