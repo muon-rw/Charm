@@ -38,6 +38,7 @@
     "improved_mineshafts.MineshaftPiecesMixin",
     "longer_suspicious_effects.FlowerBlockMixin",
     "lumberjacks.VillagerMixin",
+    "make_suspicious_blocks.PistonBaseBlockMixin",
     "no_crop_trampling.FarmBlockMixin",
     "open_both_doors.DoorBlockMixin",
     "parrots_stay_on_shoulder.PlayerMixin",

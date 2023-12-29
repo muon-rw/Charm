@@ -1,23 +1,25 @@
 package svenhjol.charm.feature.make_suspicious_blocks;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BrushableBlockEntity;
-import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import svenhjol.charm.Charm;
 import svenhjol.charmony.common.CommonFeature;
 import svenhjol.charmony.feature.advancements.Advancements;
-import svenhjol.charmony.api.event.BlockUseEvent;
+import svenhjol.charmony.helper.PlayerHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +31,7 @@ public class MakeSuspiciousBlocks extends CommonFeature {
 
     @Override
     public String description() {
-        return "Add an item to sand and gravel when holding a brush in your offhand.";
+        return "Use a piston to push an item into sand or gravel, making it suspicious.";
     }
 
     @Override
@@ -39,40 +41,62 @@ public class MakeSuspiciousBlocks extends CommonFeature {
         registerSuspiciousBlockConversion(Blocks.GRAVEL, Blocks.SUSPICIOUS_GRAVEL);
     }
 
-    @Override
-    public void runWhenEnabled() {
-        BlockUseEvent.INSTANCE.handle(this::handleBlockUse);
-    }
-
     public static void registerSuspiciousBlockConversion(Block normal, Block suspicious) {
         SUSPICIOUS_BLOCK_CONVERSIONS.put(normal, suspicious);
     }
 
-    private InteractionResult handleBlockUse(Player player, Level level, InteractionHand hand, BlockHitResult hitResult) {
-        var offHand = player.getItemInHand(InteractionHand.OFF_HAND);
-        var mainHand = player.getItemInHand(InteractionHand.MAIN_HAND);
-        if (!offHand.is(Items.BRUSH) || mainHand.isEmpty()) {
-            return InteractionResult.PASS;
+    /**
+     * Called by the piston base block mixin.
+     * Ensure the block two spaces from the piston head direction is able to be converted.
+     * Check for item entities in the airspace that the piston head pushes into.
+     */
+    public static void checkAndConvert(Level level, BlockPos pos, BlockState state) {
+        var direction = state.getValue(PistonBaseBlock.FACING);
+        var d1 = pos.relative(direction, 1);
+        var d2 = pos.relative(direction, 2);
+        var target = level.getBlockState(d2);
+        var random = level.getRandom();
+
+        if (!SUSPICIOUS_BLOCK_CONVERSIONS.containsKey(target.getBlock())) {
+            return;
         }
 
-        var pos = hitResult.getBlockPos();
-        var normalBlock = level.getBlockState(pos).getBlock();
-        var suspiciousBlock = SUSPICIOUS_BLOCK_CONVERSIONS.getOrDefault(normalBlock, null);
-        if (suspiciousBlock == null) {
-            return InteractionResult.PASS;
+        var itemEntities = level.getEntitiesOfClass(ItemEntity.class, new AABB(d1));
+        if (itemEntities.isEmpty()) {
+            return;
         }
 
-        level.setBlock(pos, suspiciousBlock.defaultBlockState(), 2);
+        // Get one of the stacks at random
+        var itemEntity = itemEntities.get(random.nextInt(itemEntities.size()));
+        var stack = itemEntity.getItem();
+        var result = makeSuspiciousBlock(level, d2, stack);
 
-        var optional = level.getBlockEntity(pos, BlockEntityType.BRUSHABLE_BLOCK);
-        if (optional.isPresent()) {
-            var brushable = (BrushableBlockEntity) optional.get();
-            brushable.lootTable = null;
-            brushable.item = mainHand.copy();
+        if (result) {
+            itemEntity.kill();
 
-            if (!player.getAbilities().instabuild) {
-                mainHand.shrink(mainHand.getCount());
+            // Do advancement for nearby players
+            if (!level.isClientSide) {
+                triggerMadeSuspiciousBlock((ServerLevel) level, pos);
             }
+        }
+    }
+
+    static boolean makeSuspiciousBlock(Level level, BlockPos pos, ItemStack stack) {
+        var targetState = level.getBlockState(pos);
+        var targetBlock = targetState.getBlock();
+
+        var suspiciousBlock = SUSPICIOUS_BLOCK_CONVERSIONS.getOrDefault(targetBlock, null);
+        if (suspiciousBlock == null) {
+            return false;
+        }
+
+        level.setBlockAndUpdate(pos, suspiciousBlock.defaultBlockState());
+
+        var opt = level.getBlockEntity(pos, BlockEntityType.BRUSHABLE_BLOCK);
+        if (opt.isPresent()) {
+            var brushable = (BrushableBlockEntity) opt.get();
+            brushable.lootTable = null;
+            brushable.item = stack.copy();
 
             if (level.isClientSide) {
                 var random = level.getRandom();
@@ -86,16 +110,14 @@ public class MakeSuspiciousBlocks extends CommonFeature {
             }
 
             level.playSound(null, pos, addItemSound.get(), SoundSource.BLOCKS, 1.0f, 1.0f);
-            player.swing(InteractionHand.OFF_HAND);
-            triggerMadeSuspiciousBlock(player);
-            
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return true;
         }
 
-        return InteractionResult.PASS;
+        return false;
     }
 
-    public static void triggerMadeSuspiciousBlock(Player player) {
-        Advancements.trigger(new ResourceLocation(Charm.ID, "made_suspicious_block"), player);
+    public static void triggerMadeSuspiciousBlock(ServerLevel level, BlockPos pos) {
+        PlayerHelper.getPlayersInRange(level, pos, 8.0d).forEach(
+            player -> Advancements.trigger(new ResourceLocation(Charm.ID, "made_suspicious_block"), player));
     }
 }
