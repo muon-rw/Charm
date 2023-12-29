@@ -3,7 +3,7 @@
 ## 6.0.21
 
 - Increase NearbyWorkstations range to 16 blocks
-- Add decorated pots item activavtion
+- Add decorated pots item activation
 - Fix compass overlay compact view coords hidden when at far distance
 - Fix variant mob textures crash when feature disabled
 - Disable ColoredEnchantmentSmithingTemplates when optifabric is installed
