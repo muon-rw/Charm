@@ -25,7 +25,7 @@ public class DecoratedPotActivation extends CommonFeature {
     @Configurable(name = "Splash potions", description = "If true, a splash potion will be thrown at a nearby player.")
     public static boolean splashPotions = true;
 
-    @Configurable(name = "Lingering potions", description = "If true, a lingering potion will be activated.")
+    @Configurable(name = "Lingering potions", description = "If true, a lingering potion will be thrown at a nearby player.")
     public static boolean lingeringPotions = true;
 
     @Configurable(name = "Spawn eggs", description = "If true, a spawn egg will spawn a mob.")
