@@ -20,6 +20,7 @@ import svenhjol.charm.feature.copper_pistons.CopperPistons;
 import svenhjol.charm.feature.coral_sea_lanterns.CoralSeaLanterns;
 import svenhjol.charm.feature.coral_squids.CoralSquids;
 import svenhjol.charm.feature.core.Core;
+import svenhjol.charm.feature.decorated_pot_activation.DecoratedPotActivation;
 import svenhjol.charm.feature.deepslate_dungeons.DeepslateDungeons;
 import svenhjol.charm.feature.echolocation.Echolocation;
 import svenhjol.charm.feature.enchantable_horse_armor.EnchantableHorseArmor;
@@ -105,6 +106,7 @@ public class Charm extends CommonMod {
             CoralSeaLanterns.class,
             CoralSquids.class,
             Core.class,
+            DecoratedPotActivation.class,
             DeepslateDungeons.class,
             Echolocation.class,
             EnchantableHorseArmor.class,
