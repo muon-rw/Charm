@@ -1,9 +1,25 @@
-# Charm for Minecraft 1.20.x
+# Charm Forked
+This is an *unofficial* fork of Charm by Svenhjol. This fork is maintained by MuonR.
+A vast majority of the mod was written by Svenhjol and others, all credits go to the original authors.
+The original mod is licensed MIT, this fork will stay the same.
+
+If/when the original author releases publicly Charm for versions of MC that this fork targets, this fork will likely no longer be updated.
+The majority of CF Rewards are allocated to the original author, Svenhjol.
+
+**Please do not report any issues to the original developer, report them here.**
+
+## Differences from Charm:
+- Currently targeting 1.20.1 Fabric
+- Fix a few mod compatibility mixin issues
+- (Planned): Modded totem compatibility for the Inventory Totems feature
+- (Planned): Automatically disable a few other duplicate features by default
+
+
+## From Original Author:
+for Minecraft 1.20.x
 
 Charm is a vanilla-plus mod for Minecraft, inspired by Quark.
 It requires Fabric API and (currently) Minecraft 1.20.2.
-
-If you would like to participate in testing pre-release versions of Charm, discuss features or provide bug reports, please visit our [Discord](https://discord.gg/3CVxPZUMDX).
 
 ### Features in Charm 6
 
