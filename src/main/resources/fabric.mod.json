@@ -2,13 +2,14 @@
   "schemaVersion": 1,
   "id": "charm",
   "version": "${mod_version}",
-  "name": "Charm",
-  "description": "Tweaks and additions to Minecraft without changing core gameplay.",
+  "name": "Charm Forked",
+  "description": "An UNOFFICIAL, likely temporary fork of Charm. Do not report issues to the original dev.",
   "authors": [
     "svenhjol",
     "Coranthes",
     "WarlordWossman",
-    "F43nd1r"
+    "F43nd1r",
+    "MuonR"
   ],
   "icon": "icon.png",
   "license": "MIT",
@@ -42,7 +43,7 @@
   },
   "contact": {
     "homepage": "https://svenhjol.github.io/Charm",
-    "sources": "https://github.com/svenhjol/Charm"
+    "sources": "https://github.com/muon-rw/Charm"
   },
   "custom": {
     "modmenu": {
