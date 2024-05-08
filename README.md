@@ -1,7 +1,8 @@
 # Charm Forked
 This is an *unofficial* fork of Charm by Svenhjol. This fork is maintained by MuonR.
+
 A vast majority of the mod was written by Svenhjol and others, all credits go to the original authors.
-The original mod is licensed MIT, this fork will stay the same.
+The original mod is licensed MIT, and this fork will stay the same.
 
 If/when the original author releases publicly Charm for versions of MC that this fork targets, this fork will likely no longer be updated.
 The majority of CF Rewards are allocated to the original author, Svenhjol.
