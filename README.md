@@ -1,5 +1,5 @@
 # Charm Forked
-This is an *unofficial* fork of Charm by Svenhjol. This fork is maintained by MuonR.
+This is an *unofficial* fork of Charm by Svenhjol. It is being maintained by MuonR.
 
 A vast majority of the mod was written by Svenhjol and others, all credits go to the original authors.
 The original mod is licensed MIT, and this fork will stay the same.
