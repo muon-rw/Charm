@@ -131,9 +131,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                 feature -> (feature.equals("UnlimitedRepairCost")
                         || feature.equals("ShowRepairCost")
                         || feature.equals("StrongerAnvils"))
-                        && ConfigHelper.isModLoaded("zenith"),
-                feature -> feature.equals("NoExperimentalScreen")
-                        && ConfigHelper.isModLoaded("yeetusexperimentus")
+                        && ConfigHelper.isModLoaded("zenith")
         );
     }
 
