@@ -3,13 +3,13 @@ package svenhjol.charm.mixin.extra_stackables;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
-import net.minecraft.world.inventory.ItemCombinerMenu;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -23,13 +23,14 @@ public abstract class AnvilMenuMixin {
      * Prevents weird exploits with mods like DragonLoot
      */
     @Shadow
-    private int repairItemCountCost;
+    public int repairItemCountCost;
 
+    @Unique
     private boolean leftStackEnchantedBooks() {
         ItemStack leftSlot = ((AnvilMenu)(Object)this).inputSlots.getItem(0);
         return leftSlot.getItem() == Items.ENCHANTED_BOOK && leftSlot.getCount() > 1;
     }
-
+    @Unique
     private boolean rightStackEnchantedBooks() {
         ItemStack rightSlot = ((AnvilMenu)(Object)this).inputSlots.getItem(1);
         return rightSlot.getItem() == Items.ENCHANTED_BOOK && rightSlot.getCount() > 1;
