@@ -8,3 +8,18 @@ apply from: "https://charmony.work/gradle/fabric-include-toml.build.gradle"
 apply from: "https://charmony.work/gradle/fabric-include-rei.build.gradle"
 apply from: "https://charmony.work/gradle/fabric-include-modmenu.build.gradle"
 apply from: "https://charmony.work/gradle/fabric-bundle-charmony.build.gradle"
+
+repositories {
+    maven {
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
+    maven { url = "https://jitpack.io" }
+}
+
+dependencies {
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.3.6")))
+    modLocalRuntime("maven.modrinth:dragonloot:${project.dragonloot_version}+${project.minecraft_version}")
+}

@@ -1,5 +1,10 @@
 accessWidener v1 named
 
+## Mod Compat
+accessible field net/minecraft/world/inventory/ItemCombinerMenu resultSlots Lnet/minecraft/world/inventory/ResultContainer;
+accessible field net/minecraft/world/inventory/ItemCombinerMenu inputSlots Lnet/minecraft/world/Container;
+accessible field net/minecraft/world/inventory/AnvilMenu repairItemCountCost I
+
 ## Classes and interfaces
 accessible class net/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration
 accessible class net/minecraft/world/level/block/state/properties/NoteBlockInstrument$Type
