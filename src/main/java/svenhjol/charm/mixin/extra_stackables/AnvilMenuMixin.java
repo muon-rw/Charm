@@ -13,12 +13,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
+/**
+ * Changes the behavior of stacked enchanted books to only apply one book at a time
+ * Mostly done to prevent cost-capping exploits with DragonLoot
+ * Mixin priority is shifted slightly later due to a conflicting mixin from Charmony.
+ */
 @Mixin(value = AnvilMenu.class, priority = 1100)
 public abstract class AnvilMenuMixin {
-    /**
-     * Changes the behavior of stacked enchanted books to only combine one book at a time
-     * Prevents weird exploits with mods like DragonLoot
-     */
     @Shadow
     public int repairItemCountCost;
 
@@ -33,6 +34,9 @@ public abstract class AnvilMenuMixin {
 
     /**
      * Always calculate the level cost as if there is only 1 item in the left stack
+     *
+     * Why is it hard coded to cost 40 levels if the stack size is over 1?
+     * The world will never know
      */
     @ModifyExpressionValue(
             method = "createResult",
@@ -77,7 +81,14 @@ public abstract class AnvilMenuMixin {
     }
 
     /**
-     * Shrink the right slot by 1 instead of clearing it
+     * Make createResult think we only have 1 book in the right slot -
+     *
+     * Causes the right slot shrink by 1 instead of clearing
+     * without needing to mixin to multiple setItems or set temporary flags
+     *
+     * Also prevents XP cost from increasing when multiple items are
+     * placed into the right stack.
+     *
      */
     @Redirect(
             method = "createResult",
