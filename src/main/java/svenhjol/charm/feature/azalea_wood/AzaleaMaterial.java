@@ -39,6 +39,7 @@ public enum AzaleaMaterial implements IVariantWoodMaterial {
     @Override
     public BlockBehaviour.Properties blockProperties() {
         return IVariantWoodMaterial.super.blockProperties()
-            .noOcclusion();
+                .noOcclusion()
+                .destroyTime(1);
     }
 }
