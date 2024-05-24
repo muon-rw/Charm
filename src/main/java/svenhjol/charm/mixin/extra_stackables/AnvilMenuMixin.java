@@ -1,7 +1,7 @@
 package svenhjol.charm.mixin.extra_stackables;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.item.ItemStack;
@@ -9,14 +9,11 @@ import net.minecraft.world.item.Items;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(AnvilMenu.class)
+@Mixin(value = AnvilMenu.class, priority = 1100)
 public abstract class AnvilMenuMixin {
     /**
      * Changes the behavior of stacked enchanted books to only combine one book at a time
@@ -25,21 +22,19 @@ public abstract class AnvilMenuMixin {
     @Shadow
     public int repairItemCountCost;
 
-    @Unique
     private boolean leftStackEnchantedBooks() {
         ItemStack leftSlot = ((AnvilMenu)(Object)this).inputSlots.getItem(0);
         return leftSlot.getItem() == Items.ENCHANTED_BOOK && leftSlot.getCount() > 1;
     }
-    @Unique
     private boolean rightStackEnchantedBooks() {
         ItemStack rightSlot = ((AnvilMenu)(Object)this).inputSlots.getItem(1);
         return rightSlot.getItem() == Items.ENCHANTED_BOOK && rightSlot.getCount() > 1;
     }
 
     /**
-     * Calculate the level cost as if there is only 1 item in the left stack
+     * Always calculate the level cost as if there is only 1 item in the left stack
      */
-    @Redirect(
+    @ModifyExpressionValue(
             method = "createResult",
             at = @At(
                     value = "INVOKE",
@@ -57,15 +52,15 @@ public abstract class AnvilMenuMixin {
                     )
             )
     )
-    private int fakeInputStackSize(ItemStack itemStack) {
+    private int fakeInputStackSize(int original) {
         if (leftStackEnchantedBooks()) {
             return 1;
         }
-        return itemStack.getCount();
+        return original;
     }
 
     /**
-     * Change the output to 1 book at a time
+     * Change the output to always be 1 book at a time
      */
     @Redirect(
             method = "createResult",
@@ -119,15 +114,6 @@ public abstract class AnvilMenuMixin {
         } else {
             inv.setItem(index, stack);
         }
-    }
-
-    // This doesn't work lol
-    @Inject(
-            method = "onTake",
-            at = @At("RETURN")
-    )
-    private void recreateResult(Player player, ItemStack stack, CallbackInfo ci) {
-        ((AnvilMenu)(Object)this).inputSlots.setChanged();
     }
 
 }
