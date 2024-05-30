@@ -86,7 +86,7 @@ public abstract class AnvilMenuMixin {
      * Causes the right slot shrink by 1 instead of clearing
      * without needing to mixin to multiple setItems or set temporary flags
      *
-     * Also prevents XP cost from increasing when multiple items are
+     * Also prevents XP cost from increasing when multiple books are
      * placed into the right stack.
      *
      */
