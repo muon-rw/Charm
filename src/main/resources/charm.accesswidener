@@ -4,6 +4,7 @@ accessWidener v1 named
 accessible field net/minecraft/world/inventory/ItemCombinerMenu resultSlots Lnet/minecraft/world/inventory/ResultContainer;
 accessible field net/minecraft/world/inventory/ItemCombinerMenu inputSlots Lnet/minecraft/world/Container;
 accessible field net/minecraft/world/inventory/AnvilMenu repairItemCountCost I
+accessible method net/minecraft/world/item/Item getPlayerPOVHitResult (Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/ClipContext$Fluid;)Lnet/minecraft/world/phys/BlockHitResult;
 
 ## Classes and interfaces
 accessible class net/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration
