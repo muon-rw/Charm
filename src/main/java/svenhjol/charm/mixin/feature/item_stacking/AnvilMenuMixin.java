@@ -1,7 +1,10 @@
 package svenhjol.charm.mixin.feature.item_stacking;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.ResultContainer;
 import net.minecraft.world.item.ItemStack;
@@ -10,8 +13,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.Slice;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AnvilMenu.class)
 public abstract class AnvilMenuMixin {
@@ -52,18 +55,18 @@ public abstract class AnvilMenuMixin {
     /**
      * Change the output to always be 1 book at a time
      */
-    @Redirect(
+    @WrapOperation(
             method = "createResult",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/inventory/ResultContainer;setItem(ILnet/minecraft/world/item/ItemStack;)V"
             )
     )
-    private void capResultSlot(ResultContainer resultSlots, int slot, ItemStack stack) {
+    private void capResultSlot(ResultContainer instance, int i, ItemStack itemStack, Operation<Void> original) {
         if (leftStackEnchantedBooks()) {
-            stack.setCount(1);
+            itemStack.setCount(1);
         }
-        resultSlots.setItem(slot, stack);
+        original.call(instance, i, itemStack);
     }
 
 
@@ -76,14 +79,14 @@ public abstract class AnvilMenuMixin {
      * Also prevents XP cost from increasing when multiple books are
      * placed into the right stack.
      */
-    @Redirect(
+    @WrapOperation(
             method = "createResult",
             at = @At(
                     value = "FIELD",
                     target = "Lnet/minecraft/world/inventory/AnvilMenu;repairItemCountCost:I"
             )
     )
-    private void capRepairItemCountCost(AnvilMenu instance, int value) {
+    private void capRepairItemCountCost(AnvilMenu instance, int value, Operation<Void> original) {
         if (rightStackEnchantedBooks()) {
             repairItemCountCost = 1;
         } else {
@@ -94,7 +97,7 @@ public abstract class AnvilMenuMixin {
     /**
      * Shrink the left slot by 1 instead of clearing it
      */
-    @Redirect(
+    @WrapOperation(
             method = "onTake",
             at = @At(
                     value = "INVOKE",
@@ -102,13 +105,19 @@ public abstract class AnvilMenuMixin {
                     ordinal = 0
             )
     )
-    private void shrinkLeftSlot(Container inv, int index, ItemStack stack) {
+    private void shrinkLeftSlot(Container instance, int i, ItemStack itemStack, Operation<Void> original) {
         if (leftStackEnchantedBooks()) {
-            ItemStack leftSlot = inv.getItem(index);
+            ItemStack leftSlot = instance.getItem(i);
             leftSlot.shrink(1);
-            inv.setItem(index, leftSlot.isEmpty() ? ItemStack.EMPTY : leftSlot);
+            instance.setItem(i, leftSlot.isEmpty() ? ItemStack.EMPTY : leftSlot);
         } else {
-            inv.setItem(index, stack);
+            original.call(instance, i, itemStack);
         }
+    }
+
+    @Inject(method = "onTake", at = @At("RETURN"))
+    private void syncAfterTake(CallbackInfo ci) {
+        ((AnvilMenu)(Object)this).createResult();
+        ((AbstractContainerMenu)(Object)this).broadcastChanges();
     }
 }
