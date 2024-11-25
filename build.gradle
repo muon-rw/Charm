@@ -37,7 +37,7 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
     mainFile.changelogType = "markdown"
     mainFile.addModLoader("Fabric")
-    mainFile.addGameVersion(game_versions.split(", ").toList())
+    mainFile.addGameVersion("1.21.1")
 }
 
 modrinth {
@@ -50,4 +50,10 @@ modrinth {
     uploadFile = jar
     gameVersions = game_versions.split(", ").toList()
     loaders = mod_loaders.split(", ").collect { return it.toLowerCase(Locale.ROOT) }
+}
+
+task publishAll {
+    dependsOn('publishCurseForge')
+    dependsOn('modrinth')
+    group = 'publishing'
 }
