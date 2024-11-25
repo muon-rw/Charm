@@ -1,9 +1,53 @@
 plugins {
     id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
+    id "net.darkhax.curseforgegradle" version "1.0.7"
+    id "com.modrinth.minotaur" version "2.+"
 }
 
 apply from: "https://charmony.work/gradle/fabric.build.gradle"
 apply from: "https://charmony.work/gradle/fabric-include-toml.build.gradle"
 apply from: "https://charmony.work/gradle/fabric-ref-rei.build.gradle"
 apply from: "https://charmony.work/gradle/fabric-ref-modmenu.build.gradle"
+
+repositories {
+    maven {
+        // CurseForge
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        // CurseForge
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+}
+
+
+task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+    group = 'publishing'
+    apiToken = System.getenv("CF_TOKEN")
+    def mainFile = upload(1016482, jar)
+    mainFile.displayName = "v${rootProject.version}"
+    mainFile.releaseType = "release"
+    mainFile.changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
+    mainFile.changelogType = "markdown"
+    mainFile.addModLoader("Fabric")
+    mainFile.addGameVersion(game_versions.split(", ").toList())
+}
+
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN")
+    projectId = "charm-forked"
+    versionNumber = "${version}"
+    versionType = "release"
+    versionName = "Charm-Forked-${rootProject.version}+${minecraft_version}"
+    changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
+    uploadFile = jar
+    gameVersions = game_versions.split(", ").toList()
+    loaders = mod_loaders.split(", ").collect { return it.toLowerCase(Locale.ROOT) }
+}

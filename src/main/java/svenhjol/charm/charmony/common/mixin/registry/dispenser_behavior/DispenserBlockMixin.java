@@ -14,7 +14,8 @@ import svenhjol.charm.charmony.common.dispenser.CompositeDispenseItemBehavior;
 public class DispenserBlockMixin {
     @ModifyReturnValue(
         method = "getDispenseMethod",
-        at = @At("RETURN")
+        at = @At("RETURN"),
+            remap = true
     )
     private DispenseItemBehavior hookGetDispenseMethod(DispenseItemBehavior original, Level level, ItemStack stack) {
         if (CommonRegistry.conditionalDispenserBehaviors().containsKey(stack.getItem())) {

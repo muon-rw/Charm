@@ -48,10 +48,7 @@ public final class Registers extends RegisterHolder<CookingPots> {
         // Server to client packets
         registry.serverPacketSender(Networking.S2CAddedToCookingPot.TYPE,
             Networking.S2CAddedToCookingPot.CODEC);
-        
-        registry.conditionalDispenserBehavior(() -> Items.BOWL, BowlBehavior::new);
-        registry.conditionalDispenserBehavior(() -> Items.POTION, PotionBehavior::new);
-        registry.conditionalDispenserBehavior(() -> Items.WATER_BUCKET, WaterBucketBehavior::new);
+
     }
 
     @Override
