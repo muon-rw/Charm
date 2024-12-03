@@ -1,3 +1,6 @@
+## 7.0.38
+- Fixed broken published jar
+
 ## 7.0.37
 - Removed broken custom dispenser behaviors
 
