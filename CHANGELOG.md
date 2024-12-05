@@ -1,5 +1,6 @@
 ## 7.0.40
 - Update Russian Translation, courtesy of mpustovoi
+- Add effect description translation key for Echolocation (thanks mpustovoi)
 
 ## 7.0.39
 - Fixed crash with The Aether
