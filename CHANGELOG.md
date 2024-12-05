@@ -1,5 +1,5 @@
 ## 7.0.39
-- Fixed crash with Aether
+- Fixed crash with The Aether
 
 ## 7.0.38
 - Fixed broken published jar
