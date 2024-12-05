@@ -1,3 +1,6 @@
+## 7.0.40
+- Update Russian Translation, courtesy of mpustovoi
+
 ## 7.0.39
 - Fixed crash with The Aether
 
