@@ -55,7 +55,9 @@ public final class MixinConfig extends MixinConfigPlugin {
     protected List<Predicate<String>> runtimeBlacklist() {
         return List.of(
             feature -> feature.equals("GlintColoring") && ConfigHelper.isModLoaded("optifabric"),
-            feature -> feature.equals("GrindstoneDisenchanting") && ConfigHelper.isModLoaded("grindenchantments")
+            feature -> feature.equals("GrindstoneDisenchanting") && ConfigHelper.isModLoaded("grindenchantments"),
+            feature -> feature.equals("PigsFindMushrooms") && (ConfigHelper.isModLoaded("aether") ||
+                                                               ConfigHelper.isModLoaded("twilightforest"))
         );
     }
 }

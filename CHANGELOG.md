@@ -1,3 +1,6 @@
+## 7.0.39
+- Fixed crash with Aether
+
 ## 7.0.38
 - Fixed broken published jar
 
