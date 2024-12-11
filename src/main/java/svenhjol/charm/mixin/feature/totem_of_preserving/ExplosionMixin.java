@@ -22,14 +22,17 @@ public class ExplosionMixin {
     @Shadow @Final private ObjectArrayList<BlockPos> toBlow;
 
     @Inject(
-        method = "finalizeExplosion",
-        at = @At("HEAD")
+            method = "finalizeExplosion",
+            at = @At("HEAD")
     )
     private void hookFinalizeExplosion(boolean bl, CallbackInfo ci) {
         var dimension = this.level.dimension().location();
         var feature = Resolve.feature(TotemOfPreserving.class);
         if (feature.handlers.protectedPositions.containsKey(dimension)) {
             for (BlockPos pos : feature.handlers.protectedPositions.get(dimension)) {
+                if (this.level.getBlockState(pos).getBlock() instanceof net.minecraft.world.level.block.TntBlock) {
+                    continue;
+                }
                 this.toBlow.remove(pos);
             }
         }
