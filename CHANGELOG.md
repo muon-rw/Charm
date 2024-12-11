@@ -1,3 +1,6 @@
+## 7.0.41
+- Fixed an issue where TNT might not form chain reactions
+
 ## 7.0.40
 - Update Russian Translation, courtesy of mpustovoi
 - Add effect description translation key for Echolocation (thanks mpustovoi)
