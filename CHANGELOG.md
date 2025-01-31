@@ -1,3 +1,6 @@
+## 7.0.42
+- Fix worldgen conflict with Affinity (mostly)
+
 ## 7.0.41
 - Fixed an issue where TNT might not form chain reactions
 

@@ -1,5 +1,6 @@
 package svenhjol.charm.feature.wood.azalea_wood.common;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.server.MinecraftServer;
@@ -37,6 +38,9 @@ public final class Registers extends RegisterHolder<AzaleaWood> {
     @SuppressWarnings({"unchecked", "unused"})
     @Override
     public void onWorldLoaded(MinecraftServer server, ServerLevel level) {
+        if (FabricLoader.getInstance().isModLoaded("affinity")) {
+            return;
+        }
         var holder = CustomWood.holder(feature().registers.material.get());
         var log = holder.log().orElseThrow();
 
