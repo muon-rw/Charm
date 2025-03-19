@@ -48,7 +48,7 @@ public class ClearItemFrames extends CommonFeature {
      * Try and remove an amethyst shard from an itemframe.
      */
     private InteractionResult handleEntityAttack(Player player, Level level, InteractionHand hand, Entity entity, @Nullable EntityHitResult hitResult) {
-        if (entity instanceof ItemFrame frame) {
+        if (entity instanceof ItemFrame frame && !isPhantomFrame(frame)) {
             var pos = frame.blockPosition();
 
             if (frame.isInvisible()) {
@@ -83,7 +83,7 @@ public class ClearItemFrames extends CommonFeature {
         }
 
         // GlowItemFrameEntity extends ItemFrameEntity so this comparison is safe for both.
-        if (entity instanceof ItemFrame frame) {
+        if (entity instanceof ItemFrame frame && !isPhantomFrame(frame)) {
             // If there's no item yet, pass.
             if (frame.getItem().isEmpty()) {
                 return InteractionResult.PASS;
@@ -111,7 +111,11 @@ public class ClearItemFrames extends CommonFeature {
 
         return InteractionResult.PASS;
     }
-
+	private boolean isPhantomFrame(ItemFrame frame) {
+		ResourceLocation id = frame.getType().builtInRegistryHolder().key().location();
+		return id.equals(new ResourceLocation("spectrum", "phantom_frame"))
+			|| id.equals(new ResourceLocation("spectrum", "glow_phantom_frame"));
+    }
     public static void triggerMadeClearItemFrame(Player player) {
         Advancements.trigger(new ResourceLocation(Charm.ID, "made_clear_item_frame"), player);
     }
