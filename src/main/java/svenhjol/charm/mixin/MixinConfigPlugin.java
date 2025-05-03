@@ -128,7 +128,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
                 feature -> feature.equals("ColoredGlintSmithingTemplates") && ConfigHelper.isModLoaded("optifabric"),
                 feature -> feature.equals("NoChatUnverifiedMessage") && ConfigHelper.isModLoaded("chatsigninghider"),
                 feature -> feature.equals("ExtraStackables") && ConfigHelper.isModLoaded("allstackable"),
-                feature -> feature.equals("PigsFindMushrooms") && ConfigHelper.isModLoaded("twilightforest"),
+                feature -> feature.equals("PigsFindMushrooms") && ConfigHelper.isModLoaded("twilightforest") || ConfigHelper.isModLoaded("aether") ,
                 feature -> (feature.equals("UnlimitedRepairCost")
                         || feature.equals("ShowRepairCost")
                         || feature.equals("StrongerAnvils"))
