@@ -47,7 +47,7 @@ public final class ConfigHelper {
         }
 
         try {
-            var clazz = Class.forName("svenhjol." + modId + ".feature." + TextHelper.upperCamelToSnake(featureName) + "." + featureName);
+            var clazz = Class.forName("svenhjol." + modId + ".feature." + CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, featureName); + "." + featureName);
             annotation = clazz.getAnnotation(Feature.class);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Missing feature annotation: " + featureName);
