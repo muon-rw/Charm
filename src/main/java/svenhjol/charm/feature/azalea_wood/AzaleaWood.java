@@ -1,5 +1,6 @@
 package svenhjol.charm.feature.azalea_wood;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.server.MinecraftServer;
@@ -48,6 +49,9 @@ public class AzaleaWood extends CommonFeature {
 
     @SuppressWarnings({"unchecked", "unused"})
     private void handleLevelLoad(MinecraftServer server, ServerLevel level) {
+        if (FabricLoader.getInstance().isModLoaded("affinity")) {
+            return;
+        }
         var holder = CustomWood.getHolder(material);
         var log = holder.getLog().orElseThrow();
 
