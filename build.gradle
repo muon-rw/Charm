@@ -154,21 +154,5 @@ publishMods {
     modLoaders.add("fabric")
     changelog = new File("$project.rootDir/CHANGELOG.md").getText('UTF-8')
 
-    curseforge("charm-forked") {
-        projectId = "1016482"
-        projectSlug = "charm-forked"
-        accessToken = providers.environmentVariable("CF_TOKEN")
-        minecraftVersions.add("1.20.1")
-        requires("fabric-api")
-        clientRequired = true
-        serverRequired = true
-    }
-    modrinth {
-        projectId = "lz0ymQav"
-        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
-        minecraftVersions.add("1.20.1")
-        requires("fabric-api")
-    }
-
 
 }
