@@ -67,6 +67,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
             } else {
                 inputSlots.setItem(slot, stack);
             }
+        } else {
+            inputSlots.setItem(slot, stack);
         }
     }
 }
