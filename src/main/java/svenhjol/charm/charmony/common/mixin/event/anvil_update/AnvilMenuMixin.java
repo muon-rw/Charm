@@ -61,8 +61,12 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
     private void hookOnTakeSetItem(Container inputSlots, int slot, ItemStack stack) {
         if (Resolve.feature(Core.class).customOnTakeBehavior() && stack == ItemStack.EMPTY) {
             var original = inputSlots.getItem(slot);
-            original.shrink(1);
-            inputSlots.setItem(slot, original);
+            if (original.isEnchanted()) {
+                original.shrink(1);
+                inputSlots.setItem(slot, original);
+            } else {
+                inputSlots.setItem(slot, stack);
+            }
         }
     }
 }
