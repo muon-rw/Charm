@@ -6,7 +6,7 @@ Charm is MIT Licensed. This fork will stay the same.
 
 - Download Charm (Forked) [from Modrinth](https://modrinth.com/mod/charm-forked)
 - Download Charm (Forked) [from CurseForge](https://www.curseforge.com/minecraft/mc-mods/charm-forked)
-- Visit the fork's [Discord](https://lunapixel.studio/discord) (#muons-projects channel)
+- Visit the fork's [Discord](https://discord.gg/pTXJ5Z5Wzb)
 
 
 *You can read the original description of Charm here:*
